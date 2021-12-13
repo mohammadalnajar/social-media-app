@@ -1,15 +1,7 @@
 import express from 'express';
+import { getOneUser, getUsers, registerUser, updateUser } from '../controllers/users.js';
 
 export const router = express.Router();
 
-router
-  .route('/api/users')
-  .get((req, res) => {
-    res.send('get users');
-  })
-  .post((req, res) => {
-    res.json(req.body);
-  })
-  .put((req, res) => {
-    res.send('update user');
-  });
+router.route('/').get(getUsers).post(registerUser);
+router.route('/:id').get(getOneUser).put(updateUser);
