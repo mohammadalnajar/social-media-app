@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { usernameValidations } from './UserValidations.js';
+import { emailValidations, passwordValidations, usernameValidations } from './UserValidations.js';
 
 const UserSchema = new mongoose.Schema({
     userName: {
@@ -11,13 +11,13 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        // unique: true,
-        mix: 50
+        unique: [true, '__error__Sorry, but this email address is already registered...'],
+        validate: emailValidations
     },
     password: {
         type: String,
         required: true,
-        min: 6
+        validate: passwordValidations
     }
 });
 
