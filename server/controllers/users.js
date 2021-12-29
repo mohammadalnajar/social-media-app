@@ -27,6 +27,13 @@ export const registerUser = async (req, res) => {
     }
     res.json(req.body);
 };
+
+// ======= Login ==========
+
+export const loginUser = async (req, res) => {
+    res.send('login');
+};
+
 export const updateUser = (req, res) => {
     res.send('update user');
 };
