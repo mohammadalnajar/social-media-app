@@ -4,14 +4,17 @@ import { emailValidations, passwordValidations, usernameValidations } from './Us
 const UserSchema = new mongoose.Schema({
     userName: {
         type: String,
-        required: [true, '__error__Please fill in a username!'],
-        unique: [true, '__error__Sorry, but this username is already registered...'],
+        required: [true, '__error__Please fill in a username!__error_end__'],
+        unique: [true, '__error__Sorry, but this username is already registered...__error_end__'],
         validate: usernameValidations
     },
     email: {
         type: String,
         required: true,
-        unique: [true, '__error__Sorry, but this email address is already registered...'],
+        unique: [
+            true,
+            '__error__Sorry, but this email address is already registered...__error_end__'
+        ],
         validate: emailValidations
     },
     password: {
