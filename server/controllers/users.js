@@ -15,9 +15,9 @@ export const registerUser = async (req, res) => {
     const salt = 10;
     try {
         const hashedPass = await bcrypt.hash(password, salt);
-        const response = await User.create({ userName, email, phone, password: hashedPass });
-        console.log(response);
-        res.json(response);
+        let userCreated = await User.create({ userName, email, phone, password: hashedPass });
+        userCreated.password = null;
+        return successRes(res, 200, 'ok', 'account is created ...', userCreated);
     } catch (error) {
         console.log(error, 'error in register route ...');
         return errorRes(res, 400, 'failed to register', getErrorMessage(error), error);
