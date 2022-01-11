@@ -1,6 +1,8 @@
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import { getErrorMessage } from '../utils/mongoErrors.js';
+import { errorRes, successRes } from '../utils/reqResponse.js';
+import { authenticateUser } from '../middlewares/auth.js';
 
 export const getUsers = (req, res) => {
     res.send('get users');
@@ -17,17 +19,27 @@ export const registerUser = async (req, res) => {
         console.log(response);
         res.json(response);
     } catch (error) {
-        const errorMessages = getErrorMessage(error);
-        return res
-            .status(400)
-            .json({ status: 'failed to register', errorMessages, errorMsg: error });
+        console.log(error, 'error in register route ...');
+        return errorRes(res, 400, 'failed to register', getErrorMessage(error), error);
     }
 };
 
 // ======= Login ==========
 
 export const loginUser = async (req, res) => {
-    res.send('login');
+    try {
+        const { status, msg, data } = await authenticateUser(req.body, User, bcrypt);
+
+        if (status === 'success') {
+            return successRes(res, 200, 'ok', msg, data);
+        }
+        if (status === 'rejected') {
+            return errorRes(res, 400, status, null, msg);
+        }
+    } catch (error) {
+        console.log(error, 'error in login route ...');
+        errorRes(res, 500, 'Failed to login...', null, null);
+    }
 };
 
 export const updateUser = (req, res) => {
