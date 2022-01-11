@@ -17,15 +17,10 @@ export const registerUser = async (req, res) => {
         console.log(response);
         res.json(response);
     } catch (error) {
-        const errorMessage = getErrorMessage(error.message);
-        ['email', 'userName'].forEach((field) => {
-            if (error.code === 11000 && error.keyPattern[field]) {
-                errorMessage.push(`${field} should be unique ... `);
-            }
-        });
+        const errorMessages = getErrorMessage(error);
         return res
             .status(400)
-            .json({ status: 'failed to register', errorMessage, errorMsg: error });
+            .json({ status: 'failed to register', errorMessages, errorMsg: error });
     }
 };
 

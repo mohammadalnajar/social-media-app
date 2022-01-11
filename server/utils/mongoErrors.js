@@ -1,4 +1,5 @@
-export const getErrorMessage = (message) => {
+export const getErrorMessage = (error) => {
+    const { message } = error;
     const messagesArray = message
         .split('__error__')
         .filter((el) => el.includes('__error_end__'))
@@ -11,6 +12,10 @@ export const getErrorMessage = (message) => {
                 return msg[0];
             }
         });
-
+    ['email', 'userName'].forEach((field) => {
+        if (error.code === 11000 && error.keyPattern[field]) {
+            messagesArray.push(`${field} should be unique ... `);
+        }
+    });
     return messagesArray;
 };

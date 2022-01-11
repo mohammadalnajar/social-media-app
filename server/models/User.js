@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema({
     followers: {
         type: Array
     },
-    followins: {
+    followings: {
         type: Array
     }
 });
