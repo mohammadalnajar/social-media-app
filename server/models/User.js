@@ -20,6 +20,23 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    created_at: {
+        type: Date,
+        default: now()
+    },
+    updated_at: {
+        type: Date
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    followers: {
+        type: Array
+    },
+    followins: {
+        type: Array
     }
 });
 
