@@ -26,9 +26,9 @@ app.get('/', (req, res) => {
 app.use('/api/users', usersRouter);
 
 // server init function
-const startServer = () => {
+const startServer = async () => {
     // db connect
-    connectDB();
+    await connectDB();
     app.listen(PORT, () => console.log(`Server is running at http://localhost:${PORT} ...`.yellow));
 };
 
