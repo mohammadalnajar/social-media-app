@@ -4,12 +4,13 @@ import path from 'path';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import colors from 'colors';
-import { connectDB } from './config/connectDB.js';
-import { router as usersRouter } from './routes/users.js';
+import connectDB from './config/connectDB.js';
+import usersRouter from './routes/users.js';
 
 // env settings
-const __dirname = path.resolve();
-dotenv.config({ path: `${__dirname}/config/.env` });
+// eslint-disable-next-line no-underscore-dangle
+const dirname = path.resolve();
+dotenv.config({ path: `${dirname}/config/.env` });
 
 const app = express();
 const PORT = process.env.PORT || 4444;
