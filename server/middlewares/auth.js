@@ -1,11 +1,18 @@
-export const authenticateUser = async ({ password, userName }, User, bcrypt) => {
+const authenticateUser = async ({ password, userName }, User, bcrypt) => {
     try {
-        let isUserFound = await User.findOne({ userName });
+        const isUserFound = await User.findOne({ userName });
         if (isUserFound) {
-            const passMatched = await bcrypt.compare(password, isUserFound.password);
+            const passMatched = await bcrypt.compare(
+                password,
+                isUserFound.password
+            );
             if (passMatched) {
                 isUserFound.password = null;
-                return { status: 'success', msg: 'authenticated', data: isUserFound };
+                return {
+                    status: 'success',
+                    msg: 'authenticated',
+                    data: isUserFound,
+                };
             }
             return { status: 'rejected', msg: 'credentials wrong' };
         }
@@ -13,4 +20,6 @@ export const authenticateUser = async ({ password, userName }, User, bcrypt) => 
     } catch (error) {
         console.log(error, 'catch in user authenticate');
     }
+    return null;
 };
+export default authenticateUser;
