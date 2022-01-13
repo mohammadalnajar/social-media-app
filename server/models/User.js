@@ -1,9 +1,5 @@
 import mongoose from 'mongoose';
-import {
-    emailValidations,
-    passwordValidations,
-    usernameValidations,
-} from './UserValidations.js';
+import { emailValidations, usernameValidations } from './UserValidations.js';
 
 const UserSchema = new mongoose.Schema({
     userName: {
