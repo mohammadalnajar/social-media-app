@@ -1,43 +1,46 @@
 import mongoose from 'mongoose';
-import { emailValidations, passwordValidations, usernameValidations } from './UserValidations.js';
+import { emailValidations, usernameValidations } from './UserValidations.js';
 
 const UserSchema = new mongoose.Schema({
     userName: {
         type: String,
         required: [true, '__error__Please fill in a username!__error_end__'],
-        unique: [true, '__error__Sorry, but this username is already registered...__error_end__'],
-        validate: usernameValidations
+        unique: [
+            true,
+            '__error__Sorry, but this username is already registered...__error_end__',
+        ],
+        validate: usernameValidations,
     },
     email: {
         type: String,
         required: true,
         unique: [
             true,
-            '__error__Sorry, but this email address is already registered...__error_end__'
+            '__error__Sorry, but this email address is already registered...__error_end__',
         ],
-        validate: emailValidations
+        validate: emailValidations,
     },
     password: {
         type: String,
-        required: true
+        required: true,
     },
     created_at: {
         type: Date,
-        default: Date.now()
+        default: Date.now(),
     },
     updated_at: {
-        type: Date
+        type: Date,
     },
     isAdmin: {
         type: Boolean,
-        default: false
+        default: false,
     },
     followers: {
-        type: Array
+        type: Array,
     },
     followings: {
-        type: Array
-    }
+        type: Array,
+    },
 });
 
 const User = mongoose.model('Users', UserSchema);

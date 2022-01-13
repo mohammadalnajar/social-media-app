@@ -1,10 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
-import { connectDB } from './config/connectDB.js';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import colors from 'colors';
+import { connectDB } from './config/connectDB.js';
 import { router as usersRouter } from './routes/users.js';
 
 // env settings
@@ -29,7 +29,9 @@ app.use('/api/users', usersRouter);
 const startServer = async () => {
     // db connect
     await connectDB();
-    app.listen(PORT, () => console.log(`Server is running at http://localhost:${PORT} ...`.yellow));
+    app.listen(PORT, () =>
+        console.log(`Server is running at http://localhost:${PORT} ...`.yellow)
+    );
 };
 
 startServer();

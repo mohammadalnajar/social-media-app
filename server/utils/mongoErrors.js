@@ -1,4 +1,4 @@
-export const getErrorMessage = (error) => {
+const getErrorMessage = (error) => {
     const { message } = error;
     const messagesArray = message
         .split('__error__')
@@ -7,10 +7,9 @@ export const getErrorMessage = (error) => {
             if (el.includes('__error_end__,')) {
                 const msg = el.split('__error_end__,');
                 return msg[0];
-            } else {
-                const msg = el.split('__error_end__');
-                return msg[0];
             }
+            const msg = el.split('__error_end__');
+            return msg[0];
         });
     ['email', 'userName'].forEach((field) => {
         if (error.code === 11000 && error.keyPattern[field]) {
@@ -19,3 +18,5 @@ export const getErrorMessage = (error) => {
     });
     return messagesArray;
 };
+
+export default getErrorMessage;

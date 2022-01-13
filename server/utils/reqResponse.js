@@ -1,9 +1,5 @@
-export const errorRes = (res, statusCode, status, errorMessages, error) => {
-    return res
-        .status(statusCode)
-        .json({ status: status, errorMessages: errorMessages, error: error });
-};
+export const errorRes = (res, statusCode, status, errorMessages, error) =>
+    res.status(statusCode).json({ status, errorMessages, error });
 
-export const successRes = (res, statusCode, status, msg, data) => {
-    return res.status(statusCode).json({ status: status, msg: msg, data: data });
-};
+export const successRes = (res, statusCode, status, msg, data) =>
+    res.status(statusCode).json({ status, msg, data });
