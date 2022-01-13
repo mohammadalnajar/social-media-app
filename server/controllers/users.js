@@ -59,7 +59,7 @@ export const loginUser = async (req, res) => {
         }
     } catch (error) {
         console.log(error, 'error in login route ...');
-        errorRes(res, 500, 'Failed to login...', null, null);
+        return errorRes(res, 500, 'Failed to login...', null, null);
     }
     return null;
 };
