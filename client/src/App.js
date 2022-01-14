@@ -1,19 +1,15 @@
 import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import './index.css';
+import AppProvider from './providers/AppProvider';
 
-const queryClient = new QueryClient();
-
-function App() {
+const App = () => {
     return (
-        <QueryClientProvider client={queryClient}>
+        <AppProvider>
             <div className="h-screen bg-gray-800 flex flex-col justify-center items-center">
                 <p className="text-gray-100">hello world</p>
             </div>
-            <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
+        </AppProvider>
     );
-}
+};
 
 export default App;
