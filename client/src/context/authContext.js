@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-sequences */
+import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useMutation } from 'react-query';
 import {
@@ -9,7 +10,7 @@ import {
 
 const authContext = React.createContext();
 
-const authProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const [user, setUser] = React.useState({ user: null });
 
   const login = useMutation({
@@ -45,4 +46,8 @@ const useAuth = () => {
   return context;
 };
 
-export { authProvider, useAuth };
+export { AuthProvider, useAuth };
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
