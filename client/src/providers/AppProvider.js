@@ -3,6 +3,7 @@ import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { AuthProvider } from '../context/authContext';
 
 const ErrorFallback = () => {
   <div
@@ -28,7 +29,7 @@ const AppProvider = ({ children }) => {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <QueryClientProvider client={queryClient}>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ErrorBoundary>
