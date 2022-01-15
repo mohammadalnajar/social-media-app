@@ -1,12 +1,15 @@
 const URL = 'http://localhost:4444/api/users/';
 
-export const handleApiResponse = async (response) => {
-  const data = await response.json();
-
-  if (response.ok) {
-    return data;
+const handleApiResponse = async (response) => {
+  try {
+    const data = await response.json();
+    if (response.ok) {
+      return data;
+    }
+  } catch (error) {
+    console.log(error);
   }
-  return Promise.reject(data);
+  return false;
 };
 
 export const loginWithEmailAndPassword = async (data) => {
