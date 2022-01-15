@@ -11,11 +11,13 @@ const getErrorMessage = (error) => {
             const msg = el.split('__error_end__');
             return msg[0];
         });
-    ['email', 'userName'].forEach((field) => {
-        if (error.code === 11000 && error.keyPattern[field]) {
-            messagesArray.push(`${field} should be unique ... `);
-        }
-    });
+    if (error.code) {
+        ['email', 'userName'].forEach((field) => {
+            if (error.code === 11000 && error.keyPattern[field]) {
+                messagesArray.push(`${field} should be unique ... `);
+            }
+        });
+    }
     return messagesArray;
 };
 

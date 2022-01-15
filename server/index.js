@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import morgan from 'morgan';
 import helmet from 'helmet';
+import cors from 'cors';
 import colors from 'colors';
 import connectDB from './config/connectDB.js';
 import usersRouter from './routes/users.js';
@@ -15,6 +16,7 @@ dotenv.config({ path: `${dirname}/config/.env` });
 const app = express();
 const PORT = process.env.PORT || 4444;
 // middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
