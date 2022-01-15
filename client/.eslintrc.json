@@ -27,7 +27,7 @@
             "error",
             {
                 "endOfLine": "auto",
-                "tabWidth": 4
+                "tabWidth": 2
             }
         ],
         "react/function-component-definition": [
