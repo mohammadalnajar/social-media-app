@@ -4,10 +4,10 @@ const { email, name, phone, password } = patterns;
 const { lowercaseLetter, uppercaseLetter, numbers, specialCharacters, min } =
     password;
 export const usernameValidations = [
-    // {
-    //     validator: (val) => name.test(val),
-    //     message: '__error__Please insert only letters ...__error_end__'
-    // },
+    {
+        validator: (val) => name.test(val),
+        message: '__error__Please insert only letters ...__error_end__',
+    },
     {
         validator: (val) => val.length < 20,
         message:
@@ -20,6 +20,12 @@ export const usernameValidations = [
     },
 ];
 
+export const nameValidations = [
+    {
+        validator: (val) => name.test(val),
+        message: '__error__Numbers are not allowed ...__error_end__',
+    },
+];
 export const emailValidations = [
     {
         validator: (val) => email.test(val),
