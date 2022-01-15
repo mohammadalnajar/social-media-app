@@ -50,6 +50,6 @@ const validateRegisterForm = (req, res, next) => {
             'validation error'
         );
     }
-    next();
+    return next();
 };
 export default validateRegisterForm;
