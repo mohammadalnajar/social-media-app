@@ -1,8 +1,14 @@
 import patterns from '../utils/validationPatterns.js';
 
 const { email, name, phone, password } = patterns;
-const { lowercaseLetter, uppercaseLetter, numbers, specialCharacters, min } =
-    password;
+const {
+    lowercaseLetter,
+    uppercaseLetter,
+    numbers,
+    specialCharacters,
+    minPass,
+} = password;
+const { letters, minName } = name;
 export const usernameValidations = [
     {
         validator: (val) => name.test(val),
@@ -22,8 +28,12 @@ export const usernameValidations = [
 
 export const nameValidations = [
     {
-        validator: (val) => name.test(val),
+        validator: (val) => letters.test(val),
         message: '__error__Numbers are not allowed ...__error_end__',
+    },
+    {
+        validator: (val) => minName.test(val),
+        message: '__error__Please insert minimal 2 characters ...__error_end__',
     },
 ];
 export const emailValidations = [
@@ -55,7 +65,7 @@ export const passwordValidations = [
             '__error__Please insert at least one special characters ...__error_end__',
     },
     {
-        validator: (val) => min.test(val),
+        validator: (val) => minPass.test(val),
         message: '__error__Please insert minimal 8 characters ...__error_end__',
     },
 ];
