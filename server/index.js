@@ -7,7 +7,7 @@ import cors from 'cors';
 import colors from 'colors';
 import connectDB from './config/connectDB.js';
 import usersRouter from './routes/users.js';
-
+import sessionConfig from './config/session.js';
 // env settings
 // eslint-disable-next-line no-underscore-dangle
 const dirname = path.resolve();
@@ -19,6 +19,7 @@ const PORT = process.env.PORT || 4444;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(sessionConfig());
 app.use(helmet());
 app.use(morgan('dev'));
 

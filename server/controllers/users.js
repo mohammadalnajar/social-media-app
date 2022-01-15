@@ -22,6 +22,7 @@ export const registerUser = async (req, res) => {
             password: hashedPass,
         });
         userCreated.password = null;
+
         return successRes(
             res,
             200,
@@ -52,6 +53,7 @@ export const loginUser = async (req, res) => {
         );
 
         if (status === 'success') {
+            req.session.userData = data;
             return successRes(res, 200, 'ok', msg, data);
         }
         if (status === 'rejected') {
