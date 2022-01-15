@@ -4,7 +4,7 @@ const patterns = {
     password: {
         lowercaseLetter: /(?=.*?[a-z])/,
         uppercaseLetter: /^(?=.*?[A-Z])/,
-        numbers: /(?=.*?[0-9]) /,
+        numbers: /(?=.*?[0-9])/,
         specialCharacters: /(?=.*?[#?!@$%^&*-])/,
         min: /.{8,}$/,
     },
