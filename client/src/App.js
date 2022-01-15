@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthProvider } from './context/authContext';
 import EntryLayout from './features/entry/EntryLayout';
 import './index.css';
 import AppProvider from './providers/AppProvider';

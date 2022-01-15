@@ -1,17 +1,18 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-sequences */
 import PropTypes from 'prop-types';
-import * as React from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 import { useMutation } from 'react-query';
 import {
   loginWithEmailAndPassword,
   registerWithEmailAndPassword,
 } from '../utils/api';
 
-const authContext = React.createContext();
+const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = React.useState({ user: null });
+  const [user, setUser] = useState({ user: null });
+  console.log(user);
 
   const login = useMutation({
     mutationFn: loginWithEmailAndPassword,
@@ -31,17 +32,17 @@ const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const value = React.useMemo(() => {
-    user, login, register, logout;
+  const value = useMemo(() => {
+    return { user, login, register, logout };
   }, [user]);
 
-  return <authContext.Provider value={value}>{children}</authContext.Provider>;
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 const useAuth = () => {
-  const context = React.useContext(authContext);
+  const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within a authProvider');
+    throw new Error('useAuth must be used within a AuthProvider');
   }
   return context;
 };
