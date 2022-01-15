@@ -8,7 +8,8 @@ export const getUsers = (req, res) => {
     res.send('get users');
 };
 export const getOneUser = (req, res) => {
-    res.json(req.params.id);
+    const { userData } = req.session;
+    return successRes(res, 200, 'ok', 'user is logged in', userData);
 };
 export const registerUser = async (req, res) => {
     const { userName, email, phone, password } = req.body;
