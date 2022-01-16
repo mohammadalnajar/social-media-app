@@ -14,7 +14,10 @@ const getErrorMessage = (error) => {
     if (error.code) {
         ['email', 'userName'].forEach((field) => {
             if (error.code === 11000 && error.keyPattern[field]) {
-                messagesArray.push(`${field} should be unique ... `);
+                messagesArray.push({
+                    field,
+                    messagesArray: [`${field} should be unique ... `],
+                });
             }
         });
     }
