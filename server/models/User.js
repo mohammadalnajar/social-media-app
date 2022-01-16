@@ -18,11 +18,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    created_at: {
+    joinedAt: {
         type: Date,
         default: Date.now(),
     },
-    updated_at: {
+    updatedAt: {
         type: Date,
     },
     isAdmin: {
@@ -35,6 +35,11 @@ const UserSchema = new mongoose.Schema({
     followings: {
         type: Array,
     },
+    birthDate: { type: Date },
+    posts: { type: Array },
+    isVerified: { type: Boolean, default: false },
+    friends: { type: Array },
+    photos: { type: Array },
 });
 
 const User = mongoose.model('Users', UserSchema);
