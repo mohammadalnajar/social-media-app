@@ -51,24 +51,26 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
     try {
-        const { status, msg, data } = await authenticateUser(
-            req.body,
-            User,
-            bcrypt
-        );
+        if (req.body.email) {
+            const { status, msg, data } = await authenticateUser(
+                req.body,
+                User,
+                bcrypt
+            );
 
-        if (status === 'success') {
-            req.session.userData = data;
-            return successRes(res, 200, 'ok', msg, data);
+            if (status === 'success') {
+                req.session.userData = data;
+                return successRes(res, 200, 'ok', msg, data);
+            }
+            if (status === 'rejected') {
+                return errorRes(res, 400, status, null, msg);
+            }
         }
-        if (status === 'rejected') {
-            return errorRes(res, 400, status, null, msg);
-        }
+        return errorRes(res, 400, 'data is not received well ...');
     } catch (error) {
         console.log(error, 'error in login route ...');
         return errorRes(res, 500, 'Failed to login...', null, null);
     }
-    return null;
 };
 
 export const updateUser = (req, res) => {
