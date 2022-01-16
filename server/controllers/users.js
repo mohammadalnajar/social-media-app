@@ -24,17 +24,11 @@ export const registerUser = async (req, res) => {
             firstName,
             lastName,
         });
-        userCreated.password = null;
+        const { password: pass, isAdmin, ...rest } = userCreated._doc;
         if (userCreated.email) {
-            req.session.userData = userCreated;
+            req.session.userData = rest; // storing session containing user data
         }
-        return successRes(
-            res,
-            200,
-            'ok',
-            'account is created ...',
-            userCreated
-        );
+        return successRes(res, 200, 'ok', 'account is created ...', rest);
     } catch (error) {
         console.log(error, 'error in register route ...');
         return errorRes(
@@ -59,7 +53,7 @@ export const loginUser = async (req, res) => {
             );
 
             if (status === 'success') {
-                req.session.userData = data;
+                req.session.userData = data; // storing session containing user data
                 return successRes(res, 200, 'ok', msg, data);
             }
             if (status === 'rejected') {

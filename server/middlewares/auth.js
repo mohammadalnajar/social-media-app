@@ -7,11 +7,12 @@ const authenticateUser = async ({ password, email }, User, bcrypt) => {
                 isUserFound.password
             );
             if (passMatched) {
-                isUserFound.password = null;
+                const { password: pass, isAdmin, ...rest } = isUserFound._doc;
+
                 return {
                     status: 'success',
                     msg: 'authenticated',
-                    data: isUserFound,
+                    data: rest,
                 };
             }
             return { status: 'rejected', msg: 'credentials wrong' };
