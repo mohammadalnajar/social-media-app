@@ -12,7 +12,7 @@ export const getOneUser = (req, res) => {
     return successRes(res, 200, 'ok', 'user is logged in', userData);
 };
 export const registerUser = async (req, res) => {
-    const { userName, email, phone, password } = req.body;
+    const { userName, email, phone, password, firstName, lastName } = req.body;
     const salt = 10;
     try {
         const hashedPass = await bcrypt.hash(password, salt);
@@ -21,9 +21,13 @@ export const registerUser = async (req, res) => {
             email,
             phone,
             password: hashedPass,
+            firstName,
+            lastName,
         });
         userCreated.password = null;
-
+        if (userCreated.email) {
+            req.session.userData = userCreated;
+        }
         return successRes(
             res,
             200,
