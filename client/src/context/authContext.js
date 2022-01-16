@@ -12,17 +12,14 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({ user: null });
-  console.log(user);
 
-  const login = useMutation({
-    mutationFn: loginWithEmailAndPassword,
+  const login = useMutation(loginWithEmailAndPassword, {
     onSuccess: (data) => {
       setUser(data);
     },
   });
 
-  const register = useMutation({
-    mutationFn: registerWithEmailAndPassword,
+  const register = useMutation(registerWithEmailAndPassword, {
     onSuccess: (data) => {
       setUser(data);
     },
@@ -34,7 +31,7 @@ const AuthProvider = ({ children }) => {
 
   const value = useMemo(() => {
     return { user, login, register, logout };
-  }, [user]);
+  }, [user, login, register, logout]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
