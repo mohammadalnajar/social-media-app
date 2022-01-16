@@ -1,4 +1,4 @@
-import patterns from '../utils/validationPatterns.js';
+import patterns from './validationPatterns.js';
 
 const { email, name, phone, password } = patterns;
 const {
