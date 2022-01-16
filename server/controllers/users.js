@@ -11,6 +11,9 @@ export const getOneUser = (req, res) => {
     const { userData } = req.session;
     return successRes(res, 200, 'ok', 'user is logged in', userData);
 };
+
+// ======= Sign up ==========
+
 export const registerUser = async (req, res) => {
     const { userName, email, phone, password, firstName, lastName } = req.body;
     const salt = 10;
@@ -41,7 +44,7 @@ export const registerUser = async (req, res) => {
     }
 };
 
-// ======= Login ==========
+// ======= login ==========
 
 export const loginUser = async (req, res) => {
     try {
@@ -67,6 +70,11 @@ export const loginUser = async (req, res) => {
     }
 };
 
+// ======= logout ==========
+export const logoutUser = (req, res) => {
+    req.session.destroy();
+    return successRes(res, 200, 'ok', 'user is logged out', null);
+};
 export const updateUser = (req, res) => {
     res.send('update user');
 };

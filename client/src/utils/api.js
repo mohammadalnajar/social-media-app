@@ -14,7 +14,7 @@ const handleApiResponse = async (response) => {
 };
 
 export const loginWithEmailAndPassword = async (data) => {
-  return fetch(`${SERVER_URL}signin`, {
+  return fetch(`${SERVER_URL}login`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'content-type': 'application/json' },
