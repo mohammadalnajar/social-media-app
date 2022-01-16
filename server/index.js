@@ -7,6 +7,7 @@ import cors from 'cors';
 import colors from 'colors';
 import connectDB from './config/connectDB.js';
 import usersRouter from './routes/users.js';
+import postsRouter from './routes/posts.js';
 import sessionConfig from './config/session.js';
 // env settings
 // eslint-disable-next-line no-underscore-dangle
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
     res.send('Worked ...');
 });
 app.use('/api/users', usersRouter);
+app.use('/api/posts', postsRouter);
 
 // server init function
 const startServer = async () => {
