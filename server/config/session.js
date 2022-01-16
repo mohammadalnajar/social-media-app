@@ -6,8 +6,8 @@ const sessionConfig = () => {
         store: new MongoStore({
             mongoUrl: process.env.MONGODB_URL,
         }),
-        secret: 'dfdsFe3##$@DVD3385^$@&$@#',
-        cookie: { maxAge: 300000 }, // 300000ms = 5 min
+        secret: 'DfSfdSsDdsFe3##$@DVD3385^$@&$@#',
+        cookie: { maxAge: 300000 }, // 300000ms = 5 min / 900000ms = 15 min
         saveUninitialized: false,
     });
     return sessionConfigObj;
