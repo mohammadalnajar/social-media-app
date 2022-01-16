@@ -1,4 +1,5 @@
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const USER_URL = 'api/users/';
 
 const handleApiResponse = async (response) => {
   const data = await response.json();
@@ -10,7 +11,7 @@ const handleApiResponse = async (response) => {
 };
 
 export const loginWithEmailAndPassword = async (data) => {
-  return fetch(`${SERVER_URL}login`, {
+  return fetch(`${SERVER_URL}${USER_URL}signin`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'content-type': 'application/json' },
@@ -19,7 +20,7 @@ export const loginWithEmailAndPassword = async (data) => {
 };
 
 export const registerWithEmailAndPassword = async (data) => {
-  return fetch(`${SERVER_URL}signup`, {
+  return fetch(`${SERVER_URL}${USER_URL}signup`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'content-type': 'application/json' },
