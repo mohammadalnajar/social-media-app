@@ -1,20 +1,11 @@
 import mongoose from 'mongoose';
-import {
-    emailValidations,
-    passwordValidations,
-    usernameValidations,
-} from './UserValidations.js';
 
 const UserSchema = new mongoose.Schema({
     userName: {
         type: String,
-        // required: [true, '__error__Please fill in a username!__error_end__'],
-        unique: [
-            true,
-            '__error__Sorry, but this username is already registered...__error_end__',
-        ],
-        validate: usernameValidations,
     },
+    firstName: { type: String },
+    lastName: { type: String },
     email: {
         type: String,
         required: true,
@@ -22,18 +13,16 @@ const UserSchema = new mongoose.Schema({
             true,
             '__error__Sorry, but this email address is already registered...__error_end__',
         ],
-        validate: emailValidations,
     },
     password: {
         type: String,
         required: true,
-        validate: passwordValidations,
     },
-    created_at: {
+    joinedAt: {
         type: Date,
         default: Date.now(),
     },
-    updated_at: {
+    updatedAt: {
         type: Date,
     },
     isAdmin: {
@@ -46,6 +35,11 @@ const UserSchema = new mongoose.Schema({
     followings: {
         type: Array,
     },
+    birthDate: { type: Date },
+    posts: { type: Array },
+    isVerified: { type: Boolean, default: false },
+    friends: { type: Array },
+    photos: { type: Array },
 });
 
 const User = mongoose.model('Users', UserSchema);
