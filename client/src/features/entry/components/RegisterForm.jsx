@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-import ErrorAlert from '../../../components/ErrorAlert';
 import { useAuth } from '../../../context/authContext';
 import useForm from '../../../hooks/useForm';
 
@@ -13,7 +12,6 @@ const RegisterForm = ({ children }) => {
   });
 
   const { register } = useAuth();
-  console.log(register.isError);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +19,13 @@ const RegisterForm = ({ children }) => {
     console.log(formData);
     reset();
   };
+
+  const error = register?.error?.errorMessages.filter((e) => {
+    return e.field === 'password';
+  });
+
+  const passwordError =
+    'Password should have at least 8 characters, one uppercase, one lowercase, one number and one special character!';
 
   useEffect(() => {
     return () => {
@@ -31,7 +36,7 @@ const RegisterForm = ({ children }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex gap-2">
-        <div className="flex flex-col">
+        <div className="flex flex-col flex-grow">
           <span className="text-sm font-medium text-gray-600 dark:text-gray-200 mb-2">
             First name
           </span>
@@ -45,7 +50,7 @@ const RegisterForm = ({ children }) => {
             className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col flex-grow">
           <span className="text-sm font-medium text-gray-600 dark:text-gray-200 mb-2">
             Last name
           </span>
@@ -87,8 +92,11 @@ const RegisterForm = ({ children }) => {
           autoComplete="password"
           required
         />
-        {register?.isError && (
-          <ErrorAlert errorMessage="error" duration={5000} />
+        {/* {error && <ErrorAlert errorMessage={passwordError} duration={5000} />} */}
+        {error && (
+          <span className="text-[12px] text-red-500 block mt-2">
+            {passwordError}
+          </span>
         )}
       </div>
       {children}
