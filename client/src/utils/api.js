@@ -1,20 +1,17 @@
-const SERVER_URL = 'http://localhost:4444/api/users/';
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const USER_URL = 'api/users/';
 
 const handleApiResponse = async (response) => {
-  try {
-    const data = await response.json();
-    console.log(data, 'response');
-    if (response.ok) {
-      return data;
-    }
-  } catch (error) {
-    console.log(error);
+  const data = await response.json();
+
+  if (!response.ok) {
+    return Promise.reject(data);
   }
-  return null;
+  return data;
 };
 
 export const loginWithEmailAndPassword = async (data) => {
-  return fetch(`${SERVER_URL}login`, {
+  return fetch(`${SERVER_URL}${USER_URL}login`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'content-type': 'application/json' },
@@ -23,7 +20,7 @@ export const loginWithEmailAndPassword = async (data) => {
 };
 
 export const registerWithEmailAndPassword = async (data) => {
-  return fetch(`${SERVER_URL}signup`, {
+  return fetch(`${SERVER_URL}${USER_URL}signup`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'content-type': 'application/json' },

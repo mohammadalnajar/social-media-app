@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
+import ErrorAlert from '../../../components/ErrorAlert';
 import { useAuth } from '../../../context/authContext';
 import useForm from '../../../hooks/useForm';
 
@@ -8,6 +9,7 @@ const LoginForm = ({ children }) => {
     email: '',
     password: '',
   });
+
   const { login } = useAuth();
 
   const handleSubmit = (e) => {
@@ -15,6 +17,12 @@ const LoginForm = ({ children }) => {
     login.mutate(formData);
     reset();
   };
+
+  useEffect(() => {
+    return () => {
+      login.reset();
+    };
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -29,6 +37,7 @@ const LoginForm = ({ children }) => {
           autoComplete="email"
           value={formData.email}
           onChange={handleInputChange}
+          required
         />
       </div>
 
@@ -51,7 +60,11 @@ const LoginForm = ({ children }) => {
           autoComplete="password"
           value={formData.password}
           onChange={handleInputChange}
+          required
         />
+        {login?.error?.error && (
+          <ErrorAlert errorMessage={login.error.error} duration={5000} />
+        )}
       </div>
       {children}
     </form>
