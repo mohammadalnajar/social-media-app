@@ -2,6 +2,7 @@ import React from 'react';
 import MainLayout from './components/layout/MainLayout';
 import './index.css';
 import AppProvider from './providers/AppProvider';
+import AppRoutes from './routes';
 
 const App = () => {
   return (
