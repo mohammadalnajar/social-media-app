@@ -1,32 +1,18 @@
-// import React from 'react';
-// import { Router, useRoutes } from 'react-router-dom';
-// import { useAuth } from '../context/authContext';
-// import EntryLayout from '../features/entry/EntryLayout';
+import { useRoutes } from 'react-router-dom';
+import { useAuth } from '../context/authContext';
+import protectedRoutes from './protected';
+import publicRoutes from './public';
 
-// const publicRoutes = [
-//   {
-//     path: '/',
-//     element: <EntryLayout />,
-//   },
-// ];
-// const protectedRoutes = [
-//   { path: '/about', element: <div>about page</div> },
-//   { path: '/home', element: <div>home page</div> },
-// ];
+const AppRoutes = () => {
+  const auth = useAuth();
 
-// // const location = new ReactLocation();
+  const routes = auth.user.user ? [...protectedRoutes] : [...publicRoutes]; // reverse the if statement to see the protected routes
 
-// const AppRoutes = () => {
-//   const auth = useAuth();
+  // we could add also common routes here and add them to the element variable
 
-//   // const commonRoutes = [{ path: '/', element: <Landing /> }];
+  const element = useRoutes([...routes]);
 
-//   const routes = auth.user ? protectedRoutes : publicRoutes;
+  return element;
+};
 
-//   const element = useRoutes([...routes]);
-
-//   // eslint-disable-next-line react/jsx-no-useless-fragment
-//   return <>{element}</>;
-// };
-
-// export default AppRoutes;
+export default AppRoutes;

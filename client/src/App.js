@@ -4,19 +4,14 @@ import MainLayout from './components/layout/MainLayout';
 import EntryLayout from './features/entry/EntryLayout';
 import './index.css';
 import AppProvider from './providers/AppProvider';
+import AppRoutes from './routes';
 
 const App = () => {
   return (
     <AppProvider>
-      <div className="h-screen w-screen bg-white dark:bg-dark-second">
-        {/* <EntryLayout /> */}
-        <MainLayout />
-        <Router>
-          <Routes>
-            <Route exact path="/" element={<EntryLayout />} />
-          </Routes>
-        </Router>
-      </div>
+      <Router>
+        <AppRoutes /> {/* this routes can be found in the routes folder */}
+      </Router>
     </AppProvider>
   );
 };

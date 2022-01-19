@@ -12,25 +12,27 @@ const EntryLayout = () => {
     setLogin(!login);
   };
   return (
-    <FormWrapper>
-      {login ? (
-        <>
-          <FormHeading />
-          <LoginForm>
-            <FormButton title="Login" />
-          </LoginForm>
-        </>
-      ) : (
-        <RegisterForm>
-          <FormButton title="Sign up" />
-        </RegisterForm>
-      )}
+    <div className="h-screen w-screen  bg-white dark:bg-gray-800 flex justify-center items-center">
+      <FormWrapper>
+        {login ? (
+          <>
+            <FormHeading />
+            <LoginForm>
+              <FormButton title="Login" />
+            </LoginForm>
+          </>
+        ) : (
+          <RegisterForm>
+            <FormButton title="Sign up" />
+          </RegisterForm>
+        )}
 
-      <FormToggle
-        title={login ? 'or sign up' : 'or login'}
-        toggleForm={toggleForm}
-      />
-    </FormWrapper>
+        <FormToggle
+          title={login ? 'or sign up' : 'or login'}
+          toggleForm={toggleForm}
+        />
+      </FormWrapper>
+    </div>
   );
 };
 
