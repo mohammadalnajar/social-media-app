@@ -7,9 +7,11 @@ import AppRoutes from './routes';
 const App = () => {
   return (
     <AppProvider>
-      <Router>
-        <AppRoutes /> {/* this routes can be found in the routes folder */}
-      </Router>
+      <div className="h-screen w-screen bg-white dark:bg-dark-second">
+        <Router>
+          <AppRoutes /> {/* this routes can be found in the routes folder */}
+        </Router>
+      </div>
     </AppProvider>
   );
 };
