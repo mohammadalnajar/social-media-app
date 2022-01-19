@@ -1,16 +1,21 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ErrorAlert from '../../../components/ErrorAlert';
 import { useAuth } from '../../../context/authContext';
 import useForm from '../../../hooks/useForm';
 
 const LoginForm = ({ children }) => {
+  const navigate = useNavigate();
   const { formData, handleInputChange, reset } = useForm({
     email: '',
     password: '',
   });
 
-  const { login } = useAuth();
+  const {
+    login,
+    login: { isSuccess },
+  } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,10 +24,13 @@ const LoginForm = ({ children }) => {
   };
 
   useEffect(() => {
+    if (isSuccess) {
+      navigate('/feed');
+    }
     return () => {
       login.reset();
     };
-  }, []);
+  }, [isSuccess]);
 
   return (
     <form onSubmit={handleSubmit}>
