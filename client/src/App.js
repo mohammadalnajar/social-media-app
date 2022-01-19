@@ -1,15 +1,15 @@
 import React from 'react';
-import MainLayout from './components/layout/MainLayout';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import AppProvider from './providers/AppProvider';
+import AppRoutes from './routes';
 
 const App = () => {
   return (
     <AppProvider>
-      <div className="h-screen w-screen bg-white dark:bg-dark-second">
-        {/* <EntryLayout /> */}
-        <MainLayout />
-      </div>
+      <Router>
+        <AppRoutes /> {/* this routes can be found in the routes folder */}
+      </Router>
     </AppProvider>
   );
 };
