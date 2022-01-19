@@ -1,7 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import MainLayout from './components/layout/MainLayout';
-import EntryLayout from './features/entry/EntryLayout';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import AppProvider from './providers/AppProvider';
 import AppRoutes from './routes';
