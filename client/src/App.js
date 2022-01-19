@@ -9,7 +9,7 @@ const App = () => {
     <AppProvider>
       <div className="h-screen w-screen bg-white dark:bg-dark-second">
         <Router>
-          <AppRoutes /> {/* this routes can be found in the routes folder */}
+          <AppRoutes />
         </Router>
       </div>
     </AppProvider>
