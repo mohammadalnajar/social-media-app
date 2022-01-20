@@ -5,7 +5,7 @@ import { useAuth } from '../context/authContext';
 
 const ProtectedRoute = ({ children, redirectTo }) => {
   const { user } = useAuth();
-  return user.status ? children : <Navigate to={redirectTo} />;
+  return user?.data?.email ? children : <Navigate to={redirectTo} />;
 };
 ProtectedRoute.propTypes = {
   children: PropTypes.node.isRequired,
