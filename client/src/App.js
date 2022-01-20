@@ -6,13 +6,13 @@ import AppRoutes from './routes';
 
 const App = () => {
   return (
-    <AppProvider>
-      <div className="h-screen w-screen bg-white dark:bg-dark-second">
-        <Router>
+    <Router>
+      <AppProvider>
+        <div className="h-screen w-screen bg-white dark:bg-dark-second">
           <AppRoutes />
-        </Router>
-      </div>
-    </AppProvider>
+        </div>
+      </AppProvider>
+    </Router>
   );
 };
 
