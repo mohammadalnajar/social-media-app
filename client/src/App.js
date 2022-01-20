@@ -8,7 +8,7 @@ const App = () => {
   return (
     <Router>
       <AppProvider>
-        <div className="h-screen w-screen bg-white dark:bg-dark-second">
+        <div className="h-screen w-screen bg-white dark:bg-dark-main">
           <AppRoutes />
         </div>
       </AppProvider>
