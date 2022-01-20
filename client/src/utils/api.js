@@ -29,11 +29,7 @@ export const registerWithEmailAndPassword = async (data) => {
 };
 
 export const fetchUser = async () => {
-  const result = await fetch(
-    `${process.env.REACT_APP_SERVER_URL}api/users/user`,
-    {
-      credentials: 'include',
-    }
-  );
-  return result.json();
+  return fetch(`${process.env.REACT_APP_SERVER_URL}api/users/user`, {
+    credentials: 'include',
+  }).then(handleApiResponse);
 };
