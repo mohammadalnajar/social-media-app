@@ -27,3 +27,13 @@ export const registerWithEmailAndPassword = async (data) => {
     body: JSON.stringify(data),
   }).then(handleApiResponse);
 };
+
+export const fetchUser = async () => {
+  const result = await fetch(
+    `${process.env.REACT_APP_SERVER_URL}api/users/user`,
+    {
+      credentials: 'include',
+    }
+  );
+  return result.json();
+};
