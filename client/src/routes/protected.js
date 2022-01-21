@@ -1,20 +1,35 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { useQuery } from 'react-query';
 import { Navigate } from 'react-router-dom';
+import LoadingPage from '../components/LoadingPage';
 import { useAuth } from '../context/authContext';
+import { fetchUser } from '../utils/api';
 
-const ProtectedRoute = ({ children, redirectTo, isSuccess }) => {
+const ProtectedRoute = ({ children, redirectTo }) => {
   const { user } = useAuth();
+  const { isSuccess, isFetching, isError } = useQuery('fetchUser', fetchUser, {
+    retry: 0,
+  });
 
-  return user?.data?.email || isSuccess ? (
-    children
-  ) : (
-    <Navigate to={redirectTo} />
-  );
+  if (isFetching) {
+    return <LoadingPage />;
+  }
+
+  if (!isFetching) {
+    return user?.data?.email || isSuccess ? (
+      children
+    ) : (
+      <Navigate to={redirectTo} />
+    );
+  }
+  if (isError) {
+    <Navigate to={redirectTo} />;
+  }
+  return null;
 };
 ProtectedRoute.propTypes = {
   children: PropTypes.node.isRequired,
   redirectTo: PropTypes.string.isRequired,
-  isSuccess: PropTypes.bool.isRequired,
 };
 export default ProtectedRoute;
