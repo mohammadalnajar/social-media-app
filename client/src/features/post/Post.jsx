@@ -7,7 +7,7 @@ const Post = () => {
         <img
           src="./assets/images/tuat.jpg"
           alt="Profile"
-          className="w-10 h-10 rounded-full"
+          className="w-10 h-10 rounded-full hover:opacity-80 hover:cursor-pointer"
         />
         <div className="flex-1 bg-gray-100 rounded-full flex items-center justify-start pl-4 cursor-pointer dark:bg-dark-third text-gray-500 text-lg dark:text-dark-txt hover:bg-gray-300 dark:hover:bg-dark-hover">
           <span>Whats on your mind, Tuat?</span>
