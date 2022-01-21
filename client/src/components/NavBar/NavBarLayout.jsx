@@ -14,7 +14,7 @@ const NavBarLayout = () => {
           <Logo />
           <div className="flex items-center justify-between space-x-1 space-x">
             <Search />
-            <Messenger />
+            <Messenger extraClasses="md:hidden" />
             <div
               className="text-2xl grid place-items-center md:hidden bg-gray-200 dark:bg-dark-third rounded-full w-10 h-10 cursor-pointer hover:bg-gray-300 dark:text-dark-txt"
               id="dark-mode-toggle-mb"
@@ -114,9 +114,7 @@ const NavBarLayout = () => {
             </div>
           </li>
           <li>
-            <div className="text-xl hidden xl:grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
-              <i className="bx bxl-messenger" />
-            </div>
+            <Messenger extraClasses="" />
           </li>
           <li>
             <div className="text-xl grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
