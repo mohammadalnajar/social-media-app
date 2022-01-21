@@ -8,6 +8,7 @@ module.exports = {
         'dark-second': '#242526',
         'dark-third': '#3A3B3C',
         'dark-txt': '#B8BBBF',
+        'dark-hover': '#4E4F50',
       },
     },
   },
