@@ -10,7 +10,6 @@ const ProtectedRoute = ({ children, redirectTo }) => {
   const { user } = useAuth();
   const { isSuccess, isLoading, isError } = useQuery('fetchUser', fetchUser, {
     retry: 0,
-    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {
