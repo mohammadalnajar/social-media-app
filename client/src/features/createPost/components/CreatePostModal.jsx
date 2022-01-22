@@ -1,8 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import useForm from '../../../hooks/useForm';
 import CreatePostSelect from './CreatePostSelect';
 
 const CreatePostModal = ({ isOpen, firstName, children }) => {
+  const { formData, handleInputChange, reset } = useForm({
+    text: '',
+  });
+
+  console.log(formData.text);
   return (
     <>
       <input type="checkbox" id="my-modal-2" className="modal-toggle" />
@@ -29,6 +35,9 @@ const CreatePostModal = ({ isOpen, firstName, children }) => {
             </div>
             <div className="form-control">
               <textarea
+                name="text"
+                value={formData.text}
+                onChange={handleInputChange}
                 className="textarea h-24 textarea-ghost p-0 text-xl text-gray-900 placeholder:text-gray-800 focus:placeholder:text-gray-400 dark:bg-dark-second dark:focus:text-gray-200 dark:placeholder:text-gray-400 dark:focus:placeholder:text-gray-500"
                 placeholder={`Whats on your mind, ${firstName}?`}
               />
@@ -39,6 +48,7 @@ const CreatePostModal = ({ isOpen, firstName, children }) => {
               type="button"
               htmlFor="my-modal-2"
               className="btn btn-block bg-btn-primary hover:bg-btn-primary-hover border-none"
+              disabled={!formData.text && true}
             >
               Post
             </button>
