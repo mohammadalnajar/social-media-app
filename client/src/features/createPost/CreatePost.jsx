@@ -55,7 +55,11 @@ const CreatePost = () => {
           color="text-yellow-400"
         />
       </div>
-      <CreatePostModal isOpen={isOpen} toggleModal={toggleModal} />
+      <CreatePostModal
+        isOpen={isOpen}
+        toggleModal={toggleModal}
+        firstName={firstName}
+      />
     </div>
   );
 };
