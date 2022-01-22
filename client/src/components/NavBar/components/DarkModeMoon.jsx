@@ -16,7 +16,7 @@ const DarkModeMoon = ({ extraClasses }) => {
     <button
       type="button"
       onClick={darkModeToggle}
-      className={`${extraClasses} text-2xl grid place-items-center md:hidden bg-gray-200 dark:bg-dark-third rounded-full w-10 h-10 cursor-pointer hover:bg-gray-300 dark:text-dark-txt`}
+      className={`${extraClasses} text-2xl grid place-items-center bg-gray-200 dark:bg-dark-third rounded-full w-10 h-10 cursor-pointer hover:bg-gray-300 dark:text-dark-txt`}
       id="dark-mode-toggle-mb"
     >
       <i className="bx bxs-moon" />
