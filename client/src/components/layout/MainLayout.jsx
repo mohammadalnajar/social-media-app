@@ -186,7 +186,7 @@ const MainLayout = () => {
         {/* <!-- END LEFT MENU --> */}
 
         {/* <!-- MAIN CONTENT --> */}
-        <div className="w-full lg:w-2/3 xl:w-1/2 pt-32 lg:pt-16 px-2">
+        <div className="w-full lg:w-2/3 xl:w-2/5 pt-32 lg:pt-16 px-2">
           {/* <!-- STORY --> */}
           <div className="relative flex space-x-2 pt-4">
             <div className="w-1/4 sm:w-1/6 h-44 rounded-xl shadow overflow-hidden flex flex-col group cursor-pointer">
