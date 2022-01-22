@@ -4,11 +4,10 @@ import useForm from '../../../hooks/useForm';
 import CreatePostSelect from './CreatePostSelect';
 
 const CreatePostModal = ({ isOpen, firstName, children }) => {
-  const { formData, handleInputChange, reset } = useForm({
+  const { formData, handleInputChange } = useForm({
     text: '',
   });
 
-  console.log(formData.text);
   return (
     <>
       <input type="checkbox" id="my-modal-2" className="modal-toggle" />
