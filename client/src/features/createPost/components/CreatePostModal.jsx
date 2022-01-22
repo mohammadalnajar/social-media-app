@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import CreatePostSelect from './CreatePostSelect';
 
-const CreatePostModal = ({ isOpen, toggleModal, firstName }) => {
+const CreatePostModal = ({ isOpen, firstName, children }) => {
   return (
     <>
       <input type="checkbox" id="my-modal-2" className="modal-toggle" />
       <div className={`modal ${isOpen ? 'modal-open' : ''}`}>
         <div className="modal-box dark:bg-dark-second">
           <div className="card">
-            <div>
+            {children}
+            <div className="divider" />
+            <div className="flex">
               <div className="avatar">
                 <div className="mb-8 rounded-full w-14 h-14">
                   <img
@@ -17,22 +20,27 @@ const CreatePostModal = ({ isOpen, toggleModal, firstName }) => {
                   />
                 </div>
               </div>
+              <div className="flex flex-col ml-3">
+                <h1 className="text-gray-900 dark:text-dark-txt font-semibold capitalize">
+                  {firstName}
+                </h1>
+                <CreatePostSelect />
+              </div>
             </div>
             <div className="form-control">
               <textarea
-                className="textarea h-24 textarea-ghost p-0 dark:bg-dark-second dark:focus:text-gray-200 dark:focus:placeholder:text-gray-500"
-                placeholder={`Whats on your mind, ${firstName}.`}
+                className="textarea h-24 textarea-ghost p-0 text-xl text-gray-900 placeholder:text-gray-800 focus:placeholder:text-gray-400 dark:bg-dark-second dark:focus:text-gray-200 dark:placeholder:text-gray-400 dark:focus:placeholder:text-gray-500"
+                placeholder={`Whats on your mind, ${firstName}?`}
               />
             </div>
           </div>
           <div className="modal-action">
             <button
-              onClick={toggleModal}
               type="button"
               htmlFor="my-modal-2"
-              className="btn bg-btn-primary hover:bg-btn-primary-hover"
+              className="btn btn-block bg-btn-primary hover:bg-btn-primary-hover border-none"
             >
-              Close
+              Post
             </button>
           </div>
         </div>
@@ -43,8 +51,8 @@ const CreatePostModal = ({ isOpen, toggleModal, firstName }) => {
 
 CreatePostModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  toggleModal: PropTypes.func.isRequired,
   firstName: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default CreatePostModal;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { fetchUser } from '../../utils/api';
+import CreatePostHeader from './components/CreatePostHeader';
 import CreatePostModal from './components/CreatePostModal';
 import QuickShareButton from './components/QuickShareButton';
 
@@ -59,7 +60,9 @@ const CreatePost = () => {
         isOpen={isOpen}
         toggleModal={toggleModal}
         firstName={firstName}
-      />
+      >
+        <CreatePostHeader toggleModal={toggleModal} />
+      </CreatePostModal>
     </div>
   );
 };
