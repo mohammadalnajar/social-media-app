@@ -2,13 +2,16 @@ import React from 'react';
 
 const CreatePostSelect = () => {
   return (
-    <select className="select select-bordered select-xs w-full max-w-xs text-gray-900 dark:text-dark-txt bg-gray-200 dark:bg-dark-third border-none mt-1">
-      <option disabled="disabled" selected="selected">
+    <select
+      defaultValue=""
+      className="select select-bordered select-xs w-full max-w-xs text-gray-900 dark:text-dark-txt bg-gray-200 dark:bg-dark-third border-none mt-1"
+    >
+      <option value="" disabled="disabled">
         Select visibility
       </option>
-      <option>Public</option>
-      <option>Friends</option>
-      <option>Only me</option>
+      <option value={1}>Public</option>
+      <option value={2}>Friends</option>
+      <option value={3}>Only me</option>
     </select>
   );
 };
