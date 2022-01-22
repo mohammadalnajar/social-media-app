@@ -47,7 +47,7 @@ const CreatePostModal = ({ isOpen, firstName, children }) => {
             <button
               type="button"
               htmlFor="my-modal-2"
-              className="btn btn-block bg-btn-primary hover:bg-btn-primary-hover border-none"
+              className="btn btn-block disabled:dark:text-gray-500 text-semibold capitalize text-base disabled:dark:bg-dark-third bg-btn-primary hover:bg-btn-primary-hover border-none"
               disabled={!formData.text && true}
             >
               Post

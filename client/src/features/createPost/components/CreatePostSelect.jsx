@@ -3,10 +3,10 @@ import React from 'react';
 const CreatePostSelect = () => {
   return (
     <select
-      defaultValue=""
+      defaultValue={0}
       className="select select-bordered select-xs w-full max-w-xs text-gray-900 dark:text-dark-txt bg-gray-200 dark:bg-dark-third border-none mt-1"
     >
-      <option value="" disabled="disabled">
+      <option value={0} disabled="disabled">
         Select visibility
       </option>
       <option value={1}>Public</option>
