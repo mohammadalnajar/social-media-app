@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 module.exports = {
   darkMode: 'class',
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -17,6 +18,8 @@ module.exports = {
         'dark-third': '#3A3B3C',
         'dark-txt': '#B8BBBF',
         'dark-hover': '#4E4F50',
+        'btn-primary': '#2374E1',
+        'btn-primary-hover': '#3982E4',
       },
     },
   },
