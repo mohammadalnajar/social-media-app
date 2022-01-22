@@ -4,6 +4,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { AuthProvider } from '../context/authContext';
+import useDarkMode from '../hooks/useDarkMode';
 
 const ErrorFallback = () => {
   <div
@@ -26,6 +27,7 @@ const ErrorFallback = () => {
 const queryClient = new QueryClient();
 
 const AppProvider = ({ children }) => {
+  useDarkMode();
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <QueryClientProvider client={queryClient}>
