@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { fetchUser } from '../../utils/api';
 import QuickShareButton from './components/QuickShareButton';
 
-const Post = () => {
+const CreatePost = () => {
   const {
     data: {
       data: { firstName },
@@ -47,4 +47,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default CreatePost;

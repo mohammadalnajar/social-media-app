@@ -1,5 +1,5 @@
 import React from 'react';
-import Post from '../../features/post/Post';
+import CreatePost from '../../features/createPost/CreatePost';
 import NavBarLayout from '../NavBar/NavBarLayout';
 
 const MainLayout = () => {
@@ -293,7 +293,7 @@ const MainLayout = () => {
           {/* <!-- END STORY --> */}
 
           {/* <!-- POST FORM --> */}
-          <Post />
+          <CreatePost />
           {/* <!-- END POST FORM --> */}
 
           {/* <!-- ROOM --> */}
