@@ -6,11 +6,11 @@ const CreatePostModal = ({ isOpen, toggleModal, firstName }) => {
     <>
       <input type="checkbox" id="my-modal-2" className="modal-toggle" />
       <div className={`modal ${isOpen ? 'modal-open' : ''}`}>
-        <div className="modal-box">
+        <div className="modal-box dark:bg-dark-second">
           <div className="card">
             <div className="form-control">
               <textarea
-                className="textarea h-24 textarea-ghost p-0"
+                className="textarea h-24 textarea-ghost p-0 dark:bg-dark-second dark:focus:text-gray-200"
                 placeholder={`Whats on your mind, ${firstName}.`}
               />
             </div>
