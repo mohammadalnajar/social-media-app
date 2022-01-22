@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { AuthProvider } from '../context/authContext';
 import useDarkMode from '../hooks/useDarkMode';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 const ErrorFallback = () => {
   <div
@@ -28,8 +27,7 @@ const ErrorFallback = () => {
 const queryClient = new QueryClient();
 
 const AppProvider = ({ children }) => {
-  const [storedValue] = useLocalStorage('darkMode');
-  useDarkMode(storedValue);
+  useDarkMode();
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <QueryClientProvider client={queryClient}>

@@ -5,7 +5,7 @@ import useLocalStorage from '../../../hooks/useLocalStorage';
 
 const DarkModeMoon = ({ extraClasses }) => {
   const [storedValue, setValue] = useLocalStorage('darkMode');
-  const [colorTheme, setTheme] = useDarkMode(storedValue);
+  const [colorTheme, setTheme] = useDarkMode();
 
   const darkModeToggle = () => {
     setValue(storedValue === 'dark' ? 'light' : 'dark');
