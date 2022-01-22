@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { fetchUser } from '../../utils/api';
+import CreatePostModal from './components/CreatePostModal';
 import QuickShareButton from './components/QuickShareButton';
 
 const CreatePost = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const {
     data: {
       data: { firstName },
@@ -11,6 +13,10 @@ const CreatePost = () => {
   } = useQuery('fetchUser', fetchUser, {
     retry: 0,
   });
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div className="px-4 mt-4 shadow rounded-lg bg-white dark:bg-dark-second">
@@ -20,7 +26,13 @@ const CreatePost = () => {
           alt="Profile"
           className="w-10 h-10 rounded-full hover:opacity-80 hover:cursor-pointer"
         />
-        <div className="flex-1 bg-gray-100 rounded-full flex items-center justify-start pl-4 cursor-pointer dark:bg-dark-third text-gray-500 text-lg dark:text-dark-txt hover:bg-gray-300 dark:hover:bg-dark-hover">
+        <div
+          role="button"
+          tabIndex="0"
+          onClick={toggleModal}
+          onKeyDown={toggleModal}
+          className="flex-1 bg-gray-100 rounded-full flex items-center justify-start pl-4 cursor-pointer dark:bg-dark-third text-gray-500 text-lg dark:text-dark-txt hover:bg-gray-300 dark:hover:bg-dark-hover"
+        >
           <p className="text-xs xs:text-sm">
             Whats on your mind, <span className="capitalize">{firstName}</span>?
           </p>
@@ -43,6 +55,7 @@ const CreatePost = () => {
           color="text-yellow-400"
         />
       </div>
+      <CreatePostModal isOpen={isOpen} toggleModal={toggleModal} />
     </div>
   );
 };
