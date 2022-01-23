@@ -58,7 +58,7 @@ const CreatePost = () => {
       </div>
       <CreatePostModal
         isOpen={isOpen}
-        toggleModal={toggleModal}
+        setIsOpen={setIsOpen}
         firstName={firstName}
       >
         <CreatePostHeader toggleModal={toggleModal} />
