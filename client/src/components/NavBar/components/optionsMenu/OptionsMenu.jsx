@@ -2,6 +2,7 @@ import React from 'react';
 import DarkModeMoon from '../DarkModeMoon';
 import Messenger from '../features/messenger/Messenger';
 import Avatar from './Avatar';
+import Dropdown from './dropdown/Dropdown';
 
 const OptionsMenu = () => {
   return (
@@ -11,9 +12,7 @@ const OptionsMenu = () => {
       </li>
 
       <li>
-        <div className="text-xl hidden xl:grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
-          <i className="bx bx-plus" />
-        </div>
+        <Dropdown />
       </li>
       <li>
         <Messenger extraClasses="" />
