@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import FriendsTab from './FriendsTab';
-import HomeTab from './HomeTab';
-import Marketplace from './MarketplaceTab';
-import NewsTab from './NewsTab';
 import SideMenuTab from './SideMenuTab';
-import WatchTab from './WatchTab';
+import Tab from './Tab';
 
 const TabsMenu = () => {
   const [selectedTab, setSelectedTab] = useState('home');
@@ -16,19 +12,30 @@ const TabsMenu = () => {
   return (
     <ul className="flex w-full lg:w-max items-center justify-center">
       <li className="w-1/5 md:w-max text-center">
-        <HomeTab selectedState={{ setSelectedTab, selectedColor }} />
+        <Tab title="home" selectedState={{ setSelectedTab, selectedColor }} />
       </li>
       <li className="w-1/5 md:w-max text-center">
-        <WatchTab selectedState={{ setSelectedTab, selectedColor }} />
+        <Tab title="watch" selectedState={{ setSelectedTab, selectedColor }} />
       </li>
       <li className="w-1/5 md:w-max text-center">
-        <Marketplace selectedState={{ setSelectedTab, selectedColor }} />
+        <Tab
+          title="marketplace"
+          selectedState={{ setSelectedTab, selectedColor }}
+        />
       </li>
       <li className="w-1/5 md:w-max text-center">
-        <FriendsTab selectedState={{ setSelectedTab, selectedColor }} />
+        <Tab
+          title="friends"
+          dynamicNum={9} // fetch this from server
+          selectedState={{ setSelectedTab, selectedColor }}
+        />
       </li>
       <li className="w-1/5 md:w-max text-center hidden md:inline-block">
-        <NewsTab selectedState={{ setSelectedTab, selectedColor }} />
+        <Tab
+          title="news"
+          dynamicNum={30}
+          selectedState={{ setSelectedTab, selectedColor }}
+        />
       </li>
       <li className="w-1/5 md:w-max text-center inline-block md:hidden">
         <SideMenuTab />
