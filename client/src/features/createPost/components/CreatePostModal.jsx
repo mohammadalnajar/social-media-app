@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import useForm from '../../../hooks/useForm';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
+import capitalize from '../../../utils/helpers';
 import CreatePostSelect from './CreatePostSelect';
 
 const CreatePostModal = ({ isOpen, toggleModal, firstName, children }) => {
@@ -41,10 +42,7 @@ const CreatePostModal = ({ isOpen, toggleModal, firstName, children }) => {
                 value={formData.text}
                 onChange={handleInputChange}
                 className="textarea h-24 textarea-ghost p-0 text-xl text-gray-900 dark:text-dark-txt placeholder:text-gray-800 focus:placeholder:text-gray-400 dark:bg-dark-second dark:focus:text-gray-200 dark:placeholder:text-gray-400 dark:focus:placeholder:text-gray-500"
-                placeholder={`Whats on your mind, ${firstName.replace(
-                  /(^\w|\s\w)/g,
-                  (m) => m.toUpperCase()
-                )}?`}
+                placeholder={`Whats on your mind, ${capitalize(firstName)}?`}
               />
             </div>
           </div>
