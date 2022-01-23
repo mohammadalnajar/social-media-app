@@ -5,12 +5,14 @@ import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import capitalize from '../../../utils/helpers';
 import CreatePostSelect from './CreatePostSelect';
 
-const CreatePostModal = ({ isOpen, toggleModal, firstName, children }) => {
+const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
   const { formData, handleInputChange } = useForm({
     text: '',
   });
   const ref = useRef();
-  useOnClickOutside(ref, toggleModal);
+  useOnClickOutside(ref, () => {
+    setIsOpen(false);
+  });
 
   return (
     <>
@@ -64,7 +66,7 @@ const CreatePostModal = ({ isOpen, toggleModal, firstName, children }) => {
 
 CreatePostModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  toggleModal: PropTypes.func.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
   firstName: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
