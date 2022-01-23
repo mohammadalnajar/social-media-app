@@ -8,31 +8,18 @@ import TabsMenu from './components/tabsMenu/TabsMenu';
 
 const Nav = () => {
   return (
-    <>
-      {/* <!-- NAV --> */}
-      <nav className="bg-white dark:bg-dark-second h-max my-auto md:h-14 w-full shadow flex flex-col md:flex-row items-center justify-center md:justify-between fixed top-0 z-50 border-b dark:border-dark-third">
-        {/* <!-- LEFT NAV --> */}
-        <div className="flex items-center justify-between w-full md:w-max px-4 py-2">
-          <Logo />
-          <div className="flex items-center justify-between space-x-1 space-x">
-            <Search />
-            <Messenger extraClasses="md:hidden" />
-            <DarkModeMoon extraClasses="md:hidden" />
-          </div>
+    <nav className="bg-white dark:bg-dark-second h-max my-auto md:h-14 w-full shadow flex flex-col md:flex-row items-center justify-center md:justify-between fixed top-0 z-50 border-b dark:border-dark-third">
+      <div className="flex items-center justify-between w-full md:w-max px-4 py-2">
+        <Logo />
+        <div className="flex items-center justify-between space-x-1 space-x">
+          <Search />
+          <Messenger extraClasses="md:hidden" />
+          <DarkModeMoon extraClasses="md:hidden" />
         </div>
-        {/* <!-- END LEFT NAV --> */}
-
-        {/* <!-- MAIN NAV --> */}
-        <TabsMenu />
-        {/* <!-- END MAIN NAV --> */}
-
-        {/* <!-- RIGHT NAV --> */}
-        <OptionsMenu />
-        {/* <!-- END RIGHT NAV --> */}
-
-        {/* <!-- END NAV --> */}
-      </nav>
-    </>
+      </div>
+      <TabsMenu />
+      <OptionsMenu />
+    </nav>
   );
 };
 
