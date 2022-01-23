@@ -38,7 +38,10 @@ const CreatePostModal = ({ isOpen, firstName, children }) => {
                 value={formData.text}
                 onChange={handleInputChange}
                 className="textarea h-24 textarea-ghost p-0 text-xl text-gray-900 placeholder:text-gray-800 focus:placeholder:text-gray-400 dark:bg-dark-second dark:focus:text-gray-200 dark:placeholder:text-gray-400 dark:focus:placeholder:text-gray-500"
-                placeholder={`Whats on your mind, ${firstName}?`}
+                placeholder={`Whats on your mind, ${firstName.replace(
+                  /(^\w|\s\w)/g,
+                  (m) => m.toUpperCase()
+                )}?`}
               />
             </div>
           </div>
