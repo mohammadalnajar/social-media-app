@@ -8,15 +8,15 @@ import { fetchUser } from '../utils/api';
 
 const ProtectedRoute = ({ children, redirectTo }) => {
   const { user } = useAuth();
-  const { isSuccess, isFetching, isError } = useQuery('fetchUser', fetchUser, {
+  const { isSuccess, isLoading, isError } = useQuery('fetchUser', fetchUser, {
     retry: 0,
   });
 
-  if (isFetching) {
+  if (isLoading) {
     return <LoadingPage />;
   }
 
-  if (!isFetching) {
+  if (!isLoading) {
     return user?.data?.email || isSuccess ? (
       children
     ) : (

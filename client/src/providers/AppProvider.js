@@ -24,7 +24,13 @@ const ErrorFallback = () => {
   </div>;
 };
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const AppProvider = ({ children }) => {
   useDarkMode();
