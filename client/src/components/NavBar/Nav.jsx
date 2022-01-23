@@ -3,15 +3,14 @@ import DarkModeMoon from './components/DarkModeMoon';
 import Messenger from './components/features/messenger/Messenger';
 import Search from './components/features/search/Search';
 import Logo from './components/Logo';
-import NavWrapper from './components/NavWrapper';
 import OptionsMenu from './components/optionsMenu/OptionsMenu';
 import TabsMenu from './components/tabsMenu/TabsMenu';
 
-const NavBarLayout = () => {
+const Nav = () => {
   return (
     <>
       {/* <!-- NAV --> */}
-      <NavWrapper>
+      <nav className="bg-white dark:bg-dark-second h-max my-auto md:h-14 w-full shadow flex flex-col md:flex-row items-center justify-center md:justify-between fixed top-0 z-50 border-b dark:border-dark-third">
         {/* <!-- LEFT NAV --> */}
         <div className="flex items-center justify-between w-full md:w-max px-4 py-2">
           <Logo />
@@ -30,11 +29,11 @@ const NavBarLayout = () => {
         {/* <!-- RIGHT NAV --> */}
         <OptionsMenu />
         {/* <!-- END RIGHT NAV --> */}
-      </NavWrapper>
 
-      {/* <!-- END NAV --> */}
+        {/* <!-- END NAV --> */}
+      </nav>
     </>
   );
 };
 
-export default NavBarLayout;
+export default Nav;

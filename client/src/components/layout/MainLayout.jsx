@@ -1,12 +1,12 @@
 import React from 'react';
 import CreatePost from '../../features/createPost/CreatePost';
-import NavBarLayout from '../NavBar/NavBarLayout';
+import Nav from '../NavBar/Nav';
 
 const MainLayout = () => {
   return (
     <div className="bg-gray-100 dark:bg-dark-main h-screen w-screen">
       {/* NavBar */}
-      <NavBarLayout />
+      <Nav />
       {/* <!-- MAIN --> */}
       <div className="flex justify-center h-screen w-screen overflow-x-hidden">
         {/* <!-- LEFT MENU --> */}
