@@ -28,7 +28,7 @@ const Tab = ({ selectedState, title, dynamicNum = false }) => {
       }`}
     >
       <i className={`bx bx${iconClass}`} />
-      {dynamicNum && (
+      {dynamicNum !== 0 && (
         <span className="text-xs absolute top-1 right-1/4 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
           {dynamicNum}
         </span>
@@ -42,9 +42,9 @@ Tab.propTypes = {
     selectedColor: PropTypes.func,
   }).isRequired,
   title: PropTypes.string.isRequired,
-  dynamicNum: PropTypes.string,
+  dynamicNum: PropTypes.number,
 };
 Tab.defaultProps = {
-  dynamicNum: false,
+  dynamicNum: 0,
 };
 export default Tab;
