@@ -1,7 +1,21 @@
 import React from 'react';
+import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import logoutUser from './api';
 import DropDownItem from './DropDownItem';
 
 const Dropdown = () => {
+  const navigate = useNavigate();
+  const logout = useMutation(logoutUser, {
+    onSuccess: (data) => {
+      if (data?.status === 'ok') {
+        navigate('/');
+      }
+    },
+  });
+  const logoutUserOnClick = () => {
+    logout.mutate();
+  };
   return (
     <div className="dropdown dropdown-end">
       <div
@@ -19,7 +33,7 @@ const Dropdown = () => {
           <DropDownItem title="Item 2" />
         </li>
         <li>
-          <DropDownItem title="Item 3" />
+          <DropDownItem title="Log Out" onClick={logoutUserOnClick} />
         </li>
       </ul>
     </div>
