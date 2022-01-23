@@ -1,18 +1,21 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useRef } from 'react';
 import useForm from '../../../hooks/useForm';
+import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import CreatePostSelect from './CreatePostSelect';
 
-const CreatePostModal = ({ isOpen, firstName, children }) => {
+const CreatePostModal = ({ isOpen, toggleModal, firstName, children }) => {
   const { formData, handleInputChange } = useForm({
     text: '',
   });
+  const ref = useRef();
+  useOnClickOutside(ref, toggleModal);
 
   return (
     <>
       <input type="checkbox" id="my-modal-2" className="modal-toggle" />
       <div className={`modal ${isOpen ? 'modal-open' : ''}`}>
-        <div className="modal-box dark:bg-dark-second">
+        <div ref={ref} className="modal-box dark:bg-dark-second">
           <div className="card">
             {children}
             <div className="divider dark:before:bg-dark-third dark:after:bg-dark-third" />
@@ -49,7 +52,7 @@ const CreatePostModal = ({ isOpen, firstName, children }) => {
             <button
               type="button"
               htmlFor="my-modal-2"
-              className="btn btn-block disabled:dark:text-gray-500 disabled:cursor-not-allowed text-semibold capitalize text-base disabled:dark:bg-dark-third bg-btn-primary hover:bg-btn-primary-hover border-none"
+              className="btn btn-block disabled:dark:text-gray-500 text-semibold capitalize text-base disabled:dark:bg-dark-third bg-btn-primary hover:bg-btn-primary-hover border-none"
               disabled={!formData.text && true}
             >
               Post
@@ -63,6 +66,7 @@ const CreatePostModal = ({ isOpen, firstName, children }) => {
 
 CreatePostModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
+  toggleModal: PropTypes.func.isRequired,
   firstName: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
