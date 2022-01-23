@@ -15,7 +15,7 @@ const CreatePostModal = ({ isOpen, firstName, children }) => {
         <div className="modal-box dark:bg-dark-second">
           <div className="card">
             {children}
-            <div className="divider" />
+            <div className="divider before:bg-dark-third after:bg-dark-third" />
             <div className="flex">
               <div className="avatar">
                 <div className="mb-8 rounded-full w-14 h-14">
