@@ -7,7 +7,6 @@ const useDarkMode = () => {
     return storedValue;
   });
   const colorTheme = theme === 'light' ? 'dark' : 'light';
-  console.log(storedValue, 'stored');
   useEffect(
     () => {
       const root = window.document.documentElement;
