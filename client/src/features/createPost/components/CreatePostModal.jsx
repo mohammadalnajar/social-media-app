@@ -15,7 +15,7 @@ const CreatePostModal = ({ isOpen, firstName, children }) => {
         <div className="modal-box dark:bg-dark-second">
           <div className="card">
             {children}
-            <div className="divider before:bg-dark-third after:bg-dark-third" />
+            <div className="divider dark:before:bg-dark-third dark:after:bg-dark-third" />
             <div className="flex">
               <div className="avatar">
                 <div className="mb-8 rounded-full w-14 h-14">
@@ -37,7 +37,7 @@ const CreatePostModal = ({ isOpen, firstName, children }) => {
                 name="text"
                 value={formData.text}
                 onChange={handleInputChange}
-                className="textarea h-24 textarea-ghost p-0 text-xl text-gray-900 placeholder:text-gray-800 focus:placeholder:text-gray-400 dark:bg-dark-second dark:focus:text-gray-200 dark:placeholder:text-gray-400 dark:focus:placeholder:text-gray-500"
+                className="textarea h-24 textarea-ghost p-0 text-xl text-gray-900 dark:text-dark-txt placeholder:text-gray-800 focus:placeholder:text-gray-400 dark:bg-dark-second dark:focus:text-gray-200 dark:placeholder:text-gray-400 dark:focus:placeholder:text-gray-500"
                 placeholder={`Whats on your mind, ${firstName.replace(
                   /(^\w|\s\w)/g,
                   (m) => m.toUpperCase()
@@ -49,7 +49,7 @@ const CreatePostModal = ({ isOpen, firstName, children }) => {
             <button
               type="button"
               htmlFor="my-modal-2"
-              className="btn btn-block disabled:dark:text-gray-500 text-semibold capitalize text-base disabled:dark:bg-dark-third bg-btn-primary hover:bg-btn-primary-hover border-none"
+              className="btn btn-block disabled:dark:text-gray-500 disabled:cursor-not-allowed text-semibold capitalize text-base disabled:dark:bg-dark-third bg-btn-primary hover:bg-btn-primary-hover border-none"
               disabled={!formData.text && true}
             >
               Post
