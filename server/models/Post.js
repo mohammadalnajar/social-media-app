@@ -14,7 +14,7 @@ const PostSchema = new mongoose.Schema({
     },
     visibility: {
         type: String,
-        enum: ['only me', 'everyone', 'only friends'],
+        enum: ['only me', 'public', 'friends'],
         required: true,
     },
     likes: { type: Array },
