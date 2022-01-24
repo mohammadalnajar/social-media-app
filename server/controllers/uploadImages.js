@@ -1,7 +1,8 @@
+/* eslint-disable no-shadow */
+/* eslint-disable object-shorthand */
 import multer from 'multer';
 
 import { v4 as uuidv4 } from 'uuid';
-import Post from '../models/Post.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
 const uploadImg = (req, res, next) => {
