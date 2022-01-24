@@ -12,8 +12,28 @@ export const getAllFriendsPosts = (req, res) => {
     res.send('getAllFriendsPosts');
 };
 // ========= get ALL posts (user) =========
-export const getAllUserPosts = (req, res) => {
-    res.send('getAllUserPosts');
+export const getAllUserPosts = async (req, res) => {
+    const { _id: userId } = req.session.userData;
+    const user = await User.findById(userId);
+    const posts = await Promise.all(
+        user.posts.map(async (postId) => {
+            try {
+                const post = await Post.findById(postId);
+                return post;
+            } catch (error) {
+                console.log(error, 'in get posts');
+                return errorRes(
+                    res,
+                    500,
+                    'failed to get user posts ...',
+                    null,
+                    null
+                );
+            }
+        })
+    );
+    const data = posts;
+    return successRes(res, 200, 'ok', 'all user posts found', data);
 };
 // ========= create a post =========
 export const createPost = async (req, res) => {
