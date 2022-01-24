@@ -2,7 +2,7 @@ import {
     emailValidations,
     nameValidations,
     passwordValidations,
-} from '../models/UserValidations.js';
+} from '../utils/UserValidations.js';
 import getErrorMessage from '../utils/mongoErrors.js';
 import { errorRes } from '../utils/reqResponse.js';
 
