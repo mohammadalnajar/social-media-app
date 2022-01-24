@@ -22,7 +22,10 @@ export const createPost = async (req, res) => {
     // create post
     const { text, visibility } = req.body;
     try {
-        const createdPost = await Post.create({ text, visibility });
+        const createdPost = await Post.create({
+            text,
+            visibility: visibility.toLowerCase(),
+        });
         if (createdPost) {
             const updated = await User.findOneAndUpdate(
                 { _id: userId },
