@@ -1,6 +1,7 @@
 import Post from '../models/Post.js';
 import User from '../models/User.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
+import uploadImg from './uploadImages.js';
 
 // ========= get ALL posts (everyone) =========
 export const getAllUsersPosts = (req, res) => {
@@ -16,6 +17,7 @@ export const getAllUserPosts = (req, res) => {
 };
 // ========= create a post =========
 export const createPost = async (req, res) => {
+    console.log(req.body, 'body');
     // get userId from session
     const { _id: userId } = req.session.userData;
 
@@ -24,9 +26,69 @@ export const createPost = async (req, res) => {
     try {
         const createdPost = await Post.create({
             text,
-            visibility: visibility.toLowerCase(),
+            visibility,
         });
         if (createdPost) {
+            const onImageUploadSuccess = async (fileName) => {
+                console.log(fileName, 'fileName');
+                try {
+                    const addImageUrlToPost = await Post.findOneAndUpdate(
+                        { _id: createdPost.id },
+                        {
+                            $set: { imageUrl: `/images/${fileName}` },
+                        }
+                    );
+                    // add post id to user posts array
+                    const updated = await User.findOneAndUpdate(
+                        { _id: userId },
+                        {
+                            $push: { posts: createdPost.id },
+                        }
+                    );
+                    if (updated && addImageUrlToPost) {
+                        // get post data after update
+                        const post = await Post.findById(createdPost.id);
+                        return successRes(
+                            res,
+                            200,
+                            'ok',
+                            'post is created',
+                            post
+                        );
+                    }
+                } catch (error) {
+                    console.log(error, 'error in onImageUploadSuccess');
+                    return errorRes(
+                        res,
+                        500,
+                        'something went wrong ...',
+                        null,
+                        null
+                    );
+                }
+                return null;
+            };
+            const onImageUploadFail = (err) => {
+                console.log(err, 'onImageUploadFail func error');
+                return errorRes(
+                    res,
+                    500,
+                    'failed to upload the image',
+                    null,
+                    null
+                );
+            };
+            if (req.file) {
+                uploadImg(
+                    { name: 'post', id: createdPost.id },
+                    req,
+                    res,
+                    onImageUploadSuccess,
+                    onImageUploadFail
+                );
+            }
+
+            // add post id to user posts array
             const updated = await User.findOneAndUpdate(
                 { _id: userId },
                 {
@@ -34,10 +96,9 @@ export const createPost = async (req, res) => {
                 }
             );
             if (updated) {
-                const user = await User.findById(userId);
-                const { password, isAdmin, ...rest } = user._doc;
-                req.session.userData = rest;
-                return successRes(res, 200, 'ok', 'post is created', rest);
+                // get post data after update
+                const post = await Post.findById(createdPost.id);
+                return successRes(res, 200, 'ok', 'post is created', post);
             }
             return errorRes(
                 res,
