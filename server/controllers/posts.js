@@ -22,71 +22,72 @@ export const createPost = async (req, res) => {
     const { _id: userId } = req.session.userData;
 
     // create post
-    const { text, visibility } = req.body;
+    const { text, visibility, imageUrl } = req.body;
     try {
         const createdPost = await Post.create({
             text,
             visibility,
+            imageUrl,
         });
         if (createdPost) {
-            const onImageUploadSuccess = async (fileName) => {
-                console.log(fileName, 'fileName');
-                try {
-                    const addImageUrlToPost = await Post.findOneAndUpdate(
-                        { _id: createdPost.id },
-                        {
-                            $set: { imageUrl: `/images/${fileName}` },
-                        }
-                    );
-                    // add post id to user posts array
-                    const updated = await User.findOneAndUpdate(
-                        { _id: userId },
-                        {
-                            $push: { posts: createdPost.id },
-                        }
-                    );
-                    if (updated && addImageUrlToPost) {
-                        // get post data after update
-                        const post = await Post.findById(createdPost.id);
-                        return successRes(
-                            res,
-                            200,
-                            'ok',
-                            'post is created',
-                            post
-                        );
-                    }
-                } catch (error) {
-                    console.log(error, 'error in onImageUploadSuccess');
-                    return errorRes(
-                        res,
-                        500,
-                        'something went wrong ...',
-                        null,
-                        null
-                    );
-                }
-                return null;
-            };
-            const onImageUploadFail = (err) => {
-                console.log(err, 'onImageUploadFail func error');
-                return errorRes(
-                    res,
-                    500,
-                    'failed to upload the image',
-                    null,
-                    null
-                );
-            };
-            if (req.file) {
-                uploadImg(
-                    { name: 'post', id: createdPost.id },
-                    req,
-                    res,
-                    onImageUploadSuccess,
-                    onImageUploadFail
-                );
-            }
+            // const onImageUploadSuccess = async (fileName) => {
+            //     console.log(fileName, 'fileName');
+            //     try {
+            //         const addImageUrlToPost = await Post.findOneAndUpdate(
+            //             { _id: createdPost.id },
+            //             {
+            //                 $set: { imageUrl: `/images/${fileName}` },
+            //             }
+            //         );
+            //         // add post id to user posts array
+            //         const updated = await User.findOneAndUpdate(
+            //             { _id: userId },
+            //             {
+            //                 $push: { posts: createdPost.id },
+            //             }
+            //         );
+            //         if (updated && addImageUrlToPost) {
+            //             // get post data after update
+            //             const post = await Post.findById(createdPost.id);
+            //             return successRes(
+            //                 res,
+            //                 200,
+            //                 'ok',
+            //                 'post is created',
+            //                 post
+            //             );
+            //         }
+            //     } catch (error) {
+            //         console.log(error, 'error in onImageUploadSuccess');
+            //         return errorRes(
+            //             res,
+            //             500,
+            //             'something went wrong ...',
+            //             null,
+            //             null
+            //         );
+            //     }
+            //     return null;
+            // };
+            // const onImageUploadFail = (err) => {
+            //     console.log(err, 'onImageUploadFail func error');
+            //     return errorRes(
+            //         res,
+            //         500,
+            //         'failed to upload the image',
+            //         null,
+            //         null
+            //     );
+            // };
+            // if (req.file) {
+            //     uploadImg(
+            //         { name: 'post', id: createdPost.id },
+            //         req,
+            //         res,
+            //         onImageUploadSuccess,
+            //         onImageUploadFail
+            //     );
+            // }
 
             // add post id to user posts array
             const updated = await User.findOneAndUpdate(
@@ -98,7 +99,8 @@ export const createPost = async (req, res) => {
             if (updated) {
                 // get post data after update
                 const post = await Post.findById(createdPost.id);
-                return successRes(res, 200, 'ok', 'post is created', post);
+                const data = post;
+                return successRes(res, 200, 'ok', 'post is created', data);
             }
             return errorRes(
                 res,
