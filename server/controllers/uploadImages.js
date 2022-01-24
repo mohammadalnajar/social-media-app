@@ -15,7 +15,7 @@ const uploadImg = (req, res, next) => {
     //     fileName = `${id}-post-${uuidv4()}`;
     //     // save post img
     // }
-
+    let filename = '';
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, 'public/images');
@@ -24,13 +24,14 @@ const uploadImg = (req, res, next) => {
             console.log(file.originalname);
             const fileName = file.originalname.split('.');
             const extension = fileName[fileName.length - 1];
-            cb(null, `${uuidv4()}.${extension}`);
+            filename = `${uuidv4()}.${extension}`;
+            cb(null, filename);
         },
     });
     const upload = multer({ storage });
 
     const onImageUploadSuccess = async () => {
-        // console.log(fileName, 'fileName');
+        console.log(filename, 'fileName');
         // try {
         //     const addImageUrlToPost = await Post.findOneAndUpdate(
         //         { _id: createdPost.id },
@@ -49,6 +50,9 @@ const uploadImg = (req, res, next) => {
         //     return errorRes(res, 500, 'something went wrong ...', null, null);
         // }
         // return null;
+        return successRes(res, 200, 'ok', 'image is saved', {
+            imageUrl: `/images/${filename}`,
+        });
     };
     const onImageUploadFail = (err) => {
         console.log(err, 'onImageUploadFail func error');
