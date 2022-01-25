@@ -109,8 +109,13 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
             <button
               type="button"
               onClick={handleSubmit}
-              className="btn btn-block disabled:dark:text-gray-500 text-semibold capitalize text-base disabled:dark:bg-dark-third bg-btn-primary hover:bg-btn-primary-hover border-none"
-              disabled={!formData.text && !files.length > 0 && true}
+              className={`${
+                upload.isLoading && 'loading'
+              } btn btn-block disabled:dark:text-gray-500 text-semibold capitalize text-base disabled:dark:bg-dark-third bg-btn-primary hover:bg-btn-primary-hover border-none`}
+              disabled={
+                (!formData.text && !files.length > 0) ||
+                (upload.isLoading && true)
+              }
             >
               Post
             </button>
