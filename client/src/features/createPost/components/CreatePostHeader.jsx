@@ -3,7 +3,7 @@ import React from 'react';
 
 const CreatePostHeader = ({ toggleModal }) => {
   return (
-    <div className="flex flex-nowrap">
+    <div className="flex flex-nowrap px-3">
       <h1 className="flex-1 text-center text-xl text-gray-900 dark:text-dark-txt font-bold">
         Create post
       </h1>
