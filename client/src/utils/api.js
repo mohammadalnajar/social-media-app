@@ -1,7 +1,6 @@
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
-const USER_URL = 'api/users/';
+import { IMG_URL, POST_URL, SERVER_URL, USER_URL } from './constants';
 
-const handleApiResponse = async (response) => {
+export const handleApiResponse = async (response) => {
   const data = await response.json();
 
   if (!response.ok) {
@@ -31,5 +30,26 @@ export const registerWithEmailAndPassword = async (data) => {
 export const fetchUser = async () => {
   return fetch(`${process.env.REACT_APP_SERVER_URL}api/users/user`, {
     credentials: 'include',
+  }).then(handleApiResponse);
+};
+
+export const uploadImage = async (data) => {
+  const formData = new FormData();
+  formData.append('file', data[0]);
+  formData.append('name', data[0].name);
+
+  return fetch(`${SERVER_URL}${IMG_URL}`, {
+    method: 'POST',
+    credentials: 'include',
+    body: formData,
+  }).then(handleApiResponse);
+};
+
+export const createPost = async (data) => {
+  return fetch(`${SERVER_URL}${POST_URL}`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
   }).then(handleApiResponse);
 };
