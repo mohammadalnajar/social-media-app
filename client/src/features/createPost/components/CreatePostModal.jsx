@@ -17,6 +17,9 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
     text: '',
   });
 
+  console.log(select);
+  console.log(files.length);
+
   const addPost = useMutation(createPost, {
     onSuccess: () => {
       setFiles([]);
@@ -38,7 +41,11 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
   });
 
   const handleSubmit = () => {
-    upload.mutate(files);
+    if (files.length === 0) {
+      addPost.mutate({ ...formData, visibility: select });
+    } else {
+      upload.mutate(files);
+    }
   };
 
   const ref = useRef();
@@ -113,6 +120,7 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
                 upload.isLoading && 'loading'
               } btn btn-block disabled:dark:text-gray-500 text-semibold capitalize text-base disabled:dark:bg-dark-third bg-btn-primary hover:bg-btn-primary-hover border-none`}
               disabled={
+                select === 'select visibility' ||
                 (!formData.text && !files.length > 0) ||
                 (upload.isLoading && true)
               }
