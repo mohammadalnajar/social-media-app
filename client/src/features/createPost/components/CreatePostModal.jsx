@@ -38,7 +38,7 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
   });
 
   const handleSubmit = () => {
-    if (files.length === 0) {
+    if (!files?.length) {
       addPost.mutate({ ...formData, visibility: select });
     } else {
       upload.mutate(files);
@@ -118,7 +118,7 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
               } btn btn-block disabled:dark:text-gray-500 text-semibold capitalize text-base disabled:dark:bg-dark-third bg-btn-primary hover:bg-btn-primary-hover border-none`}
               disabled={
                 select === 'select visibility' ||
-                (!formData.text && !files.length > 0) ||
+                (!formData.text && !files?.length) ||
                 (upload.isLoading && true)
               }
             >
