@@ -17,9 +17,6 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
     text: '',
   });
 
-  console.log(select);
-  console.log(files.length);
-
   const addPost = useMutation(createPost, {
     onSuccess: () => {
       setFiles([]);
