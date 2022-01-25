@@ -137,8 +137,24 @@ export const createPost = async (req, res) => {
     }
 };
 // ========= update a post =========
-export const updatePost = (req, res) => {
-    res.send('update post');
+export const updatePost = async (req, res) => {
+    const { id: postId, text, visibility } = req.body;
+    try {
+        const updated = await Post.findByIdAndUpdate(
+            { _id: postId },
+            { $set: { text, visibility, updatedAt: Date.now() } }
+        );
+        if (updated) {
+            const updatedPost = await Post.findById(postId);
+            return successRes(res, 200, 'post is updated', {
+                data: updatedPost,
+            });
+        }
+    } catch (error) {
+        console.log(error, 'error in update post');
+        return errorRes(res, 500, 'failed to update post', null, null);
+    }
+    return null;
 };
 // ========= delete a post =========
 export const deletePost = (req, res) => {
