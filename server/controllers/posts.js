@@ -87,17 +87,42 @@ export const updatePost = async (req, res) => {
         );
         if (updated) {
             const updatedPost = await Post.findById(postId);
-            return successRes(res, 200, 'post is updated', {
+            return successRes(res, 200, 'ok', 'post is updated', {
                 data: updatedPost,
             });
         }
+        return errorRes(res, 404, 'post was not found', null, null);
     } catch (error) {
         console.log(error, 'error in update post');
         return errorRes(res, 500, 'failed to update post', null, null);
     }
-    return null;
 };
 // ========= delete a post =========
-export const deletePost = (req, res) => {
-    res.send('delete post');
+export const deletePost = async (req, res) => {
+    const { _id: userId } = req.session.userData;
+    const { id: postId } = req.body;
+    try {
+        const deleted = await Post.findByIdAndDelete(postId);
+
+        console.log(deleted);
+        if (deleted) {
+            const updateUserPostsArray = await User.findByIdAndUpdate(
+                { _id: userId },
+                { $pull: { posts: postId } }
+            );
+            if (updateUserPostsArray) {
+                return successRes(res, 200, 'ok', 'post is deleted ...');
+            }
+            return errorRes(
+                res,
+                404,
+                'failed to delete post from user schema ...',
+                null,
+                null
+            );
+        }
+        return errorRes(res, 404, 'post was not found', null, null);
+    } catch (error) {
+        return errorRes(res, 500, 'failed to delete post ...', null, null);
+    }
 };
