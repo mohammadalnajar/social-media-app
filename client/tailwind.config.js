@@ -23,7 +23,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require('daisyui')],
+  // eslint-disable-next-line import/no-extraneous-dependencies
+  plugins: [require('daisyui'), require('tailwind-scrollbar')],
   daisyui: {
     styled: true,
     themes: false,
