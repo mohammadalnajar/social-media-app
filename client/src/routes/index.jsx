@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainLayout from '../components/layout/MainLayout';
+import NotFound from '../components/NotFound';
 import EntryLayout from '../features/entry/EntryLayout';
 import ProtectedRoute from './protected';
 
@@ -16,6 +17,7 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
