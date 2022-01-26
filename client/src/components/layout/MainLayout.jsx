@@ -211,7 +211,7 @@ const MainLayout = () => {
                 <img
                   src="./assets/images/story.jpg"
                   alt="Story images"
-                  className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full"
+                  className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full object-cover"
                 />
                 <div className="w-full h-full bg-black absolute top-0 left-0 bg-opacity-10" />
                 <span className="absolute bottom-0 left-2 pb-2 font-semibold text-white">
@@ -227,7 +227,7 @@ const MainLayout = () => {
                 <img
                   src="./assets/images/story-1.jpg"
                   alt="Story images"
-                  className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full"
+                  className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full object-cover"
                 />
                 <div className="w-full h-full bg-black absolute top-0 left-0 bg-opacity-10" />
                 <span className="absolute bottom-0 left-2 pb-2 font-semibold text-white">
@@ -243,7 +243,7 @@ const MainLayout = () => {
                 <img
                   src="./assets/images/story-2.jpg"
                   alt="Story images"
-                  className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full"
+                  className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full object-cover"
                 />
                 <div className="w-full h-full bg-black absolute top-0 left-0 bg-opacity-10" />
                 <span className="absolute bottom-0 left-2 pb-2 font-semibold text-white">
@@ -259,7 +259,7 @@ const MainLayout = () => {
                 <img
                   src="./assets/images/story-3.jpg"
                   alt="Story images"
-                  className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full"
+                  className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full object-cover"
                 />
                 <div className="w-full h-full bg-black absolute top-0 left-0 bg-opacity-10" />
                 <span className="absolute bottom-0 left-2 pb-2 font-semibold text-white">
@@ -275,7 +275,7 @@ const MainLayout = () => {
                 <img
                   src="./assets/images/story-4.jpg"
                   alt="Story images"
-                  className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full"
+                  className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full object-cover"
                 />
                 <div className="w-full h-full bg-black absolute top-0 left-0 bg-opacity-10" />
                 <span className="absolute bottom-0 left-2 pb-2 font-semibold text-white">
