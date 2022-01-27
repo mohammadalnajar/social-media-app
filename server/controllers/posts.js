@@ -1,7 +1,6 @@
 import Post from '../models/Post.js';
 import User from '../models/User.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
-import uploadImg from './uploadImages.js';
 
 // ========= get ALL posts (everyone) =========
 export const getAllUsersPosts = (req, res) => {
@@ -121,7 +120,25 @@ export const deletePost = async (req, res) => {
                 null
             );
         }
-        return errorRes(res, 404, 'post was not found', null, null);
+        const updateUserPostsArray = await User.findByIdAndUpdate(
+            { _id: userId },
+            { $pull: { posts: postId } }
+        );
+        if (updateUserPostsArray) {
+            return successRes(
+                res,
+                200,
+                'ok',
+                'post is deleted from user schema ...'
+            );
+        }
+        return errorRes(
+            res,
+            404,
+            'post not found and failed to delete from user schema ...',
+            null,
+            null
+        );
     } catch (error) {
         return errorRes(res, 500, 'failed to delete post ...', null, null);
     }
