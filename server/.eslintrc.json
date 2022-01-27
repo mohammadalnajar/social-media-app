@@ -1,4 +1,11 @@
 {
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx"]
+            }
+        }
+    },
     "extends": ["airbnb-base", "prettier", "plugin:node/recommended"],
     "plugins": ["prettier"],
     "parserOptions": {
