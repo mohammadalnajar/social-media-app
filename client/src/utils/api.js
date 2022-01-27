@@ -1,4 +1,10 @@
-import { IMG_URL, POST_URL, SERVER_URL, USER_URL } from './constants';
+import {
+  IMG_URL,
+  POST_URL,
+  SERVER_URL,
+  USER_URL,
+  IMG_CLOUD_URL,
+} from './constants';
 
 export const handleApiResponse = async (response) => {
   const data = await response.json();
@@ -42,6 +48,15 @@ export const uploadImage = async (data) => {
     method: 'POST',
     credentials: 'include',
     body: formData,
+  }).then(handleApiResponse);
+};
+
+export const uploadImageCloud = async (data) => {
+  return fetch(`${SERVER_URL}${IMG_CLOUD_URL}`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ data }),
   }).then(handleApiResponse);
 };
 
