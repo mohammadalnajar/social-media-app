@@ -54,7 +54,7 @@ export const uploadImg = (req, res, next) => {
 // =========== CLOUD ===========
 
 export const uploadImgCloud = async (req, res) => {
-    // console.log(req.body.data);
+    // https://stackoverflow.com/questions/19917401/error-request-entity-too-large
     try {
         const fileStr = req.body.data;
         const uploadedRes = await cloud.uploader.upload(fileStr, {
