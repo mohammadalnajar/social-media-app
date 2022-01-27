@@ -1,7 +1,6 @@
 import Post from '../models/Post.js';
 import User from '../models/User.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
-import uploadImg from './uploadImages.js';
 
 // ========= get ALL posts (everyone) =========
 export const getAllUsersPosts = (req, res) => {
