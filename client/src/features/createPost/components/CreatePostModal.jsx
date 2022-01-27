@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import { useMutation } from 'react-query';
 import useForm from '../../../hooks/useForm';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
-import { createPost, uploadImage } from '../../../utils/api';
+import { createPost, uploadImage, uploadImageCloud } from '../../../utils/api';
 import capitalize from '../../../utils/helpers';
 import CreatePostSelect from './CreatePostSelect';
 import ImageDropzone from './ImageDropzone';
@@ -11,6 +11,7 @@ import ImagePreview from './ImagePreview';
 
 const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
   const [files, setFiles] = useState([]);
+  const [img, setImg] = useState('');
   const [select, setSelect] = useState('select visibility');
   const [showDropzone, setShowDropzone] = useState(false);
   const { formData, handleInputChange, reset } = useForm({
@@ -37,11 +38,22 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
     },
   });
 
+  const uploadImgCloud = useMutation(uploadImageCloud, {
+    onSuccess: (data) => {
+      const {
+        data: { imageUrl },
+      } = data;
+      const newFormData = { ...formData, visibility: select, imageUrl };
+      addPost.mutate(newFormData);
+    },
+  });
+
   const handleSubmit = () => {
     if (!files?.length) {
       addPost.mutate({ ...formData, visibility: select });
     } else {
-      upload.mutate(files);
+      // upload.mutate(files); // save on server
+      uploadImgCloud.mutate(img); // save on cloud
     }
   };
 
@@ -90,7 +102,11 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
                 placeholder={`Whats on your mind, ${capitalize(firstName)}?`}
               />
               {showDropzone && (
-                <ImageDropzone files={files} setFiles={setFiles}>
+                <ImageDropzone
+                  setImg={setImg}
+                  files={files}
+                  setFiles={setFiles}
+                >
                   <ImagePreview files={files} setFiles={setFiles} />
                 </ImageDropzone>
               )}
