@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-const ImageDropzone = ({ files, setFiles, children }) => {
+const ImageDropzone = ({ files, setFiles, setImg, children }) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(acceptedFiles[0]);
+      reader.onloadend = () => {
+        setImg(reader.result);
+      };
       setFiles(
         acceptedFiles.map((file) => {
           return Object.assign(file, {
@@ -54,6 +59,7 @@ const ImageDropzone = ({ files, setFiles, children }) => {
 
 ImageDropzone.propTypes = {
   files: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setImg: PropTypes.func.isRequired,
   setFiles: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };
