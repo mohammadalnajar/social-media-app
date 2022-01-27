@@ -3,8 +3,17 @@ import User from '../models/User.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
 // ========= get ALL posts (everyone) =========
-export const getAllUsersPosts = (req, res) => {
-    res.send('getAllUsersPosts');
+export const getAllUsersPosts = async (req, res) => {
+    try {
+        const posts = await Post.find({ visibility: 'public' });
+        if (posts) {
+            return successRes(res, 200, 'ok', 'posts found', { posts });
+        }
+        return errorRes(res, 404, 'no posts found');
+    } catch (error) {
+        console.log(error, 'error with getting all users posts ...');
+        return errorRes(res, 500, 'failed to get users posts');
+    }
 };
 // ========= get ALL posts (friends) =========
 export const getAllFriendsPosts = (req, res) => {
