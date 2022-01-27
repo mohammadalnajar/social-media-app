@@ -1,28 +1,21 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-shadow */
 /* eslint-disable object-shorthand */
 import multer from 'multer';
 
 import { v4 as uuidv4 } from 'uuid';
+import cloud from '../config/cloudinary.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
-const uploadImg = (req, res, next) => {
-    // const { name, id } = target;
-    // let fileName = '';
-    // if (name === 'user') {
-    //     fileName = `${id}-profile-${uuidv4()}`;
-    //     // save user img
-    // } else if (name === 'post') {
-    //     console.log(id, 'post id');
-    //     fileName = `${id}-post-${uuidv4()}`;
-    //     // save post img
-    // }
+// =========== LOCAL ===========
+
+export const uploadImg = (req, res, next) => {
     let filename = '';
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, 'public/images');
         },
         filename: function (req, file, cb) {
-            console.log(file.originalname);
             const fileName = file.originalname.split('.');
             const extension = fileName[fileName.length - 1];
             filename = `${uuidv4()}.${extension}`;
@@ -32,25 +25,7 @@ const uploadImg = (req, res, next) => {
     const upload = multer({ storage });
 
     const onImageUploadSuccess = async () => {
-        console.log(filename, 'fileName');
-        // try {
-        //     const addImageUrlToPost = await Post.findOneAndUpdate(
-        //         { _id: createdPost.id },
-        //         {
-        //             $set: { imageUrl: `/images/${fileName}` },
-        //         }
-        //     );
-        //     // add post id to user posts array
-        //     if (addImageUrlToPost) {
-        //         // get post data after update
-        //         const post = await Post.findById(createdPost.id);
-        //         return successRes(res, 200, 'ok', 'post is created', post);
-        //     }
-        // } catch (error) {
-        //     console.log(error, 'error in onImageUploadSuccess');
-        //     return errorRes(res, 500, 'something went wrong ...', null, null);
-        // }
-        // return null;
+        console.log('upload');
         return successRes(res, 200, 'ok', 'image is saved', {
             imageUrl: `/images/${filename}`,
         });
@@ -76,4 +51,20 @@ const uploadImg = (req, res, next) => {
     });
 };
 
-export default uploadImg;
+// =========== CLOUD ===========
+
+export const uploadImgCloud = async (req, res) => {
+    // console.log(req.body.data);
+    try {
+        const fileStr = req.body.data;
+        const uploadedRes = await cloud.uploader.upload(fileStr, {
+            upload_preset: 'social-media-app',
+        });
+        const { secure_url } = uploadedRes;
+        const imageUrl = secure_url;
+        return successRes(res, 200, 'ok', 'image is uploaded', { imageUrl });
+    } catch (error) {
+        console.log(error, 'error in uploading image');
+        return errorRes(res, 500, 'some error occurred');
+    }
+};
