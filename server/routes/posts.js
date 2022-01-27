@@ -15,10 +15,10 @@ const router = express.Router();
 router
     .route('/')
     .get(isUserLoggedIn, getAllUserPosts)
-    .post(isUserLoggedIn, isJsonCheck, createPost);
+    .post(isUserLoggedIn, isJsonCheck, createPost)
+    .put(isUserLoggedIn, isJsonCheck, updatePost)
+    .delete(isUserLoggedIn, isJsonCheck, deletePost);
 router.route('/friends').get(isUserLoggedIn, getAllFriendsPosts);
 router.route('/users').get(isUserLoggedIn, getAllUsersPosts);
-router.route('/update').post(isUserLoggedIn, isJsonCheck, updatePost);
-router.route('/delete').post(isUserLoggedIn, deletePost);
 
 export default router;

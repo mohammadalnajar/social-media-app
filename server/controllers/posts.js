@@ -1,11 +1,19 @@
 import Post from '../models/Post.js';
 import User from '../models/User.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
-import uploadImg from './uploadImages.js';
 
 // ========= get ALL posts (everyone) =========
-export const getAllUsersPosts = (req, res) => {
-    res.send('getAllUsersPosts');
+export const getAllUsersPosts = async (req, res) => {
+    try {
+        const posts = await Post.find({ visibility: 'public' });
+        if (posts) {
+            return successRes(res, 200, 'ok', 'posts found', { posts });
+        }
+        return errorRes(res, 404, 'no posts found');
+    } catch (error) {
+        console.log(error, 'error with getting all users posts ...');
+        return errorRes(res, 500, 'failed to get users posts');
+    }
 };
 // ========= get ALL posts (friends) =========
 export const getAllFriendsPosts = (req, res) => {
@@ -50,65 +58,6 @@ export const createPost = async (req, res) => {
             imageUrl,
         });
         if (createdPost) {
-            // const onImageUploadSuccess = async (fileName) => {
-            //     console.log(fileName, 'fileName');
-            //     try {
-            //         const addImageUrlToPost = await Post.findOneAndUpdate(
-            //             { _id: createdPost.id },
-            //             {
-            //                 $set: { imageUrl: `/images/${fileName}` },
-            //             }
-            //         );
-            //         // add post id to user posts array
-            //         const updated = await User.findOneAndUpdate(
-            //             { _id: userId },
-            //             {
-            //                 $push: { posts: createdPost.id },
-            //             }
-            //         );
-            //         if (updated && addImageUrlToPost) {
-            //             // get post data after update
-            //             const post = await Post.findById(createdPost.id);
-            //             return successRes(
-            //                 res,
-            //                 200,
-            //                 'ok',
-            //                 'post is created',
-            //                 post
-            //             );
-            //         }
-            //     } catch (error) {
-            //         console.log(error, 'error in onImageUploadSuccess');
-            //         return errorRes(
-            //             res,
-            //             500,
-            //             'something went wrong ...',
-            //             null,
-            //             null
-            //         );
-            //     }
-            //     return null;
-            // };
-            // const onImageUploadFail = (err) => {
-            //     console.log(err, 'onImageUploadFail func error');
-            //     return errorRes(
-            //         res,
-            //         500,
-            //         'failed to upload the image',
-            //         null,
-            //         null
-            //     );
-            // };
-            // if (req.file) {
-            //     uploadImg(
-            //         { name: 'post', id: createdPost.id },
-            //         req,
-            //         res,
-            //         onImageUploadSuccess,
-            //         onImageUploadFail
-            //     );
-            // }
-
             // add post id to user posts array
             const updated = await User.findOneAndUpdate(
                 { _id: userId },
@@ -137,10 +86,69 @@ export const createPost = async (req, res) => {
     }
 };
 // ========= update a post =========
-export const updatePost = (req, res) => {
-    res.send('update post');
+export const updatePost = async (req, res) => {
+    const { id: postId, text, visibility } = req.body;
+    try {
+        const updated = await Post.findByIdAndUpdate(
+            { _id: postId },
+            { $set: { text, visibility, updatedAt: Date.now() } }
+        );
+        if (updated) {
+            const updatedPost = await Post.findById(postId);
+            return successRes(res, 200, 'ok', 'post is updated', {
+                data: updatedPost,
+            });
+        }
+        return errorRes(res, 404, 'post was not found', null, null);
+    } catch (error) {
+        console.log(error, 'error in update post');
+        return errorRes(res, 500, 'failed to update post', null, null);
+    }
 };
 // ========= delete a post =========
-export const deletePost = (req, res) => {
-    res.send('delete post');
+export const deletePost = async (req, res) => {
+    const { _id: userId } = req.session.userData;
+    const { id: postId } = req.body;
+    try {
+        const deleted = await Post.findByIdAndDelete(postId);
+
+        console.log(deleted);
+        if (deleted) {
+            const updateUserPostsArray = await User.findByIdAndUpdate(
+                { _id: userId },
+                { $pull: { posts: postId } }
+            );
+            if (updateUserPostsArray) {
+                return successRes(res, 200, 'ok', 'post is deleted ...');
+            }
+            return errorRes(
+                res,
+                404,
+                'failed to delete post from user schema ...',
+                null,
+                null
+            );
+        }
+        const updateUserPostsArray = await User.findByIdAndUpdate(
+            { _id: userId },
+            { $pull: { posts: postId } }
+        );
+        if (updateUserPostsArray) {
+            return successRes(
+                res,
+                200,
+                'ok',
+                'post is deleted from user schema ...'
+            );
+        }
+        return errorRes(
+            res,
+            404,
+            'post not found and failed to delete from user schema ...',
+            null,
+            null
+        );
+    } catch (error) {
+        return errorRes(res, 500, 'failed to delete post ...', null, null);
+    }
 };
