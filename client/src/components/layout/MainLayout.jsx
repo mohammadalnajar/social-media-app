@@ -1,7 +1,7 @@
 import React from 'react';
 import CreatePost from '../../features/createPost/CreatePost';
 import Nav from '../NavBar/Nav';
-import PostList from '../postList/PostList';
+import PostList from '../post/PostList';
 
 const MainLayout = () => {
   return (
