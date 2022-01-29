@@ -69,7 +69,7 @@ export const createPost = async (data) => {
   }).then(handleApiResponse);
 };
 
-export const getAllPosts = async () => {
+export const getUserPosts = async () => {
   return fetch(`${process.env.REACT_APP_SERVER_URL}${POST_URL}`, {
     credentials: 'include',
   }).then(handleApiResponse);
