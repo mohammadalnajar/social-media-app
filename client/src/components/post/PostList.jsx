@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { useQuery } from 'react-query';
-import { getAllPosts } from '../../utils/api';
+import { getUserPosts } from '../../utils/api';
 import PostAction from './components/PostAction';
 import PostAuthor from './components/PostAuthor';
 import PostComment from './components/PostComment';
@@ -12,8 +12,8 @@ import Post from './Post';
 
 const PostList = () => {
   const { data, isSuccess, isLoading, isError } = useQuery(
-    'getAllPosts',
-    getAllPosts,
+    'getUserPosts',
+    getUserPosts,
     {
       retry: 0,
     }
@@ -21,19 +21,26 @@ const PostList = () => {
 
   return (
     <div>
-      {data?.data?.map((post) => {
-        console.log(post);
-        return (
-          <Post key={post._id}>
-            <PostAuthor createdAt={post.createdAt} />
-            <PostContent text={post.text} />
-            <PostMedia imageUrl={post.imageUrl} />
-            <PostStats />
-            <PostAction />
-            <PostComment />
-          </Post>
-        );
-      })}
+      {data?.data
+        ? data?.data?.map((post) => {
+            console.log(post);
+
+            return (
+              <Post key={post._id}>
+                <PostAuthor createdAt={post.createdAt} />
+                <PostContent text={post.text} />
+                <PostMedia imageUrl={post.imageUrl} />
+                <PostStats
+                  likes={post.likes}
+                  dislikes={post.dislikes}
+                  comments={post.comments}
+                />
+                <PostAction />
+                <PostComment />
+              </Post>
+            );
+          })
+        : null}
     </div>
   );
 };
