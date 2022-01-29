@@ -4,7 +4,7 @@
 import multer from 'multer';
 
 import { v4 as uuidv4 } from 'uuid';
-import cloud from '../config/cloudinary.js';
+import { uploadImageToCloud } from '../api/uploadImageToCloud.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
 // =========== LOCAL ===========
@@ -56,11 +56,7 @@ export const uploadImg = (req, res, next) => {
 export const uploadImgCloud = async (req, res) => {
     // https://stackoverflow.com/questions/19917401/error-request-entity-too-large
     try {
-        const fileStr = req.body.data;
-        const uploadedRes = await cloud.uploader.upload(fileStr, {
-            upload_preset: 'social-media-app',
-        });
-        const { secure_url } = uploadedRes;
+        const { secure_url } = await uploadImageToCloud(req.body.data);
         const imageUrl = secure_url;
         return successRes(res, 200, 'ok', 'image is uploaded', { imageUrl });
     } catch (error) {
