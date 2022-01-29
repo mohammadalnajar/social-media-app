@@ -40,7 +40,7 @@ const ImageDropzone = ({ files, setFiles, setImg, children }) => {
         >
           <div
             htmlFor="file"
-            className="relative flex flex-col justify-center items-center mx-auto h-full bg-gray-100 dark:bg-dark-third dark:hover:bg-dark-hover cursor-pointer rounded-lg border-dark-txt"
+            className="relative flex flex-col justify-center items-center mx-auto h-full bg-gray-100 hover:bg-gray-200 dark:bg-dark-third dark:hover:bg-dark-hover cursor-pointer rounded-lg border-dark-txt"
           >
             <input id="file" {...getInputProps()} />
             <i className="bx bx-image-add text-[40px] dark:text-dark-txt" />
