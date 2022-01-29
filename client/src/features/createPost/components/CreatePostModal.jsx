@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import useForm from '../../../hooks/useForm';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
-import { createPost, uploadImage, uploadImageCloud } from '../../../utils/api';
+import { createPost, uploadImageCloud } from '../../../utils/api';
 import capitalize from '../../../utils/helpers';
 import CreatePostSelect from './CreatePostSelect';
 import ImageDropzone from './ImageDropzone';
@@ -18,6 +18,8 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
     text: '',
   });
 
+  const queryClient = useQueryClient();
+
   const addPost = useMutation(createPost, {
     onSuccess: () => {
       setFiles([]);
@@ -25,18 +27,20 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
       setSelect('select visibility');
       setShowDropzone(false);
       setIsOpen(false);
+      // invalidate getAllPosts queries to refetch them
+      queryClient.invalidateQueries('getUserPosts');
     },
   });
 
-  const upload = useMutation(uploadImage, {
-    onSuccess: (data) => {
-      const {
-        data: { imageUrl },
-      } = data;
-      const newFormData = { ...formData, visibility: select, imageUrl };
-      addPost.mutate(newFormData);
-    },
-  });
+  // const upload = useMutation(uploadImage, {
+  //   onSuccess: (data) => {
+  //     const {
+  //       data: { imageUrl },
+  //     } = data;
+  //     const newFormData = { ...formData, visibility: select, imageUrl };
+  //     addPost.mutate(newFormData);
+  //   },
+  // });
 
   const uploadImgCloud = useMutation(uploadImageCloud, {
     onSuccess: (data) => {
@@ -130,12 +134,12 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
               type="button"
               onClick={handleSubmit}
               className={`${
-                upload.isLoading && 'loading'
+                uploadImgCloud.isLoading && 'loading'
               } btn btn-block disabled:dark:text-gray-500 text-semibold capitalize text-base disabled:dark:bg-dark-third bg-btn-primary hover:bg-btn-primary-hover border-none`}
               disabled={
                 select === 'select visibility' ||
                 (!formData.text && !files?.length) ||
-                (upload.isLoading && true)
+                (uploadImgCloud.isLoading && true)
               }
             >
               Post
