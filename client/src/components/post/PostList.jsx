@@ -23,25 +23,29 @@ const PostList = () => {
     <div>
       {isLoading && <LoadingPage />}
       {isSuccess
-        ? data?.data?.map((post) => {
-            const { _id: id } = post;
-            console.log(post);
+        ? data?.data
+            ?.sort((a, b) => {
+              return +new Date(b.createdAt) - +new Date(a.createdAt);
+            })
+            .map((post) => {
+              const { _id: id } = post;
+              // console.log(post);
 
-            return (
-              <Post key={id}>
-                <PostAuthor createdAt={post.createdAt} />
-                <PostContent text={post.text} />
-                <PostMedia imageUrl={post.imageUrl} />
-                <PostStats
-                  likes={post.likes}
-                  dislikes={post.dislikes}
-                  comments={post.comments}
-                />
-                <PostAction />
-                <PostComment />
-              </Post>
-            );
-          })
+              return (
+                <Post key={id}>
+                  <PostAuthor createdAt={post.createdAt} />
+                  <PostContent text={post.text} />
+                  <PostMedia imageUrl={post.imageUrl} />
+                  <PostStats
+                    likes={post.likes}
+                    dislikes={post.dislikes}
+                    comments={post.comments}
+                  />
+                  <PostAction />
+                  <PostComment />
+                </Post>
+              );
+            })
         : null}
     </div>
   );
