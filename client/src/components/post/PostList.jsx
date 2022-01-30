@@ -1,7 +1,7 @@
-/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getUserPosts } from '../../utils/api';
+import LoadingPage from '../LoadingPage';
 import PostAction from './components/PostAction';
 import PostAuthor from './components/PostAuthor';
 import PostComment from './components/PostComment';
@@ -21,12 +21,14 @@ const PostList = () => {
 
   return (
     <div>
-      {data?.data
+      {isLoading && <LoadingPage />}
+      {isSuccess
         ? data?.data?.map((post) => {
+            const { _id: id } = post;
             console.log(post);
 
             return (
-              <Post key={post._id}>
+              <Post key={id}>
                 <PostAuthor createdAt={post.createdAt} />
                 <PostContent text={post.text} />
                 <PostMedia imageUrl={post.imageUrl} />
