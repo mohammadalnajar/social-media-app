@@ -25,7 +25,7 @@ const PostList = () => {
       {isSuccess
         ? data?.data
             ?.sort((a, b) => {
-              return +new Date(b.createdAt) - +new Date(a.createdAt);
+              return new Date(b.createdAt) - new Date(a.createdAt);
             })
             .map((post) => {
               const { _id: id } = post;
