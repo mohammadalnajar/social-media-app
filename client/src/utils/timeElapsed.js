@@ -11,16 +11,29 @@ const timeElapsed = (prevDate) => {
     //   const seconds = Math.round(diff / 1000);
     //   return `${seconds} ${seconds > 1 ? 'seconds' : 'second'} ago`;
     // }
-    case diff < hour:
-      return `${Math.round(diff / minute)} minutes ago`;
-    case diff < day:
-      return `${Math.round(diff / hour)} hours ago`;
-    case diff < month:
-      return `${Math.round(diff / day)} days ago`;
-    case diff < year:
-      return `${Math.round(diff / month)} months ago`;
-    case diff > year:
-      return `${Math.round(diff / year)} years ago`;
+    case diff < hour: {
+      const minutes = Math.round(diff / minute);
+      return `${minutes} ${minutes > 1 ? 'minutes' : 'minute'} ago`;
+    }
+    case diff < day: {
+      const hours = Math.round(diff / hour);
+      return `${hours} ${hours > 1 ? 'hours' : 'hour'} ago`;
+    }
+    case diff < month: {
+      const days = Math.round(diff / day);
+      return `${days} ${days > 1 ? 'days' : 'day'} ago`;
+    }
+
+    case diff < year: {
+      const months = Math.round(diff / month);
+      return `${months} ${months > 1 ? 'months' : 'minute'} ago`;
+    }
+
+    case diff > year: {
+      const years = Math.round(diff / year);
+      return `${years} ${years > 1 ? 'years' : 'year'} ago`;
+    }
+
     default:
       return '';
   }
