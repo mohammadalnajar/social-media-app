@@ -1,4 +1,5 @@
 import {
+  FEED_URL,
   IMG_CLOUD_URL,
   IMG_URL,
   POST_URL,
@@ -71,6 +72,12 @@ export const createPost = async (data) => {
 
 export const getUserPosts = async () => {
   return fetch(`${process.env.REACT_APP_SERVER_URL}${POST_URL}`, {
+    credentials: 'include',
+  }).then(handleApiResponse);
+};
+
+export const getFeedPosts = async () => {
+  return fetch(`${process.env.REACT_APP_SERVER_URL}${POST_URL}${FEED_URL}`, {
     credentials: 'include',
   }).then(handleApiResponse);
 };
