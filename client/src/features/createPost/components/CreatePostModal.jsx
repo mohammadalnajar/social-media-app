@@ -28,7 +28,7 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
       setShowDropzone(false);
       setIsOpen(false);
       // invalidate getAllPosts queries to refetch them
-      queryClient.invalidateQueries('getUserPosts');
+      queryClient.invalidateQueries('getFeedPosts');
     },
   });
 
