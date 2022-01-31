@@ -1,9 +1,10 @@
 import {
+  FEED_URL,
+  IMG_CLOUD_URL,
   IMG_URL,
   POST_URL,
   SERVER_URL,
   USER_URL,
-  IMG_CLOUD_URL,
 } from './constants';
 
 export const handleApiResponse = async (response) => {
@@ -66,5 +67,17 @@ export const createPost = async (data) => {
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
+  }).then(handleApiResponse);
+};
+
+export const getUserPosts = async () => {
+  return fetch(`${process.env.REACT_APP_SERVER_URL}${POST_URL}`, {
+    credentials: 'include',
+  }).then(handleApiResponse);
+};
+
+export const getFeedPosts = async () => {
+  return fetch(`${process.env.REACT_APP_SERVER_URL}${POST_URL}${FEED_URL}`, {
+    credentials: 'include',
   }).then(handleApiResponse);
 };

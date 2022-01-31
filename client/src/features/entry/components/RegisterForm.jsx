@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/authContext';
 import useForm from '../../../hooks/useForm';
 
 const RegisterForm = ({ children }) => {
+  const navigate = useNavigate();
   const { formData, handleInputChange, reset } = useForm({
     firstName: '',
     lastName: '',
@@ -11,7 +13,10 @@ const RegisterForm = ({ children }) => {
     password: '',
   });
 
-  const { register } = useAuth();
+  const {
+    register,
+    register: { isSuccess },
+  } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +25,7 @@ const RegisterForm = ({ children }) => {
     reset();
   };
 
-  const error = register?.error?.errorMessages.filter((e) => {
+  const error = register?.error?.errorMessages?.filter((e) => {
     return e.field === 'password';
   });
 
@@ -28,6 +33,9 @@ const RegisterForm = ({ children }) => {
     'Password should have at least 8 characters, one uppercase, one lowercase, one number and one special character!';
 
   useEffect(() => {
+    if (isSuccess) {
+      navigate('/feed');
+    }
     return () => {
       register.reset();
     };
