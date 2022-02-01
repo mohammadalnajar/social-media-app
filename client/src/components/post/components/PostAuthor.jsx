@@ -1,24 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useQuery } from 'react-query';
-import { fetchUser } from '../../../utils/api';
 import timeElapsed from '../../../utils/timeElapsed';
 
-const PostAuthor = ({ createdAt }) => {
-  const {
-    data: { data },
-  } = useQuery('fetchUser', fetchUser, {
-    retry: 0,
-  });
-  const fullName = `${data.firstName} ${data.lastName}`;
+const PostAuthor = ({ createdAt, authorData }) => {
+  const { userId, firstName, lastName, profileImageUrl } = authorData;
+  const fullName = `${firstName} ${lastName}`;
   const timeAgo = timeElapsed(new Date(createdAt).getTime());
 
   return (
     <div className="flex items-center justify-between px-4 py-2">
       <div className="flex space-x-2 items-center">
         <div className="relative">
+          <span hidden>{userId}</span>
           <img
-            src={data.profileImageUrl}
+            src={profileImageUrl}
             alt="Profile"
             className="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-dark-hover"
           />
@@ -38,6 +33,12 @@ const PostAuthor = ({ createdAt }) => {
 
 PostAuthor.propTypes = {
   createdAt: PropTypes.string.isRequired,
+  authorData: PropTypes.shape({
+    userId: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    profileImageUrl: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default PostAuthor;
