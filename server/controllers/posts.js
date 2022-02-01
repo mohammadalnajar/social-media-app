@@ -46,7 +46,6 @@ export const getAllUserPosts = async (req, res) => {
 };
 // ========= create a post =========
 export const createPost = async (req, res) => {
-    console.log(req.body, 'body');
     // get userId from session
     const { _id: userId } = req.session.userData;
 
@@ -58,6 +57,7 @@ export const createPost = async (req, res) => {
             visibility,
             imageUrl,
             imagePublicId,
+            userId,
         });
         if (createdPost) {
             // add post id to user posts array
