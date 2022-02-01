@@ -22,6 +22,7 @@ const PostSchema = new mongoose.Schema({
     comments: { type: Array },
     photos: { type: Array },
     imageUrl: { type: String, default: '/images/not-found.jpg' },
+    imagePublicId: { type: String },
 });
 
 const Post = mongoose.model('Posts', PostSchema);
