@@ -56,9 +56,14 @@ export const uploadImg = (req, res, next) => {
 export const uploadImgCloud = async (req, res) => {
     // https://stackoverflow.com/questions/19917401/error-request-entity-too-large
     try {
-        const { secure_url } = await uploadImageToCloud(req.body.data);
+        const { secure_url, public_id } = await uploadImageToCloud(
+            req.body.data
+        );
         const imageUrl = secure_url;
-        return successRes(res, 200, 'ok', 'image is uploaded', { imageUrl });
+        return successRes(res, 200, 'ok', 'image is uploaded', {
+            imageUrl,
+            imagePublicId: public_id,
+        });
     } catch (error) {
         console.log(error, 'error in uploading image');
         return errorRes(res, 500, 'some error occurred');
