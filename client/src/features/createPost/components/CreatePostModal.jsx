@@ -45,9 +45,14 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
   const uploadImgCloud = useMutation(uploadImageCloud, {
     onSuccess: (data) => {
       const {
-        data: { imageUrl },
+        data: { imageUrl, imagePublicId },
       } = data;
-      const newFormData = { ...formData, visibility: select, imageUrl };
+      const newFormData = {
+        ...formData,
+        visibility: select,
+        imageUrl,
+        imagePublicId,
+      };
       addPost.mutate(newFormData);
     },
   });
