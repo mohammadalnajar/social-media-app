@@ -8,3 +8,8 @@ export const uploadImageToCloud = async (fileStr) => {
     });
     return uploadedRes;
 };
+
+export const deleteImageFormCloud = async (publicId) => {
+    const deleted = await cloud.uploader.destroy(publicId);
+    return deleted;
+};
