@@ -7,6 +7,7 @@ import {
     getAllUsersPosts,
     updatePost,
 } from '../controllers/posts.js';
+import checkPostAuthor from '../middlewares/checkPostAuthor.js';
 import isJsonCheck from '../middlewares/isJson.js';
 import isUserLoggedIn from '../middlewares/isLoggedIn.js';
 
@@ -17,7 +18,7 @@ router
     .get(isUserLoggedIn, getAllUserPosts)
     .post(isUserLoggedIn, isJsonCheck, createPost)
     .put(isUserLoggedIn, isJsonCheck, updatePost)
-    .delete(isUserLoggedIn, isJsonCheck, deletePost);
+    .delete(isUserLoggedIn, isJsonCheck, checkPostAuthor, deletePost);
 router.route('/friends').get(isUserLoggedIn, getAllFriendsPosts);
 router.route('/users').get(isUserLoggedIn, getAllUsersPosts);
 

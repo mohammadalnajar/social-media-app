@@ -1,3 +1,4 @@
+import { deleteImageFormCloud } from '../api/uploadImageToCloud.js';
 import Post from '../models/Post.js';
 import User from '../models/User.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
@@ -50,12 +51,13 @@ export const createPost = async (req, res) => {
     const { _id: userId } = req.session.userData;
 
     // create post
-    const { text, visibility, imageUrl } = req.body;
+    const { text, visibility, imageUrl, imagePublicId } = req.body;
     try {
         const createdPost = await Post.create({
             text,
             visibility,
             imageUrl,
+            imagePublicId,
         });
         if (createdPost) {
             // add post id to user posts array
@@ -110,36 +112,37 @@ export const deletePost = async (req, res) => {
     const { _id: userId } = req.session.userData;
     const { id: postId } = req.body;
     try {
-        const deleted = await Post.findByIdAndDelete(postId);
-
-        console.log(deleted);
-        if (deleted) {
-            const updateUserPostsArray = await User.findByIdAndUpdate(
-                { _id: userId },
-                { $pull: { posts: postId } }
+        const postFound = await Post.findById(postId);
+        if (postFound) {
+            const { result } = await deleteImageFormCloud(
+                postFound.imagePublicId
             );
-            if (updateUserPostsArray) {
-                return successRes(res, 200, 'ok', 'post is deleted ...');
+            if (result === 'ok') {
+                const deleted = await Post.findByIdAndDelete(postId);
+                if (deleted) {
+                    const updateUserPostsArray = await User.findByIdAndUpdate(
+                        { _id: userId },
+                        { $pull: { posts: postId } }
+                    );
+                    if (updateUserPostsArray) {
+                        return successRes(
+                            res,
+                            200,
+                            'ok',
+                            'post is completely deleted ...'
+                        );
+                    }
+                    return errorRes(
+                        res,
+                        404,
+                        'failed to delete post from user schema ...',
+                        null,
+                        null
+                    );
+                }
+                return errorRes(res, 404, 'failed to delete post from schema');
             }
-            return errorRes(
-                res,
-                404,
-                'failed to delete post from user schema ...',
-                null,
-                null
-            );
-        }
-        const updateUserPostsArray = await User.findByIdAndUpdate(
-            { _id: userId },
-            { $pull: { posts: postId } }
-        );
-        if (updateUserPostsArray) {
-            return successRes(
-                res,
-                200,
-                'ok',
-                'post is deleted from user schema ...'
-            );
+            return errorRes(res, 404, 'failed to delete image from cloud');
         }
         return errorRes(
             res,
@@ -149,6 +152,6 @@ export const deletePost = async (req, res) => {
             null
         );
     } catch (error) {
-        return errorRes(res, 500, 'failed to delete post ...', null, null);
+        return errorRes(res, 500, 'failed to delete post ...', null, error);
     }
 };
