@@ -3,146 +3,98 @@
 @tailwind utilities;
 
 /* Dark mode icon */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Montserrat', sans-serif;
-}
-
-@keyframes blink {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 0.8;
-  }
-}
 .container {
-  width: 90%;
-  max-width: 300px;
-  margin: 0 auto;
-  padding: 100px 0;
-}
-.container .switcher-wrapper {
   display: flex;
+  width: 100%;
+  height: 100%;
+  background: var(--color-secondary);
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.container .switcher-wrapper .mode {
-  padding: 0 10px;
-  font-weight: 800;
+.container h1 {
+  color: var(--font-color);
+  font-family: sans-serif;
 }
-.container .switcher-wrapper .mode.light {
-  color: #252e48;
-}
-.container .switcher-wrapper .mode.dark {
-  color: #c7cedb;
-}
-.container #switcher {
-  width: 60px;
-  height: 30px;
-  position: relative;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  padding: 0 6px;
-  background: #86afff;
-  transition: all 0.2s linear;
-}
-.container #switcher .star {
-  position: absolute;
-  background: #fff;
-  clip-path: circle(45% at 60% 60%);
-  transition: all 0.2s linear;
-}
-.container #switcher .star.star1 {
-  width: 6px;
-  height: 6px;
-  top: 6px;
-  left: 70%;
-}
-.container #switcher .star.star2 {
-  width: 4px;
-  height: 4px;
-  top: 18px;
-  left: 65%;
-}
-.container #switcher .star.star3 {
-  width: 3px;
-  height: 3px;
-  top: 7px;
-  left: 52%;
-  opacity: 0;
-}
-.container #switcher .round-btn {
-  width: 20px;
-  height: 20px;
-  clip-path: circle(50% at 50% 50%);
-  background: #ffffff;
-  cursor: pointer;
-  border-radius: 50%;
-  border: 1px solid transparent;
-  transition: all 0.2s linear;
-}
-.container #switcher .round-btn .moon-mode {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #00134c;
-  position: absolute;
-  left: -4px;
-  top: 0;
-  opacity: 0;
-  transition: all 0.1s linear;
+.container button {
+  color: var(--font-color);
+  background: var(--color-primary);
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 5px;
 }
 
-main {
-  height: 100vh;
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
-main.night {
-  background: #003b6f;
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
-main.night .container .mode.light {
-  color: #4c5879;
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
-main.night .container .mode.dark {
-  color: #ffffff;
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 40px;
+  width: 40px;
+  left: 0px;
+  bottom: 4px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  box-shadow: 0 0px 15px #2020203d;
+  background: white url('../public/assets/images/moon.png');
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-main.night .container #switcher {
-  background: #00134c;
+
+input:checked + .slider {
+  background-color: #2196f3;
 }
-main.night .container #switcher .star {
-  clip-path: polygon(
-    50% 0%,
-    61% 35%,
-    98% 35%,
-    68% 57%,
-    79% 91%,
-    50% 70%,
-    21% 91%,
-    32% 57%,
-    2% 35%,
-    39% 35%
-  );
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
 }
-main.night .container #switcher .star1 {
-  opacity: 0.6;
-  left: 16%;
-  animation: blink 1.8s linear infinite;
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+  background: white url('../public/assets/images/sun.png');
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-main.night .container #switcher .star2 {
-  left: 36%;
-  animation: blink 2.4s linear infinite;
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
 }
-main.night .container #switcher .star3 {
-  animation: blink 1.2s linear infinite;
+
+.slider.round:before {
+  border-radius: 50%;
 }
-main.night .container #switcher .round-btn {
-  transform: translateX(30px) rotate(20deg);
-  border-color: #00134c;
-}
-main.night .container #switcher .round-btn .moon-mode {
-  opacity: 1;
-}
+/* resource: => https://codepen.io/haxzie/pen/xxKNEGM */
