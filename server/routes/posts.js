@@ -17,7 +17,7 @@ router
     .route('/')
     .get(isUserLoggedIn, getAllUserPosts)
     .post(isUserLoggedIn, isJsonCheck, createPost)
-    .put(isUserLoggedIn, isJsonCheck, updatePost)
+    .put(isUserLoggedIn, isJsonCheck, checkPostAuthor, updatePost)
     .delete(isUserLoggedIn, isJsonCheck, checkPostAuthor, deletePost);
 router.route('/friends').get(isUserLoggedIn, getAllFriendsPosts);
 router.route('/users').get(isUserLoggedIn, getAllUsersPosts);
