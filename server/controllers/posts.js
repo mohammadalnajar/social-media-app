@@ -7,8 +7,27 @@ import { errorRes, successRes } from '../utils/reqResponse.js';
 export const getAllUsersPosts = async (req, res) => {
     try {
         const posts = await Post.find({ visibility: 'public' });
-        if (posts) {
-            return successRes(res, 200, 'ok', 'posts found', { posts });
+        if (posts && posts.length > 0) {
+            const data = await Promise.all(
+                posts.map(async (post) => {
+                    const {
+                        _id: userId,
+                        firstName,
+                        lastName,
+                        profileImageUrl,
+                    } = await User.findById(post.userId);
+                    return {
+                        ...post._doc,
+                        authorData: {
+                            userId,
+                            firstName,
+                            lastName,
+                            profileImageUrl,
+                        },
+                    };
+                })
+            );
+            return successRes(res, 200, 'ok', 'posts found', { posts: data });
         }
         return errorRes(res, 404, 'no posts found');
     } catch (error) {
@@ -46,7 +65,6 @@ export const getAllUserPosts = async (req, res) => {
 };
 // ========= create a post =========
 export const createPost = async (req, res) => {
-    console.log(req.body, 'body');
     // get userId from session
     const { _id: userId } = req.session.userData;
 
@@ -58,6 +76,7 @@ export const createPost = async (req, res) => {
             visibility,
             imageUrl,
             imagePublicId,
+            userId,
         });
         if (createdPost) {
             // add post id to user posts array

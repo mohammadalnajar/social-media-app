@@ -34,7 +34,10 @@ const PostList = () => {
 
               return (
                 <Post key={id}>
-                  <PostAuthor createdAt={post.createdAt} />
+                  <PostAuthor
+                    createdAt={post.createdAt}
+                    authorData={post.authorData}
+                  />
                   <PostContent text={post.text} />
                   <PostMedia imageUrl={post.imageUrl} />
                   <PostStats
