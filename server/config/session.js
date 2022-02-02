@@ -9,6 +9,7 @@ const sessionConfig = () => {
         secret: 'DfSfdSsDdsFe3##$@DVD3385^$@&$@#',
         cookie: { maxAge: 10 * 60 * 1000 }, // 300000ms = 5 min / 900000ms = 15 min
         saveUninitialized: false,
+        domain: '.herokuapp.com',
     });
     return sessionConfigObj;
 };
