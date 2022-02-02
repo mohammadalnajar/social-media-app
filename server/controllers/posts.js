@@ -116,9 +116,8 @@ export const updatePost = async (req, res) => {
         );
         if (updated) {
             const updatedPost = await Post.findById(postId);
-            return successRes(res, 200, 'ok', 'post is updated', {
-                data: updatedPost,
-            });
+            if (updatedPost)
+                return successRes(res, 200, 'ok', 'post is updated');
         }
         return errorRes(res, 404, 'post was not found', null, null);
     } catch (error) {
