@@ -20,7 +20,7 @@ const PostAuthor = ({ createdAt, authorData, children }) => {
           <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
         </div>
         <div className="flex flex-col leading-tight justify-center">
-          <div className="font-semibold">{fullName}</div>
+          <div className="font-semibold capitalize">{fullName}</div>
           <span className="text-sm text-gray-500">{timeAgo}</span>
         </div>
       </div>
