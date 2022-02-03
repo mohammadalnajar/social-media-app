@@ -13,7 +13,9 @@ const timeElapsed = (prevDate) => {
     // }
     case diff < hour: {
       const minutes = Math.round(diff / minute);
-      return `${minutes} ${minutes > 1 ? 'minutes' : 'minute'} ago`;
+      return `${minutes > 1 ? minutes : ''} ${
+        minutes > 1 ? 'minutes ago' : 'just now'
+      }`;
     }
     case diff < day: {
       const hours = Math.round(diff / hour);

@@ -4,6 +4,7 @@ import { getFeedPosts } from '../../utils/api';
 import LoadingPage from '../LoadingPage';
 import PostAction from './components/PostAction';
 import PostAuthor from './components/PostAuthor';
+import PostAuthorAction from './components/PostAuthorAction';
 import PostComment from './components/PostComment';
 import PostContent from './components/PostContent';
 import PostMedia from './components/PostMedia';
@@ -37,7 +38,9 @@ const PostList = () => {
                   <PostAuthor
                     createdAt={post.createdAt}
                     authorData={post.authorData}
-                  />
+                  >
+                    <PostAuthorAction />
+                  </PostAuthor>
                   <PostContent text={post.text} />
                   <PostMedia imageUrl={post.imageUrl} />
                   <PostStats
@@ -46,7 +49,7 @@ const PostList = () => {
                     comments={post.comments}
                   />
                   <PostAction />
-                  <PostComment />
+                  <PostComment authorData={post.authorData} />
                 </Post>
               );
             })
