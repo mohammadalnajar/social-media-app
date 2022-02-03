@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import timeElapsed from '../../../utils/timeElapsed';
 
-const PostAuthor = ({ createdAt, authorData }) => {
+const PostAuthor = ({ createdAt, authorData, children }) => {
   const { userId, firstName, lastName, profileImageUrl } = authorData;
   const fullName = `${firstName} ${lastName}`;
   const timeAgo = timeElapsed(new Date(createdAt).getTime());
@@ -24,15 +24,14 @@ const PostAuthor = ({ createdAt, authorData }) => {
           <span className="text-sm text-gray-500">{timeAgo}</span>
         </div>
       </div>
-      <div className="w-8 h-8 grid place-items-center text-xl text-gray-500 hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third rounded-full cursor-pointer">
-        <i className="bx bx-dots-horizontal-rounded" />
-      </div>
+      {children}
     </div>
   );
 };
 
 PostAuthor.propTypes = {
   createdAt: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   authorData: PropTypes.shape({
     userId: PropTypes.string.isRequired,
     firstName: PropTypes.string.isRequired,
