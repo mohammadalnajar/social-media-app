@@ -29,17 +29,16 @@ app.use(helmet());
 app.use(morgan('dev'));
 
 // routes
-app.get('/', (req, res) => {
-    res.send('Worked ...');
-});
+// app.get('/', (req, res) => {
+//     res.send('Worked ...');
+// });
 app.use('/api/users', usersRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/uploadImage', uploadRouter);
-
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
+    app.use(express.static('../client/build'));
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(dirname, 'client', 'build', 'index.html'));
+        res.sendFile('index.html', { root: '../client/build' });
     });
 }
 
