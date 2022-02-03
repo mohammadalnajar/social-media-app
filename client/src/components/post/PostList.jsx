@@ -49,7 +49,7 @@ const PostList = () => {
                     comments={post.comments}
                   />
                   <PostAction />
-                  <PostComment />
+                  <PostComment authorData={post.authorData} />
                 </Post>
               );
             })

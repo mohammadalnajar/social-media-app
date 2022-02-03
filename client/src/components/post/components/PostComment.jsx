@@ -1,13 +1,14 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-const PostComment = () => {
+const PostComment = ({ authorData }) => {
   return (
     <div className="py-2 px-4">
       <div className="flex space-x-2">
         <img
-          src="./assets/images/tuat.jpg"
+          src={authorData.profileImageUrl}
           alt="Profile"
-          className="w-9 h-9 rounded-full"
+          className="w-9 h-9 rounded-full border-2 border-gray-300 dark:border-dark-hover"
         />
         <div className="flex-1 flex bg-gray-100 dark:bg-dark-third rounded-full items-center justify-between px-3">
           <input
@@ -33,6 +34,12 @@ const PostComment = () => {
       </div>
     </div>
   );
+};
+
+PostComment.propTypes = {
+  authorData: PropTypes.shape({
+    profileImageUrl: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default PostComment;
