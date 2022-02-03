@@ -7,7 +7,7 @@ const sessionConfig = () => {
             mongoUrl: process.env.MONGODB_URL,
         }),
         secret: 'DfSfdSsDdsFe3##$@DVD3385^$@&$@#',
-        cookie: { maxAge: 10 * 60 * 1000 }, // 300000ms = 5 min / 900000ms = 15 min
+        cookie: { maxAge: 10 * 60 * 1000, secure: true, sameSite: 'none' }, // 300000ms = 5 min / 900000ms = 15 min
         saveUninitialized: false,
     });
     return sessionConfigObj;
