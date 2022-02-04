@@ -18,7 +18,8 @@ queryClient.setQueryDefaults('fetchUser', {
 
 queryClient.setQueryDefaults('getFeedPosts', {
   queryFn: getFeedPosts,
-  staleTime: 1 * 60 * 1000,
+  staleTime: 2 * 60 * 1000,
+  refetchInterval: 2 * 60 * 1000,
 });
 
 export default queryClient;
