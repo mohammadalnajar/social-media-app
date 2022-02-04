@@ -1,5 +1,6 @@
 import { QueryClient } from 'react-query';
-import { fetchUser, getFeedPosts } from './api';
+import { getFeedPosts } from '../components/post/api';
+import { fetchUser } from './api';
 
 const queryClient = new QueryClient({
   defaultOptions: {
