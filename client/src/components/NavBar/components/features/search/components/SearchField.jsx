@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const SearchField = () => {
-  const [focused, setFocused] = useState(false);
+  const [, setFocused] = useState(false);
   const onFocus = () => {
     setFocused(true);
   };
