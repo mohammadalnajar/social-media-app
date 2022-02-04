@@ -8,9 +8,10 @@ const Dropdown = () => {
   const navigate = useNavigate();
   const logout = useMutation(logoutUser, {
     onSuccess: (data) => {
-      if (data?.status === 'ok') {
-        navigate('/');
-      }
+      if (data?.status === 'ok') navigate('/');
+    },
+    onError: (err) => {
+      if (err.status === 'not authenticated') navigate('/');
     },
   });
   const logoutUserOnClick = () => {
