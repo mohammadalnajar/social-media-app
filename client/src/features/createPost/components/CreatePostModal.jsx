@@ -9,7 +9,13 @@ import CreatePostSelect from './CreatePostSelect';
 import ImageDropzone from './ImageDropzone';
 import ImagePreview from './ImagePreview';
 
-const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
+const CreatePostModal = ({
+  isOpen,
+  setIsOpen,
+  firstName,
+  dropZone,
+  children,
+}) => {
   const [files, setFiles] = useState([]);
   const [img, setImg] = useState('');
   const [select, setSelect] = useState('select visibility');
@@ -129,6 +135,7 @@ const CreatePostModal = ({ isOpen, setIsOpen, firstName, children }) => {
               <button
                 type="button"
                 onClick={toggleDropzone}
+                disabled={!dropZone ? 'true' : 'false'}
                 aria-label="show dropzone"
                 className="bx bx-images text-green-500 hover:text-green-400 px-2 flex items-center text-3xl cursor-pointer"
               />
@@ -160,6 +167,7 @@ CreatePostModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
   firstName: PropTypes.string.isRequired,
+  dropZone: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
 };
 
