@@ -18,13 +18,13 @@ const PostList = () => {
     isSuccess,
     isLoading,
     isError,
-  } = useQuery('getFeedPost');
+  } = useQuery('getFeedPosts');
 
   if (isError) {
     return (
       <ErrorAlert
         errorMessage="Something went wrong, please refresh the page"
-        duration={1 * 60 * 1000}
+        duration={1 * 60 * 1000} // 1 min
       />
     );
   }
