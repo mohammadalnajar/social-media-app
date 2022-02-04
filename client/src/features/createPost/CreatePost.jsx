@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { fetchUser } from '../../utils/api';
 import CreatePostHeader from './components/CreatePostHeader';
 import CreatePostModal from './components/CreatePostModal';
 import QuickShareButton from './components/QuickShareButton';
@@ -11,9 +10,7 @@ const CreatePost = () => {
     data: {
       data: { firstName },
     },
-  } = useQuery('fetchUser', fetchUser, {
-    retry: 0,
-  });
+  } = useQuery('fetchUser');
 
   const toggleModal = () => {
     setIsOpen(!isOpen);

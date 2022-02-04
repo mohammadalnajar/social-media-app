@@ -4,13 +4,10 @@ import { useQuery } from 'react-query';
 import { Navigate } from 'react-router-dom';
 import LoadingPage from '../components/LoadingPage';
 import { useAuth } from '../context/authContext';
-import { fetchUser } from '../utils/api';
 
 const ProtectedRoute = ({ children, redirectTo }) => {
   const { user } = useAuth();
-  const { isSuccess, isLoading, isError } = useQuery('fetchUser', fetchUser, {
-    retry: 0,
-  });
+  const { isSuccess, isLoading, isError } = useQuery('fetchUser');
 
   if (isLoading) {
     return <LoadingPage />;

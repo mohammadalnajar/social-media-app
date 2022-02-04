@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { getFeedPosts } from '../../utils/api';
+import ErrorAlert from '../ErrorAlert';
 import LoadingPage from '../LoadingPage';
 import PostAction from './components/PostAction';
 import PostAuthor from './components/PostAuthor';
@@ -17,9 +17,17 @@ const PostList = () => {
     data: { data: { posts } = {} } = {},
     isSuccess,
     isLoading,
-  } = useQuery('getFeedPosts', getFeedPosts, {
-    retry: 0,
-  });
+    isError,
+  } = useQuery('getFeedPosts');
+
+  if (isError) {
+    return (
+      <ErrorAlert
+        errorMessage="Something went wrong, please refresh the page"
+        duration={1 * 60 * 1000} // 1 min
+      />
+    );
+  }
 
   return (
     <div>
@@ -31,15 +39,13 @@ const PostList = () => {
             })
             .map((post) => {
               const { _id: id } = post;
-              console.log(post);
-
               return (
                 <Post key={id}>
                   <PostAuthor
                     createdAt={post.createdAt}
                     authorData={post.authorData}
                   >
-                    <PostAuthorAction />
+                    <PostAuthorAction id={id} />
                   </PostAuthor>
                   <PostContent text={post.text} />
                   <PostMedia imageUrl={post.imageUrl} />
