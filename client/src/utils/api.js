@@ -28,7 +28,7 @@ export const registerWithEmailAndPassword = async (data) => {
 };
 
 export const fetchUser = async () => {
-  return fetch(`${process.env.REACT_APP_SERVER_URL}api/users/user`, {
+  return fetch(`${SERVER_URL}${USER_URL}user`, {
     credentials: 'include',
   }).then(handleApiResponse);
 };
