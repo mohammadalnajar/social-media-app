@@ -1,6 +1,7 @@
 import { deleteImageFormCloud } from '../api/uploadImageToCloud.js';
 import Post from '../models/Post.js';
 import User from '../models/User.js';
+import sortPostsByDate from '../utils/helpers.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
 // ========= get ALL posts (everyone) =========
@@ -27,7 +28,10 @@ export const getAllUsersPosts = async (req, res) => {
                     };
                 })
             );
-            return successRes(res, 200, 'ok', 'posts found', { posts: data });
+            const sortedPosts = sortPostsByDate(data);
+            return successRes(res, 200, 'ok', 'posts found', {
+                posts: sortedPosts,
+            });
         }
         return errorRes(res, 404, 'no posts found');
     } catch (error) {
