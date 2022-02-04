@@ -1,6 +1,5 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { getFeedPosts } from '../../utils/api';
 import LoadingPage from '../LoadingPage';
 import PostAction from './components/PostAction';
 import PostAuthor from './components/PostAuthor';
@@ -17,9 +16,7 @@ const PostList = () => {
     data: { data: { posts } = {} } = {},
     isSuccess,
     isLoading,
-  } = useQuery('getFeedPosts', getFeedPosts, {
-    retry: 0,
-  });
+  } = useQuery('getFeedPosts');
 
   return (
     <div>

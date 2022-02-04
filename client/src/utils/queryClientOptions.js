@@ -1,18 +1,23 @@
 import { QueryClient } from 'react-query';
-import { fetchUser } from './api';
+import { fetchUser, getFeedPosts } from './api';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
+      retry: 0,
     },
   },
 });
 
 queryClient.setQueryDefaults('fetchUser', {
   queryFn: fetchUser,
-  retry: 0,
   staleTime: 5 * 60 * 1000,
+});
+
+queryClient.setQueryDefaults('getFeedPosts', {
+  queryFn: getFeedPosts,
+  staleTime: 1 * 60 * 1000,
 });
 
 export default queryClient;
