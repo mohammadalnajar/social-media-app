@@ -28,15 +28,13 @@ const PostList = () => {
             })
             .map((post) => {
               const { _id: id } = post;
-              console.log(post);
-
               return (
                 <Post key={id}>
                   <PostAuthor
                     createdAt={post.createdAt}
                     authorData={post.authorData}
                   >
-                    <PostAuthorAction />
+                    <PostAuthorAction id={id} />
                   </PostAuthor>
                   <PostContent text={post.text} />
                   <PostMedia imageUrl={post.imageUrl} />

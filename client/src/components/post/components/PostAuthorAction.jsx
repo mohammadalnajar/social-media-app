@@ -1,6 +1,17 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { useMutation, useQueryClient } from 'react-query';
+import { deletePost } from '../api';
 
-const PostAuthorAction = () => {
+const PostAuthorAction = ({ id }) => {
+  const queryClient = useQueryClient();
+  const remove = useMutation(deletePost, {
+    onSuccess: () => {
+      // invalidate getFeedPosts query to refetch it
+      queryClient.invalidateQueries('getFeedPosts');
+    },
+  });
+
   return (
     <div className="dropdown">
       <button
@@ -11,17 +22,25 @@ const PostAuthorAction = () => {
       </button>
       <ul className="p-2 shadow menu dropdown-content bg-base-100 dark:bg-dark-third rounded-box w-52">
         <li className="dark:hover:bg-dark-hover dark:text-gray-100">
-          <button type="button">Item 1</button>
+          <button type="button">EDIT</button>
         </li>
-        <li className="dark:hover:bg-dark-hover dark:text-gray-100">
-          <button type="button">Item 2</button>
-        </li>
-        <li className="dark:hover:bg-dark-hover dark:text-gray-100">
-          <button type="button">Item 3</button>
+        <li className="dark:hover:bg-dark-hover text-red-500">
+          <button
+            type="button"
+            onClick={() => {
+              remove.mutate({ id });
+            }}
+          >
+            DELETE
+          </button>
         </li>
       </ul>
     </div>
   );
+};
+
+PostAuthorAction.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default PostAuthorAction;
