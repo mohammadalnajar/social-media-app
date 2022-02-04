@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import ErrorAlert from '../ErrorAlert';
 import LoadingPage from '../LoadingPage';
 import PostAction from './components/PostAction';
 import PostAuthor from './components/PostAuthor';
@@ -16,7 +17,17 @@ const PostList = () => {
     data: { data: { posts } = {} } = {},
     isSuccess,
     isLoading,
-  } = useQuery('getFeedPosts');
+    isError,
+  } = useQuery('getFeedPost');
+
+  if (isError) {
+    return (
+      <ErrorAlert
+        errorMessage="Something went wrong, please refresh the page"
+        duration={1 * 60 * 1000}
+      />
+    );
+  }
 
   return (
     <div>
