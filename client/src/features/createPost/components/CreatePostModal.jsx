@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import useForm from '../../../hooks/useForm';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import capitalize from '../../../utils/helpers';
-import { createPost, uploadImageCloud } from '../api';
+import { createPost, editPost, uploadImageCloud } from '../api';
 import CreatePostSelect from './CreatePostSelect';
 import ImageDropzone from './ImageDropzone';
 import ImagePreview from './ImagePreview';
@@ -14,7 +14,8 @@ const CreatePostModal = ({
   setIsOpen,
   firstName,
   dropZone,
-  postData: { visibility, text },
+  method,
+  postData: { visibility, text, id, userID },
   children,
 }) => {
   const [files, setFiles] = useState([]);
@@ -26,16 +27,25 @@ const CreatePostModal = ({
   });
 
   const queryClient = useQueryClient();
+  const resetModal = () => {
+    setFiles([]);
+    reset();
+    setSelect('select visibility');
+    setShowDropzone(false);
+    setIsOpen(false);
+    // invalidate getAllPosts queries to refetch them
+    queryClient.invalidateQueries('getFeedPosts');
+  };
 
   const addPost = useMutation(createPost, {
     onSuccess: () => {
-      setFiles([]);
-      reset();
-      setSelect('select visibility');
-      setShowDropzone(false);
-      setIsOpen(false);
-      // invalidate getAllPosts queries to refetch them
-      queryClient.invalidateQueries('getFeedPosts');
+      resetModal();
+    },
+  });
+
+  const updatePost = useMutation(editPost, {
+    onSuccess: () => {
+      resetModal();
     },
   });
 
@@ -55,11 +65,15 @@ const CreatePostModal = ({
   });
 
   const handleSubmit = () => {
-    if (!files?.length) {
-      addPost.mutate({ ...formData, visibility: select });
-    } else {
-      // upload.mutate(files); // save on server
-      uploadImgCloud.mutate(img); // save on cloud
+    if (method === 'POST') {
+      if (!files?.length) {
+        addPost.mutate({ ...formData, visibility: select });
+      } else {
+        // upload.mutate(files); // save on server
+        uploadImgCloud.mutate(img); // save on cloud
+      }
+    } else if (method === 'PUT') {
+      updatePost.mutate({ ...formData, visibility: select, id, userID });
     }
   };
 
@@ -159,9 +173,12 @@ CreatePostModal.propTypes = {
   setIsOpen: PropTypes.func.isRequired,
   firstName: PropTypes.string.isRequired,
   dropZone: PropTypes.bool.isRequired,
+  method: PropTypes.string.isRequired,
   postData: PropTypes.shape({
     visibility: PropTypes.string,
     text: PropTypes.string,
+    id: PropTypes.string,
+    userID: PropTypes.string,
   }),
   children: PropTypes.node.isRequired,
 };
@@ -170,6 +187,8 @@ CreatePostModal.defaultProps = {
   postData: {
     visibility: 'select visibility',
     text: '',
+    id: '',
+    userID: '',
   },
 };
 
