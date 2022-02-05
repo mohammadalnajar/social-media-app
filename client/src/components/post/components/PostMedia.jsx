@@ -7,7 +7,7 @@ const PostMedia = ({ imageUrl }) => {
     <>
       {imageUrl !== '/images/not-found.jpg' ? (
         <div className="py-2">
-          <img src={imageUrl} alt="Post" />
+          <img src={imageUrl} alt="Post" className="w-full" />
         </div>
       ) : null}
     </>

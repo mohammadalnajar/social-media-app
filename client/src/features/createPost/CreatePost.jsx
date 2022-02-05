@@ -57,7 +57,7 @@ const CreatePost = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         firstName={firstName}
-        dropZone="false"
+        dropZone={false}
       >
         <CreatePostHeader toggleModal={toggleModal} title="Create post" />
       </CreatePostModal>

@@ -14,14 +14,15 @@ const CreatePostModal = ({
   setIsOpen,
   firstName,
   dropZone,
+  postData: { visibility, text },
   children,
 }) => {
   const [files, setFiles] = useState([]);
   const [img, setImg] = useState('');
-  const [select, setSelect] = useState('select visibility');
+  const [select, setSelect] = useState(visibility);
   const [showDropzone, setShowDropzone] = useState(false);
   const { formData, handleInputChange, reset } = useForm({
-    text: '',
+    text,
   });
 
   const queryClient = useQueryClient();
@@ -135,7 +136,7 @@ const CreatePostModal = ({
               <button
                 type="button"
                 onClick={toggleDropzone}
-                disabled={!dropZone ? 'true' : 'false'}
+                disabled={!dropZone}
                 aria-label="show dropzone"
                 className="bx bx-images text-green-500 hover:text-green-400 px-2 flex items-center text-3xl cursor-pointer"
               />
@@ -163,13 +164,6 @@ const CreatePostModal = ({
   );
 };
 
-CreatePostModal.defaultProps = {
-  postData: PropTypes.shape({
-    visibility: 'select visibility',
-    text: '',
-  }),
-};
-
 CreatePostModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
@@ -180,6 +174,13 @@ CreatePostModal.propTypes = {
     text: PropTypes.string,
   }),
   children: PropTypes.node.isRequired,
+};
+
+CreatePostModal.defaultProps = {
+  postData: {
+    visibility: 'select visibility',
+    text: '',
+  },
 };
 
 export default CreatePostModal;
