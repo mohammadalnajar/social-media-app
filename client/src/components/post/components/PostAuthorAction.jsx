@@ -58,7 +58,7 @@ const PostAuthorAction = ({ id, userId, text, visibility, firstName }) => {
         firstName={firstName}
         dropZone={false}
       >
-        <CreatePostHeader toggleModal={toggleModal} title="Create post" />
+        <CreatePostHeader toggleModal={toggleModal} title="Edit post" />
       </CreatePostModal>
     </div>
   );
