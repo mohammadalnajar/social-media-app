@@ -19,7 +19,7 @@ const PostAuthorAction = ({ id, userId, text, visibility, firstName }) => {
   });
 
   return (
-    <div className="dropdown">
+    <div className="dropdown dropdown-end">
       <button
         type="button"
         className="w-8 h-8 grid place-items-center text-xl text-gray-500 hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third rounded-full cursor-pointer"
