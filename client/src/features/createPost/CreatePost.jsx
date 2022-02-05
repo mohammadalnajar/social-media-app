@@ -54,6 +54,7 @@ const CreatePost = () => {
         />
       </div>
       <CreatePostModal
+        method="POST"
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         firstName={firstName}
