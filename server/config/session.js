@@ -17,3 +17,8 @@ const sessionConfig = () => {
     return sessionConfigObj;
 };
 export default sessionConfig;
+
+// https://expressjs.com/en/guide/behind-proxies.html
+// http://expressjs.com/en/resources/middleware/cookie-session.html
+// https://stackoverflow.com/questions/63010545/issue-with-cross-site-cookies-how-to-set-cookie-from-backend-to-frontend
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
