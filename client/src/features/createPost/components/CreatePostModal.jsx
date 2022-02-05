@@ -159,7 +159,7 @@ const CreatePostModal = ({
                 (uploadImgCloud.isLoading && true)
               }
             >
-              Post
+              {method === 'POST' ? 'Post' : 'Save'}
             </button>
           </div>
         </div>

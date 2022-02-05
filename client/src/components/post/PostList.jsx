@@ -41,7 +41,13 @@ const PostList = () => {
                   createdAt={post.createdAt}
                   authorData={post.authorData}
                 >
-                  <PostAuthorAction id={id} />
+                  <PostAuthorAction
+                    id={id}
+                    userId={post.userId}
+                    text={post.text}
+                    visibility={post.visibility}
+                    firstName={post.authorData.firstName}
+                  />
                 </PostAuthor>
                 <PostContent text={post.text} />
                 <PostMedia imageUrl={post.imageUrl} />
