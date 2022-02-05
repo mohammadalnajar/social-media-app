@@ -39,16 +39,6 @@ const CreatePostModal = ({
     },
   });
 
-  // const upload = useMutation(uploadImage, {
-  //   onSuccess: (data) => {
-  //     const {
-  //       data: { imageUrl },
-  //     } = data;
-  //     const newFormData = { ...formData, visibility: select, imageUrl };
-  //     addPost.mutate(newFormData);
-  //   },
-  // });
-
   const uploadImgCloud = useMutation(uploadImageCloud, {
     onSuccess: (data) => {
       const {
