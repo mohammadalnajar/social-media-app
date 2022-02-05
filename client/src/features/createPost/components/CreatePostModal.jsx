@@ -163,11 +163,22 @@ const CreatePostModal = ({
   );
 };
 
+CreatePostModal.defaultProps = {
+  postData: PropTypes.shape({
+    visibility: 'select visibility',
+    text: '',
+  }),
+};
+
 CreatePostModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
   firstName: PropTypes.string.isRequired,
   dropZone: PropTypes.bool.isRequired,
+  postData: PropTypes.shape({
+    visibility: PropTypes.string,
+    text: PropTypes.string,
+  }),
   children: PropTypes.node.isRequired,
 };
 
