@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import Avatar from '../../../components/Avatar';
 import useForm from '../../../hooks/useForm';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import capitalize from '../../../utils/helpers';
@@ -25,6 +26,9 @@ const CreatePostModal = ({
   const { formData, handleInputChange, reset } = useForm({
     text,
   });
+  const {
+    data: { data: userData },
+  } = useQuery('fetchUser');
 
   const queryClient = useQueryClient();
   const resetModal = () => {
@@ -100,10 +104,7 @@ const CreatePostModal = ({
             <div className="flex px-3 max-h-16">
               <div className="avatar">
                 <div className="mb-8 rounded-full w-14 h-14">
-                  <img
-                    src="http://daisyui.com/tailwind-css-component-profile-1@56w.png"
-                    alt="avatar"
-                  />
+                  <Avatar imageUrl={userData.profileImageUrl} />
                 </div>
               </div>
               <div className="flex flex-col ml-3">
