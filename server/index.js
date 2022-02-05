@@ -17,9 +17,21 @@ dotenv.config({ path: `${dirname}/config/.env` });
 
 const app = express();
 const PORT = process.env.PORT || 4444;
+// cors options
+const whitelist = [process.env.CLIENT_URL, process.env.CLIENT_URL_SEC];
+const corsOptionsDelegate = function (req, callback) {
+    let corsOptions;
+    if (whitelist.indexOf(req.header('Origin')) !== -1) {
+        corsOptions = { origin: true, credentials: true }; // reflect (enable) the requested origin in the CORS response
+    } else {
+        corsOptions = { origin: false }; // disable CORS for this request
+    }
+    callback(null, corsOptions); // callback expects two parameters: error and options
+};
 // middleware
 app.use('/images', express.static(path.join(dirname, 'public/images')));
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.set('trust proxy', 1); // for deployment
+app.use(cors(corsOptionsDelegate));
 app.use(express.json({ limit: '50mb' }));
 app.use(
     express.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 })
@@ -29,18 +41,12 @@ app.use(helmet());
 app.use(morgan('dev'));
 
 // routes
-// app.get('/', (req, res) => {
-//     res.send('Worked ...');
-// });
+app.get('/', (req, res) => {
+    res.send('Worked ...');
+});
 app.use('/api/users', usersRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/uploadImage', uploadRouter);
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('../client/build'));
-    app.get('*', (req, res) => {
-        res.sendFile('index.html', { root: '../client/build' });
-    });
-}
 
 // server init function
 const startServer = async () => {
