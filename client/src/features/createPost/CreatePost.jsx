@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import Avatar from '../../components/Avatar';
-import CreatePostHeader from './components/CreatePostHeader';
-import CreatePostModal from './components/CreatePostModal';
-import QuickShareButton from './components/QuickShareButton';
+import PostModal from '../../components/postModal/PostModal';
+import PostModalHeader from '../../components/postModal/PostModalHeader';
+import QuickShareButton from './QuickShareButton';
 
 const CreatePost = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,15 +49,9 @@ const CreatePost = () => {
           color="text-yellow-400"
         />
       </div>
-      <CreatePostModal
-        method="POST"
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        firstName={userData.firstName}
-        dropZone
-      >
-        <CreatePostHeader toggleModal={toggleModal} title="Create post" />
-      </CreatePostModal>
+      <PostModal method="POST" isOpen={isOpen} setIsOpen={setIsOpen} dropZone>
+        <PostModalHeader toggleModal={toggleModal} title="Create post" />
+      </PostModal>
     </div>
   );
 };
