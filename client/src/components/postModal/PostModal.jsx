@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef, useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import useForm from '../../hooks/useForm';
+import React, { useRef } from 'react';
+import { useQuery } from 'react-query';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import Avatar from '../Avatar';
-import { createPost, createPostWithImages, editPost } from './api';
+import usePost from './hooks/usePost';
 import ImageDropzone from './ImageDropzone';
 import ImagePreview from './ImagePreview';
 import OpenDropzoneButton from './OpenDropzoneButton';
@@ -20,51 +19,25 @@ const PostModal = ({
   postData: { visibility, text, id, userID },
   children,
 }) => {
-  const [files, setFiles] = useState([]);
-  const [img, setImg] = useState('');
-  const [select, setSelect] = useState(visibility);
-  const [showDropzone, setShowDropzone] = useState(false);
-  const { formData, handleInputChange, reset } = useForm({
-    text,
-  });
-
-  useEffect(() => {
-    reset();
-  }, [text]);
+  const {
+    files,
+    setFiles,
+    img,
+    setImg,
+    select,
+    setSelect,
+    showDropzone,
+    setShowDropzone,
+    formData,
+    handleInputChange,
+    addPost,
+    updatePost,
+    addPostWithImages,
+  } = usePost({ visibility, text, setIsOpen });
 
   const {
     data: { data: userData },
   } = useQuery('fetchUser');
-
-  const queryClient = useQueryClient();
-
-  const resetModal = () => {
-    setFiles([]);
-    reset();
-    setSelect(visibility);
-    setShowDropzone(false);
-    setIsOpen(false);
-    // invalidate getAllPosts queries to refetch them
-    queryClient.invalidateQueries('getFeedPosts');
-  };
-
-  const addPostWithImages = useMutation(createPostWithImages, {
-    onSuccess: () => {
-      resetModal();
-    },
-  });
-
-  const addPost = useMutation(createPost, {
-    onSuccess: () => {
-      resetModal();
-    },
-  });
-
-  const updatePost = useMutation(editPost, {
-    onSuccess: () => {
-      resetModal();
-    },
-  });
 
   const handleSubmit = () => {
     if (method === 'POST') {
