@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import CreatePostHeader from '../../../features/createPost/components/CreatePostHeader';
-import CreatePostModal from '../../../features/createPost/components/CreatePostModal';
+import PostModal from '../../postModal/PostModal';
+import PostModalHeader from '../../postModal/PostModalHeader';
 import { deletePost } from '../api';
 
 const PostAuthorAction = ({ id, userId, text, visibility, firstName }) => {
@@ -50,7 +50,7 @@ const PostAuthorAction = ({ id, userId, text, visibility, firstName }) => {
           </button>
         </li>
       </ul>
-      <CreatePostModal
+      <PostModal
         method="PUT"
         postData={{ id, userId, text, visibility }}
         isOpen={isOpen}
@@ -58,8 +58,8 @@ const PostAuthorAction = ({ id, userId, text, visibility, firstName }) => {
         firstName={firstName}
         dropZone={false}
       >
-        <CreatePostHeader toggleModal={toggleModal} title="Edit post" />
-      </CreatePostModal>
+        <PostModalHeader toggleModal={toggleModal} title="Edit post" />
+      </PostModal>
     </div>
   );
 };
