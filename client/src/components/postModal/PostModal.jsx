@@ -4,7 +4,12 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import Avatar from '../Avatar';
 import useForm from '../../hooks/useForm';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
-import { createPost, editPost, uploadImageCloud } from './api';
+import {
+  createPost,
+  createPostWithImages,
+  editPost,
+  uploadImageCloud,
+} from './api';
 import PostModalSelect from './PostModalSelect';
 import ImageDropzone from './ImageDropzone';
 import ImagePreview from './ImagePreview';
@@ -44,6 +49,12 @@ const PostModal = ({
     queryClient.invalidateQueries('getFeedPosts');
   };
 
+  const addPostWithImages = useMutation(createPostWithImages, {
+    onSuccess: () => {
+      resetModal();
+    },
+  });
+
   const addPost = useMutation(createPost, {
     onSuccess: () => {
       resetModal();
@@ -77,7 +88,13 @@ const PostModal = ({
         addPost.mutate({ ...formData, visibility: select });
       } else {
         // upload.mutate(files); // save on server
-        uploadImgCloud.mutate(img); // save on cloud
+        // uploadImgCloud.mutate(img); // save on cloud
+        const newFormData = {
+          ...formData,
+          visibility: select,
+          imageData: img,
+        };
+        addPostWithImages.mutate(newFormData);
       }
     } else if (method === 'PUT') {
       updatePost.mutate({ ...formData, visibility: select, id, userID });
