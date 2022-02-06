@@ -1,6 +1,7 @@
 import express from 'express';
 import {
     createPost,
+    createPostWithImages,
     deletePost,
     getAllFriendsPosts,
     getAllUserPosts,
@@ -16,7 +17,8 @@ const router = express.Router();
 router
     .route('/')
     .get(isUserLoggedIn, getAllUserPosts)
-    .post(isUserLoggedIn, isJsonCheck, createPost)
+    .post(isUserLoggedIn, isJsonCheck, createPostWithImages, createPost)
+    // createPWI and createP function should happen in order
     .put(isUserLoggedIn, isJsonCheck, checkPostAuthor, updatePost)
     .delete(isUserLoggedIn, isJsonCheck, checkPostAuthor, deletePost);
 router.route('/friends').get(isUserLoggedIn, getAllFriendsPosts);
