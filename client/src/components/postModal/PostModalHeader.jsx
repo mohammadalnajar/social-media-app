@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const CreatePostHeader = ({ toggleModal }) => {
+const PostModalHeader = ({ toggleModal, title }) => {
   return (
     <div className="flex flex-nowrap px-3">
       <h1 className="flex-1 text-center text-xl text-gray-900 dark:text-dark-txt font-bold">
-        Create post
+        {title}
       </h1>
       <button
         type="button"
@@ -18,8 +18,9 @@ const CreatePostHeader = ({ toggleModal }) => {
   );
 };
 
-CreatePostHeader.propTypes = {
+PostModalHeader.propTypes = {
   toggleModal: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
-export default CreatePostHeader;
+export default PostModalHeader;

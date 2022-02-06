@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import CreatePostHeader from './components/CreatePostHeader';
-import CreatePostModal from './components/CreatePostModal';
-import QuickShareButton from './components/QuickShareButton';
+import Avatar from '../../components/Avatar';
+import PostModal from '../../components/postModal/PostModal';
+import PostModalHeader from '../../components/postModal/PostModalHeader';
+import QuickShareButton from './QuickShareButton';
 
 const CreatePost = () => {
   const [isOpen, setIsOpen] = useState(false);
   const {
-    data: {
-      data: { firstName },
-    },
+    data: { data: userData },
   } = useQuery('fetchUser');
 
   const toggleModal = () => {
@@ -19,11 +18,7 @@ const CreatePost = () => {
   return (
     <div className="px-4 mt-4 shadow rounded-lg bg-white dark:bg-dark-second">
       <div className="p-2 border-b border-gray-300 dark:border-dark-third flex space-x-4">
-        <img
-          src="./assets/images/tuat.jpg"
-          alt="Profile"
-          className="w-10 h-10 rounded-full hover:opacity-80 hover:cursor-pointer"
-        />
+        <Avatar imageUrl={userData.profileImageUrl} />
         <div
           role="button"
           tabIndex="0"
@@ -32,7 +27,8 @@ const CreatePost = () => {
           className="flex-1 bg-gray-100 rounded-full flex items-center justify-start pl-4 cursor-pointer dark:bg-dark-third text-gray-500 text-lg dark:text-dark-txt hover:bg-gray-300 dark:hover:bg-dark-hover"
         >
           <p className="text-xs xs:text-sm">
-            Whats on your mind, <span className="capitalize">{firstName}</span>?
+            Whats on your mind,
+            <span className="capitalize">{userData.firstName}</span>?
           </p>
         </div>
       </div>
@@ -53,13 +49,9 @@ const CreatePost = () => {
           color="text-yellow-400"
         />
       </div>
-      <CreatePostModal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        firstName={firstName}
-      >
-        <CreatePostHeader toggleModal={toggleModal} />
-      </CreatePostModal>
+      <PostModal method="POST" isOpen={isOpen} setIsOpen={setIsOpen} dropZone>
+        <PostModalHeader toggleModal={toggleModal} title="Create post" />
+      </PostModal>
     </div>
   );
 };
