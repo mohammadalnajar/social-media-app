@@ -1,18 +1,20 @@
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
-import useForm from '../../../hooks/useForm';
-import useOnClickOutside from '../../../hooks/useOnClickOutside';
-import capitalize from '../../../utils/helpers';
-import { createPost, editPost, uploadImageCloud } from '../api';
-import CreatePostSelect from './CreatePostSelect';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import Avatar from '../Avatar';
+import useForm from '../../hooks/useForm';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
+import { createPost, editPost, uploadImageCloud } from './api';
+import PostModalSelect from './PostModalSelect';
 import ImageDropzone from './ImageDropzone';
 import ImagePreview from './ImagePreview';
+import PostModalTextArea from './PostModalTextArea';
+import OpenDropzoneButton from './OpenDropzoneButton';
+import SubmitButton from './SubmitButton';
 
-const CreatePostModal = ({
+const PostModal = ({
   isOpen,
   setIsOpen,
-  firstName,
   dropZone,
   method,
   postData: { visibility, text, id, userID },
@@ -26,7 +28,12 @@ const CreatePostModal = ({
     text,
   });
 
+  const {
+    data: { data: userData },
+  } = useQuery('fetchUser');
+
   const queryClient = useQueryClient();
+
   const resetModal = () => {
     setFiles([]);
     reset();
@@ -82,11 +89,15 @@ const CreatePostModal = ({
     setIsOpen(false);
   });
 
-  const toggleDropzone = () => {
-    setShowDropzone(!showDropzone);
-    if (showDropzone) {
-      setFiles([]);
-    }
+  const isLoading = () => {
+    if (uploadImgCloud.isLoading || addPost.isLoading || updatePost.isLoading)
+      return true;
+    return false;
+  };
+  const isFormFilled = () => {
+    if (select === 'select visibility' || (!formData.text && !files?.length))
+      return false;
+    return true;
   };
 
   return (
@@ -100,26 +111,21 @@ const CreatePostModal = ({
             <div className="flex px-3 max-h-16">
               <div className="avatar">
                 <div className="mb-8 rounded-full w-14 h-14">
-                  <img
-                    src="http://daisyui.com/tailwind-css-component-profile-1@56w.png"
-                    alt="avatar"
-                  />
+                  <Avatar imageUrl={userData.profileImageUrl} />
                 </div>
               </div>
               <div className="flex flex-col ml-3">
                 <h1 className="text-gray-900 dark:text-dark-txt font-semibold capitalize">
-                  {firstName}
+                  {userData.firstName}
                 </h1>
-                <CreatePostSelect select={select} setSelect={setSelect} />
+                <PostModalSelect select={select} setSelect={setSelect} />
               </div>
             </div>
             <div className="form-control px-3 max-h-80 scrollbar-thin hover:scrollbar-thumb-gray-300 dark:hover:scrollbar-thumb-dark-hover scrollbar-track-transparent overflow-y-auto">
-              <textarea
-                name="text"
-                value={formData.text}
-                onChange={handleInputChange}
-                className="textarea h-24 textarea-ghost p-0 text-xl text-gray-900 dark:text-dark-txt placeholder:text-gray-800 focus:placeholder:text-gray-400 dark:bg-dark-second dark:focus:text-gray-200 dark:placeholder:text-gray-400 dark:focus:placeholder:text-gray-500"
-                placeholder={`Whats on your mind, ${capitalize(firstName)}?`}
+              <PostModalTextArea
+                text={formData.text}
+                handleInputChange={handleInputChange}
+                firstName={userData.firstName}
               />
               {showDropzone && (
                 <ImageDropzone
@@ -132,46 +138,28 @@ const CreatePostModal = ({
               )}
             </div>
           </div>
-          <div className="px-3 mt-2">
-            <div className="flex w-full p-2 border-[1px] border-gray-300 dark:border-dark-third rounded-lg">
-              <p className="flex-1 px-2 flex items-center font-semibold dark:text-dark-txt">
-                Add to your post
-              </p>
-              <button
-                type="button"
-                onClick={toggleDropzone}
-                disabled={!dropZone}
-                aria-label="show dropzone"
-                className="bx bx-images text-green-500 hover:text-green-400 px-2 flex items-center text-3xl cursor-pointer"
-              />
-            </div>
-          </div>
-          <div className="modal-action mt-4 px-3">
-            <button
-              type="button"
-              onClick={handleSubmit}
-              className={`${
-                uploadImgCloud.isLoading && 'loading'
-              } btn btn-block disabled:dark:text-gray-500 text-semibold capitalize text-base disabled:dark:bg-dark-third bg-btn-primary hover:bg-btn-primary-hover border-none`}
-              disabled={
-                select === 'select visibility' ||
-                (!formData.text && !files?.length) ||
-                (uploadImgCloud.isLoading && true)
-              }
-            >
-              {method === 'POST' ? 'Post' : 'Save'}
-            </button>
-          </div>
+          {dropZone && (
+            <OpenDropzoneButton
+              setShowDropzone={setShowDropzone}
+              showDropzone={showDropzone}
+              setFiles={setFiles}
+            />
+          )}
+          <SubmitButton
+            isLoading={isLoading}
+            handleSubmit={handleSubmit}
+            isFormFilled={isFormFilled}
+            method={method}
+          />
         </div>
       </div>
     </>
   );
 };
 
-CreatePostModal.propTypes = {
+PostModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
-  firstName: PropTypes.string.isRequired,
   dropZone: PropTypes.bool.isRequired,
   method: PropTypes.string.isRequired,
   postData: PropTypes.shape({
@@ -183,7 +171,7 @@ CreatePostModal.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-CreatePostModal.defaultProps = {
+PostModal.defaultProps = {
   postData: {
     visibility: 'select visibility',
     text: '',
@@ -192,4 +180,4 @@ CreatePostModal.defaultProps = {
   },
 };
 
-export default CreatePostModal;
+export default PostModal;
