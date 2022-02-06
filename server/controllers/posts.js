@@ -136,10 +136,17 @@ export const deletePost = async (req, res) => {
     try {
         const postFound = await Post.findById(postId);
         if (postFound) {
-            const { result } = await deleteImageFormCloud(
-                postFound.imagePublicId
-            );
-            if (result === 'ok') {
+            // check if post has an image
+            let imageDeleted;
+            if (postFound.imagePublicId) {
+                const { result } = await deleteImageFormCloud(
+                    postFound.imagePublicId
+                );
+                if (result === 'ok') imageDeleted = 'deleted';
+            } else {
+                imageDeleted = 'no-need';
+            }
+            if (imageDeleted === 'deleted' || imageDeleted === 'no-need') {
                 const deleted = await Post.findByIdAndDelete(postId);
                 if (deleted) {
                     const updateUserPostsArray = await User.findByIdAndUpdate(
