@@ -20,6 +20,12 @@ const PostList = () => {
     isError,
   } = useQuery('getFeedPosts');
 
+  const {
+    data: {
+      data: { _id: userId },
+    },
+  } = useQuery('fetchUser');
+
   if (isError) {
     return (
       <ErrorAlert
@@ -41,13 +47,15 @@ const PostList = () => {
                   createdAt={post.createdAt}
                   authorData={post.authorData}
                 >
-                  <PostAuthorAction
-                    id={id}
-                    userId={post.userId}
-                    text={post.text}
-                    visibility={post.visibility}
-                    firstName={post.authorData.firstName}
-                  />
+                  {userId === post.authorData.userId && (
+                    <PostAuthorAction
+                      id={id}
+                      userId={post.userId}
+                      text={post.text}
+                      visibility={post.visibility}
+                      firstName={post.authorData.firstName}
+                    />
+                  )}
                 </PostAuthor>
                 <PostContent text={post.text} />
                 <PostMedia imageUrl={post.imageUrl} />

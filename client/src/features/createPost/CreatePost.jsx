@@ -28,7 +28,7 @@ const CreatePost = () => {
         >
           <p className="text-xs xs:text-sm">
             Whats on your mind,
-            <span className="capitalize">{userData.firstName}</span>?
+            <span className="capitalize ml-1">{userData.firstName}</span>?
           </p>
         </div>
       </div>
