@@ -44,3 +44,12 @@ export const editPost = async (data) => {
     body: JSON.stringify(data),
   }).then(handleApiResponse);
 };
+
+export const createPostWithImages = async (data) => {
+  return fetch(`${SERVER_URL}${POST_URL}`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  }).then(handleApiResponse);
+};

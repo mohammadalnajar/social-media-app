@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import Avatar from '../Avatar';
 import useForm from '../../hooks/useForm';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
-import { createPost, editPost, uploadImageCloud } from './api';
+import { createPost, createPostWithImages, editPost } from './api';
 import PostModalSelect from './PostModalSelect';
 import ImageDropzone from './ImageDropzone';
 import ImagePreview from './ImagePreview';
@@ -44,6 +44,12 @@ const PostModal = ({
     queryClient.invalidateQueries('getFeedPosts');
   };
 
+  const addPostWithImages = useMutation(createPostWithImages, {
+    onSuccess: () => {
+      resetModal();
+    },
+  });
+
   const addPost = useMutation(createPost, {
     onSuccess: () => {
       resetModal();
@@ -56,28 +62,17 @@ const PostModal = ({
     },
   });
 
-  const uploadImgCloud = useMutation(uploadImageCloud, {
-    onSuccess: (data) => {
-      const {
-        data: { imageUrl, imagePublicId },
-      } = data;
-      const newFormData = {
-        ...formData,
-        visibility: select,
-        imageUrl,
-        imagePublicId,
-      };
-      addPost.mutate(newFormData);
-    },
-  });
-
   const handleSubmit = () => {
     if (method === 'POST') {
       if (!files?.length) {
         addPost.mutate({ ...formData, visibility: select });
       } else {
-        // upload.mutate(files); // save on server
-        uploadImgCloud.mutate(img); // save on cloud
+        const newFormData = {
+          ...formData,
+          visibility: select,
+          imageData: img,
+        };
+        addPostWithImages.mutate(newFormData);
       }
     } else if (method === 'PUT') {
       updatePost.mutate({ ...formData, visibility: select, id, userID });
@@ -90,7 +85,11 @@ const PostModal = ({
   });
 
   const isLoading = () => {
-    if (uploadImgCloud.isLoading || addPost.isLoading || updatePost.isLoading)
+    if (
+      addPost.isLoading ||
+      updatePost.isLoading ||
+      addPostWithImages.isLoading
+    )
       return true;
     return false;
   };
