@@ -4,12 +4,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import Avatar from '../Avatar';
 import useForm from '../../hooks/useForm';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
-import {
-  createPost,
-  createPostWithImages,
-  editPost,
-  uploadImageCloud,
-} from './api';
+import { createPost, createPostWithImages, editPost } from './api';
 import PostModalSelect from './PostModalSelect';
 import ImageDropzone from './ImageDropzone';
 import ImagePreview from './ImagePreview';
@@ -67,28 +62,11 @@ const PostModal = ({
     },
   });
 
-  const uploadImgCloud = useMutation(uploadImageCloud, {
-    onSuccess: (data) => {
-      const {
-        data: { imageUrl, imagePublicId },
-      } = data;
-      const newFormData = {
-        ...formData,
-        visibility: select,
-        imageUrl,
-        imagePublicId,
-      };
-      addPost.mutate(newFormData);
-    },
-  });
-
   const handleSubmit = () => {
     if (method === 'POST') {
       if (!files?.length) {
         addPost.mutate({ ...formData, visibility: select });
       } else {
-        // upload.mutate(files); // save on server
-        // uploadImgCloud.mutate(img); // save on cloud
         const newFormData = {
           ...formData,
           visibility: select,
@@ -108,7 +86,6 @@ const PostModal = ({
 
   const isLoading = () => {
     if (
-      uploadImgCloud.isLoading ||
       addPost.isLoading ||
       updatePost.isLoading ||
       addPostWithImages.isLoading
