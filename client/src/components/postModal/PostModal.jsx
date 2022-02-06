@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import Avatar from '../Avatar';
 import useForm from '../../hooks/useForm';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
+import Avatar from '../Avatar';
 import { createPost, createPostWithImages, editPost } from './api';
-import PostModalSelect from './PostModalSelect';
 import ImageDropzone from './ImageDropzone';
 import ImagePreview from './ImagePreview';
-import PostModalTextArea from './PostModalTextArea';
 import OpenDropzoneButton from './OpenDropzoneButton';
+import PostModalSelect from './PostModalSelect';
+import PostModalTextArea from './PostModalTextArea';
 import SubmitButton from './SubmitButton';
 
 const PostModal = ({
@@ -28,6 +28,10 @@ const PostModal = ({
     text,
   });
 
+  useEffect(() => {
+    reset();
+  }, [text]);
+
   const {
     data: { data: userData },
   } = useQuery('fetchUser');
@@ -37,7 +41,7 @@ const PostModal = ({
   const resetModal = () => {
     setFiles([]);
     reset();
-    setSelect('select visibility');
+    setSelect(visibility);
     setShowDropzone(false);
     setIsOpen(false);
     // invalidate getAllPosts queries to refetch them
