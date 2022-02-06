@@ -1,4 +1,9 @@
-import { deleteImageFormCloud } from '../api/uploadImageToCloud.js';
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable camelcase */
+import {
+    deleteImageFormCloud,
+    uploadImageToCloud,
+} from '../api/uploadImageToCloud.js';
 import Post from '../models/Post.js';
 import User from '../models/User.js';
 import sortPostsByDate from '../utils/helpers.js';
@@ -78,8 +83,8 @@ export const createPost = async (req, res) => {
         const createdPost = await Post.create({
             text,
             visibility,
-            imageUrl,
-            imagePublicId,
+            imageUrl: imageUrl || null,
+            imagePublicId: imagePublicId || null,
             userId,
         });
         if (createdPost) {
@@ -107,6 +112,25 @@ export const createPost = async (req, res) => {
         return errorRes(res, 400, 'failed to create a post ...', null, null);
     } catch (error) {
         console.log(error, 'error in create post ...');
+        return errorRes(res, 500, 'server error');
+    }
+};
+export const createPostWithImages = async (req, res, next) => {
+    const { imageData } = req.body;
+    try {
+        if (imageData) {
+            const { secure_url, public_id } = await uploadImageToCloud(
+                imageData
+            );
+            if (public_id) {
+                req.body.imageUrl = secure_url;
+                req.body.imagePublicId = public_id;
+                return next();
+            }
+        }
+        return next();
+    } catch (error) {
+        console.log(error, 'error in create post with images ...');
         return errorRes(res, 500, 'server error');
     }
 };

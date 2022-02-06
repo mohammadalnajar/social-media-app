@@ -16,7 +16,9 @@ const PostMedia = ({ imageUrl }) => {
 };
 
 PostMedia.propTypes = {
-  imageUrl: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
 };
-
+PostMedia.defaultProps = {
+  imageUrl: null,
+};
 export default PostMedia;
