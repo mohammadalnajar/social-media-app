@@ -35,3 +35,12 @@ export const createPost = async (data) => {
     body: JSON.stringify(data),
   }).then(handleApiResponse);
 };
+
+export const editPost = async (data) => {
+  return fetch(`${SERVER_URL}${POST_URL}`, {
+    method: 'PUT',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  }).then(handleApiResponse);
+};

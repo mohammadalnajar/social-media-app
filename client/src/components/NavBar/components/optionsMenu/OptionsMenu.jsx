@@ -1,14 +1,26 @@
 import React from 'react';
+import { useQuery } from 'react-query';
+import capitalize from '../../../../utils/helpers';
+import Avatar from '../../../Avatar';
 import DarkModeMoon from '../DarkModeMoon';
 import Messenger from '../features/messenger/Messenger';
-import Avatar from './Avatar';
 import Dropdown from './dropdown/Dropdown';
+import NavAvatar from './NavAvatar';
 
 const OptionsMenu = () => {
+  const {
+    data: { data: userData },
+  } = useQuery('fetchUser');
+
   return (
     <ul className="hidden md:flex mx-4 items-center justify-center">
       <li className="h-full hidden xl:flex">
-        <Avatar />
+        <NavAvatar>
+          <Avatar
+            imageUrl={userData.profileImageUrl}
+            firstName={capitalize(userData.firstName)}
+          />
+        </NavAvatar>
       </li>
 
       <li>
