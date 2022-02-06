@@ -5,17 +5,19 @@ import React from 'react';
 const PostMedia = ({ imageUrl }) => {
   return (
     <>
-      {imageUrl !== '/images/not-found.jpg' ? (
+      {imageUrl && (
         <div className="py-2">
           <img src={imageUrl} alt="Post" />
         </div>
-      ) : null}
+      )}
     </>
   );
 };
 
 PostMedia.propTypes = {
-  imageUrl: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
 };
-
+PostMedia.defaultProps = {
+  imageUrl: null,
+};
 export default PostMedia;
