@@ -21,7 +21,7 @@ const PostSchema = new mongoose.Schema({
     dislikes: { type: Array },
     comments: { type: Array },
     photos: { type: Array },
-    imageUrl: { type: String, default: '/images/not-found.jpg' },
+    imageUrl: { type: String },
     imagePublicId: { type: String },
     userId: { type: String, required: true },
 });
