@@ -107,7 +107,12 @@ const PostModal = ({
   });
 
   const isLoading = () => {
-    if (uploadImgCloud.isLoading || addPost.isLoading || updatePost.isLoading)
+    if (
+      uploadImgCloud.isLoading ||
+      addPost.isLoading ||
+      updatePost.isLoading ||
+      addPostWithImages.isLoading
+    )
       return true;
     return false;
   };
