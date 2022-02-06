@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const CreatePostSelect = ({ select, setSelect }) => {
+const PostModalSelect = ({ select, setSelect }) => {
   return (
     <select
       value={select}
@@ -20,9 +20,9 @@ const CreatePostSelect = ({ select, setSelect }) => {
   );
 };
 
-CreatePostSelect.propTypes = {
+PostModalSelect.propTypes = {
   select: PropTypes.string.isRequired,
   setSelect: PropTypes.func.isRequired,
 };
 
-export default CreatePostSelect;
+export default PostModalSelect;
