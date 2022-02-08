@@ -32,16 +32,17 @@ const Tab = ({ selectedState, title, dynamicNum = false }) => {
       }}
       className={`${selectedColor(
         title
-      )} w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block ${
-        dynamicNum && 'relative'
+      )} w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block 
+        
       } tooltip ${openTooltip && 'tooltip-open '} tooltip-bottom`}
     >
-      <i className={`bx bx${iconClass}`} />
-      {dynamicNum !== 0 && (
-        <span className="text-xs absolute top-1 right-1/4 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
-          {dynamicNum}
-        </span>
-      )}
+      <i className={`bx bx${iconClass} ${dynamicNum && 'relative'}`}>
+        {dynamicNum !== 0 && (
+          <span className="text-xs absolute -top-1 -right-2 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
+            {dynamicNum}
+          </span>
+        )}
+      </i>
     </button>
   );
 };
