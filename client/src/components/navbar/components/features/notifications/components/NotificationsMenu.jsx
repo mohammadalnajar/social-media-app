@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 const NotificationsMenu = ({ myRef }) => {
   return (
     <div>
-      <input type="checkbox" id="my-modal-2" className="modal-toggle" />
       <div className="modal-open modal ">
         <div
           ref={myRef}
