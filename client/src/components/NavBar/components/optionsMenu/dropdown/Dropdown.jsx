@@ -1,42 +1,42 @@
-import React from 'react';
-import { useMutation } from 'react-query';
-import { useNavigate } from 'react-router-dom';
-import logoutUser from './api';
+import React, { useRef, useState } from 'react';
+import useLogout from '../../../../../hooks/useLogout';
+import useOnClickOutside from '../../../../../hooks/useOnClickOutside';
 import DropDownItem from './DropDownItem';
 
 const Dropdown = () => {
-  const navigate = useNavigate();
-  const logout = useMutation(logoutUser, {
-    onSuccess: (data) => {
-      if (data?.status === 'ok') navigate('/');
-    },
-    onError: (err) => {
-      if (err.status === 'not authenticated') navigate('/');
-    },
-  });
-  const logoutUserOnClick = () => {
-    logout.mutate();
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const { logoutUserOnClick } = useLogout();
+  const ref = useRef();
+
+  const dropDownToggle = () => {
+    setOpenDropdown(!openDropdown);
   };
+
+  useOnClickOutside(ref, () => {
+    setOpenDropdown(false);
+  });
+
   return (
-    <div className="dropdown dropdown-end">
-      <div
-        role="button"
-        tabIndex="0"
-        className="text-xl hidden xl:grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative"
+    <div className="flex items-center" ref={ref}>
+      <button
+        type="button"
+        onClick={dropDownToggle}
+        className="text-xl hidden xl:grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-2.5 cursor-pointer hover:bg-gray-300 relative"
       >
         <i className="fas fa-chevron-down" />
+      </button>
+      <div
+        className={`dropdown dropdown-end ${openDropdown && 'dropdown-open'}`}
+      >
+        <ul className="p-2 shadow menu top-5 dropdown-content dark:border-dark-third border dark:bg-dark-second bg-base-100 dark:text-dark-txt rounded-box w-52">
+          <DropDownItem icon="" title="Setting">
+            <i className="fa-solid fa-gear" />
+          </DropDownItem>
+          <DropDownItem icon="" title="Log Out" onClick={logoutUserOnClick}>
+            <i className="fa-solid fa-arrow-right-from-bracket" />
+          </DropDownItem>
+        </ul>
       </div>
-      <ul className="p-2 shadow menu dropdown-content dark:border-dark-third border dark:bg-dark-second bg-base-100 dark:text-dark-txt rounded-box w-52">
-        <li>
-          <DropDownItem title="Item 1" />
-        </li>
-        <li>
-          <DropDownItem title="Item 2" />
-        </li>
-        <li>
-          <DropDownItem title="Log Out" onClick={logoutUserOnClick} />
-        </li>
-      </ul>
     </div>
   );
 };
