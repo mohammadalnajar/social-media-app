@@ -21,6 +21,20 @@ module.exports = {
         'btn-primary': '#2374E1',
         'btn-primary-hover': '#3982E4',
       },
+      keyframes: {
+        rotateUP: {
+          '0%': { transform: 'rotateZ(0deg)' },
+          '100%': { transform: 'rotateZ(180deg)' },
+        },
+        rotateDown: {
+          '0%': { transform: 'rotateZ(180deg)' },
+          '100%': { transform: 'rotateZ(0deg)' },
+        },
+      },
+      animation: {
+        rotateUP: 'rotateUP .3s ease-in-out forwards',
+        rotateDown: 'rotateDown .3s ease-in-out forwards',
+      },
     },
   },
   // eslint-disable-next-line import/no-extraneous-dependencies
