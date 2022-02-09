@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import capitalize from '../../../../utils/helpers';
+import './style.css';
 
 const Tab = ({ selectedState, title, dynamicNum = false }) => {
   const { setSelectedTab, selectedColor } = selectedState;
