@@ -16,7 +16,7 @@ const MessengerIcon = ({ toggleModal, isModalOpen }) => {
       onClick={toggleModal}
       className={`tooltip ${isOpenTooltip && 'tooltip-open'} ${
         isModalOpen
-          ? 'dark:bg-dark-bg-modal-open dark:text-dark-text-modal-open'
+          ? 'dark:bg-dark-bg-modal-open dark:text-dark-text-modal-open bg-bg-modal-open text-text-modal-open'
           : 'dark:bg-dark-third dark:text-dark-txt'
       } tooltip-bottom text-2xl grid place-items-center bg-gray-200 rounded-full w-10 h-10 cursor-pointer  dark:hover:bg-gray-600 hover:bg-gray-300`}
     >

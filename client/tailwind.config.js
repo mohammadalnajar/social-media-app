@@ -20,6 +20,8 @@ module.exports = {
         'dark-hover': '#4E4F50',
         'dark-bg-modal-open': '#263951',
         'dark-text-modal-open': '#2E89FF',
+        'bg-modal-open': '#E7F3FF',
+        'text-modal-open': '#1876F2',
         'btn-primary': '#2374E1',
         'btn-primary-hover': '#3982E4',
       },

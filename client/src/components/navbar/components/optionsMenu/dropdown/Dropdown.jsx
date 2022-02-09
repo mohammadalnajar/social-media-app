@@ -18,7 +18,7 @@ const Dropdown = () => {
         onClick={dropDownToggle}
         className={`${
           isDropdownOpen
-            ? 'dark:bg-dark-bg-modal-open dark:text-dark-text-modal-open'
+            ? 'dark:bg-dark-bg-modal-open dark:text-dark-text-modal-open bg-bg-modal-open text-text-modal-open'
             : 'dark:bg-dark-third dark:text-dark-txt'
         } text-xl hidden xl:grid place-items-center bg-gray-200 rounded-full mx-1 p-2.5 dark:hover:bg-gray-600 cursor-pointer hover:bg-gray-300 relative`}
       >
