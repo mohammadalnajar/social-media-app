@@ -1,20 +1,15 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import useLogout from '../../../../../hooks/useLogout';
-import useOnClickOutside from '../../../../../hooks/useOnClickOutside';
+import useToggleOpen from '../../../../../hooks/useToggleOpen';
 import DropDownItem from './DropDownItem';
 
 const Dropdown = () => {
-  const [openDropdown, setOpenDropdown] = useState('');
-  const { logoutUserOnClick } = useLogout();
   const ref = useRef();
-
-  const dropDownToggle = () => {
-    setOpenDropdown(!openDropdown);
-  };
-
-  useOnClickOutside(ref, () => {
-    setOpenDropdown(false);
+  const { isOpen: openDropdown, toggle: dropDownToggle } = useToggleOpen({
+    ref,
+    initialState: '',
   });
+  const { logoutUserOnClick } = useLogout();
 
   return (
     <div className="flex items-center" ref={ref}>
