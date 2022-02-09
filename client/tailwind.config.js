@@ -34,10 +34,32 @@ module.exports = {
           '0%': { transform: 'rotateZ(180deg)' },
           '100%': { transform: 'rotateZ(0deg)' },
         },
+        leftTrans: {
+          '0%': {
+            transform: 'translateX(0)',
+            opacity: '1',
+          },
+          '100%': {
+            transform: 'translateX(-50px)',
+            opacity: '0',
+          },
+        },
+        rightTrans: {
+          '0%': {
+            transform: 'translateX(-50px)',
+            opacity: '0',
+          },
+          '100%': {
+            transform: 'translateX(0)',
+            opacity: '1',
+          },
+        },
       },
       animation: {
         rotateUP: 'rotateUP .3s ease-in-out forwards',
         rotateDown: 'rotateDown .3s ease-in-out forwards',
+        leftTrans: 'leftTrans .6s ease-in-out forwards',
+        rightTrans: 'rightTrans .3s ease-in-out forwards',
       },
     },
   },
