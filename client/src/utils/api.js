@@ -27,6 +27,12 @@ export const registerWithEmailAndPassword = async (data) => {
   }).then(handleApiResponse);
 };
 
+export const logoutUser = async () => {
+  return fetch(`${SERVER_URL}${USER_URL}/logout`, {
+    credentials: 'include',
+  }).then(handleApiResponse);
+};
+
 export const fetchUser = async () => {
   return fetch(`${SERVER_URL}${USER_URL}user`, {
     credentials: 'include',
