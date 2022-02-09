@@ -19,7 +19,7 @@ const MainLayout = () => {
                 className="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third"
               >
                 <img
-                  src="./assets/images/tuat.jpg"
+                  src="https://robohash.org/mmm"
                   alt="Profile "
                   className="w-10 h-10 rounded-full"
                 />
@@ -193,7 +193,7 @@ const MainLayout = () => {
             <div className="w-1/4 sm:w-1/6 h-44 rounded-xl shadow overflow-hidden flex flex-col group cursor-pointer">
               <div className="h-3/5 overflow-hidden">
                 <img
-                  src="./assets/images/profile.jpg"
+                  src="https://robohash.org/mcdd"
                   alt="profile"
                   className="group-hover:transform group-hover:scale-110 transition-all duration-700"
                 />
@@ -308,73 +308,73 @@ const MainLayout = () => {
               </div>
               <div className="relative cursor-pointer">
                 <img
-                  src="./assets/images/avt-3.jpg"
+                  src="https://robohash.org/vvvv"
                   alt="Profile"
-                  className="rounded-full"
+                  className="w-10 h-10 rounded-full"
                 />
                 <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
               </div>
               <div className="relative cursor-pointer">
                 <img
-                  src="./assets/images/avt-4.jpg"
+                  src="https://robohash.org/mmm"
                   alt="Profile"
-                  className="rounded-full"
+                  className="w-10 h-10 rounded-full"
                 />
                 <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
               </div>
               <div className="relative cursor-pointer">
                 <img
-                  src="./assets/images/avt-5.jpg"
+                  src="https://robohash.org/dswed"
                   alt="Profile"
-                  className="rounded-full"
+                  className="w-10 h-10 rounded-full"
                 />
                 <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
               </div>
               <div className="relative cursor-pointer">
                 <img
-                  src="./assets/images/avt-2.jpg"
+                  src="https://robohash.org/vfbd"
                   alt="Profile"
-                  className="rounded-full"
+                  className="w-10 h-10 rounded-full"
                 />
                 <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
               </div>
               <div className="relative cursor-pointer hidden sm:inline">
                 <img
-                  src="./assets/images/avt-3.jpg"
+                  src="https://robohash.org/xxxx"
                   alt="Profile"
-                  className="rounded-full"
+                  className="w-10 h-10 rounded-full"
                 />
                 <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
               </div>
               <div className="relative cursor-pointer hidden sm:inline">
                 <img
-                  src="./assets/images/avt-4.jpg"
+                  src="https://robohash.org/dmmm"
                   alt="Profile"
-                  className="rounded-full"
+                  className="w-10 h-10 rounded-full"
                 />
                 <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
               </div>
               <div className="relative cursor-pointer hidden sm:inline">
                 <img
-                  src="./assets/images/avt-5.jpg"
+                  src="https://robohash.org/dmsmm"
                   alt="Profile"
-                  className="rounded-full"
+                  className="w-10 h-10 rounded-full"
                 />
                 <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
               </div>
               <div className="relative cursor-pointer hidden sm:inline">
                 <img
-                  src="./assets/images/avt-7.jpg"
+                  src="https://robohash.org/csssx"
                   alt="Profile"
-                  className="rounded-full"
+                  className="w-10 h-10 rounded-full"
                 />
                 <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
               </div>
               <div className="relative cursor-pointer hidden sm:inline">
                 <img
-                  src="./assets/images/avt-3.jpg"
+                  src="https://robohash.org/sdew"
                   alt="Profile"
-                  className="rounded-full"
+                  className="w-10 h-10 rounded-full"
                 />
                 <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
               </div>
@@ -484,9 +484,9 @@ const MainLayout = () => {
                 {/* <!-- COMMENT --> */}
                 <div className="flex space-x-2">
                   <img
-                    src="./assets/images/avt-5.jpg"
+                    src="https://robohash.org/mmm"
                     alt="Profile"
-                    className="w-9 h-9 rounded-full"
+                    className="w-10 h-10 rounded-full"
                   />
                   <div>
                     <div className="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
@@ -507,9 +507,9 @@ const MainLayout = () => {
                     {/* <!-- COMMENT --> */}
                     <div className="flex space-x-2">
                       <img
-                        src="./assets/images/avt-7.jpg"
+                        src="https://robohash.org/mmm"
                         alt="Profile"
-                        className="w-9 h-9 rounded-full"
+                        className="w-10 h-10 rounded-full"
                       />
                       <div>
                         <div className="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
@@ -540,9 +540,9 @@ const MainLayout = () => {
                 {/* <!-- COMMENT --> */}
                 <div className="flex space-x-2">
                   <img
-                    src="./assets/images/avt-5.jpg"
+                    src="https://robohash.org/mmm"
                     alt="Profile"
-                    className="w-9 h-9 rounded-full"
+                    className="w-10 h-10 rounded-full"
                   />
                   <div>
                     <div className="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
@@ -567,9 +567,9 @@ const MainLayout = () => {
                     {/* <!-- COMMENT --> */}
                     <div className="flex space-x-2">
                       <img
-                        src="./assets/images/avt-7.jpg"
+                        src="https://robohash.org/mmeem"
                         alt="Profile"
-                        className="w-9 h-9 rounded-full"
+                        className="w-10 h-10 rounded-full"
                       />
                       <div>
                         <div className="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
@@ -602,9 +602,9 @@ const MainLayout = () => {
               <div className="py-2 px-4">
                 <div className="flex space-x-2">
                   <img
-                    src="./assets/images/tuat.jpg"
+                    src="https://robohash.org/mmqam"
                     alt="Profile"
-                    className="w-9 h-9 rounded-full"
+                    className="w-10 h-10 rounded-full"
                   />
                   <div className="flex-1 flex bg-gray-100 dark:bg-dark-third rounded-full items-center justify-between px-3">
                     <input
@@ -654,7 +654,7 @@ const MainLayout = () => {
                 className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third rounded-lg transition-all"
               >
                 <img
-                  src="./assets/images/avt.jpg"
+                  src="https://robohash.org/wrq"
                   alt="Profile"
                   className="w-16 h-16 rounded-full"
                 />
@@ -692,9 +692,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-3.jpg"
+                      src="https://robohash.org/bvc"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
@@ -707,9 +707,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-2.jpg"
+                      src="https://robohash.org/hgjgh"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
@@ -722,9 +722,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-4.jpg"
+                      src="https://robohash.org/dbcfd"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
@@ -737,9 +737,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-5.jpg"
+                      src="https://robohash.org/kj"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
@@ -752,9 +752,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-6.png"
+                      src="https://robohash.org/uyiy"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
@@ -767,9 +767,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-4.jpg"
+                      src="https://robohash.org/mjl"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
@@ -782,9 +782,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-5.jpg"
+                      src="https://robohash.org/mjiutrmm"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
@@ -797,9 +797,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-6.png"
+                      src="https://robohash.org/cxvd"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
@@ -812,9 +812,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-4.jpg"
+                      src="https://robohash.org/vbhy"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
@@ -827,9 +827,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-5.jpg"
+                      src="https://robohash.org/wqe"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
@@ -842,9 +842,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-6.png"
+                      src="https://robohash.org/bmj"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
@@ -857,9 +857,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-4.jpg"
+                      src="https://robohash.org/eqwewq"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
@@ -872,9 +872,9 @@ const MainLayout = () => {
                 <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
                   <div className="relative">
                     <img
-                      src="./assets/images/avt-5.jpg"
+                      src="https://robohash.org/iuyu"
                       alt="Friends profile"
-                      className="rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
                     <span className="bg-green-500 w-3 h-3 rounded-full absolute right-0 top-3/4 border-white border-2" />
                   </div>
