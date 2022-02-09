@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import capitalize from '../../../../utils/helpers';
+import useToggleOpen from '../../../../hooks/useToggleOpen';
 
 const Tab = ({ selectedState, title, dynamicNum = false }) => {
   const { setSelectedTab, selectedColor } = selectedState;
-  const [openTooltip, setOpenTooltip] = useState(false);
+  const { isOpen: isOpenTooltip, toggle: toggleTooltip } = useToggleOpen({
+    initialState: false,
+  });
+
   const onClick = () => {
     setSelectedTab(title);
   };
@@ -24,17 +28,13 @@ const Tab = ({ selectedState, title, dynamicNum = false }) => {
       data-tip={capitalize(title)}
       type="button"
       onClick={onClick}
-      onMouseEnter={() => {
-        setOpenTooltip(true);
-      }}
-      onMouseLeave={() => {
-        setOpenTooltip(false);
-      }}
+      onMouseEnter={toggleTooltip}
+      onMouseLeave={toggleTooltip}
       className={`${selectedColor(
         title
       )} w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block 
         
-      } tooltip ${openTooltip && 'tooltip-open '} tooltip-bottom`}
+      } tooltip ${isOpenTooltip && 'tooltip-open '} tooltip-bottom`}
     >
       <i className={`bx bx${iconClass} ${dynamicNum && 'relative'}`}>
         {dynamicNum !== 0 && (
