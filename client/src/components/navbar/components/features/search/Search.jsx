@@ -18,6 +18,7 @@ const Search = () => {
   return (
     <>
       <SearchField
+        isModalOpen={isModalOpen}
         toggleModal={toggleModal}
         handleInputChange={handleInputChange}
       />
