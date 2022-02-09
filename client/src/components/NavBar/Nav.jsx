@@ -5,6 +5,7 @@ import Search from './components/features/search/Search';
 import Logo from './components/Logo';
 import OptionsMenu from './components/optionsMenu/OptionsMenu';
 import TabsMenu from './components/tabsMenu/TabsMenu';
+import './style.css';
 
 const Nav = () => {
   return (
@@ -13,8 +14,8 @@ const Nav = () => {
         <Logo />
         <div className="flex items-center justify-between space-x-1 space-x">
           <Search />
-          <Messenger extraClasses="md:hidden" />
-          <DarkModeMoon extraClasses="md:hidden" />
+          {/* <Messenger extraClasses="md:hidden" /> */}
+          {/* <DarkModeMoon extraClasses="md:hidden" /> */}
         </div>
       </div>
       <TabsMenu />
