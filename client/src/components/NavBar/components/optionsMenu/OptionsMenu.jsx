@@ -4,6 +4,7 @@ import capitalize from '../../../../utils/helpers';
 import Avatar from '../../../Avatar';
 import DarkModeMoon from '../DarkModeMoon';
 import Messenger from '../features/messenger/Messenger';
+import Notifications from '../features/notifications/Notifications';
 import Dropdown from './dropdown/Dropdown';
 import NavAvatar from './NavAvatar';
 
@@ -30,12 +31,7 @@ const OptionsMenu = () => {
         <Messenger extraClasses="" />
       </li>
       <li>
-        <div className="text-xl grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
-          <i className="bx bxs-bell" />
-          <span className="text-xs absolute top-0 right-0 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
-            9
-          </span>
-        </div>
+        <Notifications />
       </li>
       <li>
         <DarkModeMoon extraClasses="" />
