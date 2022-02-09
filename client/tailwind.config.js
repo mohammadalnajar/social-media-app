@@ -18,6 +18,8 @@ module.exports = {
         'dark-third': '#3A3B3C',
         'dark-txt': '#B8BBBF',
         'dark-hover': '#4E4F50',
+        'dark-bg-modal-open': '#263951',
+        'dark-text-modal-open': '#2E89FF',
         'btn-primary': '#2374E1',
         'btn-primary-hover': '#3982E4',
       },

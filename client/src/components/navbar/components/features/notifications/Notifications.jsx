@@ -5,15 +5,15 @@ import useToggleOpen from '../../../../../hooks/useToggleOpen';
 
 const Notifications = () => {
   const ref = useRef();
-  const { isOpen: showModal, toggle: toggleModal } = useToggleOpen({
+  const { isOpen: isModalOpen, toggle: toggleModal } = useToggleOpen({
     initialState: false,
     ref,
   });
 
   return (
     <div>
-      <NotificationsIcon toggleModal={toggleModal} />
-      {showModal && <NotificationsMenu myRef={ref} />}
+      <NotificationsIcon isModalOpen={isModalOpen} toggleModal={toggleModal} />
+      {isModalOpen && <NotificationsMenu myRef={ref} />}
     </div>
   );
 };
