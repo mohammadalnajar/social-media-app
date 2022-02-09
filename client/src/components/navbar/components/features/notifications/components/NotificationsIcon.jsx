@@ -2,15 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useToggleOpen from '../../../../../../hooks/useToggleOpen';
 
-const NotificationsIcon = ({ setShowModal }) => {
+const NotificationsIcon = ({ toggleModal }) => {
   const { isOpen: isOpenTooltip, toggle: toggleTooltip } = useToggleOpen({
     initialState: false,
   });
-  const toggleModal = () => {
-    setShowModal((prev) => {
-      return !prev;
-    });
-  };
+
   return (
     <button
       data-tip="Notifications"
@@ -30,6 +26,6 @@ const NotificationsIcon = ({ setShowModal }) => {
   );
 };
 NotificationsIcon.propTypes = {
-  setShowModal: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 export default NotificationsIcon;
