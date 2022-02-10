@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import useDarkMode from '../../../hooks/useDarkMode';
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import '../../../index.css';
 
-const DarkModeMoon = ({ extraClasses }) => {
+const DarkModeMoon = () => {
   const [storedValue, setValue] = useLocalStorage('darkMode');
   const [checked, setChecked] = useState(() => {
     if (storedValue === 'dark') {
@@ -20,7 +19,7 @@ const DarkModeMoon = ({ extraClasses }) => {
   };
 
   return (
-    <div className={`${extraClasses} container m-2`}>
+    <div className="container m-2">
       <button
         type="button"
         id="switch"
@@ -40,7 +39,5 @@ const DarkModeMoon = ({ extraClasses }) => {
     </div>
   );
 };
-DarkModeMoon.propTypes = {
-  extraClasses: PropTypes.string.isRequired,
-};
+
 export default DarkModeMoon;
