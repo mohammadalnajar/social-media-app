@@ -211,7 +211,9 @@ export const deletePost = async (req, res) => {
 
 // ========= like or unlike a post =========
 export const likePost = async (req, res) => {
-    const { postId, like } = req.body;
+    const { like } = req.body;
+    const { postId } = req.params;
+
     const { _id: userId } = req.session.userData;
     try {
         if (like) {
@@ -255,7 +257,8 @@ export const likePost = async (req, res) => {
 
 // ========= dislike or un dislike a post =========
 export const dislikePost = async (req, res) => {
-    const { postId, dislike } = req.body;
+    const { dislike } = req.body;
+    const { postId } = req.params;
     const { _id: userId } = req.session.userData;
     try {
         if (dislike) {
@@ -309,10 +312,72 @@ export const dislikePost = async (req, res) => {
 
 // ========= get likes for a post =========
 export const getPostLikes = async (req, res) => {
-    res.send('get likes for a post');
+    const { postId } = req.params;
+    try {
+        const post = await Post.findById(postId);
+        if (post) {
+            const likesArr = await Promise.allSettled(
+                post.likes.map(async (userId) => {
+                    const user = await User.findById(userId);
+                    if (user) {
+                        return {
+                            userId: user._id,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                        };
+                    }
+                    return null;
+                })
+            );
+            const likes = likesArr.map((obj) => obj.value); // to get rid of promise status data
+            return successRes(res, 200, 'ok', 'likes data found ...', {
+                likes,
+            });
+        }
+        return errorRes(res, 404, 'post is not found ...');
+    } catch (error) {
+        return errorRes(
+            res,
+            500,
+            'failed to get all likes of a post ...',
+            null,
+            error
+        );
+    }
 };
 
 // ========= get dislikes for a post =========
 export const getPostDislikes = async (req, res) => {
-    res.send('get dislikes for a post');
+    const { postId } = req.params;
+    try {
+        const post = await Post.findById(postId);
+        if (post) {
+            const dislikesArr = await Promise.allSettled(
+                post.dislikes.map(async (userId) => {
+                    const user = await User.findById(userId);
+                    if (user) {
+                        return {
+                            userId: user._id,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                        };
+                    }
+                    return null;
+                })
+            );
+            const dislikes = dislikesArr.map((obj) => obj.value); // to get rid of promise status data
+            return successRes(res, 200, 'ok', 'dislikes data found ...', {
+                dislikes,
+            });
+        }
+        return errorRes(res, 404, 'post is not found ...');
+    } catch (error) {
+        return errorRes(
+            res,
+            500,
+            'failed to get all dislikes of a post ...',
+            null,
+            error
+        );
+    }
 };
