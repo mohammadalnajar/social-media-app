@@ -14,8 +14,10 @@ const Nav = () => {
         <Logo />
         <div className="flex items-center justify-between space-x-1 space-x">
           <Search />
-          {/* <Messenger extraClasses="md:hidden" /> */}
-          {/* <DarkModeMoon extraClasses="md:hidden" /> */}
+          <div className="flex md:hidden">
+            <Messenger />
+            <DarkModeMoon />
+          </div>
         </div>
       </div>
       <TabsMenu />
