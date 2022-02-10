@@ -208,3 +208,23 @@ export const deletePost = async (req, res) => {
         return errorRes(res, 500, 'failed to delete post ...', null, error);
     }
 };
+
+// ========= like or unlike a post =========
+export const likePost = async (req, res) => {
+    res.send('like a post');
+};
+
+// ========= dislike or un dislike a post =========
+export const dislikePost = async (req, res) => {
+    res.send('dislike a post');
+};
+
+// ========= get likes for a post =========
+export const getPostLikes = async (req, res) => {
+    res.send('get likes for a post');
+};
+
+// ========= get dislikes for a post =========
+export const getPostDislikes = async (req, res) => {
+    res.send('get dislikes for a post');
+};
