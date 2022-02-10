@@ -211,12 +211,52 @@ export const deletePost = async (req, res) => {
 
 // ========= like or unlike a post =========
 export const likePost = async (req, res) => {
-    res.send('like a post');
+    const { postId, like } = req.body;
+    const { _id: userId } = req.session.userData;
+    try {
+        if (like) {
+            // like a post
+            const updated = await Post.findOneAndUpdate(
+                { _id: postId },
+                {
+                    $push: { likes: userId },
+                }
+            );
+            if (updated) {
+                return successRes(res, 200, 'ok', 'post is liked by the user');
+            }
+            return errorRes(
+                res,
+                404,
+                'post is not found or failed to update...'
+            );
+        }
+        // unlike a post
+        const updated = await Post.findOneAndUpdate(
+            { _id: postId },
+            {
+                $pull: { likes: userId },
+            }
+        );
+        if (updated) {
+            return successRes(res, 200, 'ok', 'post is unliked by the user');
+        }
+        return errorRes(res, 404, 'post is not found or failed to update...');
+    } catch (error) {
+        return errorRes(
+            res,
+            500,
+            'failed to like or unlike a post ...',
+            null,
+            error
+        );
+    }
+    res.send(req.body);
 };
 
 // ========= dislike or un dislike a post =========
 export const dislikePost = async (req, res) => {
-    res.send('dislike a post');
+    res.send(req.body);
 };
 
 // ========= get likes for a post =========
