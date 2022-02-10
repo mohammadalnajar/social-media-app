@@ -8,7 +8,7 @@ const Search = () => {
   const { isOpen: isModalOpen, toggle: toggleModal } = useToggleOpen({
     initialState: false,
   });
-  const { formData, handleInputChange, reset } = useForm({ search: '' });
+  const { formData, handleInputChange } = useForm({ search: '' });
 
   useEffect(() => {
     // fetch users onKey press comes here
