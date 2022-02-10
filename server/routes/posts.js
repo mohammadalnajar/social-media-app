@@ -12,9 +12,12 @@ import {
     likePost,
     updatePost,
 } from '../controllers/posts.js';
-import checkPostAuthor from '../middlewares/checkPostAuthor.js';
 import isJsonCheck from '../middlewares/isJson.js';
 import isUserLoggedIn from '../middlewares/isLoggedIn.js';
+import {
+    checkPostAuthor,
+    checkPostLikedOrDisliked,
+} from '../middlewares/postMiddlewares.js';
 
 const router = express.Router();
 
@@ -30,10 +33,10 @@ router.route('/users').get(isUserLoggedIn, getAllUsersPosts);
 router
     .route('/like')
     .get(isUserLoggedIn, getPostLikes)
-    .post(isUserLoggedIn, isJsonCheck, likePost);
+    .post(isUserLoggedIn, isJsonCheck, checkPostLikedOrDisliked, likePost);
 router
     .route('/dislike')
     .get(isUserLoggedIn, getPostDislikes)
-    .post(isUserLoggedIn, isJsonCheck, dislikePost);
+    .post(isUserLoggedIn, isJsonCheck, checkPostLikedOrDisliked, dislikePost);
 
 export default router;
