@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useToggleOpen from '../../../../../../hooks/useToggleOpen';
+import useToggle from '../../../../../../hooks/useToggle';
 
 const NotificationsIcon = ({ toggleModal, isModalOpen }) => {
-  const { isOpen: isOpenTooltip, toggle: toggleTooltip } = useToggleOpen({
-    initialState: false,
-  });
+  const [isOpenTooltip, toggleTooltip] = useToggle({});
 
   return (
     <button

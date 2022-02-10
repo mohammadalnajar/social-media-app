@@ -1,12 +1,11 @@
 import React, { useRef } from 'react';
 import NotificationsIcon from './components/NotificationsIcon';
 import NotificationsMenu from './components/NotificationsMenu';
-import useToggleOpen from '../../../../../hooks/useToggleOpen';
+import useToggle from '../../../../../hooks/useToggle';
 
 const Notifications = () => {
   const ref = useRef();
-  const { isOpen: isModalOpen, toggle: toggleModal } = useToggleOpen({
-    initialState: false,
+  const [isModalOpen, toggleModal] = useToggle({
     ref,
   });
 

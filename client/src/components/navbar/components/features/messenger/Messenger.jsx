@@ -1,12 +1,11 @@
 import React, { useRef } from 'react';
-import useToggleOpen from '../../../../../hooks/useToggleOpen';
+import useToggle from '../../../../../hooks/useToggle';
 import MessengerIcon from './components/MessengerIcon';
 import MessengerModal from './components/MessengerModal';
 
 const Messenger = () => {
   const ref = useRef();
-  const { isOpen: isModalOpen, toggle: toggleModal } = useToggleOpen({
-    initialState: false,
+  const [isModalOpen, toggleModal] = useToggle({
     ref,
   });
 

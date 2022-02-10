@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import SearchField from './components/SearchField';
-import useToggleOpen from '../../../../../hooks/useToggleOpen';
+import useToggle from '../../../../../hooks/useToggle';
 import SearchMenu from './components/SearchMenu';
 import useForm from '../../../../../hooks/useForm';
 
 const Search = () => {
-  const { isOpen: isModalOpen, toggle: toggleModal } = useToggleOpen({
-    initialState: false,
-  });
+  const [isModalOpen, toggleModal] = useToggle({});
   const { formData, handleInputChange } = useForm({ search: '' });
 
   useEffect(() => {

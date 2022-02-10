@@ -1,12 +1,11 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import useToggleOpen from '../../../../../../hooks/useToggleOpen';
+import useToggle from '../../../../../../hooks/useToggle';
 
 const SearchField = ({ isModalOpen, toggleModal, handleInputChange }) => {
   const [removeEl, setRemoveEl] = useState('');
   const ref = useRef();
-  const { isOpen: isFieldOpen, toggle: toggleField } = useToggleOpen({
-    initialState: '',
+  const [isFieldOpen, toggleField] = useToggle({
     ref,
   });
   const removeElement = () => {

@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import useLogout from '../../../../../hooks/useLogout';
-import useToggleOpen from '../../../../../hooks/useToggleOpen';
+import useToggle from '../../../../../hooks/useToggle';
 import DropDownItem from './DropDownItem';
 
 const Dropdown = () => {
   const ref = useRef();
-  const { isOpen: isDropdownOpen, toggle: dropDownToggle } = useToggleOpen({
+  const [isDropdownOpen, dropDownToggle] = useToggle({
     ref,
     initialState: '',
   });

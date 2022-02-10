@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useOnClickOutside from './useOnClickOutside';
 
-const useToggleOpen = ({ initialState, ref = false }) => {
+const useToggle = ({ initialState = false, ref = false }) => {
   const [isOpen, setIsOpen] = useState(initialState);
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -12,7 +12,7 @@ const useToggleOpen = ({ initialState, ref = false }) => {
       setIsOpen(false);
     });
   }
-  return { isOpen, toggle };
+  return [isOpen, toggle];
 };
 
-export default useToggleOpen;
+export default useToggle;

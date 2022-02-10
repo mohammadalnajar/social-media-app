@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import capitalize from '../../../../utils/helpers';
-import useToggleOpen from '../../../../hooks/useToggleOpen';
+import useToggle from '../../../../hooks/useToggle';
 
 const Tab = ({ selectedState, title, dynamicNum = false }) => {
   const { setSelectedTab, selectedColor } = selectedState;
-  const { isOpen: isOpenTooltip, toggle: toggleTooltip } = useToggleOpen({
-    initialState: false,
-  });
+  const [isOpenTooltip, toggleTooltip] = useToggle({});
 
-  const onClick = () => {
+  const handleClick = () => {
     setSelectedTab(title);
   };
   let iconClass = title === 'home' ? 's-home' : '';
@@ -27,7 +25,7 @@ const Tab = ({ selectedState, title, dynamicNum = false }) => {
     <button
       data-tip={capitalize(title)}
       type="button"
-      onClick={onClick}
+      onClick={handleClick}
       onMouseEnter={toggleTooltip}
       onMouseLeave={toggleTooltip}
       className={`${selectedColor(
