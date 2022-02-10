@@ -4,6 +4,10 @@
     "description": "",
     "main": "index.js",
     "type": "module",
+    "engines": {
+        "npm": ">=8.0.0",
+        "node": ">=16.0.0"
+    },
     "scripts": {
         "server": "nodemon index.js",
         "lint": "eslint .",
