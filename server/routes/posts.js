@@ -31,11 +31,11 @@ router
 router.route('/friends').get(isUserLoggedIn, getAllFriendsPosts);
 router.route('/users').get(isUserLoggedIn, getAllUsersPosts);
 router
-    .route('/like')
+    .route('/like/:postId')
     .get(isUserLoggedIn, getPostLikes)
     .post(isUserLoggedIn, isJsonCheck, checkPostLikedOrDisliked, likePost);
 router
-    .route('/dislike')
+    .route('/dislike/:postId')
     .get(isUserLoggedIn, getPostDislikes)
     .post(isUserLoggedIn, isJsonCheck, checkPostLikedOrDisliked, dislikePost);
 
