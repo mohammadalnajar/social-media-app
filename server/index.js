@@ -38,7 +38,7 @@ app.use(
 );
 app.use(sessionConfig());
 app.use(helmet());
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 // routes
 app.get('/', (req, res) => {
