@@ -47,3 +47,17 @@ export const dislikePost = async (data) => {
     body: JSON.stringify(data),
   }).then(handleApiResponse);
 };
+
+export const getLikes = async (data) => {
+  const { postId } = data;
+  return fetch(`${SERVER_URL}${POST_URL}${LIKE_URL}${postId}`, {
+    credentials: 'include',
+  }).then(handleApiResponse);
+};
+
+export const getDislikes = async (data) => {
+  const { postId } = data;
+  return fetch(`${SERVER_URL}${POST_URL}${DISLIKE_URL}${postId}`, {
+    credentials: 'include',
+  }).then(handleApiResponse);
+};
