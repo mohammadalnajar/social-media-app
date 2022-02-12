@@ -13,7 +13,7 @@ const queryClient = new QueryClient({
 
 queryClient.setQueryDefaults('fetchUser', {
   queryFn: fetchUser,
-  staleTime: 5 * 60 * 1000,
+  staleTime: 30 * 60 * 1000,
 });
 
 queryClient.setQueryDefaults('getFeedPosts', {
