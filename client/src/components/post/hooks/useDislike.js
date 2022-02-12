@@ -1,18 +1,42 @@
-import { useMutation, useQueryClient } from 'react-query';
+import { useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { dislikePost } from '../api';
 
-const useDislike = () => {
-  const queryClient = useQueryClient();
-  const invalidateQuery = () => {
-    queryClient.invalidateQueries('getDislikes');
+const useDislike = ({ dislikes, postId }) => {
+  const {
+    data: {
+      data: { _id: userId },
+    },
+  } = useQuery('fetchUser');
+
+  const userDislikePostCheck = () => {
+    let check = false;
+    dislikes?.forEach((dislike) => {
+      if (dislike?.userId === userId) {
+        check = true;
+      }
+    });
+    return check;
   };
-  const addDislike = useMutation(dislikePost, {
+
+  const [checked, setChecked] = useState(userDislikePostCheck());
+  const toggleChecked = () => {
+    setChecked(!checked);
+  };
+  const queryClient = useQueryClient();
+
+  const invalidateQuery = () => {
+    queryClient.invalidateQueries(`getDislikes-${postId}`);
+  };
+
+  const dislikeOrUnDislikePost = useMutation(dislikePost, {
     onSuccess: () => {
+      toggleChecked();
       invalidateQuery();
     },
   });
 
-  return { addDislike };
+  return { dislikeOrUnDislikePost, checked, toggleChecked };
 };
 
 export default useDislike;
