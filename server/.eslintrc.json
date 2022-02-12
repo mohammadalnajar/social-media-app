@@ -30,6 +30,6 @@
         "no-unused-vars": "warn",
         "no-console": "off",
         "func-names": "off",
-        "no-underscore-dangle": "warn"
+        "no-underscore-dangle": "off"
     }
 }
