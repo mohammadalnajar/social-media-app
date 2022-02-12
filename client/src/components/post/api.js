@@ -48,14 +48,16 @@ export const dislikePost = async (data) => {
   }).then(handleApiResponse);
 };
 
-export const getLikes = async (data) => {
+export const getLikes = async ({ queryKey }) => {
+  const data = queryKey[1];
   const { postId } = data;
   return fetch(`${SERVER_URL}${POST_URL}${LIKE_URL}${postId}`, {
     credentials: 'include',
   }).then(handleApiResponse);
 };
 
-export const getDislikes = async (data) => {
+export const getDislikes = async ({ queryKey }) => {
+  const data = queryKey[1];
   const { postId } = data;
   return fetch(`${SERVER_URL}${POST_URL}${DISLIKE_URL}${postId}`, {
     credentials: 'include',
