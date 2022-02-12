@@ -24,13 +24,13 @@ export const getAllUsersPosts = async (req, res) => {
                         profileImageUrl,
                     } = await User.findById(post.userId);
                     const { likes } = await getLikesData(post);
-                    const { dislike } = await getDislikesData(post);
+                    const { dislikes } = await getDislikesData(post);
                     return {
                         ...post._doc,
+                        likes,
+                        dislikes,
                         authorData: {
                             userId,
-                            likes,
-                            dislike,
                             firstName,
                             lastName,
                             profileImageUrl,
