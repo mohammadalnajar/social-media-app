@@ -2,17 +2,12 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import ErrorAlert from '../ErrorAlert';
 import LoadingPage from '../LoadingPage';
-import PostAction from './components/PostAction';
-import Comment from './components/postActions/Comment';
-import Dislike from './components/postActions/Dislike';
-import Like from './components/postActions/Like';
-import Share from './components/postActions/Share';
+import PostActions from './components/PostActions';
 import PostAuthor from './components/PostAuthor';
 import PostAuthorAction from './components/PostAuthorAction';
 import PostComment from './components/PostComment';
 import PostContent from './components/PostContent';
 import PostMedia from './components/PostMedia';
-import PostStats from './components/PostStats';
 import Post from './Post';
 
 const PostList = () => {
@@ -63,17 +58,7 @@ const PostList = () => {
                 </PostAuthor>
                 <PostContent text={post.text} />
                 <PostMedia imageUrl={post.imageUrl} />
-                <PostStats
-                  likes={post.likes}
-                  dislikes={post.dislikes}
-                  comments={post.comments}
-                />
-                <PostAction>
-                  <Like postId={id} likes={post.likes} />
-                  <Dislike postId={id} dislikes={post.dislikes} />
-                  <Comment postId={id} comments={post.comments} />
-                  <Share />
-                </PostAction>
+                <PostActions postId={id} />
                 <PostComment authorData={post.authorData} />
               </Post>
             );
