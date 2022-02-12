@@ -6,6 +6,7 @@ import {
 } from '../api/uploadImageToCloud.js';
 import Post from '../models/Post.js';
 import User from '../models/User.js';
+import { getDislikesData, getLikesData } from '../services/postActions.js';
 import sortPostsByDate from '../utils/helpers.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
@@ -22,10 +23,14 @@ export const getAllUsersPosts = async (req, res) => {
                         lastName,
                         profileImageUrl,
                     } = await User.findById(post.userId);
+                    const { likes } = await getLikesData(post);
+                    const { dislike } = await getDislikesData(post);
                     return {
                         ...post._doc,
                         authorData: {
                             userId,
+                            likes,
+                            dislike,
                             firstName,
                             lastName,
                             profileImageUrl,
@@ -311,25 +316,13 @@ export const dislikePost = async (req, res) => {
 };
 
 // ========= get likes for a post =========
+
 export const getPostLikes = async (req, res) => {
     const { postId } = req.params;
     try {
         const post = await Post.findById(postId);
         if (post) {
-            const likesArr = await Promise.allSettled(
-                post.likes.map(async (userId) => {
-                    const user = await User.findById(userId);
-                    if (user) {
-                        return {
-                            userId: user._id,
-                            firstName: user.firstName,
-                            lastName: user.lastName,
-                        };
-                    }
-                    return null;
-                })
-            );
-            const likes = likesArr.map((obj) => obj.value); // to get rid of promise status data
+            const { likes } = await getLikesData(post);
             return successRes(res, 200, 'ok', 'likes data found ...', {
                 likes,
             });
@@ -352,20 +345,7 @@ export const getPostDislikes = async (req, res) => {
     try {
         const post = await Post.findById(postId);
         if (post) {
-            const dislikesArr = await Promise.allSettled(
-                post.dislikes.map(async (userId) => {
-                    const user = await User.findById(userId);
-                    if (user) {
-                        return {
-                            userId: user._id,
-                            firstName: user.firstName,
-                            lastName: user.lastName,
-                        };
-                    }
-                    return null;
-                })
-            );
-            const dislikes = dislikesArr.map((obj) => obj.value); // to get rid of promise status data
+            const { dislikes } = await getDislikesData(post);
             return successRes(res, 200, 'ok', 'dislikes data found ...', {
                 dislikes,
             });
