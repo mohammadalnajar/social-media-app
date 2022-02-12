@@ -24,19 +24,31 @@ export const checkPostLikedOrDisliked = async (req, res, next) => {
     const { postId, like, dislike } = req.body;
     try {
         if (like) {
-            const check = await Post.find({ _id: postId, likes: userId });
-            if (check.length > 0) {
-                return errorRes(res, 400, 'like is already existed ...');
+            if (typeof like === 'boolean') {
+                const check = await Post.find({ _id: postId, likes: userId });
+                if (check.length > 0) {
+                    return errorRes(res, 400, 'like is already existed ...');
+                }
+                return next();
             }
+            throw new Error('check like datatype ...');
         }
         if (dislike) {
-            const check = await Post.find({ _id: postId, dislikes: userId });
-            if (check.length > 0) {
-                return errorRes(res, 400, 'dislike is already existed ...');
+            if (typeof dislike === 'boolean') {
+                const check = await Post.find({
+                    _id: postId,
+                    dislikes: userId,
+                });
+                if (check.length > 0) {
+                    return errorRes(res, 400, 'dislike is already existed ...');
+                }
+                return next();
             }
+            throw new Error('check dislike datatype ...');
         }
         return next();
     } catch (error) {
+        console.log(error, 'failed to checkPostLikedOrDisliked');
         return errorRes(res, 500, 'something went wrong ...');
     }
 };
