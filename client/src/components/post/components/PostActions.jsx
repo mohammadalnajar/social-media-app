@@ -7,32 +7,24 @@ import Dislike from './postActions/Dislike';
 import Like from './postActions/Like';
 import Share from './postActions/Share';
 import PostStats from './postActions/PostStats';
-import { getLikes } from '../api';
+import { getDislikes, getLikes } from '../api';
+import usePostActions from '../hooks/usePostActions';
 
 const PostActions = ({ postId }) => {
-  const { data: { data: { likes } = {} } = {} } = useQuery(
-    [`getLikes-${postId}`, { postId }],
-    getLikes,
-    {
-      staleTime: 10 * 60 * 1000,
-      refetchInterval: 2 * 60 * 1000,
-    }
-  );
+  const { likes, dislikes } = usePostActions({ postId });
+
   return (
     <div>
-      {likes && (
+      {likes && dislikes ? (
         <>
           <PostStats
             likes={likes}
-            // dislikes={dislikes}
+            dislikes={dislikes}
             // comments={comments}
           />
           <PostAction>
             <Like postId={postId} likes={likes} />
-            <Dislike
-              postId={postId}
-              // dislikes={dislikes}
-            />
+            <Dislike postId={postId} dislikes={dislikes} />
             <Comment
               postId={postId}
               // comments={comments}
@@ -40,7 +32,7 @@ const PostActions = ({ postId }) => {
             <Share />
           </PostAction>
         </>
-      )}
+      ) : null}
     </div>
   );
 };
