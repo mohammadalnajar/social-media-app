@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useQuery } from 'react-query';
 import PostAction from './postActions/PostAction';
 import Comment from './postActions/Comment';
 import Dislike from './postActions/Dislike';
 import Like from './postActions/Like';
 import Share from './postActions/Share';
 import PostStats from './postActions/PostStats';
-import { getDislikes, getLikes } from '../api';
 import usePostActions from '../hooks/usePostActions';
 
 const PostActions = ({ postId }) => {
