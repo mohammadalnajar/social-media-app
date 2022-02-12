@@ -5,6 +5,7 @@ import useLike from '../../hooks/useLike';
 const Like = ({ postId, likes }) => {
   const { likeOrUnlikePost, checked: userLikePost } = useLike({
     likes,
+    postId,
   });
 
   const handleClick = () => {

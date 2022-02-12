@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { likePost } from '../api';
 
-const useLike = ({ likes }) => {
+const useLike = ({ likes, postId }) => {
   const {
     data: {
       data: { _id: userId },
@@ -26,7 +26,7 @@ const useLike = ({ likes }) => {
   const queryClient = useQueryClient();
 
   const invalidateQuery = () => {
-    queryClient.invalidateQueries('getFeedPosts');
+    queryClient.invalidateQueries(`getLikes-${postId}`);
   };
 
   const likeOrUnlikePost = useMutation(likePost, {
