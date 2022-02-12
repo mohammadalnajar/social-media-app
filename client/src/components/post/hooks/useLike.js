@@ -19,7 +19,9 @@ const useLike = ({ likes, postId }) => {
     return check;
   };
 
-  const [checked, setChecked] = useState(userLikePostCheck());
+  const [checked, setChecked] = useState(() => {
+    return userLikePostCheck();
+  });
   const toggleChecked = () => {
     setChecked(!checked);
   };
