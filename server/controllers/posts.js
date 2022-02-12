@@ -292,7 +292,7 @@ export const dislikePost = async (req, res) => {
         const updated = await Post.findOneAndUpdate(
             { _id: postId },
             {
-                $pull: { likes: userId },
+                $pull: { dislikes: userId },
             }
         );
         if (updated) {
