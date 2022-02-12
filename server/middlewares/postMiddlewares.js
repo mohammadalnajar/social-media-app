@@ -21,16 +21,16 @@ export const checkPostAuthor = async (req, res, next) => {
 
 export const checkPostLikedOrDisliked = async (req, res, next) => {
     const { _id: userId } = req.session.userData;
-    const { like, dislike } = req.body;
+    const { postId, like, dislike } = req.body;
     try {
         if (like) {
-            const check = await Post.find({ likes: userId });
+            const check = await Post.find({ _id: postId, likes: userId });
             if (check.length > 0) {
                 return errorRes(res, 400, 'like is already existed ...');
             }
         }
         if (dislike) {
-            const check = await Post.find({ dislikes: userId });
+            const check = await Post.find({ _id: postId, dislikes: userId });
             if (check.length > 0) {
                 return errorRes(res, 400, 'dislike is already existed ...');
             }
