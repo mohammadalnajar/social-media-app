@@ -6,7 +6,7 @@ const usePostActions = ({ postId }) => {
     [`getLikes-${postId}`, { postId }],
     getLikes,
     {
-      staleTime: 10 * 60 * 1000,
+      staleTime: 2 * 60 * 1000,
       refetchInterval: 2 * 60 * 1000,
     }
   );
@@ -15,7 +15,7 @@ const usePostActions = ({ postId }) => {
     [`getDislikes-${postId}`, { postId }],
     getDislikes,
     {
-      staleTime: 10 * 60 * 1000,
+      staleTime: 2 * 60 * 1000,
       refetchInterval: 2 * 60 * 1000,
     }
   );
