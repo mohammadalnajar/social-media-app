@@ -8,6 +8,8 @@ const Like = ({ postId, likes }) => {
     postId,
   });
 
+  const { isLoading } = likeOrUnlikePost;
+
   const handleClick = () => {
     const data = {
       postId,
@@ -20,7 +22,9 @@ const Like = ({ postId, likes }) => {
     <button
       onClick={handleClick}
       type="button"
-      className={`w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer ${
+      className={`${
+        isLoading && 'loading'
+      } btn bg-dark-second border-none w-1/3 flex space-x-2 justify-center items-center  hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer ${
         userLikePost ? 'text-blue-500' : 'text-gray-500 dark:text-dark-txt'
       } `}
     >
