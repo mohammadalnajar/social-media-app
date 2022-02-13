@@ -32,6 +32,7 @@ const SearchField = ({ isModalOpen, toggleModal, handleInputChange }) => {
         ref={ref}
         type="text"
         name="search"
+        autoComplete="off"
         onFocus={toggleModal}
         onBlur={toggleModal}
         onChange={handleInputChange}
