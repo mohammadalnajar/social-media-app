@@ -54,12 +54,51 @@ module.exports = {
             opacity: '1',
           },
         },
+        widthEx: {
+          '0%': {
+            width: '2.5rem',
+          },
+          '100%': {
+            width: '250px',
+          },
+        },
+        widthExBar: {
+          '0%': {
+            width: '0px',
+          },
+          '100%': {
+            width: '250px',
+          },
+        },
+        widthRed: {
+          '0%': {
+            width: '250px',
+          },
+          '100%': {
+            width: '2.5rem',
+          },
+        },
+        widthRedBar: {
+          '0%': {
+            width: '250px',
+          },
+          '100%': {
+            width: '0px',
+          },
+        },
       },
       animation: {
         rotateUP: 'rotateUP .3s ease-in-out forwards',
         rotateDown: 'rotateDown .3s ease-in-out forwards',
         leftTrans: 'leftTrans .6s ease-in-out forwards',
         rightTrans: 'rightTrans .3s ease-in-out forwards',
+        widthEx: 'widthEx .8s ease-in-out forwards',
+        widthExBar: 'widthExBar 1s ease-in-out forwards',
+        widthRed: 'widthRed 1s ease-in-out forwards',
+        widthRedBar: 'widthRedBar .8s ease-in-out forwards',
+      },
+      transitionProperty: {
+        width: 'width',
       },
     },
   },
