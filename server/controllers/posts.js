@@ -6,6 +6,7 @@ import {
 } from '../api/uploadImageToCloud.js';
 import Post from '../models/Post.js';
 import User from '../models/User.js';
+import { getDislikesData, getLikesData } from '../services/postActions.js';
 import sortPostsByDate from '../utils/helpers.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
@@ -22,8 +23,12 @@ export const getAllUsersPosts = async (req, res) => {
                         lastName,
                         profileImageUrl,
                     } = await User.findById(post.userId);
+                    const { likes } = await getLikesData(post);
+                    const { dislikes } = await getDislikesData(post);
                     return {
                         ...post._doc,
+                        likes,
+                        dislikes,
                         authorData: {
                             userId,
                             firstName,
@@ -206,5 +211,153 @@ export const deletePost = async (req, res) => {
         );
     } catch (error) {
         return errorRes(res, 500, 'failed to delete post ...', null, error);
+    }
+};
+
+// ========= like or unlike a post =========
+export const likePost = async (req, res) => {
+    const { like } = req.body;
+    const { postId } = req.params;
+
+    const { _id: userId } = req.session.userData;
+    try {
+        if (like) {
+            // like a post
+            const updated = await Post.findOneAndUpdate(
+                { _id: postId },
+                {
+                    $push: { likes: userId },
+                }
+            );
+            if (updated) {
+                return successRes(res, 200, 'ok', 'post is liked by the user');
+            }
+            return errorRes(
+                res,
+                404,
+                'post is not found or failed to update...'
+            );
+        }
+        // unlike a post
+        const updated = await Post.findOneAndUpdate(
+            { _id: postId },
+            {
+                $pull: { likes: userId },
+            }
+        );
+        if (updated) {
+            return successRes(res, 200, 'ok', 'post is unliked by the user');
+        }
+        return errorRes(res, 404, 'post is not found or failed to update...');
+    } catch (error) {
+        return errorRes(
+            res,
+            500,
+            'failed to like or unlike a post ...',
+            null,
+            error
+        );
+    }
+};
+
+// ========= dislike or un dislike a post =========
+export const dislikePost = async (req, res) => {
+    const { dislike } = req.body;
+    const { postId } = req.params;
+    const { _id: userId } = req.session.userData;
+    try {
+        if (dislike) {
+            // dislike a post
+            const updated = await Post.findOneAndUpdate(
+                { _id: postId },
+                {
+                    $push: { dislikes: userId },
+                }
+            );
+            if (updated) {
+                return successRes(
+                    res,
+                    200,
+                    'ok',
+                    'post is disliked by the user'
+                );
+            }
+            return errorRes(
+                res,
+                404,
+                'post is not found or failed to update...'
+            );
+        }
+        // un dislike a post
+        const updated = await Post.findOneAndUpdate(
+            { _id: postId },
+            {
+                $pull: { dislikes: userId },
+            }
+        );
+        if (updated) {
+            return successRes(
+                res,
+                200,
+                'ok',
+                'post is un disliked by the user'
+            );
+        }
+        return errorRes(res, 404, 'post is not found or failed to update...');
+    } catch (error) {
+        return errorRes(
+            res,
+            500,
+            'failed to like or unlike a post ...',
+            null,
+            error
+        );
+    }
+};
+
+// ========= get likes for a post =========
+
+export const getPostLikes = async (req, res) => {
+    const { postId } = req.params;
+    try {
+        const post = await Post.findById(postId);
+        if (post) {
+            const { likes } = await getLikesData(post);
+            return successRes(res, 200, 'ok', 'likes data found ...', {
+                likes,
+            });
+        }
+        return errorRes(res, 404, 'post is not found ...');
+    } catch (error) {
+        return errorRes(
+            res,
+            500,
+            'failed to get all likes of a post ...',
+            null,
+            error
+        );
+    }
+};
+
+// ========= get dislikes for a post =========
+export const getPostDislikes = async (req, res) => {
+    const { postId } = req.params;
+    try {
+        const post = await Post.findById(postId);
+        if (post) {
+            const { dislikes } = await getDislikesData(post);
+            return successRes(res, 200, 'ok', 'dislikes data found ...', {
+                dislikes,
+            });
+        }
+        return errorRes(res, 404, 'post is not found ...');
+    } catch (error) {
+        return errorRes(
+            res,
+            500,
+            'failed to get all dislikes of a post ...',
+            null,
+            error
+        );
     }
 };

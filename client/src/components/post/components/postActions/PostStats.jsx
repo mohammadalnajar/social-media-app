@@ -27,9 +27,14 @@ const PostStats = ({ likes, dislikes, comments }) => {
 };
 
 PostStats.propTypes = {
-  likes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  dislikes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  likes: PropTypes.arrayOf(PropTypes.object),
+  dislikes: PropTypes.arrayOf(PropTypes.object),
+  comments: PropTypes.arrayOf(PropTypes.object),
 };
 
+PostStats.defaultProps = {
+  likes: [{}],
+  dislikes: [{}],
+  comments: [{}],
+};
 export default PostStats;

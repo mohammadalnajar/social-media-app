@@ -63,6 +63,27 @@
     ```json
         "no body required"
     ```
+    ___
+7. **LIKE A POST:** (auth)
+    
+    1. ***POST*** =>  http://localhost:4444/api/posts/like/
+    ```json
+       {
+        "postId":"62046164019bd22821eeb6",
+        "like":true ("to like") / false ("to unlike")
+        }
+    ```
+    ___ 
+8. **DISLIKE A POST:** (auth)
+    
+    1. ***POST*** =>  http://localhost:4444/api/posts/dislike/
+    ```json
+       {
+        "postId":"62046164019bd22821eeb6",
+        "like":true ("to dislike") / false ("to un dislike")
+        }
+    ```
+
 
 
 ### Workflow: (explain)
