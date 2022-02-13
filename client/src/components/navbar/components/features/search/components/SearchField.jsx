@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import useToggle from '../../../../../../hooks/useToggle';
 
@@ -11,7 +11,7 @@ const SearchField = ({ isModalOpen, toggleModal, handleInputChange }) => {
   return (
     <div
       className={`relative xl:w-64 bg-gray-100 dark:bg-dark-third px-2 py-2 ${
-        !isFieldOpen && 'w-15 md:w-15'
+        !isFieldOpen ? 'w-15 md:w-15' : 'w-65'
       }  h-10 md:h-10 xl:pl-3 xl:pr-8 rounded-full flex items-center justify-center cursor-pointer`}
     >
       <button type="button" onClick={toggleField}>
