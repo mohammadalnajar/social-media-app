@@ -19,7 +19,7 @@ const SearchField = ({ isModalOpen, toggleModal, handleInputChange }) => {
     <div
       className={`relative bg-gray-100 dark:bg-dark-third px-2 py-2 ${
         !isFieldOpen && 'w-10 md:w-10'
-      }  h-10  md:h-11 xl:w-max xl:pl-3 xl:pr-8 rounded-full flex items-center justify-center cursor-pointer`}
+      }  h-10  md:h-10 xl:w-max xl:pl-3 xl:pr-8 rounded-full flex items-center justify-center cursor-pointer`}
     >
       <button type="button" onClick={toggleField}>
         <i
