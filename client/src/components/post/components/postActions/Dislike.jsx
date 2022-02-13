@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useDislike from '../../hooks/useDislike';
+import useAction from '../../hooks/useAction';
 
 const Dislike = ({ postId, dislikes }) => {
-  const { dislikeOrUnDislikePost, checked: userDislikePost } = useDislike({
+  const { dislikeOrUnDislikePost, checked: userDislikePost } = useAction({
     dislikes,
     postId,
   });
