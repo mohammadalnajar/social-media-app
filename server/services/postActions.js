@@ -1,3 +1,4 @@
+/* eslint-disable node/no-unsupported-features/es-builtins */
 import User from '../models/User.js';
 
 // ========= get likesData (post) =========
