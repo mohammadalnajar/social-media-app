@@ -16,12 +16,12 @@ const SearchField = ({ isModalOpen, toggleModal, handleInputChange }) => {
   return (
     <div
       ref={ref}
-      className={`bg-gray-100 dark:bg-dark-third px-2 py-2 ${
+      className={`w-10 h-10 bg-gray-100 dark:bg-dark-third px-2 py-2 ${
         mdScreen && isFieldOpen !== '' && !isFieldOpen
-          ? 'animate-widthRed'
+          ? 'animate-widthRed max-w-170'
           : 'xl:w-0'
       } ${
-        mdScreen && isFieldOpen && 'animate-widthEx'
+        mdScreen && isFieldOpen && 'animate-widthEx max-w-170'
       } xl:w-64 h-10 md:h-10 xl:pl-3 xl:pr-8 rounded-full flex items-center justify-center cursor-pointer transition-all duration-75 `}
     >
       <button type="button" className="w-full h-full" onClick={toggleField}>
@@ -41,9 +41,11 @@ const SearchField = ({ isModalOpen, toggleModal, handleInputChange }) => {
         placeholder="Search Facebook"
         className={`outline-none bg-transparent dark:text-white ${
           mdScreen && isFieldOpen !== '' && !isFieldOpen
-            ? 'animate-widthRedBar'
+            ? 'animate-widthRedBar max-w-130'
             : 'w-0'
-        } ${mdScreen && isFieldOpen && 'animate-widthExBar'} xl:w-64`}
+        } ${
+          mdScreen && isFieldOpen && 'animate-widthExBar max-w-130 '
+        }   xl:w-64`}
       />
     </div>
   );
