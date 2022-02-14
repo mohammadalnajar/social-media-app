@@ -9,7 +9,9 @@ const useToggle = ({ initialState = false, ref = false }) => {
 
   if (ref) {
     useOnClickOutside(ref, () => {
-      setIsOpen(false);
+      if (isOpen) {
+        setIsOpen(!isOpen);
+      }
     });
   }
   return [isOpen, toggle];

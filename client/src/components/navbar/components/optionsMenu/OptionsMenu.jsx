@@ -14,7 +14,7 @@ const OptionsMenu = () => {
   } = useQuery('fetchUser');
 
   return (
-    <ul className="hidden md:flex mx-4 items-center justify-center">
+    <ul className="hidden md:flex mr-4 items-center justify-center">
       <li className="h-full hidden xl:flex">
         <NavAvatar>
           <Avatar

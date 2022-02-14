@@ -637,7 +637,7 @@ const MainLayout = () => {
         </div>
         {/* <!-- END MAIN CONTENT --> */}
         {/* <!-- RIGHT MENU --> */}
-        <div className="w-1/5 pt-16 h-full hidden xl:block px-4 fixed top-0 right-0">
+        <div className="w-1/5 pt-16 h-full hidden xl:block px-4 fixed top-0 right-5">
           <div className="h-full">
             <div className="flex justify-between items-center px-4 pt-4">
               <span className="font-semibold text-gray-500 text-lg dark:text-dark-txt">

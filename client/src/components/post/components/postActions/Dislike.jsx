@@ -24,7 +24,7 @@ const Dislike = ({ postId, dislikes }) => {
       onClick={handleClick}
       className={`${
         isLoading && 'loading'
-      } btn bg-dark-second border-none w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer  ${
+      } btn bg-transparent   border-none w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer  ${
         userDislikePost ? 'text-red-500' : 'text-gray-500 dark:text-dark-txt'
       }`}
     >
