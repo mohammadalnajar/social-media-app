@@ -36,7 +36,6 @@
   right: 5px;
   bottom: 0;
   background-color: #b7d0d6;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -50,7 +49,6 @@
   top: 0;
   bottom: 0;
   margin: auto 0;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
   box-shadow: 0 0px 15px #2020203d;
   background: midnightblue url('../public/assets/images/moon.png');
@@ -64,8 +62,6 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(24px);
-  -ms-transform: translateX(24px);
   transform: translateX(24px);
   background: #62c0d8 url('../public/assets/images/sun.png');
   background-size: 25px 25px;
