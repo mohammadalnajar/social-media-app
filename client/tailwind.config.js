@@ -101,6 +101,10 @@ module.exports = {
         width: 'width',
       },
     },
+    maxWidth: {
+      170: '170px',
+      130: '130px',
+    },
   },
   // eslint-disable-next-line import/no-extraneous-dependencies
   plugins: [require('daisyui'), require('tailwind-scrollbar')],
