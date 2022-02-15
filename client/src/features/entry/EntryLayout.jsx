@@ -17,9 +17,7 @@ const EntryLayout = () => {
         {login ? (
           <>
             <FormHeading />
-            <LoginForm>
-              <FormButton title="Login" />
-            </LoginForm>
+            <LoginForm />
           </>
         ) : (
           <RegisterForm>
