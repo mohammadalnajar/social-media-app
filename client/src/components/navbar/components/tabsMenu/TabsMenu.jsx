@@ -10,7 +10,7 @@ const TabsMenu = () => {
       : 'text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt';
   };
   return (
-    <ul className="flex w-full lg:w-max items-center justify-center">
+    <ul className="flex w-full lg:w-max md:w-1/3 items-center justify-center">
       <li className="w-1/5 md:w-max text-center">
         <Tab title="home" selectedState={{ setSelectedTab, selectedColor }} />
       </li>

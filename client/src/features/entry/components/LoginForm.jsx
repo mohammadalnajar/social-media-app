@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ErrorAlert from '../../../components/ErrorAlert';
 import { useAuth } from '../../../context/authContext';
 import useForm from '../../../hooks/useForm';
+import FormButton from './FormButton';
 
-const LoginForm = ({ children }) => {
+const LoginForm = () => {
   const navigate = useNavigate();
   const { formData, handleInputChange, reset } = useForm({
     email: '',
@@ -20,7 +20,9 @@ const LoginForm = ({ children }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     login.mutate(formData);
-    reset();
+    if (isSuccess) {
+      reset();
+    }
   };
 
   useEffect(() => {
@@ -74,13 +76,9 @@ const LoginForm = ({ children }) => {
           <ErrorAlert errorMessage={login.error.error} duration={5000} />
         )}
       </div>
-      {children}
+      <FormButton title="Login" isLoading={login.isLoading} />
     </form>
   );
-};
-
-LoginForm.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default LoginForm;

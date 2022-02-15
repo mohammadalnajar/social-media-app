@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import FormButton from './components/FormButton';
 import FormHeading from './components/FormHeading';
 import FormToggle from './components/FormToggle';
 import FormWrapper from './components/FormWrapper';
@@ -17,14 +16,10 @@ const EntryLayout = () => {
         {login ? (
           <>
             <FormHeading />
-            <LoginForm>
-              <FormButton title="Login" />
-            </LoginForm>
+            <LoginForm />
           </>
         ) : (
-          <RegisterForm>
-            <FormButton title="Sign up" />
-          </RegisterForm>
+          <RegisterForm />
         )}
 
         <FormToggle

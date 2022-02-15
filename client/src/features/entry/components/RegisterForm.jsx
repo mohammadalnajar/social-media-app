@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/authContext';
 import useForm from '../../../hooks/useForm';
+import FormButton from './FormButton';
 
-const RegisterForm = ({ children }) => {
+const RegisterForm = () => {
   const navigate = useNavigate();
   const { formData, handleInputChange, reset } = useForm({
     firstName: '',
@@ -21,8 +21,9 @@ const RegisterForm = ({ children }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     register.mutate(formData);
-    console.log(formData);
-    reset();
+    if (isSuccess) {
+      reset();
+    }
   };
 
   const error = register?.error?.errorMessages?.filter((e) => {
@@ -39,7 +40,7 @@ const RegisterForm = ({ children }) => {
     return () => {
       register.reset();
     };
-  }, []);
+  }, [isSuccess]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -107,13 +108,9 @@ const RegisterForm = ({ children }) => {
           </span>
         )}
       </div>
-      {children}
+      <FormButton title="Sign up" isLoading={register.isLoading} />
     </form>
   );
-};
-
-RegisterForm.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default RegisterForm;

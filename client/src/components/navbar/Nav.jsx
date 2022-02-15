@@ -13,9 +13,9 @@ const Nav = () => {
     <nav className="bg-white dark:bg-dark-second h-max my-auto md:h-14 w-full shadow flex flex-col md:flex-row items-center justify-center md:justify-between fixed top-0 z-50 border-b dark:border-dark-third">
       <div className="flex w-full md:w-1/3 items-center  px-4 py-2">
         <Logo />
-        <div className="flex items-center w-100 justify-between ">
+        <div className="flex items-center w-full justify-between ">
           <Search />
-          <div className="flex md:hidden justify-center">
+          <div className="flex md:hidden md:w-1/3 justify-end">
             <Dropdown />
             <Messenger />
             <DarkModeMoon />
