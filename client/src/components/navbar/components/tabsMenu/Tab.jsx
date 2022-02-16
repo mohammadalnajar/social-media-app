@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import capitalize from '../../../../utils/helpers';
-import useToggle from '../../../../hooks/useToggle';
+import useWindowSize from '../../../../hooks/useWindowSize';
 
 const Tab = ({ selectedState, title, dynamicNum = false }) => {
   const { setSelectedTab, selectedColor } = selectedState;
-  const [isOpenTooltip, toggleTooltip] = useToggle({});
+  const screenSize = useWindowSize();
+  const lgScreen = screenSize.width >= 1024 && true;
 
   const handleClick = () => {
     setSelectedTab(title);
@@ -26,13 +27,11 @@ const Tab = ({ selectedState, title, dynamicNum = false }) => {
       data-tip={capitalize(title)}
       type="button"
       onClick={handleClick}
-      onMouseEnter={toggleTooltip}
-      onMouseLeave={toggleTooltip}
       className={`${selectedColor(
         title
       )} w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block 
         
-      } tooltip ${isOpenTooltip && 'tooltip-open '} tooltip-bottom`}
+      } ${lgScreen && 'tooltip tooltip-bottom'} `}
     >
       <i className={`bx bx${iconClass} ${dynamicNum && 'relative'}`}>
         {dynamicNum !== 0 && (
