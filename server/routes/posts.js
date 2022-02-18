@@ -1,5 +1,11 @@
 import express from 'express';
 import {
+    createComment,
+    deleteComment,
+    getPostComments,
+    updateComment,
+} from '../controllers/comments.js';
+import {
     createPost,
     createPostWithImages,
     deletePost,
@@ -39,4 +45,11 @@ router
     .get(isUserLoggedIn, getPostDislikes)
     .post(isUserLoggedIn, isJsonCheck, checkPostLikedOrDisliked, dislikePost);
 
+// =========== comments ===========
+router
+    .route('/comments/:postId')
+    .get(isUserLoggedIn, getPostComments)
+    .post(isUserLoggedIn, isJsonCheck, createComment)
+    .put(isUserLoggedIn, isJsonCheck, updateComment)
+    .delete(isUserLoggedIn, deleteComment);
 export default router;
