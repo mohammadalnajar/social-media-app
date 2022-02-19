@@ -1,11 +1,47 @@
+/* eslint-disable node/no-unsupported-features/es-builtins */
 import Comment from '../models/Comment.js';
 import Post from '../models/Post.js';
+import getUserData from '../services/users.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
 // ========= get comments of a post =========
 
 export const getPostComments = async (req, res) => {
-    res.send('get comments');
+    const { postId } = req.params;
+    try {
+        const foundPost = await Post.findById(postId);
+        if (foundPost) {
+            const { comments: commentsIds } = foundPost;
+            const commentsArr = await Promise.allSettled(
+                commentsIds.map(async (commentId) => {
+                    const comment = await Comment.findById(commentId);
+                    if (comment) return comment;
+                    return null;
+                })
+            );
+            const comments = commentsArr.map((obj) => obj.value);
+
+            const commentsDataArr = await Promise.allSettled(
+                comments.map(async (comment) => {
+                    const { _id, firstName, lastName } = await getUserData(
+                        comment.userId
+                    );
+                    const { userId, ...rest } = comment._doc;
+                    return {
+                        ...rest, // rest data from comment obj
+                        userData: { userId: _id, firstName, lastName },
+                    };
+                })
+            );
+            const commentsData = commentsDataArr.map((obj) => obj.value);
+
+            return successRes(res, 200, 'ok', 'comments found', commentsData);
+        }
+        return errorRes(res, 404, 'post was not found');
+    } catch (error) {
+        console.log(error, 'error in get comments of a post');
+        return errorRes(res, 500, 'something went wrong');
+    }
 };
 
 // ========= create a comment =========
