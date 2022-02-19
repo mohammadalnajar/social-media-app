@@ -49,7 +49,10 @@ router
 router
     .route('/comments/:postId')
     .get(isUserLoggedIn, getPostComments)
-    .post(isUserLoggedIn, isJsonCheck, createComment)
+    .post(isUserLoggedIn, isJsonCheck, createComment);
+router
+    .route('/comments/:commentId')
     .put(isUserLoggedIn, isJsonCheck, updateComment)
     .delete(isUserLoggedIn, deleteComment);
+
 export default router;
