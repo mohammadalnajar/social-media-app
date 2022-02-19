@@ -2,9 +2,13 @@ import Comment from '../models/Comment.js';
 import Post from '../models/Post.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
+// ========= get comments of a post =========
+
 export const getPostComments = async (req, res) => {
     res.send('get comments');
 };
+
+// ========= create a comment =========
 export const createComment = async (req, res) => {
     const { postId } = req.params;
     const { _id: userId } = req.session.userData;
@@ -37,9 +41,13 @@ export const createComment = async (req, res) => {
         return errorRes(res, 500, 'something went wrong in server ...');
     }
 };
+
+// ========= update a comment =========
 export const updateComment = async (req, res) => {
     res.send('update comment');
 };
+
+// ========= delete a comment =========
 export const deleteComment = async (req, res) => {
     res.send('delete comment');
 };
