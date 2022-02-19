@@ -20,6 +20,7 @@ const CommentSchema = new mongoose.Schema({
     imageUrl: { type: String },
     imagePublicId: { type: String },
     userId: { type: String, required: true },
+    postId: { type: String, required: true },
 });
 
 const Comment = mongoose.model('comments', CommentSchema);
