@@ -60,12 +60,20 @@ export const createComment = async (req, res) => {
                 { $push: { comments: createdComment.id } }
             );
             if (updatedPost) {
+                const { firstName, lastName } = await getUserData(userId);
+                const { userId: ignoredId, ...rest } = createdComment._doc;
+
                 return successRes(
                     res,
                     200,
                     'ok',
                     'comment is created successfully ...',
-                    { comment: createdComment }
+                    {
+                        comment: {
+                            ...rest,
+                            userData: { userId, firstName, lastName },
+                        },
+                    }
                 );
             }
             throw new Error('failed to update post after creating');
@@ -89,8 +97,14 @@ export const updateComment = async (req, res) => {
         );
         if (updated) {
             const comment = await Comment.findById(commentId);
+            const {
+                _id: userId,
+                firstName,
+                lastName,
+            } = await getUserData(comment.userId);
+            const { userId: ignoredId, ...rest } = comment._doc;
             return successRes(res, 200, 'ok', 'comment is edited ...', {
-                comment,
+                comment: { ...rest, userData: { userId, firstName, lastName } },
             });
         }
         return errorRes(
