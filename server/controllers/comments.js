@@ -106,5 +106,33 @@ export const updateComment = async (req, res) => {
 
 // ========= delete a comment =========
 export const deleteComment = async (req, res) => {
-    res.send('delete comment');
+    const { commentId } = req.params;
+    try {
+        const foundComment = await Comment.findById(commentId);
+        if (foundComment) {
+            const deleted = await Comment.findByIdAndDelete(commentId);
+            if (deleted) {
+                const updatePostComments = await Post.findByIdAndUpdate(
+                    {
+                        _id: deleted.postId,
+                    },
+                    { $pull: { comments: commentId } }
+                );
+                if (updatePostComments) {
+                    return successRes(
+                        res,
+                        200,
+                        'ok',
+                        'comment is deleted and post comments updated ...'
+                    );
+                }
+                throw new Error('post is not found to be updated ... ');
+            }
+            throw new Error('failed to delete comment ... ');
+        }
+        return errorRes(res, 404, ' comment is not found ...');
+    } catch (error) {
+        console.log(error, 'error in delete comment ...');
+        return errorRes(res, 500, 'something went wrong ...');
+    }
 };
