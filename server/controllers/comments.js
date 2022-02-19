@@ -51,7 +51,7 @@ export const createComment = async (req, res) => {
     const { text } = req.body;
 
     try {
-        const createdComment = await Comment.create({ text, userId });
+        const createdComment = await Comment.create({ text, userId, postId });
         if (createdComment) {
             const updatedPost = await Post.findOneAndUpdate(
                 { _id: postId },
