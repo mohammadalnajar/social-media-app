@@ -80,7 +80,28 @@ export const createComment = async (req, res) => {
 
 // ========= update a comment =========
 export const updateComment = async (req, res) => {
-    res.send('update comment');
+    const { commentId } = req.params;
+    const { text } = req.body;
+    try {
+        const updated = await Comment.findByIdAndUpdate(
+            { _id: commentId },
+            { $set: { text, updatedAt: Date.now() } }
+        );
+        if (updated) {
+            const comment = await Comment.findById(commentId);
+            return successRes(res, 200, 'ok', 'comment is edited ...', {
+                comment,
+            });
+        }
+        return errorRes(
+            res,
+            404,
+            'failed to edit comment, comment was not found'
+        );
+    } catch (error) {
+        console.log(error, 'error in edit comment ...');
+        return errorRes(res, 500, 'something went wrong');
+    }
 };
 
 // ========= delete a comment =========
