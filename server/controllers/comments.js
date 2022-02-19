@@ -35,7 +35,9 @@ export const getPostComments = async (req, res) => {
             );
             const commentsData = commentsDataArr.map((obj) => obj.value);
 
-            return successRes(res, 200, 'ok', 'comments found', commentsData);
+            return successRes(res, 200, 'ok', 'comments found', {
+                comments: commentsData,
+            });
         }
         return errorRes(res, 404, 'post was not found');
     } catch (error) {
