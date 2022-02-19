@@ -60,14 +60,12 @@ export const createComment = async (req, res) => {
                 { $push: { comments: createdComment.id } }
             );
             if (updatedPost) {
-                const data = createdComment;
-
                 return successRes(
                     res,
                     200,
                     'ok',
                     'comment is created successfully ...',
-                    data
+                    { comment: createdComment }
                 );
             }
             throw new Error('failed to update post after creating');
