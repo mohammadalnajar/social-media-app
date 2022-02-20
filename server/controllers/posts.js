@@ -28,7 +28,6 @@ export const getAllUsersPosts = async (req, res) => {
                     const { dislikes } = await getDislikesData(post);
                     const { commentsData: comments } =
                         await commentServices.getPostComments(post.comments);
-                    console.log(comments, 'comments in post controller');
                     return {
                         ...post._doc,
                         likes,
