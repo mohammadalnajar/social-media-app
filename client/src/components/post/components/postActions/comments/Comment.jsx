@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import timeElapsed from '../../../../../utils/timeElapsed';
 
 const Comment = ({ comment }) => {
   const {
     userData: { profileImageUrl, firstName, lastName },
     text,
   } = comment;
-
+  const timeAgo = timeElapsed(new Date(comment.createdAt).getTime(), true);
   return (
     <div className="mb-4">
       <div className="flex space-x-2">
@@ -27,7 +28,7 @@ const Comment = ({ comment }) => {
             <span>.</span>
             <span className="font-semibold cursor-pointer">Reply</span>
             <span>.</span>
-            10m
+            {timeAgo}
           </div>
         </div>
       </div>
