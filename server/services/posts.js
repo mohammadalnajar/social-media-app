@@ -21,6 +21,19 @@ const postServices = {
             throw new Error(error);
         }
     },
+    async deleteComment(postId, commentId) {
+        try {
+            const updatePostComments = await Post.findByIdAndUpdate(
+                {
+                    _id: postId,
+                },
+                { $pull: { comments: commentId } }
+            );
+            return updatePostComments;
+        } catch (error) {
+            throw new Error(error);
+        }
+    },
 };
 
 export default postServices;
