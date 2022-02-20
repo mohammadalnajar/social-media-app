@@ -27,6 +27,7 @@ import {
 
 const router = express.Router();
 
+// =========== posts ===========
 router
     .route('/')
     .get(isUserLoggedIn, getAllUserPosts)
@@ -36,6 +37,8 @@ router
     .delete(isUserLoggedIn, isJsonCheck, checkPostAuthor, deletePost);
 router.route('/friends').get(isUserLoggedIn, getAllFriendsPosts);
 router.route('/users').get(isUserLoggedIn, getAllUsersPosts);
+
+// =========== likes & dislikes ===========
 router
     .route('/like/:postId')
     .get(isUserLoggedIn, getPostLikes)
