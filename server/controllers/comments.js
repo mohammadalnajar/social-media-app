@@ -101,15 +101,13 @@ export const updateComment = async (req, res) => {
 export const deleteComment = async (req, res) => {
     const { commentId } = req.params;
     try {
-        const foundComment = await Comment.findById(commentId);
+        const foundComment = await commentServices.getCommentById(commentId);
         if (foundComment) {
-            const deleted = await Comment.findByIdAndDelete(commentId);
+            const deleted = await commentServices.deleteComment(commentId);
             if (deleted) {
-                const updatePostComments = await Post.findByIdAndUpdate(
-                    {
-                        _id: deleted.postId,
-                    },
-                    { $pull: { comments: commentId } }
+                const updatePostComments = await postServices.deleteComment(
+                    deleted.postId,
+                    commentId
                 );
                 if (updatePostComments) {
                     return successRes(
