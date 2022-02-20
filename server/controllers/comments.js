@@ -1,6 +1,7 @@
 /* eslint-disable node/no-unsupported-features/es-builtins */
 import Comment from '../models/Comment.js';
 import Post from '../models/Post.js';
+import commentServices from '../services/comments.js';
 import getUserData from '../services/users.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
@@ -12,28 +13,10 @@ export const getPostComments = async (req, res) => {
         const foundPost = await Post.findById(postId);
         if (foundPost) {
             const { comments: commentsIds } = foundPost;
-            const commentsArr = await Promise.allSettled(
-                commentsIds.map(async (commentId) => {
-                    const comment = await Comment.findById(commentId);
-                    if (comment) return comment;
-                    return null;
-                })
-            );
-            const comments = commentsArr.map((obj) => obj.value);
 
-            const commentsDataArr = await Promise.allSettled(
-                comments.map(async (comment) => {
-                    const { _id, firstName, lastName } = await getUserData(
-                        comment.userId
-                    );
-                    const { userId, ...rest } = comment._doc;
-                    return {
-                        ...rest, // rest data from comment obj
-                        userData: { userId: _id, firstName, lastName },
-                    };
-                })
+            const { commentsData } = await commentServices.getPostComments(
+                commentsIds
             );
-            const commentsData = commentsDataArr.map((obj) => obj.value);
 
             return successRes(res, 200, 'ok', 'comments found', {
                 comments: commentsData,
