@@ -9,10 +9,15 @@ const PostComment = ({ postId }) => {
     formData,
     handleInputChange,
   } = useComment({ postId });
-  console.log(postComment);
-  const handleSubmit = () => {
-    console.log(formData, 'data');
-    postComment.mutate({ text: formData.text, postId });
+
+  const handleSubmit = (e) => {
+    if (e.type === 'click' || e.code === 'Enter') {
+      postComment.mutate({ text: formData.text, postId });
+    }
+  };
+
+  const textFilled = () => {
+    return formData.text.length > 0 && true;
   };
   return (
     <div className="py-2 px-4">
@@ -28,6 +33,7 @@ const PostComment = ({ postId }) => {
             name="text"
             value={formData.text}
             onChange={handleInputChange}
+            onKeyDown={handleSubmit}
             placeholder="Write a comment..."
             className="outline-none bg-transparent flex-1"
           />
@@ -44,8 +50,17 @@ const PostComment = ({ postId }) => {
             <span className="w-7 h-7 grid place-items-center rounded-full hover:bg-gray-200 cursor-pointer text-gray-500 dark:text-dark-txt dark:hover:bg-dark-second text-xl">
               <i className="bx bx-happy-heart-eyes" />
             </span>
-            <button type="button" className="btn" onClick={handleSubmit}>
-              Submit
+            <button
+              type="button"
+              disabled={!textFilled() && true}
+              className={`rounded-full h-[25px] w-[25px]  ${
+                textFilled()
+                  ? 'hover:text-blue-500 hover:bg-dark-second'
+                  : 'cursor-not-allowed'
+              }`}
+              onClick={handleSubmit}
+            >
+              <i className="bx bxs-send" />
             </button>
           </div>
         </div>
