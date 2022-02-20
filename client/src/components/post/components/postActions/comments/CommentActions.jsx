@@ -12,8 +12,9 @@ const CommentActions = ({ commentId, toggleEdit, postId }) => {
   return (
     <div className="dropdown dropdown-end">
       <button
+        data-tip="Edit or delete this"
         type="button"
-        className="w-8 h-8 grid place-items-center text-xl text-gray-500 hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third rounded-full cursor-pointer"
+        className="w-8 h-8 grid place-items-center text-xl text-gray-500 hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third rounded-full cursor-pointer tooltip tooltip-bottom"
       >
         <i className="bx bx-dots-horizontal-rounded" />
       </button>
