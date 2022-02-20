@@ -65,7 +65,8 @@ export const getDislikes = async ({ queryKey }) => {
   }).then(handleApiResponse);
 };
 
-export const getPostComments = async (data) => {
+export const getPostComments = async ({ queryKey }) => {
+  const data = queryKey[1];
   const { postId } = data;
   return fetch(`${SERVER_URL}${POST_URL}${COMMENT_URL}${postId}`, {
     credentials: 'include',
