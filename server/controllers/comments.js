@@ -77,20 +77,13 @@ export const updateComment = async (req, res) => {
     const { commentId } = req.params;
     const { text } = req.body;
     try {
-        const updated = await Comment.findByIdAndUpdate(
-            { _id: commentId },
-            { $set: { text, updatedAt: Date.now() } }
-        );
+        const updated = await commentServices.updateComment(commentId, {
+            text,
+        });
         if (updated) {
-            const comment = await Comment.findById(commentId);
-            const {
-                _id: userId,
-                firstName,
-                lastName,
-            } = await getUserData(comment.userId);
-            const { userId: ignoredId, ...rest } = comment._doc;
+            const comment = await commentServices.getCommentById(commentId);
             return successRes(res, 200, 'ok', 'comment is edited ...', {
-                comment: { ...rest, userData: { userId, firstName, lastName } },
+                comment,
             });
         }
         return errorRes(
