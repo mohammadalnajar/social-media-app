@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import useForm from '../../../hooks/useForm';
 import { createComment, updateComment } from '../api';
 
-const useComment = ({ postId, defaultTextVal }) => {
+const useComment = ({ postId, defaultTextVal, close }) => {
   const {
     data: { data: userData },
   } = useQuery('fetchUser');
@@ -28,6 +28,7 @@ const useComment = ({ postId, defaultTextVal }) => {
     onSuccess: () => {
       invalidateCommentsQuery();
       reset();
+      if (close) close(); // to close the editComment component when the comment is updated
     },
   });
 

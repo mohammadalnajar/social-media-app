@@ -2,14 +2,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import useComment from '../hooks/useComment';
 
-const PostComment = ({ postId, commentId, defaultTextVal, method }) => {
-  const {
-    userData: { profileImageUrl },
-    postComment,
-    editComment,
-    formData,
-    handleInputChange,
-  } = useComment({ postId, defaultTextVal });
+const PostComment = ({
+  profileImageUrl,
+  postId,
+  commentId,
+  defaultTextVal,
+  method,
+  close,
+}) => {
+  const { postComment, editComment, formData, handleInputChange } = useComment({
+    postId,
+    defaultTextVal,
+    close,
+  });
 
   const handleSubmit = (e) => {
     if (e.type === 'click' || e.code === 'Enter') {
@@ -79,11 +84,14 @@ PostComment.propTypes = {
   commentId: PropTypes.string,
   defaultTextVal: PropTypes.string.isRequired,
   method: PropTypes.string.isRequired,
+  profileImageUrl: PropTypes.string.isRequired,
+  close: PropTypes.func,
 };
 
 PostComment.defaultProps = {
   postId: '',
   commentId: '',
+  close: () => {},
 };
 
 export default PostComment;
