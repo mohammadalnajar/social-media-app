@@ -32,14 +32,14 @@ const commentServices = {
     },
 
     async getCommentData(comment) {
-        const { _id, firstName, lastName } = await getUserData(
+        const { _id, firstName, lastName, profileImageUrl } = await getUserData(
             comment.userId,
             'get user data in comment service getCommentData' // this is the context to inform where this service get used
         );
         const { userId, ...rest } = comment._doc;
         return {
             ...rest, // rest data from comment obj
-            userData: { userId: _id, firstName, lastName },
+            userData: { userId: _id, firstName, lastName, profileImageUrl },
         };
     },
 
