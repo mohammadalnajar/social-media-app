@@ -2,6 +2,7 @@
 import Comment from '../models/Comment.js';
 import Post from '../models/Post.js';
 import commentServices from '../services/comments.js';
+import postServices from '../services/posts.js';
 import getUserData from '../services/users.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
@@ -10,7 +11,7 @@ import { errorRes, successRes } from '../utils/reqResponse.js';
 export const getPostComments = async (req, res) => {
     const { postId } = req.params;
     try {
-        const foundPost = await Post.findById(postId);
+        const foundPost = await postServices.getPostById(postId);
         if (foundPost) {
             const { comments: commentsIds } = foundPost;
 
@@ -38,9 +39,9 @@ export const createComment = async (req, res) => {
     try {
         const createdComment = await Comment.create({ text, userId, postId });
         if (createdComment) {
-            const updatedPost = await Post.findOneAndUpdate(
-                { _id: postId },
-                { $push: { comments: createdComment.id } }
+            const updatedPost = await postServices.addComment(
+                postId,
+                createdComment
             );
             if (updatedPost) {
                 const { firstName, lastName } = await getUserData(userId);

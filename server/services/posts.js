@@ -9,6 +9,18 @@ const postServices = {
             throw new Error(error);
         }
     },
+
+    async addComment(postId, createdComment) {
+        try {
+            const updatedPost = await Post.findOneAndUpdate(
+                { _id: postId },
+                { $push: { comments: createdComment.id } }
+            );
+            return updatedPost;
+        } catch (error) {
+            throw new Error(error);
+        }
+    },
 };
 
 export default postServices;
