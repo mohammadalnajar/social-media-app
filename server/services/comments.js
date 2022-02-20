@@ -76,6 +76,14 @@ const commentServices = {
             throw new Error(error);
         }
     },
+    async deleteComment(commentId) {
+        try {
+            const deleted = await Comment.findByIdAndDelete(commentId);
+            return deleted;
+        } catch (error) {
+            throw new Error(error);
+        }
+    },
 };
 
 export default commentServices;
