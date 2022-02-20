@@ -55,6 +55,15 @@ const commentServices = {
             throw new Error(error);
         }
     },
+    async getCommentById(commentId) {
+        try {
+            const comment = await Comment.findById(commentId);
+            const commentData = await this.getCommentData(comment);
+            return commentData;
+        } catch (error) {
+            throw new Error(error);
+        }
+    },
 };
 
 export default commentServices;
