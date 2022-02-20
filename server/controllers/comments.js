@@ -48,8 +48,9 @@ export const createComment = async (req, res) => {
                 createdComment
             );
             if (updatedPost) {
-                const { firstName, lastName } = await getUserData(userId);
-                const { userId: ignoredId, ...rest } = createdComment._doc;
+                const commentData = await commentServices.getCommentData(
+                    createdComment
+                );
 
                 return successRes(
                     res,
@@ -57,10 +58,7 @@ export const createComment = async (req, res) => {
                     'ok',
                     'comment is created successfully ...',
                     {
-                        comment: {
-                            ...rest,
-                            userData: { userId, firstName, lastName },
-                        },
+                        comment: commentData,
                     }
                 );
             }
