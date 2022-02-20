@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import timeElapsed from '../../../../../utils/timeElapsed';
+import CommentAvatar from './CommentAvatar';
 
 const Comment = ({ comment }) => {
   const {
@@ -8,14 +9,11 @@ const Comment = ({ comment }) => {
     text,
   } = comment;
   const timeAgo = timeElapsed(new Date(comment.createdAt).getTime(), true);
+
   return (
     <div className="mb-4">
       <div className="flex space-x-2">
-        <img
-          src={profileImageUrl}
-          alt="Profile"
-          className="w-10 h-10 rounded-full"
-        />
+        <CommentAvatar profileImageUrl={profileImageUrl} />
         <div>
           <div className="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
             <span className="font-semibold block">
