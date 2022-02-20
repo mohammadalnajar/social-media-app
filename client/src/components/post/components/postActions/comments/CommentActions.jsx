@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import useComment from '../../../hooks/useComment';
+import useToggle from '../../../../../hooks/useToggle';
+import DeleteCommentModal from './DeleteCommentModal';
 
 const CommentActions = ({ commentId, toggleEdit, postId }) => {
   const { removeComment } = useComment({ postId });
-
+  const ref = useRef();
+  const [isModalOpen, toggleModal] = useToggle({
+    ref,
+  });
   const handleRemoveCommentClick = () => {
     removeComment.mutate({ commentId });
+    // toggleModal();
   };
 
   return (
@@ -32,7 +38,7 @@ const CommentActions = ({ commentId, toggleEdit, postId }) => {
         <li className="dark:hover:bg-dark-hover text-red-500">
           <button
             type="button"
-            onClick={handleRemoveCommentClick}
+            onClick={toggleModal}
             className="btn bg-transparent border-0 dark:hover:bg-dark-hover"
           >
             <i className="bx bx-trash mr-2" />
@@ -40,6 +46,14 @@ const CommentActions = ({ commentId, toggleEdit, postId }) => {
           </button>
         </li>
       </ul>
+      {isModalOpen && (
+        <DeleteCommentModal
+          isLoading={removeComment.isLoading}
+          handleRemoveCommentClick={handleRemoveCommentClick}
+          toggleModal={toggleModal}
+          myRef={ref}
+        />
+      )}
     </div>
   );
 };
