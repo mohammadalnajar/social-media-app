@@ -37,7 +37,11 @@ export const createComment = async (req, res) => {
     const { text } = req.body;
 
     try {
-        const createdComment = await Comment.create({ text, userId, postId });
+        const createdComment = await commentServices.createComment({
+            text,
+            userId,
+            postId,
+        });
         if (createdComment) {
             const updatedPost = await postServices.addComment(
                 postId,

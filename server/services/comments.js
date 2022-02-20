@@ -42,6 +42,19 @@ const commentServices = {
             userData: { userId: _id, firstName, lastName },
         };
     },
+
+    async createComment({ text, userId, postId }) {
+        try {
+            const createdComment = await Comment.create({
+                text,
+                userId,
+                postId,
+            });
+            return createdComment;
+        } catch (error) {
+            throw new Error(error);
+        }
+    },
 };
 
 export default commentServices;
