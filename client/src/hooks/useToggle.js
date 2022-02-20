@@ -3,8 +3,10 @@ import useOnClickOutside from './useOnClickOutside';
 
 const useToggle = ({ initialState = false, ref = false }) => {
   const [isOpen, setIsOpen] = useState(initialState);
-  const toggle = () => {
-    setIsOpen(!isOpen);
+  const toggle = (boolean) => {
+    if (boolean === 'show') return setIsOpen(true);
+    if (boolean === 'hide') return setIsOpen(false);
+    return setIsOpen(!isOpen);
   };
 
   if (ref) {
