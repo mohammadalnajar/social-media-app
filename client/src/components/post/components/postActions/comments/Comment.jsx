@@ -55,7 +55,13 @@ const Comment = ({ comment }) => {
             </div>
           </div>
           <div className="flex items-center mb-5">
-            {isMenuShow && <CommentActions toggleEdit={toggleEdit} />}
+            {isMenuShow && (
+              <CommentActions
+                commentId={commentId}
+                postId={postId}
+                toggleEdit={toggleEdit}
+              />
+            )}
           </div>
         </div>
       )}

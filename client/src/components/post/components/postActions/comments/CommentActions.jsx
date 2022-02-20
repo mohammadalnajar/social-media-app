@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import useComment from '../../../hooks/useComment';
 
-const CommentActions = ({ toggleEdit }) => {
+const CommentActions = ({ commentId, toggleEdit, postId }) => {
+  const { removeComment } = useComment({ postId });
+
+  const handleRemoveCommentClick = () => {
+    removeComment.mutate({ commentId });
+  };
+
   return (
     <div className="dropdown dropdown-end">
       <button
@@ -24,6 +31,7 @@ const CommentActions = ({ toggleEdit }) => {
         <li className="dark:hover:bg-dark-hover text-red-500">
           <button
             type="button"
+            onClick={handleRemoveCommentClick}
             className="btn bg-transparent border-0 dark:hover:bg-dark-hover"
           >
             <i className="bx bx-trash mr-2" />
@@ -37,6 +45,8 @@ const CommentActions = ({ toggleEdit }) => {
 
 CommentActions.propTypes = {
   toggleEdit: PropTypes.func.isRequired,
+  postId: PropTypes.string.isRequired,
+  commentId: PropTypes.string.isRequired,
 };
 
 export default CommentActions;

@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import useForm from '../../../hooks/useForm';
-import { createComment, updateComment } from '../api';
+import { createComment, deleteComment, updateComment } from '../api';
 
 const useComment = ({ postId, defaultTextVal, close }) => {
   const {
@@ -32,10 +32,18 @@ const useComment = ({ postId, defaultTextVal, close }) => {
     },
   });
 
+  const removeComment = useMutation(deleteComment, {
+    onSuccess: () => {
+      invalidateCommentsQuery();
+      reset();
+    },
+  });
+
   return {
     userData,
     postComment,
     editComment,
+    removeComment,
     formData,
     handleInputChange,
     reset,
