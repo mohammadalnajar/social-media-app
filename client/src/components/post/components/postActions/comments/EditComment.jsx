@@ -1,10 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PostComment from '../../PostComment';
 
-const EditComment = ({ toggleEdit }) => {
+const EditComment = ({
+  profileImageUrl,
+  commentId,
+  postId,
+  text,
+  toggleEdit,
+}) => {
   return (
     <div>
-      <span>edit component</span>
+      <PostComment
+        profileImageUrl={profileImageUrl}
+        postId={postId}
+        commentId={commentId}
+        defaultTextVal={text}
+        method="PUT"
+        close={toggleEdit}
+      />
 
       <button
         type="button"
@@ -18,5 +32,9 @@ const EditComment = ({ toggleEdit }) => {
 };
 EditComment.propTypes = {
   toggleEdit: PropTypes.func.isRequired,
+  commentId: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  postId: PropTypes.string.isRequired,
+  profileImageUrl: PropTypes.string.isRequired,
 };
 export default EditComment;

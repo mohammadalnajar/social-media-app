@@ -1,5 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useQuery } from 'react-query';
 import timeElapsed from '../../../../../utils/timeElapsed';
 import CommentAvatar from './CommentAvatar';
 import CommentActions from './CommentActions';
@@ -10,18 +12,27 @@ const Comment = ({ comment }) => {
   const [isMenuShow, toggleMenu] = useToggle({});
   const [isShowEdit, toggleEdit] = useToggle({});
   const {
-    userData: { profileImageUrl, firstName, lastName },
+    _id: commentId,
+    postId,
+    userData: { userId, profileImageUrl, firstName, lastName },
     text,
   } = comment;
+
+  const {
+    data: {
+      data: { _id: loggedUserId },
+    },
+  } = useQuery('fetchUser');
+
   const timeAgo = timeElapsed(new Date(comment.createdAt).getTime(), true);
 
   return (
     <div className="mb-4">
-      {!isShowEdit ? (
+      {!isShowEdit && (
         <div
           className="flex  space-x-2"
           onMouseEnter={() => {
-            return toggleMenu('show');
+            return userId === loggedUserId && toggleMenu('show');
           }}
           onMouseLeave={() => {
             return toggleMenu('hide');
@@ -47,8 +58,15 @@ const Comment = ({ comment }) => {
             {isMenuShow && <CommentActions toggleEdit={toggleEdit} />}
           </div>
         </div>
-      ) : (
-        <EditComment toggleEdit={toggleEdit} />
+      )}
+      {isShowEdit && (
+        <EditComment
+          profileImageUrl={profileImageUrl}
+          postId={postId}
+          commentId={commentId}
+          text={text}
+          toggleEdit={toggleEdit}
+        />
       )}
     </div>
   );
@@ -56,6 +74,7 @@ const Comment = ({ comment }) => {
 
 Comment.propTypes = {
   comment: PropTypes.shape({
+    _id: PropTypes.string,
     comments: PropTypes.arrayOf(PropTypes.string),
     createdAt: PropTypes.string,
     dislikes: PropTypes.arrayOf(PropTypes.string),
@@ -74,6 +93,7 @@ Comment.propTypes = {
 };
 Comment.defaultProps = {
   comment: {
+    _id: '',
     comments: [''],
     createdAt: '',
     dislikes: [''],
