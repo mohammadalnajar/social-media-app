@@ -1,12 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useQuery } from 'react-query';
 
-const PostComment = ({ authorData }) => {
+const PostComment = ({ postId }) => {
+  const {
+    data: {
+      data: { profileImageUrl },
+    },
+  } = useQuery('fetchUser');
   return (
     <div className="py-2 px-4">
       <div className="flex space-x-2">
         <img
-          src={authorData.profileImageUrl}
+          src={profileImageUrl}
           alt="Profile"
           className="w-9 h-9 rounded-full border-2 border-gray-300 dark:border-dark-hover"
         />
@@ -37,9 +43,7 @@ const PostComment = ({ authorData }) => {
 };
 
 PostComment.propTypes = {
-  authorData: PropTypes.shape({
-    profileImageUrl: PropTypes.string.isRequired,
-  }).isRequired,
+  postId: PropTypes.string.isRequired,
 };
 
 export default PostComment;

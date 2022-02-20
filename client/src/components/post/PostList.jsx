@@ -59,7 +59,7 @@ const PostList = () => {
                 <PostContent text={post.text} />
                 <PostMedia imageUrl={post.imageUrl} />
                 <PostActions postId={id} />
-                <PostComment authorData={post.authorData} />
+                <PostComment postId={id} />
               </Post>
             );
           })
