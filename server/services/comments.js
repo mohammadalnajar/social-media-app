@@ -64,6 +64,18 @@ const commentServices = {
             throw new Error(error);
         }
     },
+    async updateComment(commentId, data) {
+        const { text } = data;
+        try {
+            const updated = await Comment.findByIdAndUpdate(
+                { _id: commentId },
+                { $set: { text, updatedAt: Date.now() } }
+            );
+            return updated;
+        } catch (error) {
+            throw new Error(error);
+        }
+    },
 };
 
 export default commentServices;
