@@ -1,34 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PostAction from './postActions/PostAction';
-import Comment from './postActions/Comment';
+import CommentButton from './postActions/CommentButton';
 import Dislike from './postActions/Dislike';
 import Like from './postActions/Like';
 import Share from './postActions/Share';
 import PostStats from './postActions/PostStats';
 import usePostActions from '../hooks/usePostActions';
+import CommentsList from './postActions/comments/CommentsList';
 
 const PostActions = ({ postId }) => {
-  const { likes, dislikes } = usePostActions({ postId });
+  const { likes, dislikes, comments } = usePostActions({ postId });
 
   return (
     <div>
-      {likes && dislikes ? (
+      {likes && dislikes && comments ? (
         <>
-          <PostStats
-            likes={likes}
-            dislikes={dislikes}
-            // comments={comments}
-          />
+          <PostStats likes={likes} dislikes={dislikes} comments={comments} />
           <PostAction>
             <Like postId={postId} likes={likes} />
             <Dislike postId={postId} dislikes={dislikes} />
-            <Comment
-              postId={postId}
-              // comments={comments}
-            />
+            <CommentButton postId={postId} comments={comments} />
             <Share />
           </PostAction>
+          <CommentsList postId={postId} comments={comments} />
         </>
       ) : null}
     </div>
