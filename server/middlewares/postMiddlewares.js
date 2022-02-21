@@ -1,5 +1,6 @@
 import Post from '../models/Post.js';
 import User from '../models/User.js';
+import commentServices from '../services/comments.js';
 import { errorRes } from '../utils/reqResponse.js';
 
 export const checkPostAuthor = async (req, res, next) => {
@@ -50,5 +51,21 @@ export const checkPostLikedOrDisliked = async (req, res, next) => {
     } catch (error) {
         console.log(error, 'failed to checkPostLikedOrDisliked');
         return errorRes(res, 500, 'something went wrong ...');
+    }
+};
+
+export const checkCommentAuthor = async (req, res, next) => {
+    const { _id: userId } = req.session.userData;
+    const { commentId } = req.params;
+    try {
+        const foundComment = await commentServices.getCommentById(commentId);
+        if (foundComment) {
+            if (foundComment.userData.userId === userId) return next();
+            return errorRes(res, 403, 'you are not the author of the post');
+        }
+        return errorRes(res, 404, 'user was not found in db');
+    } catch (error) {
+        console.log(error, 'error in check post author');
+        return errorRes(res, 500, 'Something went wrong');
     }
 };

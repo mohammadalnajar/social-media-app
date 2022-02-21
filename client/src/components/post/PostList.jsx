@@ -21,7 +21,7 @@ const PostList = () => {
 
   const {
     data: {
-      data: { _id: userId },
+      data: { _id: userId, profileImageUrl },
     },
   } = useQuery('fetchUser');
 
@@ -59,7 +59,12 @@ const PostList = () => {
                 <PostContent text={post.text} />
                 <PostMedia imageUrl={post.imageUrl} />
                 <PostActions postId={id} />
-                <PostComment authorData={post.authorData} />
+                <PostComment
+                  profileImageUrl={profileImageUrl}
+                  postId={id}
+                  defaultTextVal=""
+                  method="POST"
+                />
               </Post>
             );
           })

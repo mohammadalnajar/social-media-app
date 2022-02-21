@@ -6,6 +6,7 @@ import {
 } from '../api/uploadImageToCloud.js';
 import Post from '../models/Post.js';
 import User from '../models/User.js';
+import commentServices from '../services/comments.js';
 import { getDislikesData, getLikesData } from '../services/postActions.js';
 import sortPostsByDate from '../utils/helpers.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
@@ -25,10 +26,13 @@ export const getAllUsersPosts = async (req, res) => {
                     } = await User.findById(post.userId);
                     const { likes } = await getLikesData(post);
                     const { dislikes } = await getDislikesData(post);
+                    const { commentsData: comments } =
+                        await commentServices.getPostComments(post.comments);
                     return {
                         ...post._doc,
                         likes,
                         dislikes,
+                        comments,
                         authorData: {
                             userId,
                             firstName,

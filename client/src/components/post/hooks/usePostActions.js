@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { getDislikes, getLikes } from '../api';
+import { getDislikes, getLikes, getPostComments } from '../api';
 
 const usePostActions = ({ postId }) => {
   const { data: { data: { likes } = {} } = {} } = useQuery(
@@ -20,7 +20,16 @@ const usePostActions = ({ postId }) => {
     }
   );
 
-  return { likes, dislikes };
+  const { data: { data: { comments } = {} } = {} } = useQuery(
+    [`getComments-${postId}`, { postId }],
+    getPostComments,
+    {
+      staleTime: 2 * 60 * 1000,
+      refetchInterval: 2 * 60 * 1000,
+    }
+  );
+
+  return { likes, dislikes, comments };
 };
 
 export default usePostActions;
