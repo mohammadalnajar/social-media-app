@@ -10,7 +10,7 @@ const EditComment = ({
   toggleEdit,
 }) => {
   return (
-    <div>
+    <div className="flex flex-col items">
       <PostComment
         profileImageUrl={profileImageUrl}
         postId={postId}
@@ -23,7 +23,7 @@ const EditComment = ({
       <button
         type="button"
         onClick={toggleEdit}
-        className="hover:underline hover:text-blue-500 text-blue-600"
+        className="hover:underline self-start ml-16 hover:text-blue-500 text-blue-600"
       >
         cancel
       </button>
