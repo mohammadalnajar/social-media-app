@@ -5,32 +5,72 @@ import useToggle from '../../../../hooks/useToggle';
 
 const PostStats = ({ likes, dislikes, comments }) => {
   const [isShowComments, toggleCommentsTooltip] = useToggle({});
-  const commentsUsersData = [
+  const [isShowLikes, toggleLikesTooltip] = useToggle({});
+  const [isShowDislikes, toggleDislikesTooltip] = useToggle({});
+  const likesUsersData = [
     ...new Set(
-      comments.map((comment) => {
-        return `${comment.userData.firstName} ${comment.userData.lastName}`;
+      likes.map((like) => {
+        return `${like?.firstName} ${like?.lastName}`;
       })
     ),
   ];
-  const [isShowLikes, toggleLikesTooltip] = useToggle({});
-  const likesUsersData = [...new Set(likes)];
-  const [isShowDislikes, toggleDislikesTooltip] = useToggle({});
-  const dislikesUserData = [...new Set(dislikes)];
+  const dislikesUserData = [
+    ...new Set(
+      dislikes.map((dislike) => {
+        return `${dislike?.firstName} ${dislike?.lastName}`;
+      })
+    ),
+  ];
+  const commentsUsersData = [
+    ...new Set(
+      comments.map((comment) => {
+        return `${comment?.userData.firstName} ${comment?.userData.lastName}`;
+      })
+    ),
+  ];
 
   return (
     <div className="px-4 py-2">
       <div className="flex items-center justify-between">
-        <div className="flex flex-row items-center relative">
+        <div className="flex flex-row items-center">
           {likes?.length ? (
-            <span className="rounded-full grid place-items-center text-2xl mr-2">
-              <i className="bx bx-like" /> {likes.length}
-            </span>
+            <div
+              onMouseEnter={toggleLikesTooltip}
+              onMouseLeave={toggleLikesTooltip}
+              className="relative"
+            >
+              <span className="rounded-full grid place-items-center text-2xl mr-2">
+                <i className="bx bx-like" /> {likes.length}
+              </span>
+              {isShowLikes && (
+                <div className="absolute -right-20 -left-4 bg-gray-400 px-3 py-1 rounded-2xl text-black">
+                  {likesUsersData &&
+                    likesUsersData?.map((user) => {
+                      return <div key={user}>{user}</div>;
+                    })}
+                </div>
+              )}
+            </div>
           ) : null}
 
           {dislikes?.length ? (
-            <span className="rounded-full grid place-items-center text-2xl">
-              <i className="bx bx-dislike" /> {dislikes.length}
-            </span>
+            <div
+              onMouseEnter={toggleDislikesTooltip}
+              onMouseLeave={toggleDislikesTooltip}
+              className="relative"
+            >
+              <span className="rounded-full grid place-items-center text-2xl">
+                <i className="bx bx-dislike" /> {dislikes.length}
+              </span>
+              {isShowDislikes && (
+                <div className="absolute -right-20 -left-4 bg-gray-400 px-3 py-1 rounded-2xl text-black">
+                  {dislikesUserData &&
+                    dislikesUserData?.map((user) => {
+                      return <div key={user}>{user}</div>;
+                    })}
+                </div>
+              )}
+            </div>
           ) : null}
         </div>
         <div
