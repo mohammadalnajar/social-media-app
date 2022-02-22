@@ -43,7 +43,7 @@ const PostStats = ({ likes, dislikes, comments }) => {
                 <i className="bx bx-like" /> {likes.length}
               </span>
               {isShowLikes && (
-                <div className="absolute -right-20 -left-4 bg-gray-400 px-3 py-1 rounded-2xl text-black">
+                <div className="absolute -right-24 -left-5 bg-gray-400 px-3 py-1 rounded-2xl text-black">
                   {likesUsersData &&
                     likesUsersData?.map((user) => {
                       return <div key={user}>{user}</div>;
@@ -63,7 +63,7 @@ const PostStats = ({ likes, dislikes, comments }) => {
                 <i className="bx bx-dislike" /> {dislikes.length}
               </span>
               {isShowDislikes && (
-                <div className="absolute -right-20 -left-4 bg-gray-400 px-3 py-1 rounded-2xl text-black">
+                <div className="absolute -right-24 -left-4 bg-gray-400 px-3 py-1 rounded-2xl text-black">
                   {dislikesUserData &&
                     dislikesUserData?.map((user) => {
                       return <div key={user}>{user}</div>;
