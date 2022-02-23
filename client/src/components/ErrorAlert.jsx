@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
-const ErrorAlert = ({ errorMessage, duration }) => {
+const ErrorAlert = ({ errorMessage, duration, errorStatus }) => {
   const [alert, setAlert] = useState(errorMessage);
-
+  const navigate = useNavigate();
   const handleClose = () => {
     setAlert(false);
   };
 
   useEffect(() => {
     const renderDuration = setTimeout(() => {
+      if (errorStatus === 'not authenticated') {
+        navigate('/');
+      }
       setAlert(false);
     }, duration);
     return () => {
@@ -59,6 +63,7 @@ const ErrorAlert = ({ errorMessage, duration }) => {
 
 ErrorAlert.propTypes = {
   errorMessage: PropTypes.string.isRequired,
+  errorStatus: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
 };
 

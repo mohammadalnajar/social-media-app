@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import useForm from '../../../hooks/useForm';
 import { createPost, createPostWithImages, editPost } from '../api';
 import useDropZone from './useDropZone';
@@ -9,7 +10,7 @@ const usePost = ({ visibility, text, setIsOpen }) => {
   const { formData, handleInputChange, reset } = useForm({
     text,
   });
-
+  const navigate = useNavigate();
   const { files, setFiles, img, setImg, showDropzone, setShowDropzone } =
     useDropZone();
 
@@ -29,17 +30,32 @@ const usePost = ({ visibility, text, setIsOpen }) => {
     onSuccess: () => {
       resetModal();
     },
+    onError: (error) => {
+      if (error.status === 'not authenticated') {
+        navigate('/');
+      }
+    },
   });
 
   const updatePost = useMutation(editPost, {
     onSuccess: () => {
       resetModal();
     },
+    onError: (error) => {
+      if (error.status === 'not authenticated') {
+        navigate('/');
+      }
+    },
   });
 
   const addPostWithImages = useMutation(createPostWithImages, {
     onSuccess: () => {
       resetModal();
+    },
+    onError: (error) => {
+      if (error.status === 'not authenticated') {
+        navigate('/');
+      }
     },
   });
 

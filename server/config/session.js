@@ -8,7 +8,7 @@ const sessionConfig = () => {
         }),
         secret: 'DfSfdSsDdsFe3##$@DVD3385^$@&$@#',
         cookie: {
-            maxAge: 30 * 60 * 1000,
+            maxAge: 1 * 60 * 1000,
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : false,
             secure: process.env.NODE_ENV === 'production' && true,
         }, // 300000ms = 5 min / 900000ms = 15 min

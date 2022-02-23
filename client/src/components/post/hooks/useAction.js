@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import { dislikePost, likePost } from '../api';
 
 const useAction = ({ likes, dislikes, postId }) => {
@@ -8,7 +9,7 @@ const useAction = ({ likes, dislikes, postId }) => {
       data: { _id: userId },
     },
   } = useQuery('fetchUser');
-
+  const navigate = useNavigate();
   const userLikedOrDislikedPostCheck = (arr) => {
     let check = false;
     arr?.forEach((action) => {
@@ -48,12 +49,22 @@ const useAction = ({ likes, dislikes, postId }) => {
       toggleChecked();
       invalidateLikesQuery();
     },
+    onError: (error) => {
+      if (error.status === 'not authenticated') {
+        navigate('/');
+      }
+    },
   });
 
   const dislikeOrUnDislikePost = useMutation(dislikePost, {
     onSuccess: () => {
       toggleChecked();
       invalidateDislikesQuery();
+    },
+    onError: (error) => {
+      if (error.status === 'not authenticated') {
+        navigate('/');
+      }
     },
   });
 

@@ -17,6 +17,7 @@ const PostList = () => {
     isSuccess,
     isLoading,
     isError,
+    error,
   } = useQuery('getFeedPosts');
 
   const {
@@ -26,8 +27,10 @@ const PostList = () => {
   } = useQuery('fetchUser');
 
   if (isError) {
+    console.log();
     return (
       <ErrorAlert
+        errorStatus={error.status}
         errorMessage="Something went wrong, please refresh the page"
         duration={1 * 60 * 1000} // 1 min
       />
