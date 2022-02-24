@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import useLogout from '../../../hooks/useLogout';
 import PostModal from '../../postModal/PostModal';
 import PostModalHeader from '../../postModal/PostModalHeader';
 import { deletePost } from '../api';
 
 const PostAuthorAction = ({ id, userId, text, visibility, firstName }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
+  const { navigateToLogin } = useLogout();
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
@@ -19,9 +19,7 @@ const PostAuthorAction = ({ id, userId, text, visibility, firstName }) => {
       queryClient.invalidateQueries('getFeedPosts');
     },
     onError: (error) => {
-      if (error.status === 'not authenticated') {
-        navigate('/');
-      }
+      navigateToLogin(error);
     },
   });
 

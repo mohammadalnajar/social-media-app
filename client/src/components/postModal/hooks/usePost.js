@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import useForm from '../../../hooks/useForm';
+import useLogout from '../../../hooks/useLogout';
 import { createPost, createPostWithImages, editPost } from '../api';
 import useDropZone from './useDropZone';
 
@@ -11,6 +12,8 @@ const usePost = ({ visibility, text, setIsOpen }) => {
     text,
   });
   const navigate = useNavigate();
+  const { navigateToLogin } = useLogout();
+
   const { files, setFiles, img, setImg, showDropzone, setShowDropzone } =
     useDropZone();
 
@@ -31,9 +34,7 @@ const usePost = ({ visibility, text, setIsOpen }) => {
       resetModal();
     },
     onError: (error) => {
-      if (error.status === 'not authenticated') {
-        navigate('/');
-      }
+      navigateToLogin(error);
     },
   });
 
@@ -42,9 +43,7 @@ const usePost = ({ visibility, text, setIsOpen }) => {
       resetModal();
     },
     onError: (error) => {
-      if (error.status === 'not authenticated') {
-        navigate('/');
-      }
+      navigateToLogin(error);
     },
   });
 
@@ -53,9 +52,7 @@ const usePost = ({ visibility, text, setIsOpen }) => {
       resetModal();
     },
     onError: (error) => {
-      if (error.status === 'not authenticated') {
-        navigate('/');
-      }
+      navigateToLogin(error);
     },
   });
 

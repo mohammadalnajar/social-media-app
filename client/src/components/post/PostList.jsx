@@ -18,7 +18,6 @@ const PostList = () => {
     isSuccess,
     isLoading,
     isError,
-    error,
   } = useQuery('getFeedPosts');
 
   const {

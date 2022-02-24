@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import useForm from '../../../hooks/useForm';
+import useLogout from '../../../hooks/useLogout';
 import { createComment, deleteComment, updateComment } from '../api';
 
 const useComment = ({ postId, defaultTextVal, close }) => {
@@ -8,6 +9,7 @@ const useComment = ({ postId, defaultTextVal, close }) => {
     data: { data: userData },
   } = useQuery('fetchUser');
   const navigate = useNavigate();
+  const { navigateToLogin } = useLogout();
   const { formData, handleInputChange, reset } = useForm({
     text: defaultTextVal,
   });
@@ -24,9 +26,7 @@ const useComment = ({ postId, defaultTextVal, close }) => {
       reset();
     },
     onError: (error) => {
-      if (error.status === 'not authenticated') {
-        navigate('/');
-      }
+      navigateToLogin(error);
     },
   });
 
@@ -37,9 +37,7 @@ const useComment = ({ postId, defaultTextVal, close }) => {
       if (close) close(); // to close the editComment component when the comment is updated
     },
     onError: (error) => {
-      if (error.status === 'not authenticated') {
-        navigate('/');
-      }
+      navigateToLogin(error);
     },
   });
 
@@ -49,9 +47,7 @@ const useComment = ({ postId, defaultTextVal, close }) => {
       reset();
     },
     onError: (error) => {
-      if (error.status === 'not authenticated') {
-        navigate('/');
-      }
+      navigateToLogin(error);
     },
   });
 

@@ -5,20 +5,25 @@ import { logoutUser } from '../utils/api';
 const useLogout = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const navigateToLogin = (error) => {
+    if (error.status === 'not authenticated') {
+      navigate('/');
+    }
+  };
   const logout = useMutation(logoutUser, {
     onSuccess: (data) => {
       if (data?.status === 'ok') navigate('/');
       queryClient.removeQueries('fetchUser', { exact: true });
     },
     onError: (err) => {
-      if (err.status === 'not authenticated') navigate('/');
+      navigateToLogin(err);
     },
   });
   const logoutUserOnClick = () => {
     logout.mutate();
   };
 
-  return { logoutUserOnClick };
+  return { logoutUserOnClick, navigateToLogin };
 };
 
 export default useLogout;
