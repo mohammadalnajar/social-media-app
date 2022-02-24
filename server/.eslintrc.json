@@ -1,4 +1,11 @@
 {
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx"]
+            }
+        }
+    },
     "extends": ["airbnb-base", "prettier", "plugin:node/recommended"],
     "plugins": ["prettier"],
     "parserOptions": {
@@ -8,7 +15,7 @@
         "node/no-unsupported-features/es-syntax": [
             "error",
             {
-                "version": ">=8.0.0",
+                "version": ">=8.5.0",
                 "ignores": ["modules"]
             }
         ],
@@ -22,6 +29,7 @@
         "import/extensions": ["error", { "js": "always", "json": "always" }],
         "no-unused-vars": "warn",
         "no-console": "off",
-        "func-names": "off"
+        "func-names": "off",
+        "no-underscore-dangle": "off"
     }
 }

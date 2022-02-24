@@ -1,22 +1,23 @@
-const authenticateUser = async ({ password, userName }, User, bcrypt) => {
+const authenticateUser = async ({ password, email }, User, bcrypt) => {
     try {
-        const isUserFound = await User.findOne({ userName });
+        const isUserFound = await User.findOne({ email });
         if (isUserFound) {
             const passMatched = await bcrypt.compare(
                 password,
                 isUserFound.password
             );
             if (passMatched) {
-                isUserFound.password = null;
+                const { password: pass, isAdmin, ...rest } = isUserFound._doc;
+
                 return {
                     status: 'success',
                     msg: 'authenticated',
-                    data: isUserFound,
+                    data: rest,
                 };
             }
             return { status: 'rejected', msg: 'credentials wrong' };
         }
-        return { status: 'rejected', msg: 'username was not found' };
+        return { status: 'rejected', msg: 'email was not found' };
     } catch (error) {
         console.log(error, 'catch in user authenticate');
     }

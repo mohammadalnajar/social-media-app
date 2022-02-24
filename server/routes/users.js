@@ -5,13 +5,18 @@ import {
     registerUser,
     updateUser,
     loginUser,
+    logoutUser,
 } from '../controllers/users.js';
+import isJsonCheck from '../middlewares/isJson.js';
+import isUserLoggedIn from '../middlewares/isLoggedIn.js';
+import validateRegisterForm from '../middlewares/validateRegister.js';
 
 const router = express.Router();
 
 router.route('/').get(getUsers);
-router.route('/signup').post(registerUser);
-router.route('/signin').post(loginUser);
-router.route('/:id').get(getOneUser).put(updateUser);
+router.route('/signup').post(isJsonCheck, validateRegisterForm, registerUser);
+router.route('/login').post(isJsonCheck, loginUser);
+router.route('/logout').get(isUserLoggedIn, logoutUser);
+router.route('/user').get(isUserLoggedIn, getOneUser).put(updateUser);
 
 export default router;
