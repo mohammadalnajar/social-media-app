@@ -43,7 +43,7 @@ const PostStats = ({ likes, dislikes, comments }) => {
                 <i className="bx bx-like" /> {likes.length}
               </span>
               {isShowLikes && (
-                <div className="absolute -right-24 -left-5 bg-gray-400 px-3 py-1 rounded-2xl text-black">
+                <div className="absolute capitalize -right-24 -left-5 bg-gray-400 px-3 py-1 rounded-2xl text-black">
                   {likesUsersData &&
                     likesUsersData?.map((user) => {
                       return <div key={user}>{user}</div>;
@@ -63,7 +63,7 @@ const PostStats = ({ likes, dislikes, comments }) => {
                 <i className="bx bx-dislike" /> {dislikes.length}
               </span>
               {isShowDislikes && (
-                <div className="absolute -right-24 -left-4 bg-gray-400 px-3 py-1 rounded-2xl text-black">
+                <div className="absolute capitalize -right-24 -left-4 bg-gray-400 px-3 py-1 rounded-2xl text-black">
                   {dislikesUserData &&
                     dislikesUserData?.map((user) => {
                       return <div key={user}>{user}</div>;
@@ -79,9 +79,9 @@ const PostStats = ({ likes, dislikes, comments }) => {
           data-tip={commentsUsersData}
           className="text-gray-500 cursor-pointer dark:text-dark-txt relative "
         >
-          <span>{comments?.length ? `${comments.length} comments` : null}</span>
+          <span>{comments?.length ? `${comments.length} Comments` : null}</span>
           {isShowComments && (
-            <div className="absolute -left-20 -right-4 bg-gray-400 px-3 py-1 rounded-2xl text-black">
+            <div className="absolute capitalize -left-20 -right-4 bg-gray-400 px-3 py-1 rounded-2xl text-black">
               {commentsUsersData &&
                 commentsUsersData?.map((user) => {
                   return <div key={user}>{user}</div>;

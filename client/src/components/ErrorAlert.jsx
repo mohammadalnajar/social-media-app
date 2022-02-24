@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-const ErrorAlert = ({ errorMessage, duration }) => {
+const ErrorAlert = ({ errorMessage, duration, errorStatus }) => {
   const [alert, setAlert] = useState(errorMessage);
 
   const handleClose = () => {
@@ -59,6 +59,7 @@ const ErrorAlert = ({ errorMessage, duration }) => {
 
 ErrorAlert.propTypes = {
   errorMessage: PropTypes.string.isRequired,
+  errorStatus: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
 };
 

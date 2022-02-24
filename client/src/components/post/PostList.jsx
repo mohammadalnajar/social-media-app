@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import useLogout from '../../hooks/useLogout';
 import ErrorAlert from '../ErrorAlert';
 import LoadingPage from '../LoadingPage';
 import PostActions from './components/PostActions';
@@ -17,6 +18,7 @@ const PostList = () => {
     isSuccess,
     isLoading,
     isError,
+    error,
   } = useQuery('getFeedPosts');
 
   const {
@@ -24,8 +26,11 @@ const PostList = () => {
       data: { _id: userId, profileImageUrl },
     },
   } = useQuery('fetchUser');
-
+  const { navigateToLogin } = useLogout();
   if (isError) {
+    setTimeout(() => {
+      navigateToLogin(error);
+    }, 5000);
     return (
       <ErrorAlert
         errorMessage="Something went wrong, please refresh the page"

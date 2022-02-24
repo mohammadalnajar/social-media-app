@@ -41,7 +41,7 @@ const Comment = ({ comment }) => {
           <CommentAvatar profileImageUrl={profileImageUrl} />
           <div>
             <div className="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
-              <span className="font-semibold block">
+              <span className="font-semibold block capitalize">
                 {firstName} {lastName}
               </span>
               <span>{text}</span>
