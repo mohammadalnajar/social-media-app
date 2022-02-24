@@ -9,6 +9,7 @@ import PostComment from './components/PostComment';
 import PostContent from './components/PostContent';
 import PostMedia from './components/PostMedia';
 import Post from './Post';
+import { useNavigate } from 'react-router-dom';
 
 const PostList = () => {
   const {
@@ -25,12 +26,13 @@ const PostList = () => {
       data: { _id: userId, profileImageUrl },
     },
   } = useQuery('fetchUser');
-
+  const navigate = useNavigate();
   if (isError) {
-    console.log();
+    setTimeout(() => {
+      navigate('/');
+    }, 1 * 60 * 1000);
     return (
       <ErrorAlert
-        errorStatus={error.status}
         errorMessage="Something went wrong, please refresh the page"
         duration={1 * 60 * 1000} // 1 min
       />
