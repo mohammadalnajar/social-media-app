@@ -30,7 +30,7 @@ const PostList = () => {
   if (isError) {
     setTimeout(() => {
       navigate('/');
-    }, 1 * 60 * 1000);
+    }, 5000);
     return (
       <ErrorAlert
         errorMessage="Something went wrong, please refresh the page"
