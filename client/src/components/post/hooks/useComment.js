@@ -1,12 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import useForm from '../../../hooks/useForm';
+import useLogout from '../../../hooks/useLogout';
 import { createComment, deleteComment, updateComment } from '../api';
 
 const useComment = ({ postId, defaultTextVal, close }) => {
   const {
     data: { data: userData },
   } = useQuery('fetchUser');
-
+  const { navigateToLogin } = useLogout();
   const { formData, handleInputChange, reset } = useForm({
     text: defaultTextVal,
   });
@@ -22,6 +23,9 @@ const useComment = ({ postId, defaultTextVal, close }) => {
       invalidateCommentsQuery();
       reset();
     },
+    onError: (error) => {
+      navigateToLogin(error);
+    },
   });
 
   const editComment = useMutation(updateComment, {
@@ -30,12 +34,18 @@ const useComment = ({ postId, defaultTextVal, close }) => {
       reset();
       if (close) close(); // to close the editComment component when the comment is updated
     },
+    onError: (error) => {
+      navigateToLogin(error);
+    },
   });
 
   const removeComment = useMutation(deleteComment, {
     onSuccess: () => {
       invalidateCommentsQuery();
       reset();
+    },
+    onError: (error) => {
+      navigateToLogin(error);
     },
   });
 

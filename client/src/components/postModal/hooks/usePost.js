@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import useForm from '../../../hooks/useForm';
+import useLogout from '../../../hooks/useLogout';
 import { createPost, createPostWithImages, editPost } from '../api';
 import useDropZone from './useDropZone';
 
@@ -9,6 +10,7 @@ const usePost = ({ visibility, text, setIsOpen }) => {
   const { formData, handleInputChange, reset } = useForm({
     text,
   });
+  const { navigateToLogin } = useLogout();
 
   const { files, setFiles, img, setImg, showDropzone, setShowDropzone } =
     useDropZone();
@@ -29,17 +31,26 @@ const usePost = ({ visibility, text, setIsOpen }) => {
     onSuccess: () => {
       resetModal();
     },
+    onError: (error) => {
+      navigateToLogin(error);
+    },
   });
 
   const updatePost = useMutation(editPost, {
     onSuccess: () => {
       resetModal();
     },
+    onError: (error) => {
+      navigateToLogin(error);
+    },
   });
 
   const addPostWithImages = useMutation(createPostWithImages, {
     onSuccess: () => {
       resetModal();
+    },
+    onError: (error) => {
+      navigateToLogin(error);
     },
   });
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import useLogout from '../../../hooks/useLogout';
 import { dislikePost, likePost } from '../api';
 
 const useAction = ({ likes, dislikes, postId }) => {
@@ -8,7 +9,7 @@ const useAction = ({ likes, dislikes, postId }) => {
       data: { _id: userId },
     },
   } = useQuery('fetchUser');
-
+  const { navigateToLogin } = useLogout();
   const userLikedOrDislikedPostCheck = (arr) => {
     let check = false;
     arr?.forEach((action) => {
@@ -48,12 +49,18 @@ const useAction = ({ likes, dislikes, postId }) => {
       toggleChecked();
       invalidateLikesQuery();
     },
+    onError: (error) => {
+      navigateToLogin(error);
+    },
   });
 
   const dislikeOrUnDislikePost = useMutation(dislikePost, {
     onSuccess: () => {
       toggleChecked();
       invalidateDislikesQuery();
+    },
+    onError: (error) => {
+      navigateToLogin(error);
     },
   });
 
