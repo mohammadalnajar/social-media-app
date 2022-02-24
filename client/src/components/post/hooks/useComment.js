@@ -1,5 +1,4 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useNavigate } from 'react-router-dom';
 import useForm from '../../../hooks/useForm';
 import useLogout from '../../../hooks/useLogout';
 import { createComment, deleteComment, updateComment } from '../api';
@@ -8,7 +7,6 @@ const useComment = ({ postId, defaultTextVal, close }) => {
   const {
     data: { data: userData },
   } = useQuery('fetchUser');
-  const navigate = useNavigate();
   const { navigateToLogin } = useLogout();
   const { formData, handleInputChange, reset } = useForm({
     text: defaultTextVal,

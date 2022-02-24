@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import useLogout from '../../hooks/useLogout';
 import ErrorAlert from '../ErrorAlert';
 import LoadingPage from '../LoadingPage';
 import PostActions from './components/PostActions';
@@ -9,7 +10,6 @@ import PostComment from './components/PostComment';
 import PostContent from './components/PostContent';
 import PostMedia from './components/PostMedia';
 import Post from './Post';
-import { useNavigate } from 'react-router-dom';
 
 const PostList = () => {
   const {
@@ -18,6 +18,7 @@ const PostList = () => {
     isSuccess,
     isLoading,
     isError,
+    error,
   } = useQuery('getFeedPosts');
 
   const {
@@ -25,10 +26,10 @@ const PostList = () => {
       data: { _id: userId, profileImageUrl },
     },
   } = useQuery('fetchUser');
-  const navigate = useNavigate();
+  const { navigateToLogin } = useLogout();
   if (isError) {
     setTimeout(() => {
-      navigate('/');
+      navigateToLogin(error);
     }, 5000);
     return (
       <ErrorAlert

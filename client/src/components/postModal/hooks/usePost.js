@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { useNavigate } from 'react-router-dom';
 import useForm from '../../../hooks/useForm';
 import useLogout from '../../../hooks/useLogout';
 import { createPost, createPostWithImages, editPost } from '../api';
@@ -11,7 +10,6 @@ const usePost = ({ visibility, text, setIsOpen }) => {
   const { formData, handleInputChange, reset } = useForm({
     text,
   });
-  const navigate = useNavigate();
   const { navigateToLogin } = useLogout();
 
   const { files, setFiles, img, setImg, showDropzone, setShowDropzone } =
