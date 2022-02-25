@@ -64,9 +64,6 @@ const PostStats = ({ likes, dislikes, comments }) => {
               <span className="text-xs absolute -top-2 -right-2 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
                 {dislikes.length}
               </span>
-              {/* <span className="rounded-full grid place-items-center text-2xl">
-                <i className="bx bx-dislike" /> {dislikes.length}
-              </span> */}
               {isShowDislikes && (
                 <div className="absolute capitalize -right-24 -left-4 bg-gray-400 px-3 py-1 rounded-2xl text-black">
                   {dislikesUserData &&
