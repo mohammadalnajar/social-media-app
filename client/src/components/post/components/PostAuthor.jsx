@@ -27,7 +27,7 @@ const PostAuthor = ({ createdAt, updatedAt, authorData, children }) => {
             <span className="text-sm text-gray-500 mr-1">{timeAgo}</span>
             {updatedAt && (
               <span
-                data-tip={editedAt}
+                data-tip={`edited at ${editedAt}`}
                 className="text-sm underline dark:hover:text-dark-txt cursor-pointer text-gray-500 tooltip tooltip-bottom"
               >
                 edited
