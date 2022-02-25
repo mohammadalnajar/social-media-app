@@ -45,9 +45,9 @@ const PostComment = ({
             onChange={handleInputChange}
             onKeyDown={handleSubmit}
             placeholder="Write a comment..."
-            className="outline-none bg-transparent flex-1"
+            className="outline-none bg-transparent flex-1 w-1/2 md:w-3/4"
           />
-          <div className="flex space-x-0 items-center justify-center">
+          <div className="flex space-x-0 items-center justify-end w-1/2 md:w-1/4">
             <span className="w-7 h-7 grid place-items-center rounded-full hover:bg-gray-200 cursor-pointer text-gray-500 dark:text-dark-txt dark:hover:bg-dark-second text-xl">
               <i className="bx bx-smile" />
             </span>
