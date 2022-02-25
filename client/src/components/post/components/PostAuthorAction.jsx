@@ -1,27 +1,23 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
-import useLogout from '../../../hooks/useLogout';
+import React, { useRef, useState } from 'react';
+import useToggle from '../../../hooks/useToggle';
+import EnsureModal from '../../EnsureModal';
 import PostModal from '../../postModal/PostModal';
 import PostModalHeader from '../../postModal/PostModalHeader';
-import { deletePost } from '../api';
+import usePost from '../hooks/usePost';
 
 const PostAuthorAction = ({ id, userId, text, visibility, firstName }) => {
+  const { removePost } = usePost();
+  const ref = useRef();
+  const [isEnsureModalOpen, toggleEnsureModal] = useToggle({ ref });
   const [isOpen, setIsOpen] = useState(false);
-  const { navigateToLogin } = useLogout();
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
-  const queryClient = useQueryClient();
-  const remove = useMutation(deletePost, {
-    onSuccess: () => {
-      // invalidate getFeedPosts query to refetch it
-      queryClient.invalidateQueries('getFeedPosts');
-    },
-    onError: (error) => {
-      navigateToLogin(error);
-    },
-  });
+
+  const handleRemovePostClick = () => {
+    removePost.mutate({ id });
+  };
 
   return (
     <div className="dropdown dropdown-end">
@@ -47,11 +43,9 @@ const PostAuthorAction = ({ id, userId, text, visibility, firstName }) => {
         <li className="dark:hover:bg-dark-hover text-red-500">
           <button
             type="button"
-            onClick={() => {
-              remove.mutate({ id });
-            }}
+            onClick={toggleEnsureModal}
             className={`${
-              remove.isLoading && 'loading'
+              removePost.isLoading && 'loading'
             } btn bg-transparent border-0 dark:hover:bg-dark-hover`}
           >
             <i className="bx bx-trash mr-2" />
@@ -69,6 +63,16 @@ const PostAuthorAction = ({ id, userId, text, visibility, firstName }) => {
       >
         <PostModalHeader toggleModal={toggleModal} title="Edit post" />
       </PostModal>
+      {isEnsureModalOpen && (
+        <EnsureModal
+          handleConfirmClick={handleRemovePostClick}
+          isLoading={removePost.isLoading}
+          myRef={ref}
+          toggleEnsureModal={toggleEnsureModal}
+          title="Delete Post?"
+          question="Are you sure you want to delete this post?"
+        />
+      )}
     </div>
   );
 };
