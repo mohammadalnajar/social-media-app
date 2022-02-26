@@ -37,9 +37,9 @@ const PostStats = ({ likes, dislikes, comments }) => {
             <div
               onMouseEnter={toggleLikesTooltip}
               onMouseLeave={toggleLikesTooltip}
-              className="relative rounded-full grid place-items-center text-2xl mr-4"
+              className="relative rounded-full mr-4"
             >
-              <i className="bx bx-like" />
+              <i className="bx bx-like text-2xl" />
               <span className="text-xs absolute -top-2 -right-2 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
                 {likes.length}
               </span>
@@ -58,9 +58,9 @@ const PostStats = ({ likes, dislikes, comments }) => {
             <div
               onMouseEnter={toggleDislikesTooltip}
               onMouseLeave={toggleDislikesTooltip}
-              className="relative rounded-full grid place-items-center text-2xl mr-4"
+              className="relative rounded-full mr-4"
             >
-              <i className="bx bx-dislike" />
+              <i className="bx bx-dislike text-2xl" />
               <span className="text-xs absolute -top-2 -right-2 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
                 {dislikes.length}
               </span>
