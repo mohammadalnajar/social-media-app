@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import useComment from '../../../hooks/useComment';
 import useToggle from '../../../../../hooks/useToggle';
-import DeleteCommentModal from './DeleteCommentModal';
+import EnsureModal from '../../../../EnsureModal';
 
 const CommentActions = ({ commentId, toggleEdit, postId }) => {
   const { removeComment } = useComment({ postId });
@@ -47,11 +47,13 @@ const CommentActions = ({ commentId, toggleEdit, postId }) => {
         </li>
       </ul>
       {isModalOpen && (
-        <DeleteCommentModal
+        <EnsureModal
+          handleConfirmClick={handleRemoveCommentClick}
           isLoading={removeComment.isLoading}
-          handleRemoveCommentClick={handleRemoveCommentClick}
-          toggleModal={toggleModal}
           myRef={ref}
+          toggleEnsureModal={toggleModal}
+          title="Delete Comment?"
+          question="Are you sure you want to delete this comment?"
         />
       )}
     </div>

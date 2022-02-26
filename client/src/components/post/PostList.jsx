@@ -48,6 +48,7 @@ const PostList = () => {
             return (
               <Post key={id}>
                 <PostAuthor
+                  updatedAt={post.updatedAt}
                   createdAt={post.createdAt}
                   authorData={post.authorData}
                 >

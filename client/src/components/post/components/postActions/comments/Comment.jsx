@@ -7,6 +7,7 @@ import CommentAvatar from './CommentAvatar';
 import CommentActions from './CommentActions';
 import useToggle from '../../../../../hooks/useToggle';
 import EditComment from './EditComment';
+import getFullDateAndTime from '../../../../../utils/convertTimestamp';
 
 const Comment = ({ comment }) => {
   const [isMenuShow, toggleMenu] = useToggle({});
@@ -25,7 +26,7 @@ const Comment = ({ comment }) => {
   } = useQuery('fetchUser');
 
   const timeAgo = timeElapsed(new Date(comment.createdAt).getTime(), true);
-
+  const editedAt = getFullDateAndTime(comment.updatedAt);
   return (
     <div className="mb-4">
       {!isShowEdit && (
@@ -50,8 +51,15 @@ const Comment = ({ comment }) => {
               <span className="font-semibold cursor-pointer">Like</span>
               <span>.</span>
               <span className="font-semibold cursor-pointer">Reply</span>
-              <span>.</span>
-              {timeAgo}
+              <span>.{timeAgo}</span>
+              {comment?.updatedAt && (
+                <span
+                  data-tip={`edited at ${editedAt}`}
+                  className="ml-2 text-sm underline dark:hover:text-dark-txt cursor-pointer text-gray-500 tooltip tooltip-bottom"
+                >
+                  edited
+                </span>
+              )}
             </div>
           </div>
           <div className="flex items-center mb-5">

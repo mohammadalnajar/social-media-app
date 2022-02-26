@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const DeleteCommentModal = ({
-  handleRemoveCommentClick,
+const EnsureModal = ({
+  handleConfirmClick,
   isLoading,
   myRef,
-  toggleModal,
+  toggleEnsureModal,
+  title,
+  question,
 }) => {
-  console.log(isLoading);
   return (
     <div>
       <div className="modal-open modal ">
@@ -17,19 +18,22 @@ const DeleteCommentModal = ({
         >
           <div className="flex flex-col ">
             <div className="col text-xl flex justify-between border-b-2 dark:border-dark-third pb-2 mb-2">
-              <div>Delete Comment?</div>
+              <div>{title}</div>
               <button
                 type="button"
-                onClick={toggleModal}
+                onClick={toggleEnsureModal}
                 className="btn btn-circle btn-sm bg-gray-300 dark:bg-dark-third hover:bg-gray-400 dark:hover:bg-dark-hover border-none"
               >
                 <i className="bx bx-x text-2xl text-gray-500 dark:text-dark-txt" />
               </button>
             </div>
-            {/* <hr className="border dark:border-dark-txt m-3" /> */}
-            <div>Are you sure you want to delete this comment?</div>
+            <div>{question}</div>
             <div className="col flex justify-end">
-              <button type="button" className="btn mr-2" onClick={toggleModal}>
+              <button
+                type="button"
+                className="btn mr-2"
+                onClick={toggleEnsureModal}
+              >
                 No
               </button>
               <button
@@ -38,7 +42,7 @@ const DeleteCommentModal = ({
                   isLoading && 'loading'
                 } btn  bg-blue-600 hover:bg-blue-500`}
                 onClick={() => {
-                  handleRemoveCommentClick();
+                  handleConfirmClick();
                 }}
               >
                 Yes
@@ -51,13 +55,15 @@ const DeleteCommentModal = ({
   );
 };
 
-DeleteCommentModal.propTypes = {
+EnsureModal.propTypes = {
   myRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]).isRequired,
-  toggleModal: PropTypes.func.isRequired,
-  handleRemoveCommentClick: PropTypes.func.isRequired,
+  toggleEnsureModal: PropTypes.func.isRequired,
+  handleConfirmClick: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  question: PropTypes.string.isRequired,
 };
-export default DeleteCommentModal;
+export default EnsureModal;
