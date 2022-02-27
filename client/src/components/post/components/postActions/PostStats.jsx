@@ -37,10 +37,11 @@ const PostStats = ({ likes, dislikes, comments }) => {
             <div
               onMouseEnter={toggleLikesTooltip}
               onMouseLeave={toggleLikesTooltip}
-              className="relative"
+              className="relative rounded-full mr-4"
             >
-              <span className="rounded-full grid place-items-center text-2xl mr-2">
-                <i className="bx bx-like" /> {likes.length}
+              <i className="bx bx-like text-2xl" />
+              <span className="text-xs absolute -top-2 -right-2 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
+                {likes.length}
               </span>
               {isShowLikes && (
                 <div className="absolute capitalize -right-24 -left-5 bg-gray-400 px-3 py-1 rounded-2xl text-black">
@@ -57,10 +58,11 @@ const PostStats = ({ likes, dislikes, comments }) => {
             <div
               onMouseEnter={toggleDislikesTooltip}
               onMouseLeave={toggleDislikesTooltip}
-              className="relative"
+              className="relative rounded-full mr-4"
             >
-              <span className="rounded-full grid place-items-center text-2xl">
-                <i className="bx bx-dislike" /> {dislikes.length}
+              <i className="bx bx-dislike text-2xl" />
+              <span className="text-xs absolute -top-2 -right-2 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
+                {dislikes.length}
               </span>
               {isShowDislikes && (
                 <div className="absolute capitalize -right-24 -left-4 bg-gray-400 px-3 py-1 rounded-2xl text-black">

@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import getFullDateAndTime from '../../../utils/convertTimestamp';
 import timeElapsed from '../../../utils/timeElapsed';
 
-const PostAuthor = ({ createdAt, authorData, children }) => {
+const PostAuthor = ({ createdAt, updatedAt, authorData, children }) => {
   const { userId, firstName, lastName, profileImageUrl } = authorData;
   const fullName = `${firstName} ${lastName}`;
   const timeAgo = timeElapsed(new Date(createdAt).getTime());
+  const editedAt = getFullDateAndTime(updatedAt);
 
   return (
     <div className="flex items-center justify-between px-4 py-2">
@@ -21,7 +23,17 @@ const PostAuthor = ({ createdAt, authorData, children }) => {
         </div>
         <div className="flex flex-col leading-tight justify-center">
           <div className="font-semibold capitalize">{fullName}</div>
-          <span className="text-sm text-gray-500">{timeAgo}</span>
+          <div className="flex">
+            <span className="text-sm text-gray-500 mr-1">{timeAgo}</span>
+            {updatedAt && (
+              <span
+                data-tip={`edited at ${editedAt}`}
+                className="text-sm underline dark:hover:text-dark-txt cursor-pointer text-gray-500 tooltip tooltip-bottom"
+              >
+                edited
+              </span>
+            )}
+          </div>
         </div>
       </div>
       {children}
@@ -31,6 +43,7 @@ const PostAuthor = ({ createdAt, authorData, children }) => {
 
 PostAuthor.propTypes = {
   createdAt: PropTypes.string.isRequired,
+  updatedAt: PropTypes.string,
   children: PropTypes.node.isRequired,
   authorData: PropTypes.shape({
     userId: PropTypes.string.isRequired,
@@ -38,6 +51,9 @@ PostAuthor.propTypes = {
     lastName: PropTypes.string.isRequired,
     profileImageUrl: PropTypes.string.isRequired,
   }).isRequired,
+};
+PostAuthor.defaultProps = {
+  updatedAt: '',
 };
 
 export default PostAuthor;

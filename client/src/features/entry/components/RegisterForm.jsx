@@ -2,10 +2,12 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/authContext';
 import useForm from '../../../hooks/useForm';
+import usePassEye from '../../../hooks/usePassEye';
 import FormButton from './FormButton';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const { passShowEye, passHideEye, clickEye } = usePassEye();
   const { formData, handleInputChange, reset } = useForm({
     firstName: '',
     lastName: '',
@@ -92,15 +94,33 @@ const RegisterForm = () => {
         <span className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
           Password
         </span>
-        <input
-          name="password"
-          value={formData.password}
-          onChange={handleInputChange}
-          className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
-          type="password"
-          autoComplete="password"
-          required
-        />
+        <div className="relative">
+          <input
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+            className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+            type={passShowEye ? 'text' : 'password'}
+            autoComplete="password"
+            required
+          />
+          {passHideEye && (
+            <button type="button" onClick={clickEye}>
+              <i
+                className="fa-solid fa-eye-slash absolute top-3 right-3 text-gray-700 cursor-pointer dark:hover:text-gray-500
+  dark:text-gray-300"
+              />
+            </button>
+          )}
+          {passShowEye && (
+            <button type="button" onClick={clickEye}>
+              <i
+                className="fa-solid fa-eye absolute top-3 right-3 text-gray-700 cursor-pointer dark:hover:text-gray-500
+dark:text-gray-300"
+              />
+            </button>
+          )}
+        </div>
         {/* {error && <ErrorAlert errorMessage={passwordError} duration={5000} />} */}
         {error && (
           <span className="text-[12px] text-red-500 block mt-2">
