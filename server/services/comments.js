@@ -84,6 +84,20 @@ const commentServices = {
             throw new Error(error);
         }
     },
+    async deletePostComments(commentsIds) {
+        try {
+            const result = await Promise.allSettled(
+                commentsIds.map(async (commentId) => {
+                    const deleted = await this.deleteComment(commentId);
+                    return deleted;
+                })
+            );
+            return result;
+        } catch (error) {
+            console.log('error in deletePostComments');
+            throw new Error('failed to delete all post comments');
+        }
+    },
 };
 
 export default commentServices;

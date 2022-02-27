@@ -187,6 +187,9 @@ export const deletePost = async (req, res) => {
                         { $pull: { posts: postId } }
                     );
                     if (updateUserPostsArray) {
+                        await commentServices.deletePostComments(
+                            postFound.comments
+                        );
                         return successRes(
                             res,
                             200,
