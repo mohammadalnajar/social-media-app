@@ -1,6 +1,15 @@
 import Post from '../models/Post.js';
 
 const postServices = {
+    async getAllPublicPosts() {
+        try {
+            const posts = await Post.find({ visibility: 'public' });
+            return posts;
+        } catch (error) {
+            console.log('error in getAllPublicPosts');
+            throw new Error(error);
+        }
+    },
     async getPostById(postId) {
         try {
             const foundPost = await Post.findById(postId);

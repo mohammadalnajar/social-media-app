@@ -8,13 +8,14 @@ import Post from '../models/Post.js';
 import User from '../models/User.js';
 import commentServices from '../services/comments.js';
 import { getDislikesData, getLikesData } from '../services/postActions.js';
+import postServices from '../services/posts.js';
 import sortPostsByDate from '../utils/helpers.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
 // ========= get ALL posts (everyone) =========
 export const getAllUsersPosts = async (req, res) => {
     try {
-        const posts = await Post.find({ visibility: 'public' });
+        const posts = await postServices.getAllPublicPosts();
         if (posts && posts.length > 0) {
             const data = await Promise.all(
                 posts.map(async (post) => {
