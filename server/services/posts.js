@@ -21,7 +21,32 @@ const postServices = {
             throw new Error(error);
         }
     },
-
+    async createPost(data) {
+        const { text, visibility, imageUrl, imagePublicId, userId } = data;
+        try {
+            const createdPost = await Post.create({
+                text,
+                visibility,
+                imageUrl: imageUrl || null,
+                imagePublicId: imagePublicId || null,
+                userId,
+            });
+            if (createdPost) {
+                // add post id to user posts array
+                const updated = await userServices.addPost({
+                    userId,
+                    postId: createdPost.id,
+                });
+                if (updated) {
+                    return createdPost;
+                }
+            }
+            return null;
+        } catch (error) {
+            console.log('error in ========== createPost ==========');
+            throw new Error(error);
+        }
+    },
     async addComment(postId, createdComment) {
         try {
             const updatedPost = await Post.findOneAndUpdate(

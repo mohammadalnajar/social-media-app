@@ -11,6 +11,20 @@ const userServices = {
             throw new Error(error);
         }
     },
+    async addPost({ userId, postId }) {
+        try {
+            const updated = await User.findOneAndUpdate(
+                { _id: userId },
+                {
+                    $push: { posts: postId },
+                }
+            );
+            return updated;
+        } catch (error) {
+            console.log('error in ========== addPost ==========');
+            throw new Error(error);
+        }
+    },
 };
 
 export default userServices;

@@ -92,36 +92,26 @@ export const createPost = async (req, res) => {
     // create post
     const { text, visibility, imageUrl, imagePublicId } = req.body;
     try {
-        const createdPost = await Post.create({
+        const postCreated = await postServices.createPost({
             text,
             visibility,
-            imageUrl: imageUrl || null,
-            imagePublicId: imagePublicId || null,
+            imageUrl,
+            imagePublicId,
             userId,
         });
-        if (createdPost) {
-            // add post id to user posts array
-            const updated = await User.findOneAndUpdate(
-                { _id: userId },
-                {
-                    $push: { posts: createdPost.id },
-                }
-            );
-            if (updated) {
-                // get post data after update
-                const post = await Post.findById(createdPost.id);
-                const data = post;
-                return successRes(res, 200, 'ok', 'post is created', data);
-            }
-            return errorRes(
-                res,
-                400,
-                'failed to add the post created to the user ...',
-                null,
-                null
-            );
+        if (postCreated) {
+            // get post data after update
+            const post = await postServices.getPostById(postCreated.id);
+            const data = post;
+            return successRes(res, 200, 'ok', 'post is created', data);
         }
-        return errorRes(res, 400, 'failed to create a post ...', null, null);
+        return errorRes(
+            res,
+            400,
+            'failed to add the post created to the user ...',
+            null,
+            null
+        );
     } catch (error) {
         console.log(error, 'error in create post ...');
         return errorRes(res, 500, 'server error');
