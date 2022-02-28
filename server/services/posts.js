@@ -8,7 +8,7 @@ const postServices = {
             const posts = await Post.find({ visibility: 'public' });
             return posts;
         } catch (error) {
-            console.log('error in getAllPublicPosts');
+            console.log('error in ========== getAllPublicPosts ==========');
             throw new Error(error);
         }
     },
@@ -17,6 +17,7 @@ const postServices = {
             const foundPost = await Post.findById(postId);
             return foundPost;
         } catch (error) {
+            console.log('error in ========== getPostById ==========');
             throw new Error(error);
         }
     },
@@ -29,6 +30,7 @@ const postServices = {
             );
             return updatedPost;
         } catch (error) {
+            console.log('error in ========== addComment ==========');
             throw new Error(error);
         }
     },
@@ -42,6 +44,7 @@ const postServices = {
             );
             return updatePostComments;
         } catch (error) {
+            console.log('error in ========== deleteComment ==========');
             throw new Error(error);
         }
     },
@@ -64,7 +67,7 @@ const postServices = {
             const likes = likesArr.map((obj) => obj.value); // to get rid of promise status data
             return { likes };
         } catch (error) {
-            console.log('error in getPostLikesData');
+            console.log('error in ========== getPostLikesData ==========');
             throw new Error(error);
         }
     },
@@ -87,7 +90,7 @@ const postServices = {
             const dislikes = dislikesArr.map((obj) => obj.value); // to get rid of promise status data
             return { dislikes };
         } catch (error) {
-            console.log('error in getPostDislikesData');
+            console.log('error in ========== getPostDislikesData ==========');
             throw new Error(error);
         }
     },

@@ -63,11 +63,11 @@ export const getAllFriendsPosts = (req, res) => {
 // ========= get ALL posts (user) =========
 export const getAllUserPosts = async (req, res) => {
     const { _id: userId } = req.session.userData;
-    const user = await User.findById(userId);
+    const user = await userServices.getUserData(userId);
     const posts = await Promise.all(
         user.posts.map(async (postId) => {
             try {
-                const post = await Post.findById(postId);
+                const post = await postServices.getPostById(postId);
                 return post;
             } catch (error) {
                 console.log(error, 'in get posts');
