@@ -161,7 +161,7 @@ export const deletePost = async (req, res) => {
     const { _id: userId } = req.session.userData;
     const { id: postId } = req.body;
     try {
-        const postFound = await Post.findById(postId);
+        const postFound = await postServices.getPostById(postId);
         if (postFound) {
             // check if post has an image
             let imageDeleted;
@@ -174,12 +174,12 @@ export const deletePost = async (req, res) => {
                 imageDeleted = 'no-need';
             }
             if (imageDeleted === 'deleted' || imageDeleted === 'no-need') {
-                const deleted = await Post.findByIdAndDelete(postId);
+                const deleted = await postServices.deletePost(postId);
                 if (deleted) {
-                    const updateUserPostsArray = await User.findByIdAndUpdate(
-                        { _id: userId },
-                        { $pull: { posts: postId } }
-                    );
+                    const updateUserPostsArray = await userServices.deletePost({
+                        userId,
+                        postId,
+                    });
                     if (updateUserPostsArray) {
                         await commentServices.deletePostComments(
                             postFound.comments

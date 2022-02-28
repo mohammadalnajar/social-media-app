@@ -21,7 +21,21 @@ const userServices = {
             );
             return updated;
         } catch (error) {
-            console.log('error in ========== addPost ==========');
+            console.log('error in ========== addPost userServices ==========');
+            throw new Error(error);
+        }
+    },
+    async deletePost({ userId, postId }) {
+        try {
+            const updateUserPostsArray = await User.findByIdAndUpdate(
+                { _id: userId },
+                { $pull: { posts: postId } }
+            );
+            return updateUserPostsArray;
+        } catch (error) {
+            console.log(
+                'error in ========== deletePost userServices =========='
+            );
             throw new Error(error);
         }
     },

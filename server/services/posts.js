@@ -131,6 +131,15 @@ const postServices = {
             throw new Error(error);
         }
     },
+    async deletePost(postId) {
+        try {
+            const deleted = await Post.findByIdAndDelete(postId);
+            return deleted;
+        } catch (error) {
+            console.log('error in ========== deletePost ==========');
+            throw new Error(error);
+        }
+    },
 };
 
 export default postServices;
