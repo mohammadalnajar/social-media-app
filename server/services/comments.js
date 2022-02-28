@@ -1,6 +1,6 @@
 /* eslint-disable node/no-unsupported-features/es-builtins */
 import Comment from '../models/Comment.js';
-import getUserData from './users.js';
+import userServices from './users.js';
 
 const commentServices = {
     async getPostComments(commentsIds) {
@@ -32,10 +32,11 @@ const commentServices = {
     },
 
     async getCommentData(comment) {
-        const { id, firstName, lastName, profileImageUrl } = await getUserData(
-            comment.userId,
-            'get user data in comment service getCommentData' // this is the context to inform where this service get used
-        );
+        const { id, firstName, lastName, profileImageUrl } =
+            await userServices.getUserData(
+                comment.userId,
+                'get user data in comment service getCommentData' // this is the context to inform where this service get used
+            );
         const { userId, ...rest } = comment._doc;
         return {
             ...rest, // rest data from comment obj
