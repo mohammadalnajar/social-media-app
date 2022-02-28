@@ -140,12 +140,13 @@ export const createPostWithImages = async (req, res, next) => {
 export const updatePost = async (req, res) => {
     const { id: postId, text, visibility } = req.body;
     try {
-        const updated = await Post.findByIdAndUpdate(
-            { _id: postId },
-            { $set: { text, visibility, updatedAt: Date.now() } }
-        );
+        const updated = await postServices.updatePost({
+            id: postId,
+            text,
+            visibility,
+        });
         if (updated) {
-            const updatedPost = await Post.findById(postId);
+            const updatedPost = await postServices.getPostById(postId);
             if (updatedPost)
                 return successRes(res, 200, 'ok', 'post is updated');
         }

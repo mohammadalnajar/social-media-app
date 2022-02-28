@@ -119,6 +119,18 @@ const postServices = {
             throw new Error(error);
         }
     },
+    async updatePost({ id: postId, text, visibility }) {
+        try {
+            const updated = await Post.findByIdAndUpdate(
+                { _id: postId },
+                { $set: { text, visibility, updatedAt: Date.now() } }
+            );
+            return updated;
+        } catch (error) {
+            console.log('error in ========== updatePost ==========');
+            throw new Error(error);
+        }
+    },
 };
 
 export default postServices;
