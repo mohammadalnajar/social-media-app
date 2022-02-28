@@ -1,4 +1,6 @@
+/* eslint-disable node/no-unsupported-features/es-builtins */
 import Post from '../models/Post.js';
+import userServices from './users.js';
 
 const postServices = {
     async getAllPublicPosts() {
@@ -40,6 +42,52 @@ const postServices = {
             );
             return updatePostComments;
         } catch (error) {
+            throw new Error(error);
+        }
+    },
+    // this fn gives the user info inside an obj for each like e.g. {userId, firstName, lastName }
+    async getPostLikesData(post) {
+        try {
+            const likesArr = await Promise.allSettled(
+                post.likes.map(async (userId) => {
+                    const user = await userServices.getUserData(userId);
+                    if (user) {
+                        return {
+                            userId: user._id,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                        };
+                    }
+                    return null;
+                })
+            );
+            const likes = likesArr.map((obj) => obj.value); // to get rid of promise status data
+            return { likes };
+        } catch (error) {
+            console.log('error in getPostLikesData');
+            throw new Error(error);
+        }
+    },
+    // this fn gives the user info inside an obj for each dislike e.g. {userId, firstName, lastName }
+    async getPostDislikesData(post) {
+        try {
+            const dislikesArr = await Promise.allSettled(
+                post.dislikes.map(async (userId) => {
+                    const user = await userServices.getUserData(userId);
+                    if (user) {
+                        return {
+                            userId: user._id,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                        };
+                    }
+                    return null;
+                })
+            );
+            const dislikes = dislikesArr.map((obj) => obj.value); // to get rid of promise status data
+            return { dislikes };
+        } catch (error) {
+            console.log('error in getPostDislikesData');
             throw new Error(error);
         }
     },

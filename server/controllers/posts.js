@@ -7,8 +7,8 @@ import {
 import Post from '../models/Post.js';
 import User from '../models/User.js';
 import commentServices from '../services/comments.js';
-import { getDislikesData, getLikesData } from '../services/postActions.js';
 import postServices from '../services/posts.js';
+import userServices from '../services/users.js';
 import sortPostsByDate from '../utils/helpers.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
@@ -24,9 +24,11 @@ export const getAllUsersPosts = async (req, res) => {
                         firstName,
                         lastName,
                         profileImageUrl,
-                    } = await User.findById(post.userId);
-                    const { likes } = await getLikesData(post);
-                    const { dislikes } = await getDislikesData(post);
+                    } = await userServices.getUserData(post.userId);
+                    const { likes } = await postServices.getPostLikesData(post);
+                    const { dislikes } = await postServices.getPostDislikesData(
+                        post
+                    );
                     const { commentsData: comments } =
                         await commentServices.getPostComments(post.comments);
                     return {
@@ -330,7 +332,7 @@ export const getPostLikes = async (req, res) => {
     try {
         const post = await Post.findById(postId);
         if (post) {
-            const { likes } = await getLikesData(post);
+            const { likes } = await postServices.getPostLikesData(post);
             return successRes(res, 200, 'ok', 'likes data found ...', {
                 likes,
             });
@@ -353,7 +355,7 @@ export const getPostDislikes = async (req, res) => {
     try {
         const post = await Post.findById(postId);
         if (post) {
-            const { dislikes } = await getDislikesData(post);
+            const { dislikes } = await postServices.getPostDislikesData(post);
             return successRes(res, 200, 'ok', 'dislikes data found ...', {
                 dislikes,
             });
