@@ -26,7 +26,7 @@ const commentServices = {
             const commentsData = commentsDataArr.map((obj) => obj.value);
             return { commentsData };
         } catch (error) {
-            console.log(error, 'error in comment service getPostComments ...');
+            console.log('error in ====== getPostComments ======');
             throw new Error(error);
         }
     },
@@ -53,6 +53,7 @@ const commentServices = {
             });
             return createdComment;
         } catch (error) {
+            console.log('error in ====== createComment ======');
             throw new Error(error);
         }
     },
@@ -62,6 +63,7 @@ const commentServices = {
             const commentData = await this.getCommentData(comment);
             return commentData;
         } catch (error) {
+            console.log('error in ====== getCommentById ======');
             throw new Error(error);
         }
     },
@@ -74,6 +76,7 @@ const commentServices = {
             );
             return updated;
         } catch (error) {
+            console.log('error in ====== updateComment ======');
             throw new Error(error);
         }
     },
@@ -82,6 +85,7 @@ const commentServices = {
             const deleted = await Comment.findByIdAndDelete(commentId);
             return deleted;
         } catch (error) {
+            console.log('error in ====== deleteComment ======');
             throw new Error(error);
         }
     },
@@ -95,8 +99,8 @@ const commentServices = {
             );
             return result;
         } catch (error) {
-            console.log('error in deletePostComments');
-            throw new Error('failed to delete all post comments');
+            console.log('error in ====== deletePostComments ======');
+            throw new Error(error);
         }
     },
 };
