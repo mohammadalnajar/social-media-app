@@ -3,7 +3,7 @@ import React from 'react';
 
 const FormWrapper = ({ children }) => {
   return (
-    <div className="flex max-h-[560px] h-full w-full mx-auto overflow-hidden bg-white p-6 lg:p-0 lg:drop-shadow-2xl dark:bg-gray-800 lg:max-w-4xl">
+    <div className="flex max-h-[660px] h-full w-full mx-auto overflow-hidden bg-white p-6 lg:p-0 lg:drop-shadow-2xl dark:bg-gray-800 lg:max-w-4xl">
       <div
         className="hidden bg-cover md:block md:w-2/3"
         style={{
