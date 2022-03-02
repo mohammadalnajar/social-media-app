@@ -7,14 +7,15 @@ import {
 import Post from '../models/Post.js';
 import User from '../models/User.js';
 import commentServices from '../services/comments.js';
-import { getDislikesData, getLikesData } from '../services/postActions.js';
+import postServices from '../services/posts.js';
+import userServices from '../services/users.js';
 import sortPostsByDate from '../utils/helpers.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
 // ========= get ALL posts (everyone) =========
 export const getAllUsersPosts = async (req, res) => {
     try {
-        const posts = await Post.find({ visibility: 'public' });
+        const posts = await postServices.getAllPublicPosts();
         if (posts && posts.length > 0) {
             const data = await Promise.all(
                 posts.map(async (post) => {
@@ -23,9 +24,11 @@ export const getAllUsersPosts = async (req, res) => {
                         firstName,
                         lastName,
                         profileImageUrl,
-                    } = await User.findById(post.userId);
-                    const { likes } = await getLikesData(post);
-                    const { dislikes } = await getDislikesData(post);
+                    } = await userServices.getUserData(post.userId);
+                    const { likes } = await postServices.getPostLikesData(post);
+                    const { dislikes } = await postServices.getPostDislikesData(
+                        post
+                    );
                     const { commentsData: comments } =
                         await commentServices.getPostComments(post.comments);
                     return {
@@ -60,11 +63,11 @@ export const getAllFriendsPosts = (req, res) => {
 // ========= get ALL posts (user) =========
 export const getAllUserPosts = async (req, res) => {
     const { _id: userId } = req.session.userData;
-    const user = await User.findById(userId);
+    const user = await userServices.getUserData(userId);
     const posts = await Promise.all(
         user.posts.map(async (postId) => {
             try {
-                const post = await Post.findById(postId);
+                const post = await postServices.getPostById(postId);
                 return post;
             } catch (error) {
                 console.log(error, 'in get posts');
@@ -89,36 +92,26 @@ export const createPost = async (req, res) => {
     // create post
     const { text, visibility, imageUrl, imagePublicId } = req.body;
     try {
-        const createdPost = await Post.create({
+        const postCreated = await postServices.createPost({
             text,
             visibility,
-            imageUrl: imageUrl || null,
-            imagePublicId: imagePublicId || null,
+            imageUrl,
+            imagePublicId,
             userId,
         });
-        if (createdPost) {
-            // add post id to user posts array
-            const updated = await User.findOneAndUpdate(
-                { _id: userId },
-                {
-                    $push: { posts: createdPost.id },
-                }
-            );
-            if (updated) {
-                // get post data after update
-                const post = await Post.findById(createdPost.id);
-                const data = post;
-                return successRes(res, 200, 'ok', 'post is created', data);
-            }
-            return errorRes(
-                res,
-                400,
-                'failed to add the post created to the user ...',
-                null,
-                null
-            );
+        if (postCreated) {
+            // get post data after update
+            const post = await postServices.getPostById(postCreated.id);
+            const data = post;
+            return successRes(res, 200, 'ok', 'post is created', data);
         }
-        return errorRes(res, 400, 'failed to create a post ...', null, null);
+        return errorRes(
+            res,
+            400,
+            'failed to add the post created to the user ...',
+            null,
+            null
+        );
     } catch (error) {
         console.log(error, 'error in create post ...');
         return errorRes(res, 500, 'server error');
@@ -147,12 +140,13 @@ export const createPostWithImages = async (req, res, next) => {
 export const updatePost = async (req, res) => {
     const { id: postId, text, visibility } = req.body;
     try {
-        const updated = await Post.findByIdAndUpdate(
-            { _id: postId },
-            { $set: { text, visibility, updatedAt: Date.now() } }
-        );
+        const updated = await postServices.updatePost({
+            id: postId,
+            text,
+            visibility,
+        });
         if (updated) {
-            const updatedPost = await Post.findById(postId);
+            const updatedPost = await postServices.getPostById(postId);
             if (updatedPost)
                 return successRes(res, 200, 'ok', 'post is updated');
         }
@@ -167,7 +161,7 @@ export const deletePost = async (req, res) => {
     const { _id: userId } = req.session.userData;
     const { id: postId } = req.body;
     try {
-        const postFound = await Post.findById(postId);
+        const postFound = await postServices.getPostById(postId);
         if (postFound) {
             // check if post has an image
             let imageDeleted;
@@ -180,13 +174,16 @@ export const deletePost = async (req, res) => {
                 imageDeleted = 'no-need';
             }
             if (imageDeleted === 'deleted' || imageDeleted === 'no-need') {
-                const deleted = await Post.findByIdAndDelete(postId);
+                const deleted = await postServices.deletePost(postId);
                 if (deleted) {
-                    const updateUserPostsArray = await User.findByIdAndUpdate(
-                        { _id: userId },
-                        { $pull: { posts: postId } }
-                    );
+                    const updateUserPostsArray = await userServices.deletePost({
+                        userId,
+                        postId,
+                    });
                     if (updateUserPostsArray) {
+                        await commentServices.deletePostComments(
+                            postFound.comments
+                        );
                         return successRes(
                             res,
                             200,
@@ -326,7 +323,7 @@ export const getPostLikes = async (req, res) => {
     try {
         const post = await Post.findById(postId);
         if (post) {
-            const { likes } = await getLikesData(post);
+            const { likes } = await postServices.getPostLikesData(post);
             return successRes(res, 200, 'ok', 'likes data found ...', {
                 likes,
             });
@@ -349,7 +346,7 @@ export const getPostDislikes = async (req, res) => {
     try {
         const post = await Post.findById(postId);
         if (post) {
-            const { dislikes } = await getDislikesData(post);
+            const { dislikes } = await postServices.getPostDislikesData(post);
             return successRes(res, 200, 'ok', 'dislikes data found ...', {
                 dislikes,
             });

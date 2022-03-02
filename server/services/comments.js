@@ -1,6 +1,6 @@
 /* eslint-disable node/no-unsupported-features/es-builtins */
 import Comment from '../models/Comment.js';
-import getUserData from './users.js';
+import userServices from './users.js';
 
 const commentServices = {
     async getPostComments(commentsIds) {
@@ -26,16 +26,17 @@ const commentServices = {
             const commentsData = commentsDataArr.map((obj) => obj.value);
             return { commentsData };
         } catch (error) {
-            console.log(error, 'error in comment service getPostComments ...');
+            console.log('error in ====== getPostComments ======');
             throw new Error(error);
         }
     },
 
     async getCommentData(comment) {
-        const { id, firstName, lastName, profileImageUrl } = await getUserData(
-            comment.userId,
-            'get user data in comment service getCommentData' // this is the context to inform where this service get used
-        );
+        const { id, firstName, lastName, profileImageUrl } =
+            await userServices.getUserData(
+                comment.userId,
+                'get user data in comment service getCommentData' // this is the context to inform where this service get used
+            );
         const { userId, ...rest } = comment._doc;
         return {
             ...rest, // rest data from comment obj
@@ -52,6 +53,7 @@ const commentServices = {
             });
             return createdComment;
         } catch (error) {
+            console.log('error in ====== createComment ======');
             throw new Error(error);
         }
     },
@@ -61,6 +63,7 @@ const commentServices = {
             const commentData = await this.getCommentData(comment);
             return commentData;
         } catch (error) {
+            console.log('error in ====== getCommentById ======');
             throw new Error(error);
         }
     },
@@ -73,6 +76,7 @@ const commentServices = {
             );
             return updated;
         } catch (error) {
+            console.log('error in ====== updateComment ======');
             throw new Error(error);
         }
     },
@@ -81,6 +85,21 @@ const commentServices = {
             const deleted = await Comment.findByIdAndDelete(commentId);
             return deleted;
         } catch (error) {
+            console.log('error in ====== deleteComment ======');
+            throw new Error(error);
+        }
+    },
+    async deletePostComments(commentsIds) {
+        try {
+            const result = await Promise.allSettled(
+                commentsIds.map(async (commentId) => {
+                    const deleted = await this.deleteComment(commentId);
+                    return deleted;
+                })
+            );
+            return result;
+        } catch (error) {
+            console.log('error in ====== deletePostComments ======');
             throw new Error(error);
         }
     },
