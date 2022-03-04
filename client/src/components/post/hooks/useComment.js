@@ -14,13 +14,13 @@ const useComment = ({ postId, defaultTextVal, close }) => {
 
   const queryClient = useQueryClient();
 
-  const invalidateCommentsQuery = () => {
-    queryClient.invalidateQueries(`getComments-${postId}`);
+  const invalidateStatsQuery = () => {
+    queryClient.invalidateQueries(`getPostStats-${postId}`);
   };
 
   const postComment = useMutation(createComment, {
     onSuccess: () => {
-      invalidateCommentsQuery();
+      invalidateStatsQuery();
       reset();
     },
     onError: (error) => {
@@ -30,7 +30,7 @@ const useComment = ({ postId, defaultTextVal, close }) => {
 
   const editComment = useMutation(updateComment, {
     onSuccess: () => {
-      invalidateCommentsQuery();
+      invalidateStatsQuery();
       reset();
       if (close) close(); // to close the editComment component when the comment is updated
     },
@@ -41,7 +41,7 @@ const useComment = ({ postId, defaultTextVal, close }) => {
 
   const removeComment = useMutation(deleteComment, {
     onSuccess: () => {
-      invalidateCommentsQuery();
+      invalidateStatsQuery();
       reset();
     },
     onError: (error) => {
