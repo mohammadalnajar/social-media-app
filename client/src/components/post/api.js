@@ -6,6 +6,7 @@ import {
   LIKE_URL,
   DISLIKE_URL,
   COMMENT_URL,
+  POST_STATS,
 } from '../../utils/constants';
 
 export const getUserPosts = async () => {
@@ -49,26 +50,10 @@ export const dislikePost = async (data) => {
   }).then(handleApiResponse);
 };
 
-export const getLikes = async ({ queryKey }) => {
+export const getPostStats = async ({ queryKey }) => {
   const data = queryKey[1];
   const { postId } = data;
-  return fetch(`${SERVER_URL}${POST_URL}${LIKE_URL}${postId}`, {
-    credentials: 'include',
-  }).then(handleApiResponse);
-};
-
-export const getDislikes = async ({ queryKey }) => {
-  const data = queryKey[1];
-  const { postId } = data;
-  return fetch(`${SERVER_URL}${POST_URL}${DISLIKE_URL}${postId}`, {
-    credentials: 'include',
-  }).then(handleApiResponse);
-};
-
-export const getPostComments = async ({ queryKey }) => {
-  const data = queryKey[1];
-  const { postId } = data;
-  return fetch(`${SERVER_URL}${POST_URL}${COMMENT_URL}${postId}`, {
+  return fetch(`${SERVER_URL}${POST_URL}${POST_STATS}${postId}`, {
     credentials: 'include',
   }).then(handleApiResponse);
 };
