@@ -7,5 +7,6 @@ export const FEED_URL = 'users/';
 export const LIKE_URL = 'like/';
 export const DISLIKE_URL = 'dislike/';
 export const COMMENT_URL = 'comments/';
+export const POST_STATS = 'post-stats/';
 
 // always put a '/' at the end of the url
