@@ -36,18 +36,14 @@ const useAction = ({ likes, dislikes, postId }) => {
 
   const queryClient = useQueryClient();
 
-  const invalidateLikesQuery = () => {
-    queryClient.invalidateQueries(`getLikes-${postId}`);
-  };
-
-  const invalidateDislikesQuery = () => {
-    queryClient.invalidateQueries(`getDislikes-${postId}`);
+  const invalidateStatsQuery = () => {
+    queryClient.invalidateQueries(`getPostStats-${postId}`);
   };
 
   const likeOrUnlikePost = useMutation(likePost, {
     onSuccess: () => {
       toggleChecked();
-      invalidateLikesQuery();
+      invalidateStatsQuery();
     },
     onError: (error) => {
       navigateToLogin(error);
@@ -57,7 +53,7 @@ const useAction = ({ likes, dislikes, postId }) => {
   const dislikeOrUnDislikePost = useMutation(dislikePost, {
     onSuccess: () => {
       toggleChecked();
-      invalidateDislikesQuery();
+      invalidateStatsQuery();
     },
     onError: (error) => {
       navigateToLogin(error);
