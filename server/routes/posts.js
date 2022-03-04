@@ -15,6 +15,7 @@ import {
     getAllUsersPosts,
     getPostDislikes,
     getPostLikes,
+    getPostStats,
     likePost,
     updatePost,
 } from '../controllers/posts.js';
@@ -58,5 +59,8 @@ router
     .route('/comments/:commentId')
     .put(isUserLoggedIn, checkCommentAuthor, isJsonCheck, updateComment)
     .delete(isUserLoggedIn, checkCommentAuthor, deleteComment);
+
+// =========== comments ===========
+router.route('/post-stats/:postId').get(isUserLoggedIn, getPostStats);
 
 export default router;
