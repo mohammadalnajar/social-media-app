@@ -90,3 +90,7 @@ export const logoutUser = (req, res) => {
 export const updateUser = (req, res) => {
     res.send('update user');
 };
+
+export const deleteUserAccount = (req, res) => {
+    res.send('deleteUserAccount');
+};
