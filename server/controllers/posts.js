@@ -362,3 +362,27 @@ export const getPostDislikes = async (req, res) => {
         );
     }
 };
+
+// ========= get post stats =========
+export const getPostStats = async (req, res) => {
+    const { postId } = req.params;
+    try {
+        const post = await postServices.getPostById(postId);
+        if (post) {
+            const { comments: commentsIds } = post;
+            const { dislikes } = await postServices.getPostDislikesData(post);
+            const { likes } = await postServices.getPostLikesData(post);
+            const { commentsData } = await commentServices.getPostComments(
+                commentsIds
+            );
+            return successRes(res, 200, 'ok', 'post stats data found ...', {
+                dislikes,
+                likes,
+                comments: commentsData,
+            });
+        }
+        return errorRes(res, 404, 'post is not found ...');
+    } catch (error) {
+        return errorRes(res, 500, 'failed to get post stats ...', null, error);
+    }
+};
