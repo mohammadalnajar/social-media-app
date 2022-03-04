@@ -1,9 +1,6 @@
 /* eslint-disable node/no-unsupported-features/es-builtins */
-import Comment from '../models/Comment.js';
-import Post from '../models/Post.js';
 import commentServices from '../services/comments.js';
 import postServices from '../services/posts.js';
-import getUserData from '../services/users.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 
 // ========= get comments of a post =========
