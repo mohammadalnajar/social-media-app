@@ -1,11 +1,17 @@
+/* eslint-disable node/no-unsupported-features/es-builtins */
 /* eslint-disable camelcase */
 import bcrypt from 'bcrypt';
-import { uploadImageToCloud } from '../api/uploadImageToCloud.js';
+import {
+    deleteImageFormCloud,
+    uploadImageToCloud,
+} from '../api/uploadImageToCloud.js';
 import User from '../models/User.js';
 import getErrorMessage from '../utils/mongoErrors.js';
 import { errorRes, successRes } from '../utils/reqResponse.js';
 import authenticateUser from '../middlewares/auth.js';
 import getAvatar from '../api/getRandomAvatar.js';
+import userServices from '../services/users.js';
+import postServices from '../services/posts.js';
 
 export const getUsers = (req, res) => {
     res.send('get users');
@@ -91,6 +97,50 @@ export const updateUser = (req, res) => {
     res.send('update user');
 };
 
-export const deleteUserAccount = (req, res) => {
-    res.send('deleteUserAccount');
+export const deleteUserAccount = async (req, res) => {
+    const { _id: userId } = req.session.userData;
+    try {
+        const user = await userServices.getUserData(userId);
+        if (user) {
+            // delete all posts
+            const postsDeleted = await Promise.allSettled(
+                user.posts.map(async (postId) => {
+                    const postDeleted = await postServices.deletePostCompletely(
+                        postId
+                    );
+                    return postDeleted;
+                })
+            );
+            console.log(postsDeleted, 'postsDeleted');
+            if (postsDeleted) {
+                // delete profile image
+                const { result } = await deleteImageFormCloud(
+                    user.profileImagePublicId
+                );
+                console.log('delete user profile image', result);
+                // delete user doc
+                const userDeleted = await userServices.deleteUserAccount(
+                    userId
+                );
+                if (userDeleted) {
+                    return successRes(
+                        res,
+                        200,
+                        'ok',
+                        'user account was deleted ... '
+                    );
+                }
+            }
+        }
+        return errorRes(res, 404, 'account was not found');
+    } catch (error) {
+        console.log(error, 'error in deleteUserAccount route ...');
+        return errorRes(
+            res,
+            500,
+            'Failed to delete User Account...',
+            null,
+            null
+        );
+    }
 };
