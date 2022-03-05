@@ -39,6 +39,15 @@ const userServices = {
             throw new Error(error);
         }
     },
+    async deleteUserAccount(userId) {
+        try {
+            const deleted = await User.findByIdAndDelete(userId);
+            return deleted;
+        } catch (error) {
+            console.log('error in ========== deleteUserAccount ==========');
+            throw new Error(error);
+        }
+    },
 };
 
 export default userServices;
