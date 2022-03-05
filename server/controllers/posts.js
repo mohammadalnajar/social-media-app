@@ -5,7 +5,6 @@ import {
     uploadImageToCloud,
 } from '../api/uploadImageToCloud.js';
 import Post from '../models/Post.js';
-import User from '../models/User.js';
 import commentServices from '../services/comments.js';
 import postServices from '../services/posts.js';
 import userServices from '../services/users.js';
