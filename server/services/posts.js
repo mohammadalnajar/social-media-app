@@ -1,5 +1,7 @@
 /* eslint-disable node/no-unsupported-features/es-builtins */
+import { deleteImageFormCloud } from '../api/uploadImageToCloud.js';
 import Post from '../models/Post.js';
+import commentServices from './comments.js';
 import userServices from './users.js';
 
 const postServices = {
@@ -135,6 +137,32 @@ const postServices = {
         try {
             const deleted = await Post.findByIdAndDelete(postId);
             return deleted;
+        } catch (error) {
+            console.log('error in ========== deletePost ==========');
+            throw new Error(error);
+        }
+    },
+    async deletePostCompletely(postId) {
+        try {
+            const post = await this.getPostById(postId);
+            if (post) {
+                if (post.imagePublicId) {
+                    const { result } = await deleteImageFormCloud(
+                        post.imagePublicId
+                    );
+                    console.log('delete post image', result);
+                }
+
+                if (post.comments.length > 0) {
+                    const deletePostComments =
+                        await commentServices.deletePostComments(post.comments);
+                    console.log(deletePostComments, 'deletePostComments');
+                }
+
+                const deleted = await this.deletePost(postId);
+                return deleted;
+            }
+            return null;
         } catch (error) {
             console.log('error in ========== deletePost ==========');
             throw new Error(error);
