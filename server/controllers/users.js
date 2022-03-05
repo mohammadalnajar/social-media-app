@@ -24,9 +24,8 @@ export const registerUser = async (req, res) => {
     try {
         const hashedPass = await bcrypt.hash(password, salt);
         const fileStr = await getAvatar(email);
-        const { secure_url: profileImageUrl } = await uploadImageToCloud(
-            fileStr
-        );
+        const { secure_url: profileImageUrl, public_id: profileImagePublicId } =
+            await uploadImageToCloud(fileStr);
         if (profileImageUrl) {
             const userCreated = await User.create({
                 userName,
@@ -36,6 +35,7 @@ export const registerUser = async (req, res) => {
                 firstName,
                 lastName,
                 profileImageUrl,
+                profileImagePublicId,
             });
             const { password: pass, isAdmin, ...rest } = userCreated._doc;
             if (userCreated.email) {
