@@ -3,6 +3,7 @@ import {
     createComment,
     deleteComment,
     getPostComments,
+    likeComment,
     updateComment,
 } from '../controllers/comments.js';
 import {
@@ -40,6 +41,9 @@ router
 router.route('/friends').get(isUserLoggedIn, getAllFriendsPosts);
 router.route('/users').get(isUserLoggedIn, getAllUsersPosts);
 
+// =========== post stats ===========
+router.route('/post-stats/:postId').get(isUserLoggedIn, getPostStats);
+
 // =========== likes & dislikes ===========
 router
     .route('/like/:postId')
@@ -60,7 +64,7 @@ router
     .put(isUserLoggedIn, checkCommentAuthor, isJsonCheck, updateComment)
     .delete(isUserLoggedIn, checkCommentAuthor, deleteComment);
 
-// =========== comments ===========
-router.route('/post-stats/:postId').get(isUserLoggedIn, getPostStats);
-
+router
+    .route('/comments/:commentId/like')
+    .post(isUserLoggedIn, isJsonCheck, likeComment);
 export default router;
