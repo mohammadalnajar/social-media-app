@@ -129,18 +129,25 @@ export const deleteComment = async (req, res) => {
 export const likeComment = async (req, res) => {
     const { commentId } = req.params;
     const { like } = req.body;
+    const { _id: userId } = req.session.userData;
     try {
         const foundComment = await commentServices.getCommentById(commentId);
         if (foundComment) {
             if (like) {
                 // like a comment
-                const result = await commentServices.likeComment(commentId);
+                const result = await commentServices.likeComment(
+                    commentId,
+                    userId
+                );
                 if (result) {
                     return successRes(res, 200, 'ok', 'comment is liked ...');
                 }
             }
             // unlike a comment
-            const result = await commentServices.unlikeComment(commentId);
+            const result = await commentServices.unlikeComment(
+                commentId,
+                userId
+            );
             if (result) {
                 return successRes(res, 200, 'ok', 'comment is unliked ...');
             }
