@@ -103,6 +103,34 @@ const commentServices = {
             throw new Error(error);
         }
     },
+    async likeComment(commentId, userId) {
+        try {
+            const updated = await Comment.findOneAndUpdate(
+                { _id: commentId },
+                {
+                    $push: { likes: userId },
+                }
+            );
+            return updated;
+        } catch (error) {
+            console.log('error in ====== likeComment ======');
+            throw new Error(error);
+        }
+    },
+    async unlikeComment(commentId, userId) {
+        try {
+            const updated = await Comment.findOneAndUpdate(
+                { _id: commentId },
+                {
+                    $pull: { likes: userId },
+                }
+            );
+            return updated;
+        } catch (error) {
+            console.log('error in ====== unlikeComment ======');
+            throw new Error(error);
+        }
+    },
 };
 
 export default commentServices;
