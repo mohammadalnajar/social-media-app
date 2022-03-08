@@ -24,6 +24,7 @@ import isJsonCheck from '../middlewares/isJson.js';
 import isUserLoggedIn from '../middlewares/isLoggedIn.js';
 import {
     checkCommentAuthor,
+    checkCommentLiked,
     checkPostAuthor,
     checkPostLikedOrDisliked,
 } from '../middlewares/postMiddlewares.js';
@@ -66,5 +67,5 @@ router
 
 router
     .route('/comments/:commentId/like')
-    .post(isUserLoggedIn, isJsonCheck, likeComment);
+    .post(isUserLoggedIn, isJsonCheck, checkCommentLiked, likeComment);
 export default router;

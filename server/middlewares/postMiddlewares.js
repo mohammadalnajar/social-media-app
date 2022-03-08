@@ -1,3 +1,4 @@
+import Comment from '../models/Comment.js';
 import Post from '../models/Post.js';
 import User from '../models/User.js';
 import commentServices from '../services/comments.js';
@@ -50,6 +51,35 @@ export const checkPostLikedOrDisliked = async (req, res, next) => {
         return next();
     } catch (error) {
         console.log(error, 'failed to checkPostLikedOrDisliked');
+        return errorRes(res, 500, 'something went wrong ...');
+    }
+};
+export const checkCommentLiked = async (req, res, next) => {
+    const { _id: userId } = req.session.userData;
+    const { commentId } = req.params;
+    const { like } = req.body;
+    try {
+        if (like) {
+            if (typeof like === 'boolean') {
+                const check = await Comment.find({
+                    _id: commentId,
+                    likes: userId,
+                });
+                console.log(check, 'check ==============');
+                if (check.length > 0) {
+                    return errorRes(
+                        res,
+                        400,
+                        'this user already liked this comment ...'
+                    );
+                }
+                return next(); // like comment
+            }
+            throw new Error('check like datatype ...');
+        }
+        return next(); // unlike comment
+    } catch (error) {
+        console.log(error, 'failed to checkCommentLiked');
         return errorRes(res, 500, 'something went wrong ...');
     }
 };
