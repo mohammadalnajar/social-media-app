@@ -63,14 +63,20 @@ const PostComment = ({
             <button
               type="button"
               disabled={!textFilled() && true}
-              className={`rounded-full h-[25px] w-[25px]  ${
+              className={`rounded-full h-[25px] w-[25px] ${
+                postComment.isLoading || editComment.isLoading
+                  ? 'loading-spinner'
+                  : ''
+              }  ${
                 textFilled()
                   ? 'hover:text-blue-500 hover:bg-dark-second'
                   : 'cursor-not-allowed'
               }`}
               onClick={handleSubmit}
             >
-              <i className="bx bxs-send" />
+              {postComment.isLoading || editComment.isLoading ? null : (
+                <i className="bx bxs-send" />
+              )}
             </button>
           </div>
         </div>
