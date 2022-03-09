@@ -1,14 +1,14 @@
 import Comment from '../models/Comment.js';
 import Post from '../models/Post.js';
-import User from '../models/User.js';
 import commentServices from '../services/comments.js';
+import userServices from '../services/users.js';
 import { errorRes } from '../utils/reqResponse.js';
 
 export const checkPostAuthor = async (req, res, next) => {
     const { _id: userId } = req.session.userData;
     const { id: postId } = req.body;
     try {
-        const foundUser = await User.findById(userId);
+        const foundUser = await userServices.getUserData(userId);
         if (foundUser) {
             const foundPost = foundUser.posts.some((pId) => pId === postId);
             if (foundPost) return next();
