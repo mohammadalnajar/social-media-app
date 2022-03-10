@@ -9,7 +9,14 @@ const commentServices = {
             const commentsArr = await Promise.allSettled(
                 commentsIds.map(async (commentId) => {
                     const comment = await Comment.findById(commentId);
-                    if (comment) return comment;
+                    const { likesData } = await this.getCommentLikesData({
+                        likes: comment.likes,
+                    });
+                    if (comment) {
+                        comment.likes = likesData;
+                        console.log(likesData, '=================');
+                        return comment;
+                    }
                     return null;
                 })
             );
@@ -128,6 +135,26 @@ const commentServices = {
             return updated;
         } catch (error) {
             console.log('error in ====== unlikeComment ======');
+            throw new Error(error);
+        }
+    },
+    async getCommentLikesData({ likes }) {
+        try {
+            const likesArr = await Promise.allSettled(
+                likes.map(async (LikeUserId) => {
+                    const {
+                        firstName,
+                        lastName,
+                        _id: userId,
+                    } = await userServices.getUserData(LikeUserId);
+                    return { firstName, lastName, _id: userId };
+                })
+            );
+            const likesData = likesArr.map((obj) => obj.value);
+            console.log(likesData, '++++++++++++++++++');
+            return { likesData };
+        } catch (error) {
+            console.log('error in ====== getCommentLikesData ======');
             throw new Error(error);
         }
     },
