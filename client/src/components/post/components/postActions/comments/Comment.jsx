@@ -8,6 +8,7 @@ import CommentActions from './CommentActions';
 import useToggle from '../../../../../hooks/useToggle';
 import EditComment from './EditComment';
 import getFullDateAndTime from '../../../../../utils/convertTimestamp';
+import LikeComment from './LikeComment';
 
 const Comment = ({ comment }) => {
   const [isMenuShow, toggleMenu] = useToggle({});
@@ -48,7 +49,7 @@ const Comment = ({ comment }) => {
               <span>{text}</span>
             </div>
             <div className="px-2 pt-1 text-xs text-gray-500 dark:text-dark-txt">
-              <span className="font-semibold cursor-pointer">Like</span>
+              <LikeComment />
               <span>.</span>
               <span className="font-semibold cursor-pointer">Reply</span>
               <span>.{timeAgo}</span>
