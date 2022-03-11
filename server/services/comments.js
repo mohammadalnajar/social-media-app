@@ -13,9 +13,7 @@ const commentServices = {
                         likes: comment.likes,
                     });
                     if (comment) {
-                        comment.likes = likesData;
-                        console.log(likesData, '=================');
-                        return comment;
+                        return { ...comment._doc, likes: likesData };
                     }
                     return null;
                 })
@@ -44,7 +42,7 @@ const commentServices = {
                 comment.userId,
                 'get user data in comment service getCommentData' // this is the context to inform where this service get used
             );
-        const { userId, ...rest } = comment._doc;
+        const { userId, ...rest } = comment;
         return {
             ...rest, // rest data from comment obj
             userData: { userId: id, firstName, lastName, profileImageUrl },
@@ -145,13 +143,12 @@ const commentServices = {
                     const {
                         firstName,
                         lastName,
-                        _id: userId,
+                        id: userId,
                     } = await userServices.getUserData(LikeUserId);
-                    return { firstName, lastName, _id: userId };
+                    return { firstName, lastName, userId };
                 })
             );
             const likesData = likesArr.map((obj) => obj.value);
-            console.log(likesData, '++++++++++++++++++');
             return { likesData };
         } catch (error) {
             console.log('error in ====== getCommentLikesData ======');
