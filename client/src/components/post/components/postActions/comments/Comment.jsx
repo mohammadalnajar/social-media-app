@@ -49,7 +49,7 @@ const Comment = ({ comment }) => {
               <span>{text}</span>
             </div>
             <div className="px-2 pt-1 text-xs text-gray-500 dark:text-dark-txt">
-              <LikeComment />
+              <LikeComment commentId={commentId} likes={comment.likes} />
               <span>.</span>
               <span className="font-semibold cursor-pointer">Reply</span>
               <span>.{timeAgo}</span>
@@ -93,7 +93,7 @@ Comment.propTypes = {
     comments: PropTypes.arrayOf(PropTypes.string),
     createdAt: PropTypes.string,
     dislikes: PropTypes.arrayOf(PropTypes.string),
-    likes: PropTypes.arrayOf(PropTypes.string),
+    likes: PropTypes.arrayOf(PropTypes.object),
     photos: PropTypes.arrayOf(PropTypes.string),
     postId: PropTypes.string,
     text: PropTypes.string,
@@ -112,7 +112,7 @@ Comment.defaultProps = {
     comments: [''],
     createdAt: '',
     dislikes: [''],
-    likes: [''],
+    likes: [{}],
     photos: [''],
     postId: '',
     text: '',
