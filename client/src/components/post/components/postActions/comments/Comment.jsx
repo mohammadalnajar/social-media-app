@@ -8,7 +8,11 @@ import CommentAuthorActions from './CommentAuthorActions';
 import useToggle from '../../../../../hooks/useToggle';
 import EditComment from './EditComment';
 import getFullDateAndTime from '../../../../../utils/convertTimestamp';
-import LikeComment from './LikeComment';
+import LikeComment from './commentActions/LikeComment';
+import CommentActions from './commentActions/CommentActions';
+import ReplyToComment from './commentActions/ReplyToComment';
+import EditedAt from '../../EditedAt';
+import CommentContent from './CommentContent';
 
 const Comment = ({ comment }) => {
   const [isMenuShow, toggleMenu] = useToggle({});
@@ -43,39 +47,30 @@ const Comment = ({ comment }) => {
         >
           <CommentAvatar profileImageUrl={profileImageUrl} />
           <div className="min-w-[150px]">
-            <div className="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
-              <span className="font-semibold block capitalize">
-                {firstName} {lastName}
-              </span>
-              <span>{text}</span>
-            </div>
-            <div className="flex items-center px-2 pt-1 text-xs text-gray-500 dark:text-dark-txt">
+            <CommentContent
+              firstName={firstName}
+              lastName={lastName}
+              text={text}
+            />
+            <CommentActions>
               <LikeComment
                 postId={postId}
                 commentId={commentId}
                 likes={comment.likes}
               />
-              <div className="font-semibold cursor-pointer mx-2">Reply</div>
+              <ReplyToComment />
               <div>{timeAgo}</div>
-              {comment?.updatedAt && (
-                <div
-                  data-tip={`edited at ${editedAt}`}
-                  className="ml-2 text-sm underline dark:hover:text-dark-txt cursor-pointer text-gray-500 tooltip tooltip-bottom"
-                >
-                  edited
-                </div>
-              )}
-            </div>
+              {comment?.updatedAt && <EditedAt editedAt={editedAt} />}
+            </CommentActions>
           </div>
-          <div className="flex items-center mb-5">
-            {isMenuShow && (
-              <CommentAuthorActions
-                commentId={commentId}
-                postId={postId}
-                toggleEdit={toggleEdit}
-              />
-            )}
-          </div>
+
+          {isMenuShow && (
+            <CommentAuthorActions
+              commentId={commentId}
+              postId={postId}
+              toggleEdit={toggleEdit}
+            />
+          )}
         </div>
       )}
       {isShowEdit && (

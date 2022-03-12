@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useComment from '../../../hooks/useComment';
+import useComment from '../../../../hooks/useComment';
 
 const LikeComment = ({ commentId, likes, postId }) => {
   const { checked: userLikeComment, likeAComment } = useComment({
