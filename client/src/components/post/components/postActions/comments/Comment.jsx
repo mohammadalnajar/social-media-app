@@ -13,6 +13,7 @@ import CommentActions from './commentActions/CommentActions';
 import ReplyToComment from './commentActions/ReplyToComment';
 import EditedAt from '../../EditedAt';
 import CommentContent from './CommentContent';
+import CommentLiked from './commentActions/CommentLiked';
 
 const Comment = ({ comment }) => {
   const [isMenuShow, toggleMenu] = useToggle({});
@@ -32,7 +33,6 @@ const Comment = ({ comment }) => {
 
   const timeAgo = timeElapsed(new Date(comment.createdAt).getTime(), true);
   const editedAt = getFullDateAndTime(comment.updatedAt);
-
   return (
     <div className="mb-4">
       {!isShowEdit && (
@@ -46,7 +46,7 @@ const Comment = ({ comment }) => {
           }}
         >
           <CommentAvatar profileImageUrl={profileImageUrl} />
-          <div className="min-w-[150px]">
+          <div className="min-w-[150px] relative">
             <CommentContent
               firstName={firstName}
               lastName={lastName}
@@ -62,6 +62,7 @@ const Comment = ({ comment }) => {
               <div>{timeAgo}</div>
               {comment?.updatedAt && <EditedAt editedAt={editedAt} />}
             </CommentActions>
+            {comment?.likes.length > 0 && <CommentLiked />}
           </div>
 
           {isMenuShow && (
