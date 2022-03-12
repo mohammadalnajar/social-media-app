@@ -46,7 +46,7 @@ const Comment = ({ comment }) => {
           }}
         >
           <CommentAvatar profileImageUrl={profileImageUrl} />
-          <div className="min-w-[150px] relative">
+          <div className="min-w-[150px]">
             <CommentContent
               firstName={firstName}
               lastName={lastName}
@@ -62,7 +62,9 @@ const Comment = ({ comment }) => {
               <div>{timeAgo}</div>
               {comment?.updatedAt && <EditedAt editedAt={editedAt} />}
             </CommentActions>
-            {comment?.likes.length > 0 && <CommentLiked />}
+            {comment?.likes.length > 0 && (
+              <CommentLiked likes={comment.likes} />
+            )}
           </div>
 
           {isMenuShow && (
