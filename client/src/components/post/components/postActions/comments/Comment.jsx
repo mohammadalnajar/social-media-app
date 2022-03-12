@@ -50,7 +50,11 @@ const Comment = ({ comment }) => {
               <span>{text}</span>
             </div>
             <div className="flex justify-between items-center px-2 pt-1 text-xs text-gray-500 dark:text-dark-txt">
-              <LikeComment commentId={commentId} likes={comment.likes} />
+              <LikeComment
+                postId={postId}
+                commentId={commentId}
+                likes={comment.likes}
+              />
               <div className="font-semibold cursor-pointer">Reply</div>
               <div>{timeAgo}</div>
               {comment?.updatedAt && (
