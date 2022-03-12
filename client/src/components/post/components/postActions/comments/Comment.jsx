@@ -49,13 +49,13 @@ const Comment = ({ comment }) => {
               </span>
               <span>{text}</span>
             </div>
-            <div className="flex justify-between items-center px-2 pt-1 text-xs text-gray-500 dark:text-dark-txt">
+            <div className="flex items-center px-2 pt-1 text-xs text-gray-500 dark:text-dark-txt">
               <LikeComment
                 postId={postId}
                 commentId={commentId}
                 likes={comment.likes}
               />
-              <div className="font-semibold cursor-pointer">Reply</div>
+              <div className="font-semibold cursor-pointer mx-2">Reply</div>
               <div>{timeAgo}</div>
               {comment?.updatedAt && (
                 <div
