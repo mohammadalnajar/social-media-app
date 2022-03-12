@@ -23,7 +23,7 @@ const LikeComment = ({ commentId, likes, postId }) => {
         type="submit"
         onClick={handleClick}
         className={`${
-          userLikeComment ? 'dark:text-blue-500' : 'dark:text-white'
+          userLikeComment ? 'text-blue-500' : 'dark:text-white'
         } font-semibold cursor-pointer hover:underline `}
       >
         Like
