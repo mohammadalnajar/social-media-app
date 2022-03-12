@@ -3,7 +3,12 @@ import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import useForm from '../../../hooks/useForm';
 import useLogout from '../../../hooks/useLogout';
-import { createComment, deleteComment, updateComment } from '../api';
+import {
+  createComment,
+  deleteComment,
+  likeComment,
+  updateComment,
+} from '../api';
 
 const useComment = ({ postId, defaultTextVal, close, likes }) => {
   const {
@@ -73,11 +78,23 @@ const useComment = ({ postId, defaultTextVal, close, likes }) => {
     },
   });
 
+  const likeAComment = useMutation(likeComment, {
+    onSuccess: () => {
+      toggleChecked();
+      invalidateStatsQuery();
+      reset();
+    },
+    onError: (error) => {
+      navigateToLogin(error);
+    },
+  });
+
   return {
     userData,
     postComment,
     editComment,
     removeComment,
+    likeAComment,
     formData,
     handleInputChange,
     reset,
