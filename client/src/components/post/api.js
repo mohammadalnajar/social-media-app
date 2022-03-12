@@ -90,7 +90,7 @@ export const deleteComment = async (data) => {
 export const likeComment = async (data) => {
   const { commentId } = data;
   return fetch(
-    `${SERVER_URL}${POST_URL}${COMMENT_URL}${commentId}${LIKE_COMMENT}`,
+    `${SERVER_URL}${POST_URL}${COMMENT_URL}${LIKE_COMMENT}${commentId}`,
     {
       method: 'POST',
       credentials: 'include',

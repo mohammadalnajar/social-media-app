@@ -66,6 +66,6 @@ router
     .delete(isUserLoggedIn, checkCommentAuthor, deleteComment);
 
 router
-    .route('/comments/:commentId/like')
+    .route('/comments/like/:commentId')
     .post(isUserLoggedIn, isJsonCheck, checkCommentLiked, likeComment);
 export default router;
