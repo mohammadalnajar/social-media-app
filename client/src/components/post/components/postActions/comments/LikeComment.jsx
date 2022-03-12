@@ -5,15 +5,17 @@ import useComment from '../../../hooks/useComment';
 const LikeComment = ({ commentId, likes }) => {
   const { checked } = useComment({ likes });
   return (
-    <button
-      type="submit"
-      onClick={() => console.log(commentId, likes, checked)}
-      className={`${
-        checked ? 'dark:text-blue-500' : 'dark:text-white'
-      } font-semibold cursor-pointer hover:underline `}
-    >
-      Like
-    </button>
+    <div>
+      <button
+        type="submit"
+        onClick={() => console.log(commentId, likes, checked)}
+        className={`${
+          checked ? 'dark:text-blue-500' : 'dark:text-white'
+        } font-semibold cursor-pointer hover:underline `}
+      >
+        Like
+      </button>
+    </div>
   );
 };
 

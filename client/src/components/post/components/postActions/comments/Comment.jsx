@@ -28,6 +28,7 @@ const Comment = ({ comment }) => {
 
   const timeAgo = timeElapsed(new Date(comment.createdAt).getTime(), true);
   const editedAt = getFullDateAndTime(comment.updatedAt);
+
   return (
     <div className="mb-4">
       {!isShowEdit && (
@@ -41,25 +42,24 @@ const Comment = ({ comment }) => {
           }}
         >
           <CommentAvatar profileImageUrl={profileImageUrl} />
-          <div>
+          <div className="min-w-[150px]">
             <div className="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
               <span className="font-semibold block capitalize">
                 {firstName} {lastName}
               </span>
               <span>{text}</span>
             </div>
-            <div className="px-2 pt-1 text-xs text-gray-500 dark:text-dark-txt">
+            <div className="flex justify-between items-center px-2 pt-1 text-xs text-gray-500 dark:text-dark-txt">
               <LikeComment commentId={commentId} likes={comment.likes} />
-              <span>.</span>
-              <span className="font-semibold cursor-pointer">Reply</span>
-              <span>.{timeAgo}</span>
+              <div className="font-semibold cursor-pointer">Reply</div>
+              <div>{timeAgo}</div>
               {comment?.updatedAt && (
-                <span
+                <div
                   data-tip={`edited at ${editedAt}`}
                   className="ml-2 text-sm underline dark:hover:text-dark-txt cursor-pointer text-gray-500 tooltip tooltip-bottom"
                 >
                   edited
-                </span>
+                </div>
               )}
             </div>
           </div>
