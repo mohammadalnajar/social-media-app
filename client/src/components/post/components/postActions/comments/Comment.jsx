@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
 import timeElapsed from '../../../../../utils/timeElapsed';
 import CommentAvatar from './CommentAvatar';
-import CommentActions from './CommentActions';
+import CommentAuthorActions from './CommentAuthorActions';
 import useToggle from '../../../../../hooks/useToggle';
 import EditComment from './EditComment';
 import getFullDateAndTime from '../../../../../utils/convertTimestamp';
@@ -69,7 +69,7 @@ const Comment = ({ comment }) => {
           </div>
           <div className="flex items-center mb-5">
             {isMenuShow && (
-              <CommentActions
+              <CommentAuthorActions
                 commentId={commentId}
                 postId={postId}
                 toggleEdit={toggleEdit}

@@ -4,7 +4,7 @@ import useComment from '../../../hooks/useComment';
 import useToggle from '../../../../../hooks/useToggle';
 import EnsureModal from '../../../../EnsureModal';
 
-const CommentActions = ({ commentId, toggleEdit, postId }) => {
+const CommentAuthorActions = ({ commentId, toggleEdit, postId }) => {
   const { removeComment } = useComment({ postId });
   const ref = useRef();
   const [isModalOpen, toggleModal] = useToggle({
@@ -60,10 +60,10 @@ const CommentActions = ({ commentId, toggleEdit, postId }) => {
   );
 };
 
-CommentActions.propTypes = {
+CommentAuthorActions.propTypes = {
   toggleEdit: PropTypes.func.isRequired,
   postId: PropTypes.string.isRequired,
   commentId: PropTypes.string.isRequired,
 };
 
-export default CommentActions;
+export default CommentAuthorActions;
