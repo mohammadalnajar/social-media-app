@@ -10,7 +10,6 @@ const Search = () => {
 
   useEffect(() => {
     // fetch users onKey press comes here
-    console.log(formData.search);
   }, [formData.search]);
 
   return (
