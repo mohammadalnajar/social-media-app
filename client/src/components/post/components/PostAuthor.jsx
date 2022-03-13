@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import getFullDateAndTime from '../../../utils/convertTimestamp';
 import timeElapsed from '../../../utils/timeElapsed';
+import EditedAt from './EditedAt';
 
 const PostAuthor = ({ createdAt, updatedAt, authorData, children }) => {
   const { userId, firstName, lastName, profileImageUrl } = authorData;
@@ -25,14 +26,7 @@ const PostAuthor = ({ createdAt, updatedAt, authorData, children }) => {
           <div className="font-semibold capitalize">{fullName}</div>
           <div className="flex">
             <span className="text-sm text-gray-500 mr-1">{timeAgo}</span>
-            {updatedAt && (
-              <span
-                data-tip={`edited at ${editedAt}`}
-                className="text-sm underline dark:hover:text-dark-txt cursor-pointer text-gray-500 tooltip tooltip-bottom"
-              >
-                edited
-              </span>
-            )}
+            {updatedAt && <EditedAt editedAt={editedAt} />}
           </div>
         </div>
       </div>

@@ -4,10 +4,16 @@ import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
 import timeElapsed from '../../../../../utils/timeElapsed';
 import CommentAvatar from './CommentAvatar';
-import CommentActions from './CommentActions';
+import CommentAuthorActions from './CommentAuthorActions';
 import useToggle from '../../../../../hooks/useToggle';
 import EditComment from './EditComment';
 import getFullDateAndTime from '../../../../../utils/convertTimestamp';
+import LikeComment from './commentActions/LikeComment';
+import CommentActions from './commentActions/CommentActions';
+import ReplyToComment from './commentActions/ReplyToComment';
+import EditedAt from '../../EditedAt';
+import CommentContent from './CommentContent';
+import CommentLiked from './commentActions/CommentLiked';
 
 const Comment = ({ comment }) => {
   const [isMenuShow, toggleMenu] = useToggle({});
@@ -40,37 +46,34 @@ const Comment = ({ comment }) => {
           }}
         >
           <CommentAvatar profileImageUrl={profileImageUrl} />
-          <div>
-            <div className="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
-              <span className="font-semibold block capitalize">
-                {firstName} {lastName}
-              </span>
-              <span>{text}</span>
-            </div>
-            <div className="px-2 pt-1 text-xs text-gray-500 dark:text-dark-txt">
-              <span className="font-semibold cursor-pointer">Like</span>
-              <span>.</span>
-              <span className="font-semibold cursor-pointer">Reply</span>
-              <span>.{timeAgo}</span>
-              {comment?.updatedAt && (
-                <span
-                  data-tip={`edited at ${editedAt}`}
-                  className="ml-2 text-sm underline dark:hover:text-dark-txt cursor-pointer text-gray-500 tooltip tooltip-bottom"
-                >
-                  edited
-                </span>
-              )}
-            </div>
-          </div>
-          <div className="flex items-center mb-5">
-            {isMenuShow && (
-              <CommentActions
-                commentId={commentId}
+          <div className="min-w-[150px]">
+            <CommentContent
+              firstName={firstName}
+              lastName={lastName}
+              text={text}
+            />
+            <CommentActions>
+              <LikeComment
                 postId={postId}
-                toggleEdit={toggleEdit}
+                commentId={commentId}
+                likes={comment.likes}
               />
+              <ReplyToComment />
+              <div>{timeAgo}</div>
+              {comment?.updatedAt && <EditedAt editedAt={editedAt} />}
+            </CommentActions>
+            {comment?.likes.length > 0 && (
+              <CommentLiked likes={comment.likes} />
             )}
           </div>
+
+          {isMenuShow && (
+            <CommentAuthorActions
+              commentId={commentId}
+              postId={postId}
+              toggleEdit={toggleEdit}
+            />
+          )}
         </div>
       )}
       {isShowEdit && (
@@ -92,7 +95,7 @@ Comment.propTypes = {
     comments: PropTypes.arrayOf(PropTypes.string),
     createdAt: PropTypes.string,
     dislikes: PropTypes.arrayOf(PropTypes.string),
-    likes: PropTypes.arrayOf(PropTypes.string),
+    likes: PropTypes.arrayOf(PropTypes.object),
     photos: PropTypes.arrayOf(PropTypes.string),
     postId: PropTypes.string,
     text: PropTypes.string,
@@ -111,7 +114,7 @@ Comment.defaultProps = {
     comments: [''],
     createdAt: '',
     dislikes: [''],
-    likes: [''],
+    likes: [{}],
     photos: [''],
     postId: '',
     text: '',

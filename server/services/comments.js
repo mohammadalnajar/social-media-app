@@ -9,7 +9,12 @@ const commentServices = {
             const commentsArr = await Promise.allSettled(
                 commentsIds.map(async (commentId) => {
                     const comment = await Comment.findById(commentId);
-                    if (comment) return comment;
+                    const { likesData } = await this.getCommentLikesData({
+                        likes: comment.likes,
+                    });
+                    if (comment) {
+                        return { ...comment._doc, likes: likesData };
+                    }
                     return null;
                 })
             );
@@ -37,7 +42,7 @@ const commentServices = {
                 comment.userId,
                 'get user data in comment service getCommentData' // this is the context to inform where this service get used
             );
-        const { userId, ...rest } = comment._doc;
+        const { userId, ...rest } = comment;
         return {
             ...rest, // rest data from comment obj
             userData: { userId: id, firstName, lastName, profileImageUrl },
@@ -100,6 +105,53 @@ const commentServices = {
             return result;
         } catch (error) {
             console.log('error in ====== deletePostComments ======');
+            throw new Error(error);
+        }
+    },
+    async likeComment(commentId, userId) {
+        try {
+            const updated = await Comment.findOneAndUpdate(
+                { _id: commentId },
+                {
+                    $push: { likes: userId },
+                }
+            );
+            return updated;
+        } catch (error) {
+            console.log('error in ====== likeComment ======');
+            throw new Error(error);
+        }
+    },
+    async unlikeComment(commentId, userId) {
+        try {
+            const updated = await Comment.findOneAndUpdate(
+                { _id: commentId },
+                {
+                    $pull: { likes: userId },
+                }
+            );
+            return updated;
+        } catch (error) {
+            console.log('error in ====== unlikeComment ======');
+            throw new Error(error);
+        }
+    },
+    async getCommentLikesData({ likes }) {
+        try {
+            const likesArr = await Promise.allSettled(
+                likes.map(async (LikeUserId) => {
+                    const {
+                        firstName,
+                        lastName,
+                        id: userId,
+                    } = await userServices.getUserData(LikeUserId);
+                    return { firstName, lastName, userId };
+                })
+            );
+            const likesData = likesArr.map((obj) => obj.value);
+            return { likesData };
+        } catch (error) {
+            console.log('error in ====== getCommentLikesData ======');
             throw new Error(error);
         }
     },

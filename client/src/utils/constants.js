@@ -8,5 +8,6 @@ export const LIKE_URL = 'like/';
 export const DISLIKE_URL = 'dislike/';
 export const COMMENT_URL = 'comments/';
 export const POST_STATS = 'post-stats/';
+export const LIKE_COMMENT = 'like/';
 
 // always put a '/' at the end of the url

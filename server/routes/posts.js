@@ -3,6 +3,7 @@ import {
     createComment,
     deleteComment,
     getPostComments,
+    likeComment,
     updateComment,
 } from '../controllers/comments.js';
 import {
@@ -23,6 +24,7 @@ import isJsonCheck from '../middlewares/isJson.js';
 import isUserLoggedIn from '../middlewares/isLoggedIn.js';
 import {
     checkCommentAuthor,
+    checkCommentLiked,
     checkPostAuthor,
     checkPostLikedOrDisliked,
 } from '../middlewares/postMiddlewares.js';
@@ -39,6 +41,9 @@ router
     .delete(isUserLoggedIn, isJsonCheck, checkPostAuthor, deletePost);
 router.route('/friends').get(isUserLoggedIn, getAllFriendsPosts);
 router.route('/users').get(isUserLoggedIn, getAllUsersPosts);
+
+// =========== post stats ===========
+router.route('/post-stats/:postId').get(isUserLoggedIn, getPostStats);
 
 // =========== likes & dislikes ===========
 router
@@ -60,7 +65,7 @@ router
     .put(isUserLoggedIn, checkCommentAuthor, isJsonCheck, updateComment)
     .delete(isUserLoggedIn, checkCommentAuthor, deleteComment);
 
-// =========== comments ===========
-router.route('/post-stats/:postId').get(isUserLoggedIn, getPostStats);
-
+router
+    .route('/comments/like/:commentId')
+    .post(isUserLoggedIn, isJsonCheck, checkCommentLiked, likeComment);
 export default router;
