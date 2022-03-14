@@ -34,7 +34,7 @@ const Comment = ({ comment }) => {
   const timeAgo = timeElapsed(new Date(comment.createdAt).getTime(), true);
   const editedAt = getFullDateAndTime(comment.updatedAt);
   return (
-    <div className="mb-4">
+    <div className="mb-4 mx-2">
       {!isShowEdit && (
         <div
           className="flex  space-x-2"
