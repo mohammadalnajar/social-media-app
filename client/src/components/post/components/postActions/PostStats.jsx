@@ -2,6 +2,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import useToggle from '../../../../hooks/useToggle';
+import DislikeIcon from '../../../sharedComponents/DislikeIcon';
+import LikeIcon from '../../../sharedComponents/LikeIcon';
 
 const PostStats = ({ likes, dislikes, comments }) => {
   const [isShowComments, toggleCommentsTooltip] = useToggle({});
@@ -32,14 +34,14 @@ const PostStats = ({ likes, dislikes, comments }) => {
   return (
     <div className="px-4 py-2">
       <div className="flex items-center justify-between">
-        <div className="flex flex-row items-center">
+        <div className="flex flex-col items-center">
           {likes?.length ? (
             <div
               onMouseEnter={toggleLikesTooltip}
               onMouseLeave={toggleLikesTooltip}
-              className="relative rounded-full mr-4"
+              className="relative rounded-full mb-4"
             >
-              <i className="bx bx-like text-2xl" />
+              <LikeIcon />
               <span className="text-xs absolute -top-2 -right-2 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
                 {likes.length}
               </span>
@@ -58,9 +60,9 @@ const PostStats = ({ likes, dislikes, comments }) => {
             <div
               onMouseEnter={toggleDislikesTooltip}
               onMouseLeave={toggleDislikesTooltip}
-              className="relative rounded-full mr-4"
+              className="relative rounded-full mb-4"
             >
-              <i className="bx bx-dislike text-2xl" />
+              <DislikeIcon />
               <span className="text-xs absolute -top-2 -right-2 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
                 {dislikes.length}
               </span>
