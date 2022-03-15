@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const CommentContent = ({ firstName, lastName, text }) => {
   return (
-    <div className="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
+    <div className="bg-gray-100 dark:bg-dark-third py-2 pl-2 pr-5 rounded-2xl text-sm">
       <span className="font-semibold block capitalize">
         {firstName} {lastName}
       </span>

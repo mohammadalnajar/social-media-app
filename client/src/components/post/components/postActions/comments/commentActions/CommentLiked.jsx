@@ -15,7 +15,7 @@ const CommentLiked = ({ likes }) => {
   ];
 
   return (
-    <div className="relative bottom-12 w-8 -right-32 -mb-8">
+    <div className="relative bottom-12 w-8 -right-[100%] -translate-x-5 -mb-8">
       <LikedIcon toggleShowTooltip={toggleCommentLikesTooltip} />
       {isShowCommentLikes && (
         <div className="absolute capitalize w-36 -left-2 bg-gray-400 px-3 py-1 rounded-2xl text-black ">
