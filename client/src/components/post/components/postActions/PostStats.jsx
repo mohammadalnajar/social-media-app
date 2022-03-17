@@ -34,19 +34,19 @@ const PostStats = ({ likes, dislikes, comments }) => {
   return (
     <div className="px-4 py-2">
       <div className="flex items-center justify-between">
-        <div className="flex flex-col items-center">
+        <div className="flex items-center">
           {likes?.length ? (
             <div
               onMouseEnter={toggleLikesTooltip}
               onMouseLeave={toggleLikesTooltip}
-              className="relative rounded-full mb-4"
+              className="rounded-full cursor-pointer relative flex items-center mr-2 mt-4"
             >
               <LikeIcon />
-              <span className="text-xs absolute -top-2 -right-2 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
+              <span className="text-base hover:underline ml-2 text-white font-semibold rounded-full px-1 text-center">
                 {likes.length}
               </span>
               {isShowLikes && (
-                <div className="absolute capitalize -right-24 -left-5 bg-gray-400 px-3 py-1 rounded-2xl text-black">
+                <div className="absolute capitalize z-10 top-full -right-28 -left-5 bg-gray-400 px-3 py-1 rounded-2xl text-black">
                   {likesUsersData &&
                     likesUsersData?.map((user) => {
                       return <div key={user}>{user}</div>;
@@ -60,14 +60,14 @@ const PostStats = ({ likes, dislikes, comments }) => {
             <div
               onMouseEnter={toggleDislikesTooltip}
               onMouseLeave={toggleDislikesTooltip}
-              className="relative rounded-full mb-4"
+              className="rounded-full cursor-pointer relative flex items-center mt-4"
             >
               <DislikeIcon />
-              <span className="text-xs absolute -top-2 -right-2 bg-red-500 text-white font-semibold rounded-full px-1 text-center">
+              <span className="text-base hover:underline ml-2 text-white font-semibold rounded-full px-1 text-center">
                 {dislikes.length}
               </span>
               {isShowDislikes && (
-                <div className="absolute capitalize -right-24 -left-4 bg-gray-400 px-3 py-1 rounded-2xl text-black">
+                <div className="absolute capitalize z-10 top-full -right-28 -left-5 bg-gray-400 px-3 py-1 rounded-2xl text-black">
                   {dislikesUserData &&
                     dislikesUserData?.map((user) => {
                       return <div key={user}>{user}</div>;
@@ -81,7 +81,7 @@ const PostStats = ({ likes, dislikes, comments }) => {
           onMouseEnter={toggleCommentsTooltip}
           onMouseLeave={toggleCommentsTooltip}
           data-tip={commentsUsersData}
-          className="text-gray-500 cursor-pointer dark:text-dark-txt relative "
+          className="text-gray-500 hover:underline cursor-pointer dark:text-dark-txt relative "
         >
           <span>{comments?.length ? `${comments.length} Comments` : null}</span>
           {isShowComments && (
