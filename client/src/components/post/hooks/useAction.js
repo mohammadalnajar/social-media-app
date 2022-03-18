@@ -60,7 +60,15 @@ const useAction = ({ likes, dislikes, postId }) => {
     },
   });
 
-  return { likeOrUnlikePost, dislikeOrUnDislikePost, checked, toggleChecked };
+  const likeOrDislike = () => {};
+
+  return {
+    likeOrUnlikePost,
+    dislikeOrUnDislikePost,
+    likeOrDislike,
+    checked,
+    toggleChecked,
+  };
 };
 
 export default useAction;
