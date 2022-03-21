@@ -21,6 +21,12 @@ const useAction = ({ likes, dislikes, postId }) => {
   };
 
   const [checked, setChecked] = useState(() => {
+    if (likes && dislikes) {
+      return {
+        liked: userLikedOrDislikedPostCheck(likes),
+        disliked: userLikedOrDislikedPostCheck(dislikes),
+      };
+    }
     if (likes) {
       return userLikedOrDislikedPostCheck(likes);
     }
