@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useAction from '../../hooks/useAction';
 
-const Like = ({ postId, likes }) => {
+const Like = ({ postId, likes, userDislikedPost }) => {
   const { likeOrUnlikePost, checked: userLikePost } = useAction({
     likes,
     postId,
@@ -36,6 +36,7 @@ const Like = ({ postId, likes }) => {
 Like.propTypes = {
   postId: PropTypes.string.isRequired,
   likes: PropTypes.arrayOf(PropTypes.object),
+  userDislikedPost: PropTypes.bool.isRequired,
 };
 
 Like.defaultProps = {

@@ -60,13 +60,27 @@ const useAction = ({ likes, dislikes, postId }) => {
     onSuccess: () => {
       toggleChecked();
       invalidateStatsQuery();
+      likeOrUnlikePost.mutate({ postId, like: false });
     },
     onError: (error) => {
       navigateToLogin(error);
     },
   });
 
-  const likeOrDislike = () => {};
+  const likeOrDislike = (data) => {
+    const { like, dislike } = data;
+    if (dislike !== undefined) {
+      console.log(dislike, '1=============');
+      dislikeOrUnDislikePost.mutate(data);
+
+      return;
+    }
+    if (like !== undefined) {
+      console.log(like, '2============');
+      // likeOrUnlikePost.mutate(data);
+      // dislikeOrUnDislikePost.mutate(data);
+    }
+  };
 
   return {
     likeOrUnlikePost,

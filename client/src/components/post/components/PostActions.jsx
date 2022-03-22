@@ -8,9 +8,13 @@ import Like from './postActions/Like';
 import PostStats from './postActions/PostStats';
 import usePostActions from '../hooks/usePostActions';
 import CommentsList from './postActions/comments/CommentsList';
+import useAction from '../hooks/useAction';
 
 const PostActions = ({ postId }) => {
   const { likes, dislikes, comments } = usePostActions({ postId });
+  const {
+    checked: { liked, disliked },
+  } = useAction({ likes, dislikes });
 
   return (
     <div>
@@ -18,8 +22,12 @@ const PostActions = ({ postId }) => {
         <>
           <PostStats likes={likes} dislikes={dislikes} comments={comments} />
           <PostAction>
-            <Like postId={postId} likes={likes} />
-            <Dislike postId={postId} dislikes={dislikes} />
+            <Like userDislikedPost={disliked} postId={postId} likes={likes} />
+            <Dislike
+              userLikedPost={liked}
+              postId={postId}
+              dislikes={dislikes}
+            />
             {/* <CommentButton postId={postId} comments={comments} /> */}
             {/* <Share /> */}
           </PostAction>
