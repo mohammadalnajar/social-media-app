@@ -18,6 +18,7 @@ const Dislike = ({ postId, dislikes, userLikedPost }) => {
     const data = {
       postId,
       dislike: !userDislikePost,
+      userLikedPost,
     };
     if (userLikedPost) {
       likeOrDislike(data);
