@@ -22,9 +22,13 @@ const PostActions = ({ postId }) => {
         <>
           <PostStats likes={likes} dislikes={dislikes} comments={comments} />
           <PostAction>
-            <Like userDislikedPost={disliked} postId={postId} likes={likes} />
+            <Like
+              userDislikedPost={disliked || false}
+              postId={postId}
+              likes={likes}
+            />
             <Dislike
-              userLikedPost={liked}
+              userLikedPost={liked || false}
               postId={postId}
               dislikes={dislikes}
             />

@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import useAction from '../../hooks/useAction';
 
 const Like = ({ postId, likes, userDislikedPost }) => {
-  const { likeOrUnlikePost, checked: userLikePost } = useAction({
+  const {
+    likeOrUnlikePost,
+    checked: userLikePost,
+    likeOrDislike,
+  } = useAction({
     likes,
     postId,
   });
@@ -14,8 +18,13 @@ const Like = ({ postId, likes, userDislikedPost }) => {
     const data = {
       postId,
       like: !userLikePost,
+      userDislikedPost,
     };
 
+    if (userDislikedPost) {
+      likeOrDislike(data);
+      return;
+    }
     likeOrUnlikePost.mutate(data);
   };
   return (
