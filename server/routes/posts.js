@@ -36,7 +36,7 @@ router
     .route('/')
     .get(isUserLoggedIn, getAllUserPosts)
     .post(isUserLoggedIn, isJsonCheck, createPostWithImages, createPost)
-    // createPWI and createP function should happen in order
+    // createPWI and createP functions should happen in order
     .put(isUserLoggedIn, isJsonCheck, checkPostAuthor, updatePost)
     .delete(isUserLoggedIn, isJsonCheck, checkPostAuthor, deletePost);
 router.route('/friends').get(isUserLoggedIn, getAllFriendsPosts);
