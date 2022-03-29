@@ -33,7 +33,7 @@ const Like = ({ postId, likes, userDislikedPost }) => {
       type="button"
       className={`${
         isLoading && 'loading'
-      } btn bg-transparent  border-none w-1/4 flex space-x-2 justify-center items-center  hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer ${
+      } btn bg-transparent  border-none w-1/2 md:w-1/4 space-x-2 hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer ${
         userLikePost ? 'text-blue-500' : 'text-gray-500 dark:text-dark-txt'
       } `}
     >
