@@ -111,7 +111,6 @@ export const deleteUserAccount = async (req, res) => {
                     return postDeleted;
                 })
             );
-            console.log(postsDeleted, 'postsDeleted');
             if (postsDeleted) {
                 // delete profile image
                 const { result } = await deleteImageFormCloud(
