@@ -33,7 +33,7 @@ const CommentAuthorActions = ({ commentId, toggleEdit, postId }) => {
               onClick={toggleEdit}
             >
               <i className="bx bx-edit-alt mr-2" />
-              Edit post
+              Edit comment
             </button>
           </li>
           <li className="dark:hover:bg-dark-hover text-red-500">
@@ -43,7 +43,7 @@ const CommentAuthorActions = ({ commentId, toggleEdit, postId }) => {
               className="btn bg-transparent border-0 dark:hover:bg-dark-hover"
             >
               <i className="bx bx-trash mr-2" />
-              Delete post
+              Delete comment
             </button>
           </li>
         </ul>
