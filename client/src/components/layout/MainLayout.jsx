@@ -91,15 +91,15 @@ const MainLayout = () => {
             </li>
             <li className="border-b border-gray-200 dark:border-dark-third mt-6" />
           </ul>
-          <div className="flex justify-between items-center px-4 h-4 group">
+          {/* <div className="flex justify-between items-center px-4 h-4 group">
             <span className="font-semibold text-gray-500 text-lg dark:text-dark-txt">
               Your shortcuts
             </span>
             <span className="text-blue-500 cursor-pointer hover:bg-gray-200 dark:hover:bg-dark-third p-2 rounded-md hidden group-hover:inline-block">
               Edit
             </span>
-          </div>
-          <ul className="p-4">
+          </div> */}
+          {/* <ul className="p-4">
             <li>
               <button
                 type="button"
@@ -167,7 +167,7 @@ const MainLayout = () => {
                 <span className="font-semibold">See more</span>
               </button>
             </li>
-          </ul>
+          </ul> */}
           <div className="mt-auto p-6 text-sm text-gray-500 dark:text-dark-txt">
             <button type="button">Privacy</button>
             <span>.</span>

@@ -14,15 +14,15 @@ const TabsMenu = () => {
       <li className="w-1/5 md:w-max text-center">
         <Tab title="home" selectedState={{ setSelectedTab, selectedColor }} />
       </li>
-      <li className="w-1/5 md:w-max text-center">
+      {/* <li className="w-1/5 md:w-max text-center">
         <Tab title="watch" selectedState={{ setSelectedTab, selectedColor }} />
-      </li>
-      <li className="w-1/5 md:w-max text-center">
+      </li> */}
+      {/* <li className="w-1/5 md:w-max text-center">
         <Tab
           title="marketplace"
           selectedState={{ setSelectedTab, selectedColor }}
         />
-      </li>
+      </li> */}
       <li className="w-1/5 md:w-max text-center">
         <Tab
           title="friends"
@@ -30,13 +30,13 @@ const TabsMenu = () => {
           selectedState={{ setSelectedTab, selectedColor }}
         />
       </li>
-      <li className="w-1/5 md:w-max text-center hidden md:inline-block">
+      {/* <li className="w-1/5 md:w-max text-center hidden md:inline-block">
         <Tab
           title="news"
           dynamicNum={30}
           selectedState={{ setSelectedTab, selectedColor }}
         />
-      </li>
+      </li> */}
       <li className="w-1/5 md:w-max text-center inline-block md:hidden">
         <SideMenuTab />
       </li>
