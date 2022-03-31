@@ -7,6 +7,7 @@ import {
   DISLIKE_URL,
   COMMENT_URL,
   POST_STATS,
+  LIKE_COMMENT,
 } from '../../utils/constants';
 
 export const getUserPosts = async () => {
@@ -84,4 +85,17 @@ export const deleteComment = async (data) => {
     method: 'DELETE',
     credentials: 'include',
   }).then(handleApiResponse);
+};
+
+export const likeComment = async (data) => {
+  const { commentId } = data;
+  return fetch(
+    `${SERVER_URL}${POST_URL}${COMMENT_URL}${LIKE_COMMENT}${commentId}`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(data),
+    }
+  ).then(handleApiResponse);
 };

@@ -36,6 +36,7 @@ const UserSchema = new mongoose.Schema({
         type: Array,
     },
     profileImageUrl: { type: String },
+    profileImagePublicId: { type: String },
     birthDate: { type: Date },
     posts: { type: Array },
     isVerified: { type: Boolean, default: false },

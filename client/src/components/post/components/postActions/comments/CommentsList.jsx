@@ -8,7 +8,9 @@ const CommentsList = ({ comments }) => {
     <div className="py-2 px-4">
       {comments.length > 0
         ? comments?.map((comment) => {
-            return <Comment comment={comment} key={comment._id} />;
+            if (comment?._id)
+              return <Comment comment={comment} key={comment?._id} />;
+            return null;
           })
         : null}
     </div>

@@ -43,7 +43,6 @@ const useValidations = ({ error }) => {
             setEmailError(e.messagesArray);
             break;
           default:
-            console.log('good');
             break;
         }
       });
