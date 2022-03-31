@@ -58,7 +58,7 @@ const Comment = ({ comment }) => {
                 commentId={commentId}
                 likes={comment.likes}
               />
-              <ReplyToComment />
+              {/* <ReplyToComment /> */}
               <div>{timeAgo}</div>
               {comment?.updatedAt && <EditedAt editedAt={editedAt} />}
             </CommentActions>

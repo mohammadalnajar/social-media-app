@@ -18,7 +18,7 @@ const LikeComment = ({ commentId, likes, postId }) => {
   };
 
   return (
-    <div>
+    <div className="mr-1">
       <button
         type="submit"
         onClick={handleClick}
