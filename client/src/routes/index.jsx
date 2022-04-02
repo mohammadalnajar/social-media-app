@@ -17,6 +17,14 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/profile/:userID"
+        element={
+          <ProtectedRoute redirectTo="/">
+            <MainLayout />
+          </ProtectedRoute>
+        }
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
