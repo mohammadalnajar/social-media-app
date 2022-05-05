@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Logo from '../navbar/components/Logo';
 import SidebarButton from './components/SidebarButton';
 
 const LeftSidebar = () => {
-  const [selected, setSelected] = useState('feed');
+  const [selected, setSelected] = useState('');
+  const { pathname } = useLocation();
+  const currPage = pathname.split('/')[1];
+
+  useEffect(() => {
+    setSelected(currPage);
+  }, [currPage]);
 
   return (
     <div className="flex flex-col p-6">
@@ -13,7 +20,7 @@ const LeftSidebar = () => {
           <SidebarButton
             selected={selected}
             setSelected={setSelected}
-            srcImage="./assets/images/category.png"
+            srcImage="/assets/images/category.png"
             option="feed"
           />
         </div>
@@ -21,7 +28,7 @@ const LeftSidebar = () => {
           <SidebarButton
             selected={selected}
             setSelected={setSelected}
-            srcImage="./assets/images/user.png"
+            srcImage="/assets/images/user.png"
             option="profile"
           />
         </div>
@@ -29,7 +36,7 @@ const LeftSidebar = () => {
           <SidebarButton
             selected={selected}
             setSelected={setSelected}
-            srcImage="./assets/images/friends.png"
+            srcImage="/assets/images/friends.png"
             option="Friends"
           />
         </div>
@@ -37,7 +44,7 @@ const LeftSidebar = () => {
           <SidebarButton
             selected={selected}
             setSelected={setSelected}
-            srcImage="./assets/images/setting.png"
+            srcImage="/assets/images/setting.png"
             option="settings"
           />
         </div>
