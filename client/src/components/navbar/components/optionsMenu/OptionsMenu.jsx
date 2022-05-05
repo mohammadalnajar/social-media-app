@@ -14,7 +14,7 @@ const OptionsMenu = () => {
   const {
     data: { data: userData },
   } = useQuery('fetchUser');
-  console.log(userData);
+  // console.log(userData);
 
   return (
     <ul className="hidden md:flex mr-4 md:w-1/3 items-center justify-end">
