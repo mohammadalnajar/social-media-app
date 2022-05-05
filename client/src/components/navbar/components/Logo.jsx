@@ -5,7 +5,7 @@ const Logo = () => {
     <>
       <button type="button" href="#" className="mr-2 inline-block md:hidden">
         <img
-          src="./assets/images/fb-logo.png"
+          src="/assets/images/fb-logo.png"
           alt="Facebook logo"
           className="w-10 h-auto"
         />
