@@ -10,7 +10,7 @@ import EditComment from './EditComment';
 import getFullDateAndTime from '../../../../../utils/convertTimestamp';
 import LikeComment from './commentActions/LikeComment';
 import CommentActions from './commentActions/CommentActions';
-import ReplyToComment from './commentActions/ReplyToComment';
+// import ReplyToComment from './commentActions/ReplyToComment';
 import EditedAt from '../../EditedAt';
 import CommentContent from './CommentContent';
 import CommentLiked from './commentActions/CommentLiked';
