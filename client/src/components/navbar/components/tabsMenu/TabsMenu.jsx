@@ -12,31 +12,36 @@ const TabsMenu = () => {
   return (
     <ul className="flex w-full lg:w-max md:w-1/3 items-center justify-center">
       <li className="w-1/5 md:w-max text-center">
-        <Tab title="home" selectedState={{ setSelectedTab, selectedColor }} />
+        <Tab
+          navigateTo="/feed"
+          title="home"
+          selectedState={{ setSelectedTab, selectedColor }}
+        />
       </li>
-      <li className="w-1/5 md:w-max text-center">
+      {/* <li className="w-1/5 md:w-max text-center">
         <Tab title="watch" selectedState={{ setSelectedTab, selectedColor }} />
-      </li>
-      <li className="w-1/5 md:w-max text-center">
+      </li> */}
+      {/* <li className="w-1/5 md:w-max text-center">
         <Tab
           title="marketplace"
           selectedState={{ setSelectedTab, selectedColor }}
         />
-      </li>
+      </li> */}
       <li className="w-1/5 md:w-max text-center">
         <Tab
           title="friends"
+          navigateTo="/friends"
           dynamicNum={9} // fetch this from server
           selectedState={{ setSelectedTab, selectedColor }}
         />
       </li>
-      <li className="w-1/5 md:w-max text-center hidden md:inline-block">
+      {/* <li className="w-1/5 md:w-max text-center hidden md:inline-block">
         <Tab
           title="news"
           dynamicNum={30}
           selectedState={{ setSelectedTab, selectedColor }}
         />
-      </li>
+      </li> */}
       <li className="w-1/5 md:w-max text-center inline-block md:hidden">
         <SideMenuTab />
       </li>
