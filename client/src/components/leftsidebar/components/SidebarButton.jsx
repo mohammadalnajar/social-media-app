@@ -9,7 +9,7 @@ const SidebarButton = ({ srcImage, option, selected, setSelected }) => {
   const handleClick = () => {
     console.log(selectedCheck, 'selectedCheck');
     setSelected(option);
-    // navigate(`/${option}`);
+    navigate(`/${option}`);
   };
 
   return (
@@ -20,13 +20,12 @@ const SidebarButton = ({ srcImage, option, selected, setSelected }) => {
         selectedCheck ? 'bg-gray-200' : 'hover:bg-gray-200'
       }  rounded-xl transition-all dark:text-dark-txt dark:hover:bg-dark-third`}
     >
-      <div className={`p-2 rounded-xl ${selectedCheck && 'bg-gray-500'}`}>
-        <img
-          src={srcImage}
-          // "https://robohash.org/mmm"
-          alt={option}
-          className="w-10 h-10 rounded-full"
-        />
+      <div
+        className={`p-2 rounded-xl ${
+          selectedCheck && 'bg-gray-300'
+        } text-green-400`}
+      >
+        <img src={srcImage} alt={option} className="w-10 h-10" />
       </div>
       <span className="font-semibold capitalize">{option}</span>
     </button>
