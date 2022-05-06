@@ -18,22 +18,6 @@ const MainLayout = () => {
         {/* <!-- LEFT MENU --> */}
         <div className="w-80 h-full hidden xl:flex flex-col fixed top-0 left-0 border border-red-600">
           <LeftSidebar />
-
-          <div className="mt-auto p-6 text-sm text-gray-500 dark:text-dark-txt">
-            <button type="button">Privacy</button>
-            <span>.</span>
-            <button type="button">Terms</button>
-            <span>.</span>
-            <button type="button">Advertising</button>
-            <span>.</span>
-            <button type="button">Cookies</button>
-            <span>.</span>
-            <button type="button">Ad choices</button>
-            <span>.</span>
-            <button type="button">More</button>
-            <span>.</span>
-            <span>Facebook © 2021</span>
-          </div>
         </div>
         {/* <!-- END LEFT MENU --> */}
 
