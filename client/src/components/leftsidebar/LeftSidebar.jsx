@@ -15,7 +15,7 @@ const LeftSidebar = () => {
   }, [currPage]);
 
   return (
-    <div className="w-80 bg-white h-full hidden xl:flex flex-col justify-between fixed top-0 left-0 border ">
+    <div className="w-80 bg-white dark:bg-dark-second h-full hidden xl:flex flex-col justify-between fixed top-0 left-0 ">
       <div className="flex flex-col py-10 px-10">
         <Logo />
         <div className="py-6 my-4">
@@ -41,7 +41,7 @@ const LeftSidebar = () => {
             <SidebarButton
               selected={selected}
               setSelected={setSelected}
-              option="Friends"
+              option="friends"
             >
               <i className="fa-solid fa-user-group text-xl" />
             </SidebarButton>
