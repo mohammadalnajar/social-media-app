@@ -20,33 +20,37 @@ const LeftSidebar = () => {
           <SidebarButton
             selected={selected}
             setSelected={setSelected}
-            srcImage="/assets/images/category.png"
             option="feed"
-          />
+          >
+            <i className="fa-solid fa-newspaper text-xl" />
+          </SidebarButton>
         </div>
         <div>
           <SidebarButton
             selected={selected}
             setSelected={setSelected}
-            srcImage="/assets/images/user.png"
             option="profile"
-          />
+          >
+            <i className="fa-solid fa-user text-xl" />
+          </SidebarButton>
         </div>
         <div>
           <SidebarButton
             selected={selected}
             setSelected={setSelected}
-            srcImage="/assets/images/friends.png"
             option="Friends"
-          />
+          >
+            <i className="fa-solid fa-user-group text-xl" />
+          </SidebarButton>
         </div>
         <div>
           <SidebarButton
             selected={selected}
             setSelected={setSelected}
-            srcImage="/assets/images/setting.png"
             option="settings"
-          />
+          >
+            <i className="fa-solid fa-gear text-xl" />
+          </SidebarButton>
         </div>
 
         <div className="border-b border-gray-200 dark:border-dark-third mt-6" />

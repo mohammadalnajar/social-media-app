@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-const SidebarButton = ({ srcImage, option, selected, setSelected }) => {
+const SidebarButton = ({ option, selected, setSelected, children }) => {
   const navigate = useNavigate();
   const selectedCheck = selected === option;
 
   const handleClick = () => {
-    console.log(selectedCheck, 'selectedCheck');
     setSelected(option);
     navigate(`/${option}`);
   };
@@ -21,11 +20,11 @@ const SidebarButton = ({ srcImage, option, selected, setSelected }) => {
       }  rounded-xl transition-all dark:text-dark-txt dark:hover:bg-dark-third`}
     >
       <div
-        className={`p-2 rounded-xl ${
-          selectedCheck && 'bg-gray-300'
-        } text-green-400`}
+        className={`p-2 w-11 rounded-xl ${
+          selectedCheck ? 'bg-green-400 text-white' : 'text-green-400'
+        } `}
       >
-        <img src={srcImage} alt={option} className="w-10 h-10" />
+        {children}
       </div>
       <span className="font-semibold capitalize">{option}</span>
     </button>
@@ -37,6 +36,7 @@ SidebarButton.propTypes = {
   option: PropTypes.string.isRequired,
   selected: PropTypes.string.isRequired,
   setSelected: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default SidebarButton;
