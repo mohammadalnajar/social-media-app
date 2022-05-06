@@ -16,7 +16,7 @@ const MainLayout = () => {
       {/* <!-- MAIN --> */}
       <div className="flex justify-center h-screen w-screen overflow-x-hidden">
         {/* <!-- LEFT MENU --> */}
-        <div className="w-1/5 pt-16 h-full hidden xl:flex flex-col fixed top-0 left-0 border border-red-600">
+        <div className="w-72 pt-16 h-full hidden xl:flex flex-col fixed top-0 left-0 border border-red-600">
           <LeftSidebar />
 
           <div className="mt-auto p-6 text-sm text-gray-500 dark:text-dark-txt">
