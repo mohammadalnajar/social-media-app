@@ -13,9 +13,9 @@ const LeftSidebar = () => {
   }, [currPage]);
 
   return (
-    <div className="flex flex-col p-6">
+    <div className="flex flex-col py-10 px-10">
       <Logo />
-      <div className="py-4">
+      <div className="py-6 my-4">
         <div>
           <SidebarButton
             selected={selected}
