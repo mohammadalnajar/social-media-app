@@ -16,17 +16,25 @@ const SidebarButton = ({ option, selected, setSelected, children }) => {
       type="button"
       onClick={handleClick}
       className={`flex items-center space-x-2 w-full my-3 ${
-        selectedCheck ? 'bg-gray-200' : 'hover:bg-gray-200'
-      }  rounded-xl transition-all dark:text-dark-txt dark:hover:bg-dark-third`}
+        selectedCheck
+          ? 'bg-green-secondary dark:bg-dark-third'
+          : 'hover:bg-gray-200 dark:hover:bg-dark-third'
+      }  rounded-xl transition-all dark:text-dark-txt`}
     >
       <div
         className={`p-2 w-11 rounded-xl ${
-          selectedCheck ? 'bg-green-400 text-white' : 'text-green-400'
+          selectedCheck ? 'bg-green-primary text-white' : 'text-green-primary'
         } `}
       >
         {children}
       </div>
-      <span className="font-semibold capitalize">{option}</span>
+      <span
+        className={`font-semibold capitalize ${
+          selectedCheck ? 'dark:text-white' : 'dark:text-dark-txt'
+        }`}
+      >
+        {option}
+      </span>
     </button>
   );
 };
