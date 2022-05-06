@@ -32,7 +32,6 @@ const SidebarButton = ({ option, selected, setSelected, children }) => {
 };
 
 SidebarButton.propTypes = {
-  srcImage: PropTypes.string.isRequired,
   option: PropTypes.string.isRequired,
   selected: PropTypes.string.isRequired,
   setSelected: PropTypes.func.isRequired,
