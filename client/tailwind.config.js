@@ -24,6 +24,8 @@ module.exports = {
         'text-modal-open': '#1876F2',
         'btn-primary': '#2374E1',
         'btn-primary-hover': '#3982E4',
+        'green-primary': '#22C55E',
+        'green-secondary': '#BBF7D0',
       },
       keyframes: {
         rotateUP: {
