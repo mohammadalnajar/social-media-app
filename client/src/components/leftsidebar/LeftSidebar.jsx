@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Logo from '../navbar/components/Logo';
+import DarkModeMoon from './components/DarkModeMoon';
 import LogoutButton from './components/LogoutButton';
 import SidebarButton from './components/SidebarButton';
 
@@ -58,8 +59,14 @@ const LeftSidebar = () => {
           <div className="border-b border-gray-200 dark:border-dark-third mt-6" />
         </div>
       </div>
-
-      <LogoutButton />
+      <div className="flex p-12 items-center justify-between">
+        <div className="col">
+          <LogoutButton />
+        </div>
+        <div className="col">
+          <DarkModeMoon />
+        </div>
+      </div>
     </div>
   );
 };
