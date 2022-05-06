@@ -7,6 +7,7 @@ import { useQuery } from 'react-query';
 const SidebarButton = ({ option, selected, setSelected, children }) => {
   const navigate = useNavigate();
   const selectedCheck = selected === option;
+  const isDisabled = option === 'friends' || option === 'settings';
 
   const {
     data: { data: userData },
@@ -24,8 +25,11 @@ const SidebarButton = ({ option, selected, setSelected, children }) => {
   return (
     <button
       type="button"
+      disabled={isDisabled}
       onClick={handleClick}
-      className={`flex items-center space-x-2 w-full my-6 ${
+      className={`${
+        isDisabled && 'cursor-not-allowed'
+      } flex items-center space-x-2 w-full my-6 ${
         selectedCheck
           ? 'bg-green-secondary dark:bg-dark-third'
           : 'hover:bg-gray-200 dark:hover:bg-dark-third'
