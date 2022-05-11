@@ -22,7 +22,7 @@ const LeftSidebar = () => {
   return (
     <div>
       {!xlgScreen && (
-        <div className="absolute top-0 left-0 p-2 rounded z-10 w-full dark:bg-dark-third">
+        <div className="absolute top-0 left-0 p-2 rounded z-10 w-full bg-gray-200 dark:bg-dark-third">
           <Hamburger
             duration={0.3}
             toggled={isOpen}
