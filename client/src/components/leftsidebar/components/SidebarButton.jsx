@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
-const SidebarButton = ({ option, selected, setSelected, children }) => {
+const SidebarButton = ({
+  option,
+  selected,
+  setSelected,
+  toggleSidebar,
+  children,
+}) => {
   const navigate = useNavigate();
   const selectedCheck = selected === option;
   const isDisabled = option === 'friends' || option === 'settings';
@@ -15,6 +21,7 @@ const SidebarButton = ({ option, selected, setSelected, children }) => {
 
   const handleClick = () => {
     setSelected(option);
+    toggleSidebar(false);
     if (option === 'profile') {
       return navigate(`/profile/${userData._id}`);
     }
@@ -58,6 +65,7 @@ SidebarButton.propTypes = {
   selected: PropTypes.string.isRequired,
   setSelected: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
+  toggleSidebar: PropTypes.func.isRequired,
 };
 
 export default SidebarButton;
