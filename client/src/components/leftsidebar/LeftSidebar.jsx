@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Hamburger from 'hamburger-react';
 import useWindowSize from '../../hooks/useWindowSize';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 import Logo from '../navbar/components/Logo';
 import DarkModeMoon from './components/DarkModeMoon';
 import LogoutButton from './components/LogoutButton';
@@ -14,6 +15,10 @@ const LeftSidebar = () => {
   const screenSize = useWindowSize();
   const xlgScreen = screenSize.width >= 1280;
   const [isOpen, setOpen] = useState(false);
+  const ref = useRef();
+  useOnClickOutside(ref, () => {
+    setOpen(false);
+  });
 
   useEffect(() => {
     setSelected(currPage);
@@ -32,6 +37,7 @@ const LeftSidebar = () => {
         </div>
       )}
       <div
+        ref={ref}
         className={`w-80 bg-white dark:bg-dark-second h-full flex transition-all  ${
           !xlgScreen && !isOpen && '-translate-x-80'
         }  z-10 flex-col justify-between fixed top-0 left-0 overflow-auto`}
