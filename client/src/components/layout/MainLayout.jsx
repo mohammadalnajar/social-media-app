@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import LeftSidebar from '../leftsidebar/LeftSidebar';
-import Feed from '../mainContent/Feed';
-import Profile from '../mainContent/Profile';
+import Feed from '../mainContent/pages/Feed';
+import Profile from '../mainContent/pages/Profile';
 // import Logo from '../navbar/components/Logo';
 // import Nav from '../navbar/Nav';
 
