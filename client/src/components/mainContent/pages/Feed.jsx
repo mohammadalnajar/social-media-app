@@ -1,8 +1,8 @@
 import React from 'react';
 import CreatePost from '../../../features/createPost/CreatePost';
 import PostList from '../feed/postsList/PostList';
-import UserRooms from '../usersRooms/UserRooms';
-import UserStories from '../usersStories/UserStories';
+import UserRooms from '../feed/usersRooms/UserRooms';
+import UserStories from '../feed/usersStories/UserStories';
 
 const Feed = () => {
   return (
