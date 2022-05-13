@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import useForm from '../../../hooks/useForm';
-import useLogout from '../../../hooks/useLogout';
+import useForm from '../../../../hooks/useForm';
+import useLogout from '../../../../hooks/useLogout';
 import {
   createComment,
   deleteComment,

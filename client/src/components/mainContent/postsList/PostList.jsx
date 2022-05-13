@@ -1,8 +1,8 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import useLogout from '../../hooks/useLogout';
-import ErrorAlert from '../ErrorAlert';
-import LoadingPage from '../LoadingPage';
+import useLogout from '../../../hooks/useLogout';
+import ErrorAlert from '../../ErrorAlert';
+import LoadingPage from '../../LoadingPage';
 import PostActions from './components/PostActions';
 import PostAuthor from './components/PostAuthor';
 import PostAuthorAction from './components/PostAuthorAction';

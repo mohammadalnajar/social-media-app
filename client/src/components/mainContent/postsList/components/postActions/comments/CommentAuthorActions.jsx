@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import useComment from '../../../hooks/useComment';
-import useToggle from '../../../../../hooks/useToggle';
-import EnsureModal from '../../../../EnsureModal';
+import useToggle from '../../../../../../hooks/useToggle';
+import EnsureModal from '../../../../../EnsureModal';
 
 const CommentAuthorActions = ({ commentId, toggleEdit, postId }) => {
   const { removeComment } = useComment({ postId });

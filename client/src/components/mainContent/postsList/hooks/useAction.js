@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import useLogout from '../../../hooks/useLogout';
+import useLogout from '../../../../hooks/useLogout';
 import { dislikePost, likePost } from '../api';
 
 const useAction = ({ likes, dislikes, postId }) => {

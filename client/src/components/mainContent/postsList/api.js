@@ -1,4 +1,4 @@
-import { handleApiResponse } from '../../utils/api';
+import { handleApiResponse } from '../../../utils/api';
 import {
   FEED_URL,
   POST_URL,
@@ -8,7 +8,7 @@ import {
   COMMENT_URL,
   POST_STATS,
   LIKE_COMMENT,
-} from '../../utils/constants';
+} from '../../../utils/constants';
 
 export const getUserPosts = async () => {
   return fetch(`${SERVER_URL}${POST_URL}`, {

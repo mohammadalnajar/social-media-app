@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
-import useToggle from '../../../hooks/useToggle';
-import EnsureModal from '../../EnsureModal';
-import PostModal from '../../postModal/PostModal';
-import PostModalHeader from '../../postModal/PostModalHeader';
+import useToggle from '../../../../hooks/useToggle';
+import EnsureModal from '../../../EnsureModal';
+import PostModal from '../../../postModal/PostModal';
+import PostModalHeader from '../../../postModal/PostModalHeader';
 import usePost from '../hooks/usePost';
 
 const PostAuthorAction = ({ id, userId, text, visibility, firstName }) => {
