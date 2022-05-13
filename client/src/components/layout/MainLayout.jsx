@@ -14,7 +14,7 @@ const MainLayout = () => {
       {/* NavBar
       <Nav /> */}
       {/* <!-- MAIN --> */}
-      <div className="flex justify-center h-screen w-screen overflow-x-hidden">
+      <div className="flex justify-center h-screen w-screen overflow-x-hidden mb-10">
         {/* <!-- LEFT MENU --> */}
         <LeftSidebar />
         {/* <!-- END LEFT MENU --> */}
