@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from 'react-query';
-import useLogout from '../../../../hooks/useLogout';
+import useLogout from '../../../../../hooks/useLogout';
 import { deletePost } from '../api';
 
 const usePost = () => {

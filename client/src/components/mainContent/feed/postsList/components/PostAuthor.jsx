@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import getFullDateAndTime from '../../../../utils/convertTimestamp';
-import timeElapsed from '../../../../utils/timeElapsed';
+import getFullDateAndTime from '../../../../../utils/convertTimestamp';
+import timeElapsed from '../../../../../utils/timeElapsed';
 import EditedAt from './EditedAt';
 
 const PostAuthor = ({ createdAt, updatedAt, authorData, children }) => {

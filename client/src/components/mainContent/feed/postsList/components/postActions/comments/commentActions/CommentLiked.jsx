@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useToggle from '../../../../../../../hooks/useToggle';
+import useToggle from '../../../../../../../../hooks/useToggle';
 import LikedIcon from '../../../LikedIcon';
 
 const CommentLiked = ({ likes }) => {

@@ -2,12 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
-import timeElapsed from '../../../../../../utils/timeElapsed';
+import timeElapsed from '../../../../../../../utils/timeElapsed';
 import CommentAvatar from './CommentAvatar';
 import CommentAuthorActions from './CommentAuthorActions';
-import useToggle from '../../../../../../hooks/useToggle';
+import useToggle from '../../../../../../../hooks/useToggle';
 import EditComment from './EditComment';
-import getFullDateAndTime from '../../../../../../utils/convertTimestamp';
+import getFullDateAndTime from '../../../../../../../utils/convertTimestamp';
 import LikeComment from './commentActions/LikeComment';
 import CommentActions from './commentActions/CommentActions';
 // import ReplyToComment from './commentActions/ReplyToComment';

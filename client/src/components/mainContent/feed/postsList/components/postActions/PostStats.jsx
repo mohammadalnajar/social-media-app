@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types';
 import React from 'react';
-import useToggle from '../../../../../hooks/useToggle';
-import DislikeIcon from '../../../../sharedComponents/DislikeIcon';
-import LikeIcon from '../../../../sharedComponents/LikeIcon';
+import useToggle from '../../../../../../hooks/useToggle';
+import DislikeIcon from '../../../../../sharedComponents/DislikeIcon';
+import LikeIcon from '../../../../../sharedComponents/LikeIcon';
 
 const PostStats = ({ likes, dislikes, comments }) => {
   const [isShowComments, toggleCommentsTooltip] = useToggle({});

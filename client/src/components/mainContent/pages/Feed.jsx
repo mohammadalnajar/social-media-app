@@ -1,6 +1,6 @@
 import React from 'react';
 import CreatePost from '../../../features/createPost/CreatePost';
-import PostList from '../postsList/PostList';
+import PostList from '../feed/postsList/PostList';
 import UserRooms from '../usersRooms/UserRooms';
 import UserStories from '../usersStories/UserStories';
 
